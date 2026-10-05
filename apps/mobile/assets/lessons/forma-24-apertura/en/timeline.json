@@ -6,8 +6,6 @@
   "segments": [
     {
       "title": "Arriving",
-      "hanzi": "预备势",
-      "pinyin": "yù bèi shì",
       "clip": "preparacion-de-pie.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -96,8 +94,6 @@
     },
     {
       "title": "Commencement of the form",
-      "hanzi": "起势",
-      "pinyin": "qǐ shì",
       "clip": "comienzo-de-pie.mp4",
       "startMs": 60000,
       "durationMs": 120000,
@@ -258,8 +254,6 @@
     },
     {
       "title": "Parting the wild horse's mane",
-      "hanzi": "野马分鬃",
-      "pinyin": "yě mǎ fēn zōng",
       "clip": "crin-del-caballo.mp4",
       "startMs": 180000,
       "durationMs": 420000,
@@ -748,8 +742,6 @@
     },
     {
       "title": "Closing, standing",
-      "hanzi": "收势",
-      "pinyin": "shōu shì",
       "clip": "cierre-de-pie.mp4",
       "startMs": 600000,
       "durationMs": 120000,

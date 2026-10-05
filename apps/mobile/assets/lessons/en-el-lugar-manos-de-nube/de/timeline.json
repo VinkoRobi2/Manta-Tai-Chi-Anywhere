@@ -6,8 +6,6 @@
   "segments": [
     {
       "title": "Ankommen im Stehen",
-      "hanzi": "预备势",
-      "pinyin": "yù bèi shì",
       "clip": "preparacion-de-pie.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -96,8 +94,6 @@
     },
     {
       "title": "Wolkenhände auf der Stelle",
-      "hanzi": "云手",
-      "pinyin": "yún shǒu",
       "clip": "manos-de-nube-de-pie.mp4",
       "startMs": 60000,
       "durationMs": 480000,
@@ -698,8 +694,6 @@
     },
     {
       "title": "Abschluss im Stehen",
-      "hanzi": "收势",
-      "pinyin": "shōu shì",
       "clip": "cierre-de-pie.mp4",
       "startMs": 540000,
       "durationMs": 60000,

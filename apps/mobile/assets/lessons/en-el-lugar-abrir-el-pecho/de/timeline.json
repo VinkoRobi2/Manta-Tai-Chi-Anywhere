@@ -6,8 +6,6 @@
   "segments": [
     {
       "title": "Ankommen im Stehen",
-      "hanzi": "预备势",
-      "pinyin": "yù bèi shì",
       "clip": "preparacion-de-pie.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -96,8 +94,6 @@
     },
     {
       "title": "Brust öffnen im Stehen",
-      "hanzi": "开合",
-      "pinyin": "kāi hé",
       "clip": "abrir-el-pecho-de-pie.mp4",
       "startMs": 60000,
       "durationMs": 360000,
@@ -515,8 +511,6 @@
     },
     {
       "title": "Abschluss im Stehen",
-      "hanzi": "收势",
-      "pinyin": "shōu shì",
       "clip": "cierre-de-pie.mp4",
       "startMs": 420000,
       "durationMs": 60000,

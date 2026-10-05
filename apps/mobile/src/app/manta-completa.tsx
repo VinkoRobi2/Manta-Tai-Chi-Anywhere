@@ -2,6 +2,14 @@ import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, ScrollView, useWindowDimensions, View } from 'react-native';
+import Animated, {
+  Easing,
+  useAnimatedStyle,
+  useReducedMotion,
+  useSharedValue,
+  withRepeat,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Path } from 'react-native-svg';
 
@@ -12,17 +20,43 @@ import {
   type Offering,
   type PlanId,
 } from '@/features/paywall/purchases';
-import { StageBackground } from '@/features/player/Stage';
 import { track } from '@/lib/analytics';
 import { localeTag, useLocale } from '@/lib/i18n';
 import { useTheme } from '@/theme/theme';
-import { space } from '@/theme/tokens';
-import { GlidingManta } from '@/ui/Brand';
+import { space, stage } from '@/theme/tokens';
+import { MantaMark } from '@/ui/Brand';
 import { Button } from '@/ui/Button';
 import { Icon } from '@/ui/Icon';
 import { Press } from '@/ui/Press';
 import { IconButton } from '@/ui/Screen';
+import { StageBackground } from '@/features/player/Tide';
 import { Text } from '@/ui/Text';
+
+/** La manta se desliza despacio sobre las olas. */
+function GlidingManta() {
+  const reducedMotion = useReducedMotion();
+  const phase = useSharedValue(0);
+  useEffect(() => {
+    if (reducedMotion) return;
+    phase.value = withRepeat(
+      withTiming(1, { duration: 4_500, easing: Easing.inOut(Easing.sin) }),
+      -1,
+      true,
+    );
+  }, [phase, reducedMotion]);
+  const style = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: -8 + phase.value * 16 },
+      { translateY: 4 - phase.value * 10 },
+      { rotate: `${-3 + phase.value * 6}deg` },
+    ],
+  }));
+  return (
+    <Animated.View style={style}>
+      <MantaMark width={128} color={stage.ink} />
+    </Animated.View>
+  );
+}
 
 /** Manta completa: nunca antes de la primera clase y siempre se puede cerrar. */
 export default function PaywallScreen() {
@@ -105,20 +139,10 @@ export default function PaywallScreen() {
           }}
         >
           <StageBackground />
-          <GlidingManta width={128} />
+          <GlidingManta />
           <Svg width={width} height={48} style={{ position: 'absolute', bottom: 18 }}>
-            <Path
-              d={wave(18)}
-              fill="none"
-              stroke={palette.name === 'abisal' ? 'rgba(238,244,245,0.35)' : palette.ink}
-              strokeWidth={1.4}
-            />
-            <Path
-              d={wave(32)}
-              fill="none"
-              stroke={palette.name === 'abisal' ? 'rgba(95,227,232,0.6)' : palette.accent}
-              strokeWidth={1.4}
-            />
+            <Path d={wave(18)} fill="none" stroke="rgba(238,244,245,0.35)" strokeWidth={1.4} />
+            <Path d={wave(32)} fill="none" stroke="rgba(242,177,52,0.55)" strokeWidth={1.4} />
           </Svg>
         </View>
 
@@ -208,7 +232,7 @@ export default function PaywallScreen() {
                           {item.trialDays > 0 ? (
                             <View
                               style={{
-                                backgroundColor: palette.primary,
+                                backgroundColor: palette.sol,
                                 borderRadius: 8,
                                 paddingHorizontal: 8,
                                 paddingVertical: 1,
@@ -217,7 +241,7 @@ export default function PaywallScreen() {
                               <Text
                                 variant="caption"
                                 weight="semibold"
-                                color={palette.onPrimary}
+                                color={palette.onSol}
                                 style={{ fontSize: 12 }}
                               >
                                 {t('paywall.trialBadge', { days: item.trialDays })}
@@ -304,7 +328,12 @@ export default function PaywallScreen() {
           justifyContent: ios ? 'flex-end' : 'flex-start',
         }}
       >
-        <IconButton name="close" label={t('common.close')} onPress={() => router.back()} />
+        <IconButton
+          name="close"
+          label={t('common.close')}
+          onPress={() => router.back()}
+          color={stage.ink}
+        />
       </View>
     </View>
   );

@@ -6,8 +6,6 @@
   "segments": [
     {
       "title": "Ankommen im Stehen",
-      "hanzi": "预备势",
-      "pinyin": "yù bèi shì",
       "clip": "preparacion-de-pie.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -96,8 +94,6 @@
     },
     {
       "title": "Wolkenhände auf der Stelle",
-      "hanzi": "云手",
-      "pinyin": "yún shǒu",
       "clip": "manos-de-nube-de-pie.mp4",
       "startMs": 60000,
       "durationMs": 240000,
@@ -406,8 +402,6 @@
     },
     {
       "title": "Brust öffnen im Stehen",
-      "hanzi": "开合",
-      "pinyin": "kāi hé",
       "clip": "abrir-el-pecho-de-pie.mp4",
       "startMs": 300000,
       "durationMs": 180000,
@@ -620,8 +614,6 @@
     },
     {
       "title": "Der Kranich auf der Stelle",
-      "hanzi": "白鹤亮翅",
-      "pinyin": "bái hè liàng chì",
       "clip": "grulla-de-pie.mp4",
       "startMs": 480000,
       "durationMs": 180000,
@@ -834,8 +826,6 @@
     },
     {
       "title": "Abschluss im Stehen",
-      "hanzi": "收势",
-      "pinyin": "shōu shì",
       "clip": "cierre-de-pie.mp4",
       "startMs": 660000,
       "durationMs": 60000,

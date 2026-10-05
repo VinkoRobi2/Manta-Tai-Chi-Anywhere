@@ -6,8 +6,6 @@
   "segments": [
     {
       "title": "Ankommen",
-      "hanzi": "调息",
-      "pinyin": "tiáo xī",
       "clip": "respiracion-inicial.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -96,8 +94,6 @@
     },
     {
       "title": "Eröffnung",
-      "hanzi": "起势",
-      "pinyin": "qǐ shì",
       "clip": "comienzo.mp4",
       "clipSide": "comienzo-lado.mp4",
       "startMs": 60000,
@@ -221,8 +217,6 @@
     },
     {
       "title": "Wolkenhände",
-      "hanzi": "云手",
-      "pinyin": "yún shǒu",
       "clip": "manos-de-nube.mp4",
       "clipSide": "manos-de-nube-lado.mp4",
       "startMs": 150000,
@@ -566,8 +560,6 @@
     },
     {
       "title": "Abschluss",
-      "hanzi": "收势",
-      "pinyin": "shōu shì",
       "clip": "cierre.mp4",
       "startMs": 420000,
       "durationMs": 60000,

@@ -6,8 +6,6 @@
   "segments": [
     {
       "title": "Settling in",
-      "hanzi": "调息",
-      "pinyin": "tiáo xī",
       "clip": "respiracion-inicial.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -96,8 +94,6 @@
     },
     {
       "title": "Commencement",
-      "hanzi": "起势",
-      "pinyin": "qǐ shì",
       "clip": "comienzo.mp4",
       "clipSide": "comienzo-lado.mp4",
       "startMs": 60000,
@@ -187,8 +183,6 @@
     },
     {
       "title": "White crane spreads its wings",
-      "hanzi": "白鹤亮翅",
-      "pinyin": "bái hè liàng chì",
       "clip": "grulla.mp4",
       "startMs": 120000,
       "durationMs": 300000,
@@ -539,8 +533,6 @@
     },
     {
       "title": "Closing",
-      "hanzi": "收势",
-      "pinyin": "shōu shì",
       "clip": "cierre.mp4",
       "startMs": 420000,
       "durationMs": 60000,

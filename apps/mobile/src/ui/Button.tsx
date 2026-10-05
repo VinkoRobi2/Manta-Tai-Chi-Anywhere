@@ -1,7 +1,7 @@
 import { ActivityIndicator, View, type StyleProp, type ViewStyle } from 'react-native';
 
 import { useTheme } from '@/theme/theme';
-import { glowShadow, radius, space } from '@/theme/tokens';
+import { radius, space } from '@/theme/tokens';
 
 import { Icon, type IconName } from './Icon';
 import { Press } from './Press';
@@ -23,12 +23,8 @@ export interface ButtonProps {
   style?: StyleProp<ViewStyle>;
 }
 
-const HEIGHT = { large: 60, medium: 48, small: 44 } as const;
+const HEIGHT = { large: 60, medium: 48, small: 40 } as const;
 
-/**
- * Tinta: el principal es bermellón, como el sello; el secundario, tinta llena.
- * Abisal: el principal es menta luminosa; el secundario, vidrio.
- */
 export function Button({
   label,
   onPress,
@@ -42,15 +38,12 @@ export function Button({
   style,
 }: ButtonProps) {
   const palette = useTheme();
-  const night = palette.name === 'abisal';
   const colors = {
-    primary: { bg: palette.primary, fg: palette.onPrimary, border: 'transparent' },
-    secondary: night
-      ? { bg: palette.surfaceAlt, fg: palette.ink, border: palette.border }
-      : { bg: palette.ink, fg: palette.background, border: 'transparent' },
+    primary: { bg: palette.sol, fg: palette.onSol, border: 'transparent' },
+    secondary: { bg: palette.accent, fg: palette.onAccent, border: 'transparent' },
     tonal: { bg: palette.surfaceAlt, fg: palette.ink, border: 'transparent' },
-    quiet: { bg: 'transparent', fg: night ? palette.accent : palette.ink, border: 'transparent' },
-    outline: { bg: 'transparent', fg: palette.ink, border: palette.border },
+    quiet: { bg: 'transparent', fg: palette.accent, border: 'transparent' },
+    outline: { bg: 'transparent', fg: palette.accent, border: palette.border },
   }[variant];
 
   return (
@@ -61,12 +54,13 @@ export function Button({
       accessibilityLabel={label}
       accessibilityHint={accessibilityHint}
       accessibilityState={{ disabled: disabled || loading, busy: loading }}
+      hitSlop={size === 'small' ? 8 : undefined}
       style={[
         {
           minHeight: HEIGHT[size],
           borderRadius: radius.pill,
           backgroundColor: colors.bg,
-          borderWidth: colors.border === 'transparent' ? 0 : 1,
+          borderWidth: variant === 'outline' ? 1.5 : 0,
           borderColor: colors.border,
           paddingHorizontal: size === 'small' ? space.l : space.xl,
           alignSelf: block ? 'stretch' : 'flex-start',
@@ -74,7 +68,6 @@ export function Button({
           overflow: 'hidden',
           opacity: disabled ? 0.45 : 1,
         },
-        variant === 'primary' ? glowShadow(palette, 0.45) : null,
         style,
       ]}
     >
@@ -93,11 +86,9 @@ export function Button({
         ) : null}
         <Text
           variant={size === 'small' ? 'caption' : 'callout'}
-          weight="bold"
+          weight="semibold"
           color={colors.fg}
-          style={
-            size === 'large' ? { fontSize: 18 } : size === 'small' ? { fontSize: 15 } : undefined
-          }
+          style={size === 'large' ? { fontSize: 18 } : undefined}
         >
           {label}
         </Text>

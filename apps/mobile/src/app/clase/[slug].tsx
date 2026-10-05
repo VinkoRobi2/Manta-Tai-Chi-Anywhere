@@ -187,16 +187,9 @@ export default function LessonSheet() {
                 {index + 1}
               </Text>
             </View>
-            <View style={{ flex: 1, paddingVertical: space.s }}>
-              <Text variant="callout" weight="semibold">
-                {segment.title}
-              </Text>
-              {segment.hanzi ? (
-                <Text variant="caption" tone="soft">
-                  {segment.hanzi} · {segment.pinyin}
-                </Text>
-              ) : null}
-            </View>
+            <Text variant="callout" style={{ flex: 1 }}>
+              {segment.title}
+            </Text>
             <Text variant="caption" tone="soft" style={{ fontVariant: ['tabular-nums'] }}>
               {Math.floor(segment.durationMs / 60000)}:
               {String(Math.round((segment.durationMs % 60000) / 1000)).padStart(2, '0')}

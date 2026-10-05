@@ -6,8 +6,6 @@
   "segments": [
     {
       "title": "Ankommen im Stehen",
-      "hanzi": "预备势",
-      "pinyin": "yù bèi shì",
       "clip": "preparacion-de-pie.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -96,8 +94,6 @@
     },
     {
       "title": "Eröffnung der Form",
-      "hanzi": "起势",
-      "pinyin": "qǐ shì",
       "clip": "comienzo-de-pie.mp4",
       "startMs": 60000,
       "durationMs": 120000,
@@ -258,8 +254,6 @@
     },
     {
       "title": "Die Mähne des Wildpferdes teilen",
-      "hanzi": "野马分鬃",
-      "pinyin": "yě mǎ fēn zōng",
       "clip": "crin-del-caballo.mp4",
       "startMs": 180000,
       "durationMs": 420000,
@@ -748,8 +742,6 @@
     },
     {
       "title": "Abschluss im Stehen",
-      "hanzi": "收势",
-      "pinyin": "shōu shì",
       "clip": "cierre-de-pie.mp4",
       "startMs": 600000,
       "durationMs": 120000,

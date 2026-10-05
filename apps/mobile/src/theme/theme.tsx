@@ -3,19 +3,21 @@ import { useColorScheme } from 'react-native';
 
 import { useSettings } from '@/features/settings/settings';
 
-import { abisal, tinta, type Palette } from './tokens';
+import { cabin, light, type Palette } from './tokens';
 
-const ThemeContext = createContext<Palette>(tinta);
+const ThemeContext = createContext<Palette>(light);
 
-/**
- * De día, Tinta; de noche, Abisal. Sigue al sistema, salvo que la persona
- * elija Día o Noche (modo cabina) en Ajustes.
- */
+/** El modo sigue al sistema, salvo que la persona elija claro o cabina en Ajustes. */
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const { appearance } = useSettings();
   const system = useColorScheme();
-  const night = appearance === 'cabin' || (appearance === 'system' && system === 'dark');
-  return <ThemeContext.Provider value={night ? abisal : tinta}>{children}</ThemeContext.Provider>;
+  const dark = appearance === 'cabin' || (appearance === 'system' && system === 'dark');
+  return <ThemeContext.Provider value={dark ? cabin : light}>{children}</ThemeContext.Provider>;
+}
+
+/** Fuerza una paleta en una parte de la app (el reproductor siempre usa la oscura). */
+export function ThemeOverride({ palette, children }: { palette: Palette; children: ReactNode }) {
+  return <ThemeContext.Provider value={palette}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme(): Palette {

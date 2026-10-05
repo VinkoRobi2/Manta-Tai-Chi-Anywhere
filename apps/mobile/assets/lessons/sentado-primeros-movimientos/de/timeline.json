@@ -6,8 +6,6 @@
   "segments": [
     {
       "title": "Eröffnung",
-      "hanzi": "起势",
-      "pinyin": "qǐ shì",
       "clip": "comienzo.mp4",
       "clipSide": "comienzo-lado.mp4",
       "startMs": 0,
@@ -131,8 +129,6 @@
     },
     {
       "title": "Wolkenhände",
-      "hanzi": "云手",
-      "pinyin": "yún shǒu",
       "clip": "manos-de-nube.mp4",
       "clipSide": "manos-de-nube-lado.mp4",
       "startMs": 90000,
@@ -404,8 +400,6 @@
     },
     {
       "title": "Abschluss",
-      "hanzi": "收势",
-      "pinyin": "shōu shì",
       "clip": "cierre.mp4",
       "startMs": 300000,
       "durationMs": 60000,

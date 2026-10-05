@@ -13,7 +13,7 @@ import { space } from '@/theme/tokens';
 import { Card } from '@/ui/Card';
 import { Icon } from '@/ui/Icon';
 import { ListRow } from '@/ui/ListRow';
-import { AnchoredBadge, ProgressRing, SpaceGlyph } from '@/ui/Marine';
+import { AnchoredBadge, ProgressRing, SpacePlan } from '@/ui/Marine';
 import { Screen } from '@/ui/Screen';
 import { Segmented } from '@/ui/Segmented';
 import { Text } from '@/ui/Text';
@@ -99,7 +99,7 @@ export default function ClassesScreen() {
           <View
             style={{ flexDirection: 'row', alignItems: 'center', gap: space.m, marginTop: space.s }}
           >
-            <SpaceGlyph mode={program.spaceMode} size={48} />
+            <SpacePlan mode={program.spaceMode} size={44} />
             <View style={{ flex: 1 }}>
               <Text variant="headline" weight="semibold" accessibilityRole="header">
                 {program.title}

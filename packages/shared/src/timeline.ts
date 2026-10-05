@@ -30,10 +30,6 @@ export type TimelineBreath = z.infer<typeof TimelineBreathSchema>;
 export const TimelineSegmentSchema = z.object({
   /** Nombre del movimiento, por ejemplo "Manos de nube". */
   title: z.string().min(1).optional(),
-  /** Nombre original en chino, por ejemplo "云手". */
-  hanzi: z.string().min(1).optional(),
-  /** Pronunciación del nombre original, por ejemplo "yún shǒu". */
-  pinyin: z.string().min(1).optional(),
   /** Video del instructor (vista de frente) dentro del paquete, por ejemplo "manos-de-nube.mp4". */
   clip: z.string().min(1),
   /** Video opcional del mismo movimiento visto de lado. */
