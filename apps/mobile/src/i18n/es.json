@@ -8,6 +8,78 @@
     "soon": "Muy pronto",
     "minutes": "{{count}} min"
   },
+  "onboarding": {
+    "tagline": "Solo tienes que respirar.",
+    "start": "Empezar",
+    "haveAccount": "Ya tengo cuenta",
+    "forRelative": "Lo configuro para un familiar",
+    "relative": "Para un familiar",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "skip": "Saltar",
+    "progress": "Paso {{current}} de {{total}}",
+    "practice": {
+      "title": "¿Cómo quieres practicar?",
+      "title_relative": "¿Cómo va a practicar?",
+      "body": "Elegimos cada movimiento según tu postura. Puedes cambiarlo cuando quieras.",
+      "body_relative": "Elegimos cada movimiento según su postura. Se puede cambiar cuando quieran.",
+      "seated": "Sentado",
+      "standing": "De pie",
+      "both": "Las dos"
+    },
+    "feel": {
+      "title": "¿Qué quieres sentir?",
+      "title_relative": "¿Qué quiere sentir?",
+      "body": "Con esto ajustamos el ritmo y los movimientos de tus clases.",
+      "body_relative": "Con esto ajustamos el ritmo y los movimientos de sus clases.",
+      "limit": "Elige hasta 2 · {{count}}/2",
+      "calm": "Calma",
+      "balance": "Equilibrio",
+      "joints": "Articulaciones sueltas",
+      "sleep": "Dormir mejor",
+      "energy": "Energía"
+    },
+    "time": {
+      "title": "¿Cuánto tiempo al día?",
+      "body": "Mejor poco cada día que mucho de vez en cuando.",
+      "unit": "min",
+      "option": "{{count}} minutos",
+      "hint": {
+        "5": "Un respiro",
+        "10": "Lo ideal",
+        "20": "A fondo"
+      }
+    },
+    "care": {
+      "title": "¿Alguna zona que cuidar?",
+      "body": "Adaptamos o evitamos los movimientos que la carguen.",
+      "none": "Ninguna",
+      "safety": "Manta no sustituye a tu médico. Si algo duele, para."
+    },
+    "offline": {
+      "title": "¿Practicarás sin internet?",
+      "title_relative": "¿Practicará sin internet?",
+      "body": "En el parque, en el pueblo o de viaje: Manta funciona sin conexión.",
+      "often": "A menudo",
+      "sometimes": "A veces",
+      "rarely": "Casi nunca",
+      "auto": "Las clases gratis se descargan solas con Wi‑Fi.",
+      "manual": "Puedes descargar cualquier clase cuando quieras."
+    },
+    "plan": {
+      "title": "Tu plan está listo",
+      "title_relative": "Su plan está listo",
+      "week": "Semana 1",
+      "program": {
+        "seated": "Tai chi sentado · 7 días",
+        "standing": "Tai chi de pie · 7 días",
+        "both": "Sentado y de pie · 7 días"
+      },
+      "level": "Principiante",
+      "start": "Empezar primera clase",
+      "change": "Cambiar mis respuestas"
+    }
+  },
   "tabs": {
     "today": "Hoy",
     "classes": "Clases",
@@ -62,7 +134,8 @@
       "shoulders": "Hombros",
       "back": "Espalda",
       "knees": "Rodillas",
-      "wrists": "Muñecas"
+      "wrists": "Muñecas",
+      "neck": "Cuello"
     },
     "start": "Empezar",
     "voiceOnly": "Solo voz",
@@ -108,7 +181,8 @@
       "shoulders": "Hoy cuidamos los hombros: sube los brazos solo hasta donde sea cómodo.",
       "back": "Hoy cuidamos la espalda: muévete despacio y apóyate en el respaldo si lo necesitas.",
       "knees": "Hoy cuidamos las rodillas: pies firmes y giros suaves, sin forzar.",
-      "wrists": "Hoy cuidamos las muñecas: déjalas sueltas, sin doblarlas."
+      "wrists": "Hoy cuidamos las muñecas: déjalas sueltas, sin doblarlas.",
+      "neck": "Hoy cuidamos el cuello: giros pequeños y la mirada suave, sin forzar."
     },
     "showClass": "Ver la clase"
   },

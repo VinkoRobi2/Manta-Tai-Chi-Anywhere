@@ -8,6 +8,78 @@
     "soon": "Bald verfügbar",
     "minutes": "{{count}} Min."
   },
+  "onboarding": {
+    "tagline": "Du musst nur atmen.",
+    "start": "Los geht's",
+    "haveAccount": "Ich habe schon ein Konto",
+    "forRelative": "Ich richte es für einen Angehörigen ein",
+    "relative": "Für einen Angehörigen",
+    "next": "Weiter",
+    "back": "Zurück",
+    "skip": "Überspringen",
+    "progress": "Schritt {{current}} von {{total}}",
+    "practice": {
+      "title": "Wie möchtest du üben?",
+      "title_relative": "Wie soll geübt werden?",
+      "body": "Wir wählen jede Bewegung passend zu deiner Haltung. Du kannst es jederzeit ändern.",
+      "body_relative": "Wir wählen jede Bewegung passend zur Haltung. Das lässt sich jederzeit ändern.",
+      "seated": "Sitzend",
+      "standing": "Stehend",
+      "both": "Beides"
+    },
+    "feel": {
+      "title": "Was möchtest du spüren?",
+      "title_relative": "Was soll die Übung bewirken?",
+      "body": "Damit passen wir Tempo und Bewegungen deiner Lektionen an.",
+      "body_relative": "Damit passen wir Tempo und Bewegungen der Lektionen an.",
+      "limit": "Bis zu 2 wählen · {{count}}/2",
+      "calm": "Ruhe",
+      "balance": "Gleichgewicht",
+      "joints": "Lockere Gelenke",
+      "sleep": "Besser schlafen",
+      "energy": "Energie"
+    },
+    "time": {
+      "title": "Wie viel Zeit pro Tag?",
+      "body": "Lieber jeden Tag ein wenig als ab und zu viel.",
+      "unit": "Min.",
+      "option": "{{count}} Minuten",
+      "hint": {
+        "5": "Eine Atempause",
+        "10": "Genau richtig",
+        "20": "In aller Ruhe"
+      }
+    },
+    "care": {
+      "title": "Etwas, das geschont werden soll?",
+      "body": "Wir passen Bewegungen an, die diese Stelle belasten, oder lassen sie weg.",
+      "none": "Nichts",
+      "safety": "Manta ersetzt keine ärztliche Beratung. Wenn etwas schmerzt, hör auf."
+    },
+    "offline": {
+      "title": "Übst du ohne Internet?",
+      "title_relative": "Wird ohne Internet geübt?",
+      "body": "Im Park, auf dem Land oder unterwegs: Manta funktioniert ohne Verbindung.",
+      "often": "Oft",
+      "sometimes": "Manchmal",
+      "rarely": "Fast nie",
+      "auto": "Kostenlose Lektionen laden sich im WLAN von selbst herunter.",
+      "manual": "Du kannst jede Lektion herunterladen, wann du willst."
+    },
+    "plan": {
+      "title": "Dein Plan ist bereit",
+      "title_relative": "Der Plan ist bereit",
+      "week": "Woche 1",
+      "program": {
+        "seated": "Tai-Chi im Sitzen · 7 Tage",
+        "standing": "Tai-Chi im Stehen · 7 Tage",
+        "both": "Sitzend & stehend · 7 Tage"
+      },
+      "level": "Anfänger",
+      "start": "Erste Lektion starten",
+      "change": "Antworten ändern"
+    }
+  },
   "tabs": {
     "today": "Heute",
     "classes": "Lektionen",
@@ -62,7 +134,8 @@
       "shoulders": "Schultern",
       "back": "Rücken",
       "knees": "Knie",
-      "wrists": "Handgelenke"
+      "wrists": "Handgelenke",
+      "neck": "Nacken"
     },
     "start": "Los geht's",
     "voiceOnly": "Nur Stimme",
@@ -108,7 +181,8 @@
       "shoulders": "Heute achten wir auf die Schultern: Heb die Arme nur so weit, wie es angenehm ist.",
       "back": "Heute achten wir auf den Rücken: Beweg dich langsam und lehn dich an, wenn du es brauchst.",
       "knees": "Heute achten wir auf die Knie: Feste Füße und sanfte Drehungen, nichts erzwingen.",
-      "wrists": "Heute achten wir auf die Handgelenke: Lass sie locker, ohne sie abzuknicken."
+      "wrists": "Heute achten wir auf die Handgelenke: Lass sie locker, ohne sie abzuknicken.",
+      "neck": "Heute achten wir auf den Nacken: Kleine Drehungen und ein weicher Blick, nichts erzwingen."
     },
     "showClass": "Lektion anzeigen"
   },

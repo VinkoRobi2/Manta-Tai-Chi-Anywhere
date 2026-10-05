@@ -5,6 +5,10 @@
  */
 export type AnalyticsEvent =
   | 'app_opened'
+  | 'onboarding_started'
+  | 'onboarding_step_completed'
+  | 'onboarding_completed'
+  | 'onboarding_skipped'
   | 'space_selected'
   | 'lesson_sheet_opened'
   | 'lesson_started'

@@ -8,6 +8,78 @@
     "soon": "Coming soon",
     "minutes": "{{count}} min"
   },
+  "onboarding": {
+    "tagline": "All you have to do is breathe.",
+    "start": "Get started",
+    "haveAccount": "I already have an account",
+    "forRelative": "I'm setting it up for a family member",
+    "relative": "For a family member",
+    "next": "Next",
+    "back": "Back",
+    "skip": "Skip",
+    "progress": "Step {{current}} of {{total}}",
+    "practice": {
+      "title": "How do you want to practice?",
+      "title_relative": "How will they practice?",
+      "body": "We pick every movement for your posture. You can change it anytime.",
+      "body_relative": "We pick every movement for their posture. You can change it anytime.",
+      "seated": "Seated",
+      "standing": "Standing",
+      "both": "Both"
+    },
+    "feel": {
+      "title": "What do you want to feel?",
+      "title_relative": "What do they want to feel?",
+      "body": "This sets the pace and the movements of your classes.",
+      "body_relative": "This sets the pace and the movements of their classes.",
+      "limit": "Pick up to 2 · {{count}}/2",
+      "calm": "Calm",
+      "balance": "Balance",
+      "joints": "Looser joints",
+      "sleep": "Better sleep",
+      "energy": "Energy"
+    },
+    "time": {
+      "title": "How much time a day?",
+      "body": "A little every day beats a lot once in a while.",
+      "unit": "min",
+      "option": "{{count}} minutes",
+      "hint": {
+        "5": "A breather",
+        "10": "Just right",
+        "20": "Deep dive"
+      }
+    },
+    "care": {
+      "title": "Any area to look after?",
+      "body": "We adapt or skip the movements that load it.",
+      "none": "None",
+      "safety": "Manta doesn't replace your doctor. If something hurts, stop."
+    },
+    "offline": {
+      "title": "Will you practice offline?",
+      "title_relative": "Will they practice offline?",
+      "body": "In the park, out of town or traveling: Manta works without a connection.",
+      "often": "Often",
+      "sometimes": "Sometimes",
+      "rarely": "Rarely",
+      "auto": "Free classes download on their own over Wi‑Fi.",
+      "manual": "You can download any class whenever you like."
+    },
+    "plan": {
+      "title": "Your plan is ready",
+      "title_relative": "Their plan is ready",
+      "week": "Week 1",
+      "program": {
+        "seated": "Seated tai chi · 7 days",
+        "standing": "Standing tai chi · 7 days",
+        "both": "Seated & standing · 7 days"
+      },
+      "level": "Beginner",
+      "start": "Start first class",
+      "change": "Change my answers"
+    }
+  },
   "tabs": {
     "today": "Today",
     "classes": "Classes",
@@ -62,7 +134,8 @@
       "shoulders": "Shoulders",
       "back": "Back",
       "knees": "Knees",
-      "wrists": "Wrists"
+      "wrists": "Wrists",
+      "neck": "Neck"
     },
     "start": "Start",
     "voiceOnly": "Voice only",
@@ -108,7 +181,8 @@
       "shoulders": "Today we look after your shoulders: only raise your arms as far as feels comfortable.",
       "back": "Today we look after your back: move slowly and lean on the backrest if you need to.",
       "knees": "Today we look after your knees: steady feet and gentle turns, never forced.",
-      "wrists": "Today we look after your wrists: keep them loose, without bending them."
+      "wrists": "Today we look after your wrists: keep them loose, without bending them.",
+      "neck": "Today we look after your neck: small turns and a soft gaze, never forced."
     },
     "showClass": "Show the class"
   },
