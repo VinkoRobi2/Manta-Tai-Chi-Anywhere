@@ -75,6 +75,72 @@ export const stage = {
   control: 'rgba(238, 244, 245, 0.12)',
 } as const;
 
+/**
+ * Onboarding: blanco y negro puro, como una revista deportiva. El sol es el único color.
+ * Sigue el modo de la app: claro → fondo blanco, cabina → fondo negro.
+ */
+export interface OnboardingPalette {
+  scheme: 'light' | 'dark';
+  background: string;
+  ink: string;
+  body: string;
+  muted: string;
+  line: string;
+  iconOff: string;
+  panel: string;
+  /** Pista del anillo de minutos. */
+  track: string;
+  /** Sombra en el suelo bajo la figura. */
+  shadow: string;
+  shadowOpacity: number;
+  accent: string;
+  onAccent: string;
+}
+
+export const onboardingLight: OnboardingPalette = {
+  scheme: 'light',
+  background: '#FFFFFF',
+  ink: '#0D0D0D',
+  body: '#1F1F1F',
+  muted: '#6B6B6B',
+  line: '#D4D4D4',
+  iconOff: '#BDBDBD',
+  panel: '#F3F3F3',
+  track: '#EFEFEF',
+  shadow: '#000000',
+  shadowOpacity: 0.18,
+  accent: '#F2B134',
+  onAccent: '#0D0D0D',
+};
+
+export const onboardingDark: OnboardingPalette = {
+  scheme: 'dark',
+  background: '#000000',
+  ink: '#FFFFFF',
+  body: '#E6E6E6',
+  muted: '#9A9A9A',
+  line: '#3A3A3A',
+  iconOff: '#5A5A5A',
+  panel: '#111111',
+  track: '#1C1C1C',
+  shadow: '#FFFFFF',
+  shadowOpacity: 0.12,
+  accent: '#F2B134',
+  onAccent: '#000000',
+};
+
+/** La bienvenida va siempre sobre la imagen del amanecer. */
+export const welcome = {
+  ground: '#04191F',
+  ink: '#FFFFFF',
+  inkSoft: '#D6E4E7',
+  separator: '#7F9CA3',
+  sol: '#F2B134',
+  onSol: '#04191F',
+  glow: '#FFDC96',
+  mist: '#F6DDB4',
+} as const;
+
 export const space = { xs: 4, s: 8, m: 12, l: 16, xl: 24, xxl: 32, xxxl: 48, gutter: 20 } as const;
 
 export const radius = { chip: 12, card: 20, sheet: 28, pill: 999 } as const;
@@ -87,6 +153,7 @@ export const fonts = {
   regular: 'Lexend_400Regular',
   medium: 'Lexend_500Medium',
   semibold: 'Lexend_600SemiBold',
+  extrabold: 'Lexend_800ExtraBold',
 } as const;
 
 export type FontWeight = keyof typeof fonts;

@@ -4,10 +4,18 @@ import { storage } from '@/db/storage';
 import { createStore, useStore } from '@/lib/store';
 import type { Appearance } from '@/theme/tokens';
 
-export const CARE_TAGS = ['shoulders', 'back', 'knees', 'wrists'] as const;
+export const CARE_TAGS = ['shoulders', 'back', 'knees', 'wrists', 'neck'] as const;
 export type CareTag = (typeof CARE_TAGS)[number];
 
 export type CaptionSize = 'normal' | 'large' | 'xlarge';
+
+/** Respuestas del onboarding. */
+export type PracticeMode = 'seated' | 'standing' | 'both';
+export const GOALS = ['calm', 'balance', 'joints', 'sleep', 'energy'] as const;
+export type Goal = (typeof GOALS)[number];
+export const DAILY_MINUTES = [5, 10, 20] as const;
+export type DailyMinutes = (typeof DAILY_MINUTES)[number];
+export type OfflineUsage = 'often' | 'sometimes' | 'rarely';
 
 export interface Reminder {
   enabled: boolean;
@@ -31,6 +39,15 @@ export interface Settings {
   firstLessonCompletedAt: string | null;
   lastReviewAskAt: string | null;
   safetySeen: boolean;
+  onboardingDone: boolean;
+  practiceMode: PracticeMode;
+  goals: Goal[];
+  dailyMinutes: DailyMinutes;
+  offlineUsage: OfflineUsage;
+  /** Descargar solas las clases gratis cuando haya Wi-Fi. */
+  autoAnchorFree: boolean;
+  /** La app la configuró otra persona para un familiar. */
+  setupForRelative: boolean;
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -47,6 +64,13 @@ export const DEFAULT_SETTINGS: Settings = {
   firstLessonCompletedAt: null,
   lastReviewAskAt: null,
   safetySeen: false,
+  onboardingDone: false,
+  practiceMode: 'seated',
+  goals: [],
+  dailyMinutes: 10,
+  offlineUsage: 'sometimes',
+  autoAnchorFree: false,
+  setupForRelative: false,
 };
 
 const settingsStore = createStore<Settings>(DEFAULT_SETTINGS);
