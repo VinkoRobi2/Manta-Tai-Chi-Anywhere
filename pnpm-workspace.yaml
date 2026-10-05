@@ -1,0 +1,12 @@
+packages:
+  - apps/*
+  - packages/*
+
+# Dependencias a las que pnpm les permite correr scripts de instalación.
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@prisma/engines'
+  - esbuild
+  - prisma
+  - sharp
+  - unrs-resolver

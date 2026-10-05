@@ -1,0 +1,29 @@
+{
+  "home": {
+    "title": "Wie viel Platz hast du heute?",
+    "subtitle": "Wähle einen Modus und leg los."
+  },
+  "space": {
+    "SEATED": {
+      "title": "Im Sitzen",
+      "body": "Ein Stuhl genügt. Fürs Büro, eine Schiffskabine oder einen müden Tag."
+    },
+    "STANDING_IN_PLACE": {
+      "title": "Im Stehen, auf der Stelle",
+      "body": "Ein Quadratmeter, ohne dich fortzubewegen."
+    },
+    "FULL_FORM": {
+      "title": "Ganze Form",
+      "body": "Wenn du ein Wohnzimmer oder einen Park hast."
+    }
+  },
+  "lesson": {
+    "placeholder": "Hier läuft die Lektion mit dem 3D-Trainer.",
+    "back": "Zurück"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "language": "Sprache: wie auf deinem Telefon",
+    "version": "Version {{version}}"
+  }
+}

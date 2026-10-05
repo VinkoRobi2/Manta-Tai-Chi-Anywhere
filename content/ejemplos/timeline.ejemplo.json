@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "lessonSlug": "sentado-primeros-movimientos",
+  "locale": "es",
+  "totalDurationMs": 48000,
+  "character": "instructor.glb",
+  "segments": [
+    {
+      "clip": "respiracion.glb",
+      "startMs": 0,
+      "durationMs": 16000,
+      "cue": "voz/01-respiracion.m4a"
+    },
+    { "clip": "apertura.glb", "startMs": 16000, "durationMs": 12000, "cue": "voz/02-apertura.m4a" },
+    {
+      "clip": "manos-de-nube-sentado.glb",
+      "startMs": 28000,
+      "durationMs": 20000,
+      "playbackRate": 0.8,
+      "cue": "voz/03-manos-de-nube.m4a"
+    }
+  ]
+}

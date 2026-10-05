@@ -1,0 +1,29 @@
+{
+  "home": {
+    "title": "¿Cuánto espacio tienes hoy?",
+    "subtitle": "Elige un modo y empieza."
+  },
+  "space": {
+    "SEATED": {
+      "title": "Sentado",
+      "body": "Basta una silla. Para la oficina, un camarote o un día cansado."
+    },
+    "STANDING_IN_PLACE": {
+      "title": "De pie, en el lugar",
+      "body": "Un metro cuadrado, sin desplazarte."
+    },
+    "FULL_FORM": {
+      "title": "Forma completa",
+      "body": "Para cuando tienes una sala o un parque."
+    }
+  },
+  "lesson": {
+    "placeholder": "Aquí se reproduce la clase con el instructor 3D.",
+    "back": "Volver"
+  },
+  "settings": {
+    "title": "Ajustes",
+    "language": "Idioma: el de tu teléfono",
+    "version": "Versión {{version}}"
+  }
+}

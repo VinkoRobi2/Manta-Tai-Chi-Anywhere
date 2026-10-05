@@ -1,0 +1,31 @@
+{
+  "name": "manta",
+  "private": true,
+  "packageManager": "pnpm@10.34.6",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "postinstall": "pnpm --filter @manta/shared build",
+    "dev": "turbo run dev --filter=@manta/api --filter=@manta/web",
+    "api": "pnpm --filter @manta/api start:dev",
+    "web": "pnpm --filter @manta/web dev",
+    "mobile": "pnpm --filter @manta/mobile start",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "format": "prettier --write .",
+    "db:up": "docker compose -f infra/docker-compose.yml up -d --wait",
+    "db:down": "docker compose -f infra/docker-compose.yml down",
+    "db:migrate": "pnpm --filter @manta/api db:migrate",
+    "db:seed": "pnpm --filter @manta/api db:seed",
+    "db:studio": "pnpm --filter @manta/api db:studio",
+    "content:manifest": "node content/scripts/build-manifest.mjs",
+    "content:serve": "pnpm dlx serve content/build -l 8787"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^2.11.7"
+  }
+}

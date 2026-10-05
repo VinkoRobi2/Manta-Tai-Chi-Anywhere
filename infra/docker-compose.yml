@@ -1,0 +1,22 @@
+name: manta
+
+services:
+  db:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: manta
+      POSTGRES_PASSWORD: manta
+      POSTGRES_DB: manta
+    ports:
+      - '5433:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U manta -d manta']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  db-data:

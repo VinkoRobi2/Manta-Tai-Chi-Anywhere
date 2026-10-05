@@ -1,0 +1,29 @@
+{
+  "home": {
+    "title": "How much space do you have today?",
+    "subtitle": "Pick a mode and start."
+  },
+  "space": {
+    "SEATED": {
+      "title": "Seated",
+      "body": "One chair is enough. For the office, a ship cabin or a tired day."
+    },
+    "STANDING_IN_PLACE": {
+      "title": "Standing in place",
+      "body": "One square meter, no stepping around."
+    },
+    "FULL_FORM": {
+      "title": "Full form",
+      "body": "For when you have a living room or a park."
+    }
+  },
+  "lesson": {
+    "placeholder": "The class with the 3D instructor plays here.",
+    "back": "Back"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language: same as your phone",
+    "version": "Version {{version}}"
+  }
+}

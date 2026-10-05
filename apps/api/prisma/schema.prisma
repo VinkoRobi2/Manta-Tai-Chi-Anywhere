@@ -1,0 +1,155 @@
+// Modelo de datos de Manta.
+// Flujo: editas este archivo -> `pnpm db:migrate` -> Prisma genera la migración y el cliente tipado.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Locale {
+  es
+  en
+  de
+}
+
+enum SpaceMode {
+  SEATED
+  STANDING_IN_PLACE
+  FULL_FORM
+}
+
+enum Level {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+/// Usuario anónimo identificado por su App User ID de RevenueCat. Sin email ni contraseña al lanzar.
+model AppUser {
+  id           String            @id @default(uuid())
+  revenuecatId String            @unique
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  entitlements Entitlement[]
+  sessions     PracticeSession[]
+}
+
+/// Acceso premium según los webhooks de RevenueCat. expiresAt nulo = pago de por vida.
+model Entitlement {
+  id         String    @id @default(uuid())
+  userId     String
+  user       AppUser   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  identifier String
+  isActive   Boolean
+  productId  String?
+  store      String?
+  expiresAt  DateTime?
+  updatedAt  DateTime  @updatedAt
+
+  @@unique([userId, identifier])
+}
+
+model Program {
+  id           String               @id @default(uuid())
+  slug         String               @unique
+  spaceMode    SpaceMode
+  level        Level
+  isPremium    Boolean              @default(false)
+  published    Boolean              @default(false)
+  sortOrder    Int                  @default(0)
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+  translations ProgramTranslation[]
+  lessons      Lesson[]
+}
+
+model ProgramTranslation {
+  id          String  @id @default(uuid())
+  programId   String
+  program     Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+  locale      Locale
+  title       String
+  description String
+
+  @@unique([programId, locale])
+}
+
+model Lesson {
+  id           String              @id @default(uuid())
+  programId    String
+  program      Program             @relation(fields: [programId], references: [id], onDelete: Cascade)
+  slug         String              @unique
+  durationSec  Int
+  isPremium    Boolean             @default(false)
+  published    Boolean             @default(false)
+  sortOrder    Int                 @default(0)
+  createdAt    DateTime            @default(now())
+  updatedAt    DateTime            @updatedAt
+  translations LessonTranslation[]
+  packages     LessonPackage[]
+  sessions     PracticeSession[]
+
+  @@index([programId])
+}
+
+model LessonTranslation {
+  id       String @id @default(uuid())
+  lessonId String
+  lesson   Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  locale   Locale
+  title    String
+  summary  String
+
+  @@unique([lessonId, locale])
+}
+
+/// Paquete descargable de una clase (animaciones + voz + línea de tiempo) en un idioma.
+model LessonPackage {
+  id         String   @id @default(uuid())
+  lessonId   String
+  lesson     Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  locale     Locale
+  version    Int
+  /// Prefijo en el bucket, por ejemplo: lessons/<slug>/es/v1/
+  basePath   String
+  /// Lista de archivos [{ path, sha256, sizeBytes }], validada con PackageFileSchema de @manta/shared
+  files      Json
+  totalBytes Int
+  createdAt  DateTime @default(now())
+
+  @@unique([lessonId, locale, version])
+}
+
+/// Práctica completada, sincronizada desde el teléfono cuando hay señal.
+model PracticeSession {
+  id          String   @id @default(uuid())
+  userId      String
+  user        AppUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonId    String
+  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  completedAt DateTime
+  durationSec Int
+
+  @@index([userId, completedAt])
+}
+
+model WaitlistEntry {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  locale    Locale   @default(es)
+  source    String?
+  createdAt DateTime @default(now())
+}
+
+/// Registro de webhooks recibidos (auditoría).
+model WebhookEvent {
+  /// id del evento que manda RevenueCat
+  id         String   @id
+  type       String
+  receivedAt DateTime @default(now())
+  payload    Json
+}
