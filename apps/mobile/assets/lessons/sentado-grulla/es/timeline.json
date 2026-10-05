@@ -1,0 +1,613 @@
+{
+  "schemaVersion": 1,
+  "lessonSlug": "sentado-grulla",
+  "locale": "es",
+  "totalDurationMs": 480000,
+  "segments": [
+    {
+      "title": "Llegar a la silla",
+      "clip": "respiracion-inicial.mp4",
+      "startMs": 0,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Siéntate cerca del borde de la silla, con los pies firmes en el suelo y la espalda larga."
+        },
+        {
+          "atMs": 18000,
+          "text": "Deja caer los hombros."
+        },
+        {
+          "atMs": 36000,
+          "text": "El aire entra por la nariz, despacio."
+        },
+        {
+          "atMs": 54000,
+          "text": "Suelta la mandíbula y la frente."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 7000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 17000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 27000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 37000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 47000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 57000,
+          "phase": "out",
+          "durationMs": 3000
+        }
+      ]
+    },
+    {
+      "title": "Comienzo",
+      "clip": "comienzo.mp4",
+      "clipSide": "comienzo-lado.mp4",
+      "startMs": 60000,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Al inhalar, los brazos suben al frente hasta la altura de los hombros, como si el agua los sostuviera."
+        },
+        {
+          "atMs": 18000,
+          "text": "Al exhalar, las manos bajan hasta los muslos."
+        },
+        {
+          "atMs": 36000,
+          "text": "Codos suaves, muñecas sueltas."
+        },
+        {
+          "atMs": 54000,
+          "text": "Sube solo hasta donde sea cómodo."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 18000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 28000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 38000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 48000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 58000,
+          "phase": "out",
+          "durationMs": 2000
+        }
+      ]
+    },
+    {
+      "title": "La grulla abre las alas",
+      "clip": "grulla.mp4",
+      "startMs": 120000,
+      "durationMs": 300000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Una mano sube por delante con la palma hacia ti; la otra baja junto a la cadera."
+        },
+        {
+          "atMs": 18000,
+          "text": "Cambia de lado al exhalar."
+        },
+        {
+          "atMs": 36000,
+          "text": "La mano de arriba no pasa de la frente."
+        },
+        {
+          "atMs": 54000,
+          "text": "Respira largo, como una ola que llega a la orilla."
+        },
+        {
+          "atMs": 72000,
+          "text": "Cambia de lado al exhalar."
+        },
+        {
+          "atMs": 90000,
+          "text": "La mano de arriba no pasa de la frente."
+        },
+        {
+          "atMs": 108000,
+          "text": "Respira largo, como una ola que llega a la orilla."
+        },
+        {
+          "atMs": 126000,
+          "text": "Cambia de lado al exhalar."
+        },
+        {
+          "atMs": 144000,
+          "text": "La mano de arriba no pasa de la frente."
+        },
+        {
+          "atMs": 162000,
+          "text": "Respira largo, como una ola que llega a la orilla."
+        },
+        {
+          "atMs": 180000,
+          "text": "Cambia de lado al exhalar."
+        },
+        {
+          "atMs": 198000,
+          "text": "La mano de arriba no pasa de la frente."
+        },
+        {
+          "atMs": 216000,
+          "text": "Respira largo, como una ola que llega a la orilla."
+        },
+        {
+          "atMs": 234000,
+          "text": "Cambia de lado al exhalar."
+        },
+        {
+          "atMs": 252000,
+          "text": "La mano de arriba no pasa de la frente."
+        },
+        {
+          "atMs": 270000,
+          "text": "Respira largo, como una ola que llega a la orilla."
+        },
+        {
+          "atMs": 288000,
+          "text": "Cambia de lado al exhalar."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 14000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 19000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 25000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 30000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 36000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 41000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 47000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 52000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 58000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 63000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 69000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 74000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 80000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 85000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 91000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 96000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 102000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 107000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 113000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 118000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 124000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 129000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 135000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 140000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 146000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 151000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 157000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 162000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 168000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 173000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 179000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 184000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 190000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 195000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 201000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 206000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 212000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 217000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 223000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 228000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 234000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 239000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 245000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 250000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 256000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 261000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 267000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 272000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 278000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 283000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 289000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 294000,
+          "phase": "out",
+          "durationMs": 6000
+        }
+      ]
+    },
+    {
+      "title": "Cerrar el tai chi",
+      "clip": "cierre.mp4",
+      "startMs": 420000,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Las manos bajan despacio hasta los muslos. Quédate quieto unos segundos."
+        },
+        {
+          "atMs": 18000,
+          "text": "Nota cómo respiras ahora."
+        },
+        {
+          "atMs": 36000,
+          "text": "Cuando quieras, vuelve al día con calma."
+        },
+        {
+          "atMs": 54000,
+          "text": "Nota cómo respiras ahora."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 15000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 20000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 27000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 32000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 39000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 44000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 51000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 56000,
+          "phase": "out",
+          "durationMs": 4000
+        }
+      ]
+    }
+  ]
+}

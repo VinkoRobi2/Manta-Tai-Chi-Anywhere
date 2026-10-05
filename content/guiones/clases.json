@@ -1,0 +1,97 @@
+[
+  {
+    "slug": "sentado-primeros-movimientos",
+    "movements": [
+      { "id": "comienzo", "durationSec": 90 },
+      { "id": "manos-de-nube", "durationSec": 210 },
+      { "id": "cierre", "durationSec": 60 }
+    ]
+  },
+  {
+    "slug": "sentado-manos-de-nube",
+    "movements": [
+      { "id": "respiracion-inicial", "durationSec": 60 },
+      { "id": "comienzo", "durationSec": 90 },
+      { "id": "manos-de-nube", "durationSec": 270 },
+      { "id": "cierre", "durationSec": 60 }
+    ]
+  },
+  {
+    "slug": "sentado-abrir-el-pecho",
+    "movements": [
+      { "id": "respiracion-inicial", "durationSec": 60 },
+      { "id": "abrir-el-pecho", "durationSec": 240 },
+      { "id": "cierre", "durationSec": 120 }
+    ]
+  },
+  {
+    "slug": "sentado-grulla",
+    "movements": [
+      { "id": "respiracion-inicial", "durationSec": 60 },
+      { "id": "comienzo", "durationSec": 60 },
+      { "id": "grulla", "durationSec": 300 },
+      { "id": "cierre", "durationSec": 60 }
+    ]
+  },
+  {
+    "slug": "sentado-cepillar-rodilla",
+    "movements": [
+      { "id": "respiracion-inicial", "durationSec": 60 },
+      { "id": "comienzo", "durationSec": 60 },
+      { "id": "cepillar-rodilla", "durationSec": 360 },
+      { "id": "cierre", "durationSec": 60 }
+    ]
+  },
+  {
+    "slug": "en-el-lugar-manos-de-nube",
+    "movements": [
+      { "id": "preparacion-de-pie", "durationSec": 60 },
+      { "id": "manos-de-nube-de-pie", "durationSec": 480 },
+      { "id": "cierre-de-pie", "durationSec": 60 }
+    ]
+  },
+  {
+    "slug": "en-el-lugar-abrir-el-pecho",
+    "movements": [
+      { "id": "preparacion-de-pie", "durationSec": 60 },
+      { "id": "abrir-el-pecho-de-pie", "durationSec": 360 },
+      { "id": "cierre-de-pie", "durationSec": 60 }
+    ]
+  },
+  {
+    "slug": "en-el-lugar-grulla",
+    "movements": [
+      { "id": "preparacion-de-pie", "durationSec": 60 },
+      { "id": "grulla-de-pie", "durationSec": 420 },
+      { "id": "cierre-de-pie", "durationSec": 60 }
+    ]
+  },
+  {
+    "slug": "en-el-lugar-marea-completa",
+    "movements": [
+      { "id": "preparacion-de-pie", "durationSec": 60 },
+      { "id": "manos-de-nube-de-pie", "durationSec": 240 },
+      { "id": "abrir-el-pecho-de-pie", "durationSec": 180 },
+      { "id": "grulla-de-pie", "durationSec": 180 },
+      { "id": "cierre-de-pie", "durationSec": 60 }
+    ]
+  },
+  {
+    "slug": "forma-24-apertura",
+    "movements": [
+      { "id": "preparacion-de-pie", "durationSec": 60 },
+      { "id": "comienzo-de-pie", "durationSec": 120 },
+      { "id": "crin-del-caballo", "durationSec": 420 },
+      { "id": "cierre-de-pie", "durationSec": 120 }
+    ]
+  },
+  {
+    "slug": "forma-24-grulla",
+    "movements": [
+      { "id": "preparacion-de-pie", "durationSec": 60 },
+      { "id": "crin-del-caballo", "durationSec": 240 },
+      { "id": "grulla-de-pie", "durationSec": 240 },
+      { "id": "cierre-de-pie", "durationSec": 60 }
+    ]
+  }
+]

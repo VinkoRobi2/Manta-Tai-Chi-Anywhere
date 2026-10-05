@@ -2,22 +2,33 @@
   "schemaVersion": 1,
   "lessonSlug": "sentado-primeros-movimientos",
   "locale": "es",
-  "totalDurationMs": 48000,
-  "character": "instructor.glb",
+  "totalDurationMs": 30000,
   "segments": [
     {
-      "clip": "respiracion.glb",
+      "title": "Comienzo",
+      "clip": "comienzo.mp4",
+      "clipSide": "comienzo-lado.mp4",
       "startMs": 0,
-      "durationMs": 16000,
-      "cue": "voz/01-respiracion.m4a"
+      "durationMs": 18000,
+      "cue": "voz/01-comienzo.m4a",
+      "captions": [
+        { "atMs": 0, "text": "Al inhalar, los brazos suben al frente hasta la altura de los hombros." },
+        { "atMs": 9000, "text": "Al exhalar, las manos bajan hasta los muslos." }
+      ],
+      "breath": [
+        { "atMs": 3000, "phase": "in", "durationMs": 5000 },
+        { "atMs": 8000, "phase": "out", "durationMs": 5000 },
+        { "atMs": 13000, "phase": "in", "durationMs": 5000 }
+      ]
     },
-    { "clip": "apertura.glb", "startMs": 16000, "durationMs": 12000, "cue": "voz/02-apertura.m4a" },
     {
-      "clip": "manos-de-nube-sentado.glb",
-      "startMs": 28000,
-      "durationMs": 20000,
+      "title": "Cerrar el tai chi",
+      "clip": "cierre.mp4",
+      "startMs": 18000,
+      "durationMs": 12000,
       "playbackRate": 0.8,
-      "cue": "voz/03-manos-de-nube.m4a"
+      "captions": [{ "atMs": 0, "text": "Las manos bajan despacio hasta los muslos." }],
+      "breath": [{ "atMs": 2000, "phase": "out", "durationMs": 7000 }]
     }
   ]
 }

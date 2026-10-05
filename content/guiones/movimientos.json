@@ -1,0 +1,215 @@
+{
+  "_nota": "BORRADOR. Un instructor de tai chi certificado debe revisar cada indicación antes de publicar. Los clips .mp4 son los videos del instructor que todavía no existen.",
+  "respiracion-inicial": {
+    "clip": "respiracion-inicial.mp4",
+    "title": { "es": "Llegar a la silla", "en": "Settling in", "de": "Ankommen" },
+    "intro": {
+      "es": "Siéntate cerca del borde de la silla, con los pies firmes en el suelo y la espalda larga.",
+      "en": "Sit near the front of your chair, feet flat on the floor, spine long.",
+      "de": "Setz dich nah an die Stuhlkante, die Füße fest am Boden, der Rücken lang."
+    },
+    "cues": {
+      "es": ["Deja caer los hombros.", "El aire entra por la nariz, despacio.", "Suelta la mandíbula y la frente."],
+      "en": ["Let your shoulders drop.", "Breathe in through your nose, slowly.", "Soften your jaw and your forehead."],
+      "de": ["Lass die Schultern sinken.", "Atme langsam durch die Nase ein.", "Lockere Kiefer und Stirn."]
+    },
+    "breath": { "inMs": 4000, "outMs": 6000 }
+  },
+  "comienzo": {
+    "clip": "comienzo.mp4",
+    "clipSide": "comienzo-lado.mp4",
+    "title": { "es": "Comienzo", "en": "Commencement", "de": "Eröffnung" },
+    "intro": {
+      "es": "Al inhalar, los brazos suben al frente hasta la altura de los hombros, como si el agua los sostuviera.",
+      "en": "As you breathe in, float your arms up in front to shoulder height, as if the water were holding them.",
+      "de": "Beim Einatmen schweben die Arme nach vorn bis auf Schulterhöhe, als würde das Wasser sie tragen."
+    },
+    "cues": {
+      "es": ["Al exhalar, las manos bajan hasta los muslos.", "Codos suaves, muñecas sueltas.", "Sube solo hasta donde sea cómodo."],
+      "en": ["As you breathe out, your hands sink to your thighs.", "Soft elbows, loose wrists.", "Only rise as far as feels comfortable."],
+      "de": ["Beim Ausatmen sinken die Hände auf die Oberschenkel.", "Weiche Ellbogen, lockere Handgelenke.", "Heb die Arme nur so weit, wie es angenehm ist."]
+    },
+    "breath": { "inMs": 5000, "outMs": 5000 }
+  },
+  "manos-de-nube": {
+    "clip": "manos-de-nube.mp4",
+    "clipSide": "manos-de-nube-lado.mp4",
+    "title": { "es": "Manos de nube", "en": "Cloud hands", "de": "Wolkenhände" },
+    "intro": {
+      "es": "Una mano a la altura del pecho, la otra abajo. Gira la cintura y deja que las manos pasen como nubes.",
+      "en": "One hand at chest height, the other low. Turn from your waist and let your hands drift like clouds.",
+      "de": "Eine Hand auf Brusthöhe, die andere unten. Dreh dich aus der Taille und lass die Hände wie Wolken ziehen."
+    },
+    "cues": {
+      "es": ["La mirada sigue a la mano de arriba.", "Gira desde la cintura, no solo con los brazos.", "Cambia las manos sin prisa, como el agua que va y viene."],
+      "en": ["Your eyes follow the upper hand.", "Turn from the waist, not just the arms.", "Switch hands without hurry, like water coming and going."],
+      "de": ["Dein Blick folgt der oberen Hand.", "Dreh dich aus der Taille, nicht nur mit den Armen.", "Wechsle die Hände ohne Eile, wie Wasser, das kommt und geht."]
+    },
+    "breath": { "inMs": 5000, "outMs": 5000 }
+  },
+  "abrir-el-pecho": {
+    "clip": "abrir-el-pecho.mp4",
+    "title": { "es": "Abrir el pecho", "en": "Opening the chest", "de": "Brust öffnen" },
+    "intro": {
+      "es": "Las manos se juntan frente al pecho. Al inhalar, se abren despacio hacia los lados.",
+      "en": "Bring your hands together in front of your chest. As you breathe in, open them slowly to the sides.",
+      "de": "Die Hände kommen vor der Brust zusammen. Beim Einatmen öffnen sie sich langsam zur Seite."
+    },
+    "cues": {
+      "es": ["Al exhalar, vuelven a juntarse.", "Siente cómo se ensancha el pecho.", "Los hombros siguen abajo, lejos de las orejas."],
+      "en": ["As you breathe out, bring them back together.", "Feel your chest widen.", "Keep your shoulders low, away from your ears."],
+      "de": ["Beim Ausatmen kommen sie wieder zusammen.", "Spür, wie die Brust weit wird.", "Die Schultern bleiben unten, weg von den Ohren."]
+    },
+    "breath": { "inMs": 5000, "outMs": 6000 }
+  },
+  "grulla": {
+    "clip": "grulla.mp4",
+    "title": { "es": "La grulla abre las alas", "en": "White crane spreads its wings", "de": "Der Kranich breitet die Flügel aus" },
+    "intro": {
+      "es": "Una mano sube por delante con la palma hacia ti; la otra baja junto a la cadera.",
+      "en": "One hand rises in front, palm facing you; the other settles by your hip.",
+      "de": "Eine Hand steigt vor dir auf, die Handfläche zu dir; die andere sinkt neben die Hüfte."
+    },
+    "cues": {
+      "es": ["Cambia de lado al exhalar.", "La mano de arriba no pasa de la frente.", "Respira largo, como una ola que llega a la orilla."],
+      "en": ["Switch sides as you breathe out.", "The upper hand stays below your forehead.", "Breathe long, like a wave reaching the shore."],
+      "de": ["Wechsle die Seite beim Ausatmen.", "Die obere Hand bleibt unter der Stirn.", "Atme lang, wie eine Welle, die ans Ufer rollt."]
+    },
+    "breath": { "inMs": 5000, "outMs": 6000 }
+  },
+  "cepillar-rodilla": {
+    "clip": "cepillar-rodilla.mp4",
+    "title": { "es": "Cepillar la rodilla", "en": "Brush knee", "de": "Knie streifen" },
+    "intro": {
+      "es": "Una mano pasa sobre la rodilla, como si apartara el agua. La otra empuja suave hacia el frente.",
+      "en": "One hand sweeps over your knee, as if parting the water. The other pushes gently forward.",
+      "de": "Eine Hand streicht über das Knie, als würde sie Wasser beiseiteschieben. Die andere schiebt sanft nach vorn."
+    },
+    "cues": {
+      "es": ["Cambia de lado cuando exhales.", "Empuja sin estirar el codo del todo.", "La espalda sigue larga; apóyate en el respaldo si lo necesitas."],
+      "en": ["Switch sides as you breathe out.", "Push without locking your elbow.", "Keep your back long; lean on the backrest if you need to."],
+      "de": ["Wechsle die Seite beim Ausatmen.", "Schieb, ohne den Ellbogen ganz zu strecken.", "Der Rücken bleibt lang; lehn dich an, wenn du es brauchst."]
+    },
+    "breath": { "inMs": 5000, "outMs": 6000 }
+  },
+  "cierre": {
+    "clip": "cierre.mp4",
+    "title": { "es": "Cerrar el tai chi", "en": "Closing", "de": "Abschluss" },
+    "intro": {
+      "es": "Las manos bajan despacio hasta los muslos. Quédate quieto unos segundos.",
+      "en": "Let your hands sink slowly to your thighs. Stay still for a few breaths.",
+      "de": "Die Hände sinken langsam auf die Oberschenkel. Bleib ein paar Atemzüge ganz still."
+    },
+    "cues": {
+      "es": ["Nota cómo respiras ahora.", "Cuando quieras, vuelve al día con calma."],
+      "en": ["Notice how you are breathing now.", "When you are ready, return to your day, calmly."],
+      "de": ["Spür, wie du jetzt atmest.", "Wenn du so weit bist, kehr ruhig in deinen Tag zurück."]
+    },
+    "breath": { "inMs": 5000, "outMs": 7000 }
+  },
+  "preparacion-de-pie": {
+    "clip": "preparacion-de-pie.mp4",
+    "title": { "es": "Llegar al lugar", "en": "Arriving", "de": "Ankommen im Stehen" },
+    "intro": {
+      "es": "De pie, con los pies al ancho de los hombros y las rodillas suaves. Si el suelo se mueve, abre un poco más los pies.",
+      "en": "Stand with your feet shoulder-width apart and soft knees. If the floor moves, widen your stance a little.",
+      "de": "Steh mit hüftbreiten Füßen und weichen Knien. Wenn der Boden schwankt, stell die Füße etwas weiter."
+    },
+    "cues": {
+      "es": ["Siente el peso repartido en los dos pies.", "La coronilla sube, el mentón baja un poco."],
+      "en": ["Feel your weight spread over both feet.", "The crown of your head rises, your chin drops slightly."],
+      "de": ["Spür dein Gewicht auf beiden Füßen.", "Der Scheitel strebt nach oben, das Kinn sinkt leicht."]
+    },
+    "breath": { "inMs": 4000, "outMs": 6000 }
+  },
+  "manos-de-nube-de-pie": {
+    "clip": "manos-de-nube-de-pie.mp4",
+    "title": { "es": "Manos de nube en el lugar", "en": "Cloud hands in place", "de": "Wolkenhände auf der Stelle" },
+    "intro": {
+      "es": "Sin dar pasos: el peso pasa de un pie al otro mientras las manos dibujan nubes.",
+      "en": "No stepping: your weight shifts from one foot to the other while your hands draw clouds.",
+      "de": "Ohne Schritte: Das Gewicht wandert von einem Fuß zum anderen, während die Hände Wolken malen."
+    },
+    "cues": {
+      "es": ["Las rodillas siguen suaves.", "La cintura guía, las manos acompañan.", "Mueve el peso como una marea lenta."],
+      "en": ["Keep your knees soft.", "Your waist leads, your hands follow.", "Shift your weight like a slow tide."],
+      "de": ["Die Knie bleiben weich.", "Die Taille führt, die Hände folgen.", "Verlagere das Gewicht wie eine langsame Flut."]
+    },
+    "breath": { "inMs": 5000, "outMs": 5000 }
+  },
+  "abrir-el-pecho-de-pie": {
+    "clip": "abrir-el-pecho-de-pie.mp4",
+    "title": { "es": "Abrir el pecho de pie", "en": "Opening the chest, standing", "de": "Brust öffnen im Stehen" },
+    "intro": {
+      "es": "Las manos se abren al inhalar y vuelven al centro al exhalar. Los pies no se mueven.",
+      "en": "Your hands open as you breathe in and return to the center as you breathe out. Your feet stay still.",
+      "de": "Die Hände öffnen sich beim Einatmen und kehren beim Ausatmen zur Mitte zurück. Die Füße bleiben stehen."
+    },
+    "cues": {
+      "es": ["Siente el pecho ancho.", "Los hombros siguen abajo."],
+      "en": ["Feel your chest widen.", "Keep your shoulders low."],
+      "de": ["Spür die weite Brust.", "Die Schultern bleiben unten."]
+    },
+    "breath": { "inMs": 5000, "outMs": 6000 }
+  },
+  "grulla-de-pie": {
+    "clip": "grulla-de-pie.mp4",
+    "title": { "es": "La grulla en el lugar", "en": "White crane in place", "de": "Der Kranich auf der Stelle" },
+    "intro": {
+      "es": "El peso va a la pierna de atrás; una mano sube, la otra baja junto a la cadera.",
+      "en": "Your weight settles into the back leg; one hand rises, the other sinks by your hip.",
+      "de": "Das Gewicht geht ins hintere Bein; eine Hand steigt, die andere sinkt neben die Hüfte."
+    },
+    "cues": {
+      "es": ["Cambia de lado al exhalar.", "La pierna de adelante solo toca el suelo, sin peso."],
+      "en": ["Switch sides as you breathe out.", "The front foot only touches the floor, without weight."],
+      "de": ["Wechsle die Seite beim Ausatmen.", "Der vordere Fuß berührt den Boden nur, ohne Gewicht."]
+    },
+    "breath": { "inMs": 5000, "outMs": 6000 }
+  },
+  "comienzo-de-pie": {
+    "clip": "comienzo-de-pie.mp4",
+    "title": { "es": "Comienzo de la forma", "en": "Commencement of the form", "de": "Eröffnung der Form" },
+    "intro": {
+      "es": "El pie izquierdo se abre al ancho de los hombros. Los brazos suben al frente y bajan mientras las rodillas se doblan un poco.",
+      "en": "Your left foot steps out to shoulder width. Your arms float up in front and sink as your knees bend slightly.",
+      "de": "Der linke Fuß öffnet sich auf Schulterbreite. Die Arme schweben nach vorn und sinken, während die Knie leicht beugen."
+    },
+    "cues": {
+      "es": ["Las manos bajan hasta la altura de la cintura.", "Las rodillas apuntan hacia los pies."],
+      "en": ["Your hands sink to waist height.", "Your knees point over your toes."],
+      "de": ["Die Hände sinken auf Taillenhöhe.", "Die Knie zeigen in Richtung der Zehen."]
+    },
+    "breath": { "inMs": 5000, "outMs": 5000 }
+  },
+  "crin-del-caballo": {
+    "clip": "crin-del-caballo.mp4",
+    "title": { "es": "Separar la crin del caballo salvaje", "en": "Parting the wild horse's mane", "de": "Die Mähne des Wildpferdes teilen" },
+    "intro": {
+      "es": "Paso al frente: una mano sube en diagonal y la otra baja junto a la cadera, como si separaras una crin larga.",
+      "en": "Step forward: one hand rises on a diagonal while the other sinks by your hip, as if parting a long mane.",
+      "de": "Schritt nach vorn: Eine Hand steigt diagonal, die andere sinkt zur Hüfte, als würdest du eine lange Mähne teilen."
+    },
+    "cues": {
+      "es": ["El talón toca primero, luego el resto del pie.", "Mueve el peso despacio hacia adelante.", "Cambia de lado con el siguiente paso."],
+      "en": ["The heel lands first, then the rest of the foot.", "Shift your weight forward slowly.", "Change sides with the next step."],
+      "de": ["Erst setzt die Ferse auf, dann der ganze Fuß.", "Verlagere das Gewicht langsam nach vorn.", "Wechsle die Seite mit dem nächsten Schritt."]
+    },
+    "breath": { "inMs": 5000, "outMs": 6000 }
+  },
+  "cierre-de-pie": {
+    "clip": "cierre-de-pie.mp4",
+    "title": { "es": "Cerrar de pie", "en": "Closing, standing", "de": "Abschluss im Stehen" },
+    "intro": {
+      "es": "Las manos se cruzan frente al pecho y bajan despacio. Los pies se juntan.",
+      "en": "Your hands cross in front of your chest and lower slowly. Bring your feet together.",
+      "de": "Die Hände kreuzen sich vor der Brust und sinken langsam. Die Füße kommen zusammen."
+    },
+    "cues": {
+      "es": ["Quédate quieto unos segundos.", "Nota cómo respiras ahora."],
+      "en": ["Stay still for a few seconds.", "Notice how you are breathing now."],
+      "de": ["Bleib ein paar Sekunden ganz still.", "Spür, wie du jetzt atmest."]
+    },
+    "breath": { "inMs": 5000, "outMs": 7000 }
+  }
+}

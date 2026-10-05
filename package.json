@@ -22,7 +22,8 @@
     "db:seed": "pnpm --filter @manta/api db:seed",
     "db:studio": "pnpm --filter @manta/api db:studio",
     "content:manifest": "node content/scripts/build-manifest.mjs",
-    "content:serve": "pnpm dlx serve content/build -l 8787"
+    "content:serve": "pnpm dlx serve content/build -l 8787",
+    "content:lessons": "node content/scripts/build-lessons.mjs"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
