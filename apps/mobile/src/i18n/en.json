@@ -1,29 +1,245 @@
 {
+  "common": {
+    "anchored": "Anchored",
+    "back": "Back",
+    "close": "Close",
+    "done": "Done",
+    "skip": "Skip",
+    "soon": "Coming soon",
+    "minutes": "{{count}} min"
+  },
+  "tabs": {
+    "today": "Today",
+    "classes": "Classes",
+    "log": "Logbook"
+  },
+  "greeting": {
+    "morning": "Good morning",
+    "afternoon": "Good afternoon",
+    "evening": "Good evening"
+  },
   "home": {
     "title": "How much space do you have today?",
-    "subtitle": "Pick a mode and start."
+    "firstTime": "No account. Works without internet.",
+    "continue": "Pick up where you left off",
+    "settings": "Settings",
+    "spaceHint": "Opens the next class for this space"
   },
   "space": {
     "SEATED": {
-      "title": "Seated",
-      "body": "One chair is enough. For the office, a ship cabin or a tired day."
+      "title": "Chair",
+      "body": "One chair is enough",
+      "measure": "50 × 50 cm"
     },
     "STANDING_IN_PLACE": {
-      "title": "Standing in place",
-      "body": "One square meter, no stepping around."
+      "title": "In place",
+      "body": "One square meter",
+      "measure": "1 m²"
     },
     "FULL_FORM": {
       "title": "Full form",
-      "body": "For when you have a living room or a park."
+      "body": "A living room or a park",
+      "measure": "≈ 2 × 3 m"
     }
   },
+  "level": {
+    "BEGINNER": "Beginner",
+    "INTERMEDIATE": "Intermediate",
+    "ADVANCED": "Advanced"
+  },
+  "tides": {
+    "days": ["M", "T", "W", "T", "F", "S", "S"],
+    "dayNames": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "count": "{{count}} of {{goal}} tides",
+    "thisWeek": "this week",
+    "weekComplete": "Week complete"
+  },
   "lesson": {
-    "placeholder": "The class with the 3D instructor plays here.",
-    "back": "Back"
+    "movements_one": "{{count}} movement",
+    "movements_other": "{{count}} movements",
+    "careTitle": "Anything to look after today?",
+    "care": {
+      "shoulders": "Shoulders",
+      "back": "Back",
+      "knees": "Knees",
+      "wrists": "Wrists"
+    },
+    "start": "Start",
+    "voiceOnly": "Voice only",
+    "voiceOnlyHint": "The screen dims and the voice guides you",
+    "safety": "Move without pain. If something hurts, stop.",
+    "safetyMore": "More",
+    "locked": "This class is part of Manta Complete.",
+    "unlock": "See Manta Complete",
+    "anchor": "Anchor to practice offline · {{size}}",
+    "anchoring": "Anchoring… {{percent}}%",
+    "notFound": "We couldn't find this class."
+  },
+  "player": {
+    "movementOf": "Movement {{index}} of {{count}}",
+    "inhale": "Breathe in",
+    "exhale": "Breathe out",
+    "hold": "Hold",
+    "pause": "Pause",
+    "play": "Continue",
+    "back10": "Back 10 seconds",
+    "forward10": "Forward 10 seconds",
+    "speed": "Speed {{rate}}",
+    "mirror": "Mirror",
+    "captions": "Captions",
+    "view": {
+      "front": "Front",
+      "side": "Side"
+    },
+    "exit": "Leave class",
+    "voiceOnly": "Voice only",
+    "voiceOnlyBody": "Listen and move. Tap the screen to see the controls.",
+    "exitTitle": "Finish for today?",
+    "exitKeep": "Keep practicing",
+    "exitEnd": "Finish",
+    "exitSaved": "What you practiced stays in your logbook.",
+    "videoPending": "The instructor video goes here",
+    "tutorial": {
+      "speed": "To go slower, tap the turtle at the bottom left.",
+      "captions": "If you'd rather just listen, tap the captions to hide them.",
+      "pause": "You can pause any time with the yellow button."
+    },
+    "careNote": {
+      "shoulders": "Today we look after your shoulders: only raise your arms as far as feels comfortable.",
+      "back": "Today we look after your back: move slowly and lean on the backrest if you need to.",
+      "knees": "Today we look after your knees: steady feet and gentle turns, never forced.",
+      "wrists": "Today we look after your wrists: keep them loose, without bending them."
+    },
+    "showClass": "Show the class"
+  },
+  "final": {
+    "title": "Done.",
+    "minutes_one": "{{count}} minute of calm",
+    "minutes_other": "{{count}} minutes of calm",
+    "moodQuestion": "How is your sea?",
+    "reminderQuestion": "Shall I remind you tomorrow at this time?",
+    "reminderYes": "Yes, at {{time}}",
+    "reminderOther": "Another time",
+    "reminderSet": "Done: I'll remind you every day at {{time}}.",
+    "reminderDenied": "I don't have permission to notify you. You can turn it on in Settings any time.",
+    "next": "Next",
+    "premiumTitle": "Manta Complete",
+    "premiumBody": "All three spaces and every class, anchored for the sea.",
+    "premiumCta": "See plans"
+  },
+  "mood": {
+    "CALM": "Calm",
+    "SLIGHT": "Slight",
+    "MODERATE": "Moderate",
+    "ROUGH": "Rough"
+  },
+  "log": {
+    "title": "Logbook",
+    "weekMinutes": "this week",
+    "monthMinutes": "in {{month}}",
+    "frequentMood": "your most frequent sea",
+    "noMood": "—",
+    "empty": "Your logbook starts with your first class.",
+    "emptyCta": "Start",
+    "today": "Today",
+    "entry": "{{minutes}} min · {{space}}"
+  },
+  "classes": {
+    "title": "Classes",
+    "voyageTitle": "Prepare to sail",
+    "voyageBody": "Going days without signal? Anchor a full plan before you leave.",
+    "premium": "Manta Complete"
+  },
+  "voyage": {
+    "title": "Prepare to sail",
+    "question": "How many days will you be without signal?",
+    "days": "{{count}} days",
+    "plan": "{{count}}-day plan",
+    "planBody_one": "{{count}} class · {{spaces}}",
+    "planBody_other": "{{count}} classes · {{spaces}}",
+    "anchorAll": "Anchor everything",
+    "anchoring": "Anchoring… {{percent}}%",
+    "canLeave": "You can close this screen. We'll keep anchoring.",
+    "done": "Everything anchored. Fair winds.",
+    "total": "{{size}} in total",
+    "toDownload": "{{size}} to go",
+    "free": "{{size}} free",
+    "limited": "With Manta Complete the plan grows to {{count}} classes, including standing practice.",
+    "limitedCta": "See Manta Complete",
+    "waiting": "Queued"
+  },
+  "paywall": {
+    "title": "Manta Complete",
+    "subtitle": "Every class, anchored for the sea.",
+    "benefit1": "All three spaces and every program",
+    "benefit2": "Anchor as much as you want, no limits",
+    "benefit3": "Plans for back, balance and sleep (soon)",
+    "annual": "Yearly",
+    "lifetime": "Lifetime",
+    "monthly": "Monthly",
+    "annualNote": "{{perMonth}} a month",
+    "lifetimeNote": "Pay once, keep it forever",
+    "monthlyNote": "Cancel any time",
+    "trialBadge": "{{days}} days free",
+    "ctaTrial": "Try {{days}} days free",
+    "ctaBuy": "Continue",
+    "fineAnnual": "Free for {{days}} days, then {{price}} a year. Cancel any time in {{where}}.",
+    "fineMonthly": "{{price}} a month. Cancel any time in {{where}}.",
+    "fineLifetime": "One payment. No renewals.",
+    "whereIos": "Settings › Apple ID › Subscriptions",
+    "whereAndroid": "Google Play › Payments & subscriptions",
+    "restore": "Restore purchases",
+    "gift": "Gift Manta",
+    "giftSoon": "Soon you'll be able to gift Manta.",
+    "terms": "Terms and privacy",
+    "success": "Done. You now have Manta Complete.",
+    "restored": "Purchases restored.",
+    "nothingToRestore": "We couldn't find any previous purchases.",
+    "demo": "Test version: you won't be charged."
   },
   "settings": {
     "title": "Settings",
-    "language": "Language: same as your phone",
+    "language": "Language",
+    "languageSystem": "Phone",
+    "appearance": "Appearance",
+    "appearanceSystem": "Automatic",
+    "appearanceLight": "Light",
+    "appearanceCabin": "Cabin",
+    "appearanceHint": "Cabin mode: dark colors for practicing at night.",
+    "captions": "Caption size",
+    "captionNormal": "Normal",
+    "captionLarge": "Large",
+    "captionXLarge": "Extra large",
+    "haptics": "Vibrate on each breath in",
+    "hapticsHint": "A soft pulse at the start of each in-breath, so you can practice with your eyes closed.",
+    "voice": "Voice",
+    "voiceValue": "Your phone's voice (temporary)",
+    "reminder": "Daily reminder",
+    "reminderHint": "One notification a day. Works without internet.",
+    "reminderTime": "Reminder time",
+    "storage": "Anchored classes",
+    "storageValue_one": "{{count}} downloaded · {{size}}",
+    "storageValue_other": "{{count}} downloaded · {{size}}",
+    "storagePackaged": "The free classes come inside the app and take no extra space.",
+    "storageDelete": "Delete downloaded classes",
+    "premium": "Manta Complete",
+    "premiumActive": "Active on this phone",
+    "premiumInactive": "See plans",
+    "restore": "Restore purchases",
+    "health": "Health note",
     "version": "Version {{version}}"
+  },
+  "health": {
+    "title": "Health note",
+    "body1": "Manta offers gentle movements, but it doesn't replace a doctor or a physiotherapist.",
+    "body2": "Always move without pain. If something hurts, stop and breathe.",
+    "body3": "If you have an injury, recent surgery, dizziness or blood pressure problems, check with a health professional first.",
+    "body4": "On a boat or anywhere that moves, practice seated or keep something to hold on to nearby.",
+    "ok": "Got it"
+  },
+  "notification": {
+    "title": "Your tide for today",
+    "body": "A few minutes of tai chi, wherever you are.",
+    "channel": "Reminders"
   }
 }

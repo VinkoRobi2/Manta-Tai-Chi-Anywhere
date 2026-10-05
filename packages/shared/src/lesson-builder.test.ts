@@ -24,7 +24,13 @@ const LIBRARY: Record<string, MovementScript> = {
 
 describe('buildTimeline', () => {
   const timeline = buildTimeline(
-    { slug: 'demo', movements: [{ id: 'comienzo', durationSec: 60 }, { id: 'cierre', durationSec: 20 }] },
+    {
+      slug: 'demo',
+      movements: [
+        { id: 'comienzo', durationSec: 60 },
+        { id: 'cierre', durationSec: 20 },
+      ],
+    },
     LIBRARY,
     'en',
   );
@@ -36,7 +42,12 @@ describe('buildTimeline', () => {
   });
 
   it('alterna las indicaciones después de la introducción', () => {
-    expect(timeline.segments[0]!.captions.map((caption) => caption.text)).toEqual(['Intro', 'Uno', 'Dos', 'Uno']);
+    expect(timeline.segments[0]!.captions.map((caption) => caption.text)).toEqual([
+      'Intro',
+      'Uno',
+      'Dos',
+      'Uno',
+    ]);
   });
 
   it('alterna inhalar y exhalar dentro del segmento', () => {
@@ -47,8 +58,8 @@ describe('buildTimeline', () => {
   });
 
   it('falla con un movimiento que no existe', () => {
-    expect(() => buildTimeline({ slug: 'x', movements: [{ id: 'nada', durationSec: 10 }] }, LIBRARY, 'es')).toThrow(
-      /desconocido/,
-    );
+    expect(() =>
+      buildTimeline({ slug: 'x', movements: [{ id: 'nada', durationSec: 10 }] }, LIBRARY, 'es'),
+    ).toThrow(/desconocido/);
   });
 });

@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { groupByDay, practiceTotals, startOfWeek, tideWeek, type PracticeRecord } from './progress.js';
+import {
+  groupByDay,
+  practiceTotals,
+  startOfWeek,
+  tideWeek,
+  type PracticeRecord,
+} from './progress.js';
 
 // Fechas locales para que los tests no dependan de la zona horaria de la máquina.
 const at = (day: number, hour = 8, minute = 0) => new Date(2026, 9, day, hour, minute);

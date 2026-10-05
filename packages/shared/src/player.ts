@@ -165,7 +165,9 @@ export function createTimelinePlayer(
   let emittedUntil = -1;
 
   const positionAt = (nowMs: number) =>
-    status === 'playing' ? clamp(anchorPosition + (nowMs - anchorNow) * rate, 0, total) : anchorPosition;
+    status === 'playing'
+      ? clamp(anchorPosition + (nowMs - anchorNow) * rate, 0, total)
+      : anchorPosition;
 
   return {
     timeline,

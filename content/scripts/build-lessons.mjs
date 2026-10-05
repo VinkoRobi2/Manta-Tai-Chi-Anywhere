@@ -35,7 +35,9 @@ for (const recipe of recipes) {
     await writeFile(file, `${JSON.stringify(timeline, null, 2)}\n`);
 
     const name = `${recipe.slug.replace(/-(\w)/g, (_, c) => c.toUpperCase())}_${locale}`;
-    imports.push(`import ${name} from '../../../assets/lessons/${recipe.slug}/${locale}/timeline.json';`);
+    imports.push(
+      `import ${name} from '../../../assets/lessons/${recipe.slug}/${locale}/timeline.json';`,
+    );
     perLocale.push(`${locale}: ${name}`);
   }
   entries.push(`  '${recipe.slug}': { ${perLocale.join(', ')} },`);
@@ -52,4 +54,6 @@ ${entries.join('\n')}
 };
 `;
 await writeFile(join(root, 'apps/mobile/src/features/catalog/timelines.generated.ts'), generated);
-console.log(`Listo: ${recipes.length} clases × ${LOCALES.length} idiomas en apps/mobile/assets/lessons`);
+console.log(
+  `Listo: ${recipes.length} clases × ${LOCALES.length} idiomas en apps/mobile/assets/lessons`,
+);

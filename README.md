@@ -14,7 +14,7 @@ manta/
 │   └── shared/          Tipos y esquemas Zod compartidos
 ├── content/             Producción de clases (ver content/README.md)
 ├── infra/               docker-compose con PostgreSQL
-├── docs/                Arquitectura y prueba del motor 3D
+├── docs/                Arquitectura, instructor en video y prompt de la Fase 1
 └── .github/workflows/   CI
 ```
 
@@ -40,7 +40,7 @@ manta/
 
 ## App en el teléfono
 
-La app usa módulos nativos (RevenueCat y, pronto, el motor 3D), así que no corre en Expo Go: necesita un build de desarrollo.
+La app usa módulos nativos (video, notificaciones, RevenueCat), así que no corre en Expo Go: necesita un build de desarrollo.
 
 1. `cd apps/mobile && npx eas-cli@latest init`
 2. `npx eas-cli@latest build --profile development --platform android` (o `ios`)
@@ -65,4 +65,4 @@ Ninguno se sube a git. Las plantillas están en los `.env.example`.
 
 ## Siguiente paso
 
-La prueba del motor 3D: [docs/spike-3d.md](docs/spike-3d.md).
+Producir el primer clip del instructor y probarlo en el teléfono: [docs/instructor-video.md](docs/instructor-video.md).

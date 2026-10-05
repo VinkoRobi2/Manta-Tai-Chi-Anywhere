@@ -1,5 +1,10 @@
 import type { Locale } from './enums.js';
-import { parseTimeline, type LessonTimeline, type TimelineBreath, type TimelineCaption } from './timeline.js';
+import {
+  parseTimeline,
+  type LessonTimeline,
+  type TimelineBreath,
+  type TimelineCaption,
+} from './timeline.js';
 
 /**
  * Herramienta del pipeline de contenido: arma la línea de tiempo de una clase
@@ -51,14 +56,22 @@ export function buildTimeline(
 
     const captions: TimelineCaption[] = [{ atMs: 0, text: movement.intro[locale] }];
     const cues = movement.cues[locale];
-    for (let at = captionEveryMs, i = 0; cues.length > 0 && at < durationMs - 4_000; at += captionEveryMs, i++) {
+    for (
+      let at = captionEveryMs, i = 0;
+      cues.length > 0 && at < durationMs - 4_000;
+      at += captionEveryMs, i++
+    ) {
       captions.push({ atMs: at, text: cues[i % cues.length]! });
     }
 
     const breath: TimelineBreath[] = [];
     for (let at = breathLeadInMs, inhale = true; at < durationMs - 1_000; inhale = !inhale) {
       const phaseMs = inhale ? movement.breath.inMs : movement.breath.outMs;
-      breath.push({ atMs: at, phase: inhale ? 'in' : 'out', durationMs: Math.min(phaseMs, durationMs - at) });
+      breath.push({
+        atMs: at,
+        phase: inhale ? 'in' : 'out',
+        durationMs: Math.min(phaseMs, durationMs - at),
+      });
       at += phaseMs;
     }
 

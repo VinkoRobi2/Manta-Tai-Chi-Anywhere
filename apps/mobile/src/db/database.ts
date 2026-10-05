@@ -23,6 +23,15 @@ const MIGRATIONS: string[] = [
      downloaded_at TEXT NOT NULL,
      PRIMARY KEY (lesson_slug, locale)
    );`,
+  // 2: estado del mar, espacio y zonas a cuidar en cada práctica; preferencias de la app.
+  `ALTER TABLE practice_sessions ADD COLUMN mood TEXT;
+   ALTER TABLE practice_sessions ADD COLUMN space_mode TEXT NOT NULL DEFAULT 'SEATED';
+   ALTER TABLE practice_sessions ADD COLUMN care_tags TEXT;
+   ALTER TABLE downloaded_lessons ADD COLUMN size_bytes INTEGER NOT NULL DEFAULT 0;
+   CREATE TABLE IF NOT EXISTS settings (
+     key TEXT PRIMARY KEY NOT NULL,
+     value TEXT NOT NULL
+   );`,
 ];
 
 export function migrateDatabase(): void {

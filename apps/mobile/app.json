@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "manta",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.mantataichi.app",
@@ -19,11 +19,11 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false,
+      "predictiveBackGestureEnabled": true,
       "package": "com.mantataichi.app"
     },
     "web": {
-      "output": "static",
+      "output": "single",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
@@ -38,7 +38,14 @@
       ],
       "expo-sqlite",
       "expo-localization",
-      "expo-audio"
+      "expo-audio",
+      "expo-video",
+      [
+        "expo-notifications",
+        {
+          "color": "#1F7A8C"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

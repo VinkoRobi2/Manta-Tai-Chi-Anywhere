@@ -8,20 +8,23 @@
 
 ## Piezas
 
-| Pieza           | Tecnología                                          | Responsabilidad                                    |
-| --------------- | --------------------------------------------------- | -------------------------------------------------- |
-| apps/mobile     | Expo SDK 57, Expo Router, NativeWind 4, expo-sqlite | Experiencia completa, offline                      |
-| apps/api        | NestJS 12, Prisma 7, PostgreSQL                     | Catálogo, descargas, compras, lista de espera      |
-| apps/web        | Next.js 16, Tailwind 4                              | Landing y lista de espera                          |
-| packages/shared | TypeScript + Zod                                    | Contratos entre app y API                          |
-| Contenido       | Cloudflare R2 + CDN                                 | Paquetes de clases                                 |
-| Pagos           | RevenueCat                                          | Suscripción anual/mensual y pago único de por vida |
+| Pieza           | Tecnología                                        | Responsabilidad                                    |
+| --------------- | ------------------------------------------------- | -------------------------------------------------- |
+| apps/mobile     | Expo SDK 57, Expo Router, expo-sqlite, expo-video | Experiencia completa, offline                      |
+| apps/api        | NestJS 12, Prisma 7, PostgreSQL                   | Catálogo, descargas, compras, lista de espera      |
+| apps/web        | Next.js 16, Tailwind 4                            | Landing y lista de espera                          |
+| packages/shared | TypeScript + Zod                                  | Contratos entre app y API                          |
+| Contenido       | Cloudflare R2 + CDN                               | Paquetes de clases                                 |
+| Pagos           | RevenueCat                                        | Suscripción anual/mensual y pago único de por vida |
 
 ## Decisiones
 
 - **NestJS y no Go para la API:** Prisma Client Go fue archivado en 2025 y no es compatible con Prisma 7.
 - **Prisma solo en el servidor:** en el teléfono se usa SQLite directo con migraciones numeradas (src/db/database.ts).
 - **NativeWind 4 (estable)** en vez de la v5, que sigue en release candidate.
+- **Instructor en video realista, no 3D en tiempo real:** se ve natural en cualquier teléfono y no depende de un motor 3D. Ver [instructor-video.md](instructor-video.md).
+- **Motor del reproductor puro en @manta/shared:** recibe el tiempo desde afuera, así que se prueba con tests sin teléfono.
+- **Las líneas de tiempo se generan desde guiones** (`content/guiones`) con `pnpm content:lessons`. La app solo las lee.
 - **Puerto 5433 para Postgres local:** evita chocar con un Postgres que ya tengas instalado.
 
 ## Seguridad

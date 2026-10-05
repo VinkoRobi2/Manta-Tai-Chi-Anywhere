@@ -1,3 +1,5 @@
 pnpm-lock.yaml
 apps/api/src/generated
 content/build
+apps/mobile/assets/lessons
+apps/mobile/src/features/catalog/timelines.generated.ts

@@ -12,7 +12,10 @@
       "durationMs": 18000,
       "cue": "voz/01-comienzo.m4a",
       "captions": [
-        { "atMs": 0, "text": "Al inhalar, los brazos suben al frente hasta la altura de los hombros." },
+        {
+          "atMs": 0,
+          "text": "Al inhalar, los brazos suben al frente hasta la altura de los hombros."
+        },
         { "atMs": 9000, "text": "Al exhalar, las manos bajan hasta los muslos." }
       ],
       "breath": [

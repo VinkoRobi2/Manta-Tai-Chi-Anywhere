@@ -86,8 +86,10 @@ export function practiceTotals(records: readonly PracticeRecord[], now: Date): P
   const moodCount = new Map<SeaState, number>();
 
   for (const record of records) {
-    if (record.completedAt >= weekStart && record.completedAt <= now) weekSeconds += record.durationSec;
-    if (record.completedAt >= monthStart && record.completedAt <= now) monthSeconds += record.durationSec;
+    if (record.completedAt >= weekStart && record.completedAt <= now)
+      weekSeconds += record.durationSec;
+    if (record.completedAt >= monthStart && record.completedAt <= now)
+      monthSeconds += record.durationSec;
     if (record.mood && record.completedAt >= moodSince) {
       moodCount.set(record.mood, (moodCount.get(record.mood) ?? 0) + 1);
     }
