@@ -1,47 +1,52 @@
-import { Platform, View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
+import { View, type StyleProp, type ViewProps, type ViewStyle } from 'react-native';
 
 import { useTheme } from '@/theme/theme';
-import { radius, space } from '@/theme/tokens';
+import { glowShadow, radius, space } from '@/theme/tokens';
 
 import { Press } from './Press';
 
 export interface CardProps extends ViewProps {
   onPress?: () => void;
   padded?: boolean;
+  /** Abisal: brilla un poco más (por ejemplo, la próxima clase). */
+  highlighted?: boolean;
   style?: StyleProp<ViewStyle>;
   accessibilityLabel?: string;
 }
 
 /**
- * Superficie separada del fondo. iOS (modo claro): sombra suave.
- * Android y modo cabina: borde fino, como en Material 3.
+ * Un panel. En Tinta es papel apenas más claro con un filete fino, sin sombra.
+ * En Abisal es vidrio oscuro con borde luminoso.
  */
-export function useCardStyle(): ViewStyle {
+export function useCardStyle(highlighted = false): ViewStyle {
   const palette = useTheme();
-  const shadow = Platform.OS === 'ios' && palette.scheme === 'light';
+  if (palette.name === 'abisal') {
+    return {
+      backgroundColor: highlighted ? '#0F3242' : palette.surface,
+      borderRadius: radius.card,
+      borderWidth: 1,
+      borderColor: highlighted ? 'rgba(95,227,232,0.45)' : palette.border,
+      ...(highlighted ? glowShadow(palette, 0.35) : null),
+    };
+  }
   return {
     backgroundColor: palette.surface,
-    borderRadius: Platform.OS === 'android' ? 16 : radius.card,
-    ...(shadow
-      ? {
-          shadowColor: '#0B3C49',
-          shadowOpacity: 0.1,
-          shadowRadius: 14,
-          shadowOffset: { width: 0, height: 6 },
-        }
-      : { borderWidth: 1, borderColor: palette.border }),
+    borderRadius: 6,
+    borderWidth: 1,
+    borderColor: palette.border,
   };
 }
 
 export function Card({
   onPress,
   padded = true,
+  highlighted = false,
   style,
   children,
   accessibilityLabel,
   ...rest
 }: CardProps) {
-  const base = useCardStyle();
+  const base = useCardStyle(highlighted);
   const merged = [base, padded ? { padding: space.l } : null, style];
   if (onPress) {
     return (
@@ -60,4 +65,10 @@ export function Card({
       {children}
     </View>
   );
+}
+
+/** Filete horizontal: en Tinta separa secciones como en un libro. */
+export function Rule({ style }: { style?: StyleProp<ViewStyle> }) {
+  const palette = useTheme();
+  return <View style={[{ height: 1, backgroundColor: palette.border }, style]} />;
 }

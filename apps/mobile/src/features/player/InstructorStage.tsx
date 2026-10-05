@@ -1,9 +1,9 @@
 import type { TimelineSegment } from '@manta/shared';
 import { useVideoPlayer, VideoView, type VideoPlayer, type VideoSource } from 'expo-video';
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { useTheme } from '@/theme/theme';
 import { Text } from '@/ui/Text';
 
 /**
@@ -79,31 +79,40 @@ function VideoStage({
   );
 }
 
-/** Sin video: el nombre del movimiento, grande y sereno, mientras la voz y la marea guían. */
+/**
+ * Sin video: el nombre del movimiento, sereno. En Tinta, con su carácter chino grande;
+ * en Abisal, con su nombre y pronunciación. La voz, los subtítulos y la respiración guían.
+ */
 function GuideStage({ segment }: { segment: TimelineSegment }) {
-  const { t } = useTranslation();
+  const palette = useTheme();
+  const tinta = palette.name === 'tinta';
   return (
     <View
       style={{
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingHorizontal: 32,
-        gap: 12,
+        paddingHorizontal: 24,
+        gap: 6,
       }}
     >
-      <Text
-        variant="title"
-        tone="stage"
-        weight="light"
-        align="center"
-        style={{ fontSize: 34, lineHeight: 42 }}
-      >
+      {tinta && segment.hanzi ? (
+        <Text
+          color={palette.ink}
+          align="center"
+          accessibilityElementsHidden
+          importantForAccessibility="no"
+          style={{ fontSize: 76, lineHeight: 92, fontWeight: '600', fontFamily: undefined }}
+        >
+          {segment.hanzi}
+        </Text>
+      ) : null}
+      <Text variant="title" align="center">
         {segment.title}
       </Text>
-      {__DEV__ ? (
-        <Text variant="caption" tone="stageSoft" align="center">
-          {t('player.videoPending')}
+      {segment.pinyin ? (
+        <Text variant="callout" tone="soft" italic align="center">
+          {segment.pinyin}
         </Text>
       ) : null}
     </View>
@@ -111,7 +120,21 @@ function GuideStage({ segment }: { segment: TimelineSegment }) {
 }
 
 export function InstructorStage(props: InstructorStageProps) {
+  const palette = useTheme();
+  const tinta = palette.name === 'tinta';
   const source = resolveClip(props.segment, props.view);
-  if (!source) return <GuideStage segment={props.segment} />;
-  return <VideoStage {...props} source={source} />;
+  return (
+    <View
+      style={{
+        flex: 1,
+        overflow: 'hidden',
+        borderRadius: tinta ? 4 : 28,
+        backgroundColor: tinta ? palette.surfaceAlt : 'rgba(18,66,90,0.45)',
+        borderWidth: tinta ? 0 : 1,
+        borderColor: palette.border,
+      }}
+    >
+      {source ? <VideoStage {...props} source={source} /> : <GuideStage segment={props.segment} />}
+    </View>
+  );
 }

@@ -52,7 +52,8 @@
     "dayNames": ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"],
     "count": "{{count}} de {{goal}} mareas",
     "thisWeek": "esta semana",
-    "weekComplete": "Semana completa"
+    "weekComplete": "Semana completa",
+    "titleWeek": "Mareas de la semana"
   },
   "lesson": {
     "movements_one": "{{count}} movimiento",
@@ -117,8 +118,8 @@
     "minutes_one": "{{count}} minuto de calma",
     "minutes_other": "{{count}} minutos de calma",
     "moodQuestion": "¿Cómo está tu mar?",
-    "reminderQuestion": "¿Te recuerdo mañana a esta hora?",
-    "reminderYes": "Sí, a las {{time}}",
+    "reminderQuestion": "¿Te recuerdo mañana a esta hora, a las {{time}}?",
+    "reminderYes": "Sí, recuérdame",
     "reminderOther": "Otra hora",
     "reminderSet": "Listo: te recuerdo cada día a las {{time}}.",
     "reminderDenied": "No tengo permiso para avisarte. Puedes activarlo en Ajustes cuando quieras.",
@@ -203,9 +204,9 @@
     "languageSystem": "Teléfono",
     "appearance": "Apariencia",
     "appearanceSystem": "Automática",
-    "appearanceLight": "Clara",
-    "appearanceCabin": "Cabina",
-    "appearanceHint": "Modo cabina: colores oscuros para practicar de noche.",
+    "appearanceLight": "Día",
+    "appearanceCabin": "Noche",
+    "appearanceHint": "De día, tinta sobre papel. De noche, el mar que brilla: para practicar en un camarote sin encandilarte.",
     "captions": "Tamaño de subtítulos",
     "captionNormal": "Normal",
     "captionLarge": "Grande",

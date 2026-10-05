@@ -22,6 +22,7 @@
 - **NestJS y no Go para la API:** Prisma Client Go fue archivado en 2025 y no es compatible con Prisma 7.
 - **Prisma solo en el servidor:** en el teléfono se usa SQLite directo con migraciones numeradas (src/db/database.ts).
 - **NativeWind 4 (estable)** en vez de la v5, que sigue en release candidate.
+- **Dos mundos visuales, Tinta de día y Abisal de noche:** ver [diseno.md](diseno.md).
 - **Instructor en video realista, no 3D en tiempo real:** se ve natural en cualquier teléfono y no depende de un motor 3D. Ver [instructor-video.md](instructor-video.md).
 - **Motor del reproductor puro en @manta/shared:** recibe el tiempo desde afuera, así que se prueba con tests sin teléfono.
 - **Las líneas de tiempo se generan desde guiones** (`content/guiones`) con `pnpm content:lessons`. La app solo las lee.

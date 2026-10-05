@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Platform, ScrollView, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Svg, { Circle, Defs, LinearGradient, Path, Rect, Stop } from 'react-native-svg';
 
 import { getLesson, nextLessonFor } from '@/features/catalog/catalog';
 import { usePremium } from '@/features/paywall/purchases';
@@ -16,51 +15,15 @@ import { updateSettings, useSettings } from '@/features/settings/settings';
 import { track } from '@/lib/analytics';
 import { localeTag, useLocale } from '@/lib/i18n';
 import { useTheme } from '@/theme/theme';
-import { space } from '@/theme/tokens';
+import { glowShadow, space } from '@/theme/tokens';
+import { Enso, GlidingManta } from '@/ui/Brand';
 import { Button } from '@/ui/Button';
 import { Card } from '@/ui/Card';
 import { Icon } from '@/ui/Icon';
-import { SeaStateIcon } from '@/ui/Marine';
+import { Seal, SeaStateIcon } from '@/ui/Marine';
 import { Press } from '@/ui/Press';
-import { IconButton } from '@/ui/Screen';
+import { Backdrop, IconButton } from '@/ui/Screen';
 import { Text } from '@/ui/Text';
-
-/** Mar en calma con el sol en el horizonte y un barco pesquero a lo lejos. */
-function CalmSea({ height }: { height: number }) {
-  const palette = useTheme();
-  const dark = palette.scheme === 'dark';
-  return (
-    <Svg width="100%" height={height} viewBox="0 0 300 160" preserveAspectRatio="xMidYMax slice">
-      <Defs>
-        <LinearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-          <Stop offset="0" stopColor={dark ? '#0B3C49' : '#BFDCE2'} />
-          <Stop offset="1" stopColor={dark ? '#145466' : '#E4EFF1'} />
-        </LinearGradient>
-      </Defs>
-      <Rect x={0} y={0} width={300} height={116} fill="url(#sky)" />
-      <Circle cx={214} cy={116} r={27} fill={palette.sol} />
-      <Rect x={0} y={116} width={300} height={44} fill={dark ? '#1F5A68' : '#7DB6C2'} />
-      <Path d="M0 116h300" stroke="#EEF4F5" strokeOpacity={0.9} strokeWidth={1.2} />
-      <Path
-        d="M200 124h28M204 131h20M208 138h12"
-        stroke={palette.sol}
-        strokeWidth={2}
-        strokeLinecap="round"
-        opacity={0.85}
-      />
-      <Path
-        d="M18 128h54M110 134h66M244 126h40M34 144h84M166 149h62"
-        stroke="#EEF4F5"
-        strokeOpacity={0.7}
-        strokeWidth={1.5}
-        strokeLinecap="round"
-      />
-      <Path d="M58 116h30l-5 6H63z" fill="#0B3C49" />
-      <Path d="M72 116V99" stroke="#0B3C49" strokeWidth={1.4} />
-      <Path d="M72 101l9 13h-9z" fill="#0B3C49" opacity={0.75} />
-    </Svg>
-  );
-}
 
 export default function FinalScreen() {
   const { slug, sesion, segundos } = useLocalSearchParams<{
@@ -75,6 +38,7 @@ export default function FinalScreen() {
   const settings = useSettings();
   const premium = usePremium();
   const sessions = useSessions();
+  const night = palette.name === 'abisal';
   const ios = Platform.OS !== 'android';
 
   const lesson = getLesson(slug, locale);
@@ -112,30 +76,91 @@ export default function FinalScreen() {
 
   const close = () => router.back();
 
+  const reminderBody =
+    reminder === 'ask' ? (
+      <>
+        <Text variant={night ? 'callout' : 'headline'} weight="bold">
+          {t('final.reminderQuestion', { time: timeLabel })}
+        </Text>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: space.s }}>
+          <Button
+            label={t('final.reminderYes')}
+            variant={night ? 'primary' : 'secondary'}
+            size="small"
+            block={false}
+            onPress={acceptReminder}
+          />
+          <Button
+            label={t('final.reminderOther')}
+            variant="outline"
+            size="small"
+            block={false}
+            onPress={() => {
+              updateSettings({ reminderAsked: true });
+              router.push('/ajustes');
+            }}
+          />
+        </View>
+      </>
+    ) : (
+      <Text variant="callout">
+        {reminder === 'set'
+          ? t('final.reminderSet', { time: timeLabel })
+          : t('final.reminderDenied')}
+      </Text>
+    );
+
   return (
     <View style={{ flex: 1, backgroundColor: palette.background }}>
-      <ScrollView contentContainerStyle={{ paddingBottom: insets.bottom + space.xxl }}>
-        <CalmSea height={insets.top + 190} />
-
+      <Backdrop />
+      <ScrollView
+        contentContainerStyle={{
+          paddingTop: insets.top + 64,
+          paddingBottom: insets.bottom + space.xxl,
+          paddingHorizontal: space.gutter,
+          gap: space.xl,
+        }}
+      >
         <Animated.View
-          entering={FadeInDown.duration(700)}
-          style={{ paddingHorizontal: space.gutter, gap: space.l, marginTop: space.l }}
+          entering={FadeIn.duration(900)}
+          style={{ alignItems: 'center', gap: space.l }}
         >
-          <View>
+          {night ? (
+            <View style={{ height: 150, justifyContent: 'center' }}>
+              <GlidingManta width={190} />
+            </View>
+          ) : (
+            <View style={{ width: 200, height: 200 }}>
+              <Enso size={200} />
+              <Seal
+                char="完"
+                size={54}
+                tilt={-4}
+                style={{ position: 'absolute', right: -4, bottom: 8 }}
+              />
+            </View>
+          )}
+          <View style={{ alignItems: 'center' }}>
             <Text
               variant="display"
               accessibilityRole="header"
-              style={{ fontSize: 40, lineHeight: 46 }}
+              style={
+                night
+                  ? { fontSize: 56, lineHeight: 60, letterSpacing: -1.5 }
+                  : { fontSize: 66, lineHeight: 68 }
+              }
             >
               {t('final.title')}
             </Text>
-            <Text variant="body" tone="soft">
+            <Text variant={night ? 'body' : 'title'} italic={!night} weight="regular" tone="soft">
               {t('final.minutes', { count: minutes })}
             </Text>
           </View>
+        </Animated.View>
 
+        <Animated.View entering={FadeInDown.delay(300).duration(700)} style={{ gap: space.xl }}>
           <View style={{ gap: space.s }}>
-            <Text variant="callout" weight="medium">
+            <Text variant="label" tone="soft" align="center">
               {t('final.moodQuestion')}
             </Text>
             <View
@@ -153,29 +178,50 @@ export default function FinalScreen() {
                     accessibilityRole="radio"
                     accessibilityState={{ selected }}
                     accessibilityLabel={t(`mood.${state}`)}
-                    style={{
-                      flex: 1,
-                      minHeight: 76,
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: 6,
-                      paddingHorizontal: 2,
-                      borderRadius: ios ? 16 : 12,
-                      borderWidth: selected ? 2 : 1,
-                      borderColor: selected ? palette.accent : palette.border,
-                      backgroundColor: selected ? palette.surfaceAlt : palette.surface,
-                      overflow: 'hidden',
-                    }}
+                    style={[
+                      {
+                        flex: 1,
+                        minHeight: 84,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 8,
+                        paddingHorizontal: 2,
+                        overflow: 'hidden',
+                      },
+                      night
+                        ? {
+                            borderRadius: 20,
+                            borderWidth: selected ? 1.5 : 1,
+                            borderColor: selected ? palette.accent : palette.border,
+                            backgroundColor: selected ? 'rgba(95,227,232,0.12)' : palette.surface,
+                          }
+                        : { borderRadius: 8 },
+                      selected ? glowShadow(palette, 0.5) : null,
+                    ]}
                   >
-                    <SeaStateIcon state={state} width={34} />
-                    <Text
-                      variant="caption"
-                      align="center"
-                      style={{ fontSize: 12, lineHeight: 15 }}
-                      numberOfLines={2}
+                    <SeaStateIcon state={state} />
+                    <View
+                      style={
+                        !night && selected
+                          ? {
+                              borderBottomWidth: 2,
+                              borderBottomColor: palette.accent,
+                              paddingBottom: 2,
+                            }
+                          : { paddingBottom: 4 }
+                      }
                     >
-                      {t(`mood.${state}`)}
-                    </Text>
+                      <Text
+                        variant="caption"
+                        weight={selected ? 'bold' : 'regular'}
+                        tone={selected ? 'ink' : 'soft'}
+                        align="center"
+                        style={{ fontSize: 13, lineHeight: 16 }}
+                        numberOfLines={2}
+                      >
+                        {t(`mood.${state}`)}
+                      </Text>
+                    </View>
                   </Press>
                 );
               })}
@@ -183,45 +229,37 @@ export default function FinalScreen() {
           </View>
 
           {reminder !== 'hidden' ? (
-            <Animated.View entering={FadeIn}>
+            night ? (
               <Card>
                 <View style={{ flexDirection: 'row', gap: space.m }}>
-                  <Icon name="bell" size={22} color={palette.accent} />
-                  <View style={{ flex: 1, gap: space.m }}>
-                    {reminder === 'ask' ? (
-                      <>
-                        <Text variant="callout" weight="semibold">
-                          {t('final.reminderQuestion')}
-                        </Text>
-                        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: space.s }}>
-                          <Button
-                            label={t('final.reminderYes', { time: timeLabel })}
-                            variant="secondary"
-                            size="small"
-                            onPress={acceptReminder}
-                          />
-                          <Button
-                            label={t('final.reminderOther')}
-                            variant="outline"
-                            size="small"
-                            onPress={() => {
-                              updateSettings({ reminderAsked: true });
-                              router.push('/ajustes');
-                            }}
-                          />
-                        </View>
-                      </>
-                    ) : (
-                      <Text variant="callout">
-                        {reminder === 'set'
-                          ? t('final.reminderSet', { time: timeLabel })
-                          : t('final.reminderDenied')}
-                      </Text>
-                    )}
+                  <View
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: 22,
+                      backgroundColor: 'rgba(255,197,107,0.14)',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Icon name="bell" size={22} color="#FFC56B" />
                   </View>
+                  <View style={{ flex: 1, gap: space.m }}>{reminderBody}</View>
                 </View>
               </Card>
-            </Animated.View>
+            ) : (
+              <View
+                style={{
+                  gap: space.m,
+                  paddingVertical: space.l,
+                  borderTopWidth: 1,
+                  borderBottomWidth: 1,
+                  borderColor: palette.border,
+                }}
+              >
+                {reminderBody}
+              </View>
+            )
           ) : null}
 
           {settings.sessionsCompleted >= 2 && !premium ? (
@@ -229,18 +267,11 @@ export default function FinalScreen() {
               onPress={() => router.push('/manta-completa')}
               accessibilityLabel={`${t('final.premiumTitle')}. ${t('final.premiumBody')}`}
             >
-              <Text variant="callout" weight="semibold">
-                {t('final.premiumTitle')}
-              </Text>
-              <Text variant="caption" tone="soft" style={{ marginTop: 2 }}>
+              <Text variant="headline">{t('final.premiumTitle')}</Text>
+              <Text variant="callout" tone="soft" style={{ marginTop: 2 }}>
                 {t('final.premiumBody')}
               </Text>
-              <Text
-                variant="caption"
-                tone="accent"
-                weight="semibold"
-                style={{ marginTop: space.s }}
-              >
+              <Text variant="callout" tone="accent" weight="bold" style={{ marginTop: space.s }}>
                 {t('final.premiumCta')}
               </Text>
             </Card>
@@ -258,20 +289,18 @@ export default function FinalScreen() {
                 alignItems: 'center',
                 gap: space.m,
                 minHeight: 64,
-                borderTopWidth: 1,
-                borderTopColor: palette.border,
                 overflow: 'hidden',
               }}
             >
               <View style={{ flex: 1 }}>
-                <Text variant="label" tone="soft">
+                <Text variant="label" tone="accent">
                   {t('final.next')}
                 </Text>
-                <Text variant="callout" weight="medium">
+                <Text variant="headline">
                   {next.title} · {t('common.minutes', { count: Math.round(next.durationSec / 60) })}
                 </Text>
               </View>
-              <Icon name="chevronRight" size={18} color={palette.accent} />
+              <Icon name="chevronRight" size={18} color={palette.ink} />
             </Press>
           ) : null}
         </Animated.View>
@@ -281,8 +310,8 @@ export default function FinalScreen() {
         style={{
           position: 'absolute',
           top: insets.top + space.s,
-          left: space.m,
-          right: space.m,
+          left: space.l,
+          right: space.l,
           flexDirection: 'row',
           justifyContent: ios ? 'flex-end' : 'flex-start',
         }}
@@ -293,18 +322,20 @@ export default function FinalScreen() {
             accessibilityLabel={t('common.done')}
             style={{
               minHeight: 44,
-              paddingHorizontal: space.m,
+              paddingHorizontal: space.l,
               justifyContent: 'center',
               borderRadius: 22,
-              backgroundColor: 'rgba(255,255,255,0.7)',
+              borderWidth: night ? 1 : 0,
+              borderColor: palette.border,
+              backgroundColor: night ? palette.surface : 'transparent',
             }}
           >
-            <Text variant="callout" weight="semibold" color="#0B3C49">
+            <Text variant="callout" weight="bold">
               {t('common.done')}
             </Text>
           </Press>
         ) : (
-          <IconButton name="close" label={t('common.close')} onPress={close} color="#0B3C49" />
+          <IconButton name="close" label={t('common.close')} onPress={close} />
         )}
       </View>
     </View>

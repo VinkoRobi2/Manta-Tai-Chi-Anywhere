@@ -119,12 +119,12 @@ export default function VoyageScreen() {
                     width: 28,
                     height: 28,
                     borderRadius: 14,
-                    backgroundColor: palette.accent,
+                    backgroundColor: palette.secondary,
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
                 >
-                  <Icon name="check" size={14} color={palette.onAccent} />
+                  <Icon name="check" size={14} color={palette.background} />
                 </View>
               );
               right = (
@@ -224,7 +224,7 @@ export default function VoyageScreen() {
             style={{
               width: `${percent}%`,
               height: '100%',
-              backgroundColor: palette.accent,
+              backgroundColor: palette.secondary,
               borderRadius: 3,
             }}
           />

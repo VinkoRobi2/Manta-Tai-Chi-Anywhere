@@ -6,6 +6,8 @@
   "segments": [
     {
       "title": "Llegar al lugar",
+      "hanzi": "预备势",
+      "pinyin": "yù bèi shì",
       "clip": "preparacion-de-pie.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -94,6 +96,8 @@
     },
     {
       "title": "Manos de nube en el lugar",
+      "hanzi": "云手",
+      "pinyin": "yún shǒu",
       "clip": "manos-de-nube-de-pie.mp4",
       "startMs": 60000,
       "durationMs": 480000,
@@ -694,6 +698,8 @@
     },
     {
       "title": "Cerrar de pie",
+      "hanzi": "收势",
+      "pinyin": "shōu shì",
       "clip": "cierre-de-pie.mp4",
       "startMs": 540000,
       "durationMs": 60000,

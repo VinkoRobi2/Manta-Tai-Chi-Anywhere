@@ -19,6 +19,9 @@ export interface MovementScript {
   clip: string;
   clipSide?: string;
   title: Localized<string>;
+  /** Nombre original en chino y su pinyin, iguales en todos los idiomas. */
+  hanzi?: string;
+  pinyin?: string;
   /** Primera indicación del movimiento. */
   intro: Localized<string>;
   /** Indicaciones que se van alternando mientras dura el movimiento. */
@@ -77,6 +80,8 @@ export function buildTimeline(
 
     const segment = {
       title: movement.title[locale],
+      ...(movement.hanzi ? { hanzi: movement.hanzi } : {}),
+      ...(movement.pinyin ? { pinyin: movement.pinyin } : {}),
       clip: movement.clip,
       ...(movement.clipSide ? { clipSide: movement.clipSide } : {}),
       startMs: cursor,

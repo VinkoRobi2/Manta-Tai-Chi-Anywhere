@@ -1,9 +1,14 @@
 import '../global.css';
 
-import { Lexend_300Light } from '@expo-google-fonts/lexend/300Light';
-import { Lexend_400Regular } from '@expo-google-fonts/lexend/400Regular';
-import { Lexend_500Medium } from '@expo-google-fonts/lexend/500Medium';
-import { Lexend_600SemiBold } from '@expo-google-fonts/lexend/600SemiBold';
+import { AtkinsonHyperlegibleNext_400Regular } from '@expo-google-fonts/atkinson-hyperlegible-next/400Regular';
+import { AtkinsonHyperlegibleNext_500Medium } from '@expo-google-fonts/atkinson-hyperlegible-next/500Medium';
+import { AtkinsonHyperlegibleNext_600SemiBold } from '@expo-google-fonts/atkinson-hyperlegible-next/600SemiBold';
+import { AtkinsonHyperlegibleNext_700Bold } from '@expo-google-fonts/atkinson-hyperlegible-next/700Bold';
+import { CormorantGaramond_500Medium } from '@expo-google-fonts/cormorant-garamond/500Medium';
+import { CormorantGaramond_500Medium_Italic } from '@expo-google-fonts/cormorant-garamond/500Medium_Italic';
+import { CormorantGaramond_600SemiBold } from '@expo-google-fonts/cormorant-garamond/600SemiBold';
+import { Sora_500Medium } from '@expo-google-fonts/sora/500Medium';
+import { Sora_600SemiBold } from '@expo-google-fonts/sora/600SemiBold';
 import { useFonts } from 'expo-font';
 import { SplashScreen, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -36,10 +41,15 @@ function bootLocalData(): true {
 export default function RootLayout() {
   const [ready] = useState(bootLocalData);
   const [fontsLoaded, fontError] = useFonts({
-    Lexend_300Light,
-    Lexend_400Regular,
-    Lexend_500Medium,
-    Lexend_600SemiBold,
+    AtkinsonHyperlegibleNext_400Regular,
+    AtkinsonHyperlegibleNext_500Medium,
+    AtkinsonHyperlegibleNext_600SemiBold,
+    AtkinsonHyperlegibleNext_700Bold,
+    CormorantGaramond_500Medium,
+    CormorantGaramond_500Medium_Italic,
+    CormorantGaramond_600SemiBold,
+    Sora_500Medium,
+    Sora_600SemiBold,
   });
 
   useEffect(() => {

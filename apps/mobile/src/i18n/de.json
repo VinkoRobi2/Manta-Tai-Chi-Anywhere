@@ -52,7 +52,8 @@
     "dayNames": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"],
     "count": "{{count}} von {{goal}} Gezeiten",
     "thisWeek": "diese Woche",
-    "weekComplete": "Woche geschafft"
+    "weekComplete": "Woche geschafft",
+    "titleWeek": "Gezeiten der Woche"
   },
   "lesson": {
     "movements_one": "{{count}} Bewegung",
@@ -117,8 +118,8 @@
     "minutes_one": "{{count}} Minute Ruhe",
     "minutes_other": "{{count}} Minuten Ruhe",
     "moodQuestion": "Wie ist dein Meer?",
-    "reminderQuestion": "Soll ich dich morgen um diese Zeit erinnern?",
-    "reminderYes": "Ja, um {{time}}",
+    "reminderQuestion": "Soll ich dich morgen um diese Zeit erinnern, um {{time}}?",
+    "reminderYes": "Ja, erinnere mich",
     "reminderOther": "Andere Uhrzeit",
     "reminderSet": "Erledigt: Ich erinnere dich jeden Tag um {{time}}.",
     "reminderDenied": "Ich darf dich nicht benachrichtigen. Du kannst es jederzeit in den Einstellungen erlauben.",
@@ -203,9 +204,9 @@
     "languageSystem": "Telefon",
     "appearance": "Darstellung",
     "appearanceSystem": "Automatisch",
-    "appearanceLight": "Hell",
-    "appearanceCabin": "Kajüte",
-    "appearanceHint": "Kajütenmodus: dunkle Farben zum Üben in der Nacht.",
+    "appearanceLight": "Tag",
+    "appearanceCabin": "Nacht",
+    "appearanceHint": "Am Tag Tusche auf Papier. In der Nacht das leuchtende Meer: zum Üben in der Kajüte, ohne geblendet zu werden.",
     "captions": "Größe der Untertitel",
     "captionNormal": "Normal",
     "captionLarge": "Groß",

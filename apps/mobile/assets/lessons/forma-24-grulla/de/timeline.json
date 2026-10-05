@@ -6,6 +6,8 @@
   "segments": [
     {
       "title": "Ankommen im Stehen",
+      "hanzi": "预备势",
+      "pinyin": "yù bèi shì",
       "clip": "preparacion-de-pie.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -94,6 +96,8 @@
     },
     {
       "title": "Die Mähne des Wildpferdes teilen",
+      "hanzi": "野马分鬃",
+      "pinyin": "yě mǎ fēn zōng",
       "clip": "crin-del-caballo.mp4",
       "startMs": 60000,
       "durationMs": 240000,
@@ -377,6 +381,8 @@
     },
     {
       "title": "Der Kranich auf der Stelle",
+      "hanzi": "白鹤亮翅",
+      "pinyin": "bái hè liàng chì",
       "clip": "grulla-de-pie.mp4",
       "startMs": 300000,
       "durationMs": 240000,
@@ -660,6 +666,8 @@
     },
     {
       "title": "Abschluss im Stehen",
+      "hanzi": "收势",
+      "pinyin": "shōu shì",
       "clip": "cierre-de-pie.mp4",
       "startMs": 540000,
       "durationMs": 60000,

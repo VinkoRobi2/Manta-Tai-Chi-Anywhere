@@ -2,7 +2,13 @@
   "_nota": "BORRADOR. Un instructor de tai chi certificado debe revisar cada indicación antes de publicar. Los clips .mp4 son los videos del instructor que todavía no existen.",
   "respiracion-inicial": {
     "clip": "respiracion-inicial.mp4",
-    "title": { "es": "Llegar a la silla", "en": "Settling in", "de": "Ankommen" },
+    "title": {
+      "es": "Llegar a la silla",
+      "en": "Settling in",
+      "de": "Ankommen"
+    },
+    "hanzi": "调息",
+    "pinyin": "tiáo xī",
     "intro": {
       "es": "Siéntate cerca del borde de la silla, con los pies firmes en el suelo y la espalda larga.",
       "en": "Sit near the front of your chair, feet flat on the floor, spine long.",
@@ -25,12 +31,21 @@
         "Lockere Kiefer und Stirn."
       ]
     },
-    "breath": { "inMs": 4000, "outMs": 6000 }
+    "breath": {
+      "inMs": 4000,
+      "outMs": 6000
+    }
   },
   "comienzo": {
     "clip": "comienzo.mp4",
     "clipSide": "comienzo-lado.mp4",
-    "title": { "es": "Comienzo", "en": "Commencement", "de": "Eröffnung" },
+    "title": {
+      "es": "Comienzo",
+      "en": "Commencement",
+      "de": "Eröffnung"
+    },
+    "hanzi": "起势",
+    "pinyin": "qǐ shì",
     "intro": {
       "es": "Al inhalar, los brazos suben al frente hasta la altura de los hombros, como si el agua los sostuviera.",
       "en": "As you breathe in, float your arms up in front to shoulder height, as if the water were holding them.",
@@ -53,12 +68,21 @@
         "Heb die Arme nur so weit, wie es angenehm ist."
       ]
     },
-    "breath": { "inMs": 5000, "outMs": 5000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 5000
+    }
   },
   "manos-de-nube": {
     "clip": "manos-de-nube.mp4",
     "clipSide": "manos-de-nube-lado.mp4",
-    "title": { "es": "Manos de nube", "en": "Cloud hands", "de": "Wolkenhände" },
+    "title": {
+      "es": "Manos de nube",
+      "en": "Cloud hands",
+      "de": "Wolkenhände"
+    },
+    "hanzi": "云手",
+    "pinyin": "yún shǒu",
     "intro": {
       "es": "Una mano a la altura del pecho, la otra abajo. Gira la cintura y deja que las manos pasen como nubes.",
       "en": "One hand at chest height, the other low. Turn from your waist and let your hands drift like clouds.",
@@ -81,11 +105,20 @@
         "Wechsle die Hände ohne Eile, wie Wasser, das kommt und geht."
       ]
     },
-    "breath": { "inMs": 5000, "outMs": 5000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 5000
+    }
   },
   "abrir-el-pecho": {
     "clip": "abrir-el-pecho.mp4",
-    "title": { "es": "Abrir el pecho", "en": "Opening the chest", "de": "Brust öffnen" },
+    "title": {
+      "es": "Abrir el pecho",
+      "en": "Opening the chest",
+      "de": "Brust öffnen"
+    },
+    "hanzi": "开合",
+    "pinyin": "kāi hé",
     "intro": {
       "es": "Las manos se juntan frente al pecho. Al inhalar, se abren despacio hacia los lados.",
       "en": "Bring your hands together in front of your chest. As you breathe in, open them slowly to the sides.",
@@ -108,7 +141,10 @@
         "Die Schultern bleiben unten, weg von den Ohren."
       ]
     },
-    "breath": { "inMs": 5000, "outMs": 6000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 6000
+    }
   },
   "grulla": {
     "clip": "grulla.mp4",
@@ -117,6 +153,8 @@
       "en": "White crane spreads its wings",
       "de": "Der Kranich breitet die Flügel aus"
     },
+    "hanzi": "白鹤亮翅",
+    "pinyin": "bái hè liàng chì",
     "intro": {
       "es": "Una mano sube por delante con la palma hacia ti; la otra baja junto a la cadera.",
       "en": "One hand rises in front, palm facing you; the other settles by your hip.",
@@ -139,11 +177,20 @@
         "Atme lang, wie eine Welle, die ans Ufer rollt."
       ]
     },
-    "breath": { "inMs": 5000, "outMs": 6000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 6000
+    }
   },
   "cepillar-rodilla": {
     "clip": "cepillar-rodilla.mp4",
-    "title": { "es": "Cepillar la rodilla", "en": "Brush knee", "de": "Knie streifen" },
+    "title": {
+      "es": "Cepillar la rodilla",
+      "en": "Brush knee",
+      "de": "Knie streifen"
+    },
+    "hanzi": "搂膝拗步",
+    "pinyin": "lōu xī ào bù",
     "intro": {
       "es": "Una mano pasa sobre la rodilla, como si apartara el agua. La otra empuja suave hacia el frente.",
       "en": "One hand sweeps over your knee, as if parting the water. The other pushes gently forward.",
@@ -166,11 +213,20 @@
         "Der Rücken bleibt lang; lehn dich an, wenn du es brauchst."
       ]
     },
-    "breath": { "inMs": 5000, "outMs": 6000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 6000
+    }
   },
   "cierre": {
     "clip": "cierre.mp4",
-    "title": { "es": "Cerrar el tai chi", "en": "Closing", "de": "Abschluss" },
+    "title": {
+      "es": "Cerrar el tai chi",
+      "en": "Closing",
+      "de": "Abschluss"
+    },
+    "hanzi": "收势",
+    "pinyin": "shōu shì",
     "intro": {
       "es": "Las manos bajan despacio hasta los muslos. Quédate quieto unos segundos.",
       "en": "Let your hands sink slowly to your thighs. Stay still for a few breaths.",
@@ -184,11 +240,20 @@
       ],
       "de": ["Spür, wie du jetzt atmest.", "Wenn du so weit bist, kehr ruhig in deinen Tag zurück."]
     },
-    "breath": { "inMs": 5000, "outMs": 7000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 7000
+    }
   },
   "preparacion-de-pie": {
     "clip": "preparacion-de-pie.mp4",
-    "title": { "es": "Llegar al lugar", "en": "Arriving", "de": "Ankommen im Stehen" },
+    "title": {
+      "es": "Llegar al lugar",
+      "en": "Arriving",
+      "de": "Ankommen im Stehen"
+    },
+    "hanzi": "预备势",
+    "pinyin": "yù bèi shì",
     "intro": {
       "es": "De pie, con los pies al ancho de los hombros y las rodillas suaves. Si el suelo se mueve, abre un poco más los pies.",
       "en": "Stand with your feet shoulder-width apart and soft knees. If the floor moves, widen your stance a little.",
@@ -208,7 +273,10 @@
         "Der Scheitel strebt nach oben, das Kinn sinkt leicht."
       ]
     },
-    "breath": { "inMs": 4000, "outMs": 6000 }
+    "breath": {
+      "inMs": 4000,
+      "outMs": 6000
+    }
   },
   "manos-de-nube-de-pie": {
     "clip": "manos-de-nube-de-pie.mp4",
@@ -217,6 +285,8 @@
       "en": "Cloud hands in place",
       "de": "Wolkenhände auf der Stelle"
     },
+    "hanzi": "云手",
+    "pinyin": "yún shǒu",
     "intro": {
       "es": "Sin dar pasos: el peso pasa de un pie al otro mientras las manos dibujan nubes.",
       "en": "No stepping: your weight shifts from one foot to the other while your hands draw clouds.",
@@ -239,7 +309,10 @@
         "Verlagere das Gewicht wie eine langsame Flut."
       ]
     },
-    "breath": { "inMs": 5000, "outMs": 5000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 5000
+    }
   },
   "abrir-el-pecho-de-pie": {
     "clip": "abrir-el-pecho-de-pie.mp4",
@@ -248,6 +321,8 @@
       "en": "Opening the chest, standing",
       "de": "Brust öffnen im Stehen"
     },
+    "hanzi": "开合",
+    "pinyin": "kāi hé",
     "intro": {
       "es": "Las manos se abren al inhalar y vuelven al centro al exhalar. Los pies no se mueven.",
       "en": "Your hands open as you breathe in and return to the center as you breathe out. Your feet stay still.",
@@ -258,7 +333,10 @@
       "en": ["Feel your chest widen.", "Keep your shoulders low."],
       "de": ["Spür die weite Brust.", "Die Schultern bleiben unten."]
     },
-    "breath": { "inMs": 5000, "outMs": 6000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 6000
+    }
   },
   "grulla-de-pie": {
     "clip": "grulla-de-pie.mp4",
@@ -267,6 +345,8 @@
       "en": "White crane in place",
       "de": "Der Kranich auf der Stelle"
     },
+    "hanzi": "白鹤亮翅",
+    "pinyin": "bái hè liàng chì",
     "intro": {
       "es": "El peso va a la pierna de atrás; una mano sube, la otra baja junto a la cadera.",
       "en": "Your weight settles into the back leg; one hand rises, the other sinks by your hip.",
@@ -283,7 +363,10 @@
         "Der vordere Fuß berührt den Boden nur, ohne Gewicht."
       ]
     },
-    "breath": { "inMs": 5000, "outMs": 6000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 6000
+    }
   },
   "comienzo-de-pie": {
     "clip": "comienzo-de-pie.mp4",
@@ -292,6 +375,8 @@
       "en": "Commencement of the form",
       "de": "Eröffnung der Form"
     },
+    "hanzi": "起势",
+    "pinyin": "qǐ shì",
     "intro": {
       "es": "El pie izquierdo se abre al ancho de los hombros. Los brazos suben al frente y bajan mientras las rodillas se doblan un poco.",
       "en": "Your left foot steps out to shoulder width. Your arms float up in front and sink as your knees bend slightly.",
@@ -305,7 +390,10 @@
       "en": ["Your hands sink to waist height.", "Your knees point over your toes."],
       "de": ["Die Hände sinken auf Taillenhöhe.", "Die Knie zeigen in Richtung der Zehen."]
     },
-    "breath": { "inMs": 5000, "outMs": 5000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 5000
+    }
   },
   "crin-del-caballo": {
     "clip": "crin-del-caballo.mp4",
@@ -314,6 +402,8 @@
       "en": "Parting the wild horse's mane",
       "de": "Die Mähne des Wildpferdes teilen"
     },
+    "hanzi": "野马分鬃",
+    "pinyin": "yě mǎ fēn zōng",
     "intro": {
       "es": "Paso al frente: una mano sube en diagonal y la otra baja junto a la cadera, como si separaras una crin larga.",
       "en": "Step forward: one hand rises on a diagonal while the other sinks by your hip, as if parting a long mane.",
@@ -336,11 +426,20 @@
         "Wechsle die Seite mit dem nächsten Schritt."
       ]
     },
-    "breath": { "inMs": 5000, "outMs": 6000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 6000
+    }
   },
   "cierre-de-pie": {
     "clip": "cierre-de-pie.mp4",
-    "title": { "es": "Cerrar de pie", "en": "Closing, standing", "de": "Abschluss im Stehen" },
+    "title": {
+      "es": "Cerrar de pie",
+      "en": "Closing, standing",
+      "de": "Abschluss im Stehen"
+    },
+    "hanzi": "收势",
+    "pinyin": "shōu shì",
     "intro": {
       "es": "Las manos se cruzan frente al pecho y bajan despacio. Los pies se juntan.",
       "en": "Your hands cross in front of your chest and lower slowly. Bring your feet together.",
@@ -351,6 +450,9 @@
       "en": ["Stay still for a few seconds.", "Notice how you are breathing now."],
       "de": ["Bleib ein paar Sekunden ganz still.", "Spür, wie du jetzt atmest."]
     },
-    "breath": { "inMs": 5000, "outMs": 7000 }
+    "breath": {
+      "inMs": 5000,
+      "outMs": 7000
+    }
   }
 }

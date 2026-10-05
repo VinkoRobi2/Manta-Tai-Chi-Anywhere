@@ -6,6 +6,8 @@
   "segments": [
     {
       "title": "Llegar a la silla",
+      "hanzi": "调息",
+      "pinyin": "tiáo xī",
       "clip": "respiracion-inicial.mp4",
       "startMs": 0,
       "durationMs": 60000,
@@ -94,6 +96,8 @@
     },
     {
       "title": "Abrir el pecho",
+      "hanzi": "开合",
+      "pinyin": "kāi hé",
       "clip": "abrir-el-pecho.mp4",
       "startMs": 60000,
       "durationMs": 240000,
@@ -377,6 +381,8 @@
     },
     {
       "title": "Cerrar el tai chi",
+      "hanzi": "收势",
+      "pinyin": "shōu shì",
       "clip": "cierre.mp4",
       "startMs": 300000,
       "durationMs": 120000,

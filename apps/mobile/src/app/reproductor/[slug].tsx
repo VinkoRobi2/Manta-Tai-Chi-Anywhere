@@ -9,14 +9,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  BackHandler,
-  Platform,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import { BackHandler, Pressable, StyleSheet, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   Easing,
@@ -30,7 +23,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { getLesson, loadTimeline, type LessonInfo } from '@/features/catalog/catalog';
 import { hasVideo, InstructorStage, type StageView } from '@/features/player/InstructorStage';
-import { StageBackground, Tide } from '@/features/player/Tide';
+import { BreathGuide, StageBackground } from '@/features/player/Stage';
 import { usePlayer } from '@/features/player/usePlayer';
 import { speak, stopSpeaking } from '@/features/player/voice';
 import { recordSession } from '@/features/sessions/sessions';
@@ -43,17 +36,18 @@ import {
 import { track } from '@/lib/analytics';
 import { breathPulse } from '@/lib/haptics';
 import { localeTag, useLocale } from '@/lib/i18n';
-import { ThemeOverride } from '@/theme/theme';
-import { cabin, space, stage } from '@/theme/tokens';
+import { useTheme } from '@/theme/theme';
+import { glowShadow, space, type Palette } from '@/theme/tokens';
 import { Button } from '@/ui/Button';
 import { Icon, type IconName } from '@/ui/Icon';
 import { Press } from '@/ui/Press';
 import { Text } from '@/ui/Text';
 
-const CAPTION_SIZE: Record<CaptionSize, { fontSize: number; lineHeight: number }> = {
-  normal: { fontSize: 22, lineHeight: 30 },
-  large: { fontSize: 26, lineHeight: 34 },
-  xlarge: { fontSize: 30, lineHeight: 39 },
+/** Tamaño de los subtítulos: en Tinta van en Cormorant (más grande), en Abisal en Atkinson. */
+const CAPTION_SIZE: Record<CaptionSize, { tinta: [number, number]; abisal: [number, number] }> = {
+  normal: { tinta: [26, 30], abisal: [20, 28] },
+  large: { tinta: [30, 34], abisal: [24, 32] },
+  xlarge: { tinta: [34, 39], abisal: [28, 37] },
 };
 
 /** La primera clase enseña los controles con la voz. Ese es todo el tutorial. */
@@ -69,6 +63,7 @@ export default function PlayerScreen() {
   const { slug, voz } = useLocalSearchParams<{ slug: string; voz?: string }>();
   const locale = useLocale();
   const { t } = useTranslation();
+  const palette = useTheme();
   const lesson = getLesson(slug, locale);
   const timeline = lesson ? loadTimeline(lesson.slug, locale) : null;
 
@@ -77,13 +72,13 @@ export default function PlayerScreen() {
       <View
         style={{
           flex: 1,
-          backgroundColor: stage.bottom,
+          backgroundColor: palette.background,
           alignItems: 'center',
           justifyContent: 'center',
           gap: space.l,
         }}
       >
-        <Text tone="stage">{t('lesson.notFound')}</Text>
+        <Text>{t('lesson.notFound')}</Text>
         <Button
           label={t('common.back')}
           variant="tonal"
@@ -93,13 +88,10 @@ export default function PlayerScreen() {
       </View>
     );
   }
-  return (
-    <ThemeOverride palette={cabin}>
-      <Player lesson={lesson} timeline={timeline} startInVoiceOnly={voz === '1'} />
-    </ThemeOverride>
-  );
+  return <Player lesson={lesson} timeline={timeline} startInVoiceOnly={voz === '1'} />;
 }
 
+/** Botón del escenario: filete fino en Tinta, vidrio en Abisal. */
 function StageButton({
   icon,
   label,
@@ -107,46 +99,98 @@ function StageButton({
   active = false,
   highlighted = false,
   text,
+  bare = false,
 }: {
-  icon: IconName;
+  icon?: IconName;
   label: string;
   onPress: () => void;
   active?: boolean;
   highlighted?: boolean;
   text?: string;
+  /** Sin borde ni fondo (fila secundaria de Tinta). */
+  bare?: boolean;
 }) {
-  const android = Platform.OS === 'android';
+  const palette = useTheme();
+  const night = palette.name === 'abisal';
+  const color = active ? palette.accent : palette.ink;
   return (
     <Press
       haptic
       onPress={onPress}
       accessibilityLabel={label}
       accessibilityState={{ selected: active }}
-      style={{
-        minHeight: 48,
-        minWidth: 48,
-        paddingHorizontal: text ? space.m : 0,
-        borderRadius: android ? 14 : 24,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 6,
-        overflow: 'hidden',
-        backgroundColor: active
-          ? 'rgba(238,244,245,0.24)'
-          : android
-            ? stage.control
+      style={[
+        {
+          minHeight: 48,
+          minWidth: 48,
+          paddingHorizontal: text ? space.m : 0,
+          borderRadius: 24,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 6,
+          overflow: 'hidden',
+          borderWidth: highlighted ? 2 : bare ? 0 : 1,
+          borderColor: highlighted ? palette.primary : palette.border,
+          backgroundColor: night
+            ? active
+              ? 'rgba(95,227,232,0.16)'
+              : bare
+                ? 'transparent'
+                : palette.surface
             : 'transparent',
-        borderWidth: highlighted ? 2 : 0,
-        borderColor: cabin.sol,
-      }}
+        },
+        highlighted ? glowShadow(palette, 0.6) : null,
+      ]}
     >
-      <Icon name={icon} size={22} color={stage.ink} />
+      {icon ? <Icon name={icon} size={22} color={color} /> : null}
       {text ? (
-        <Text variant="caption" tone="stage" weight="medium" maxFontSizeMultiplier={1.4}>
+        <Text
+          variant="caption"
+          weight="bold"
+          color={color}
+          maxFontSizeMultiplier={1.4}
+          style={{ fontSize: 15 }}
+        >
           {text}
         </Text>
       ) : null}
+    </Press>
+  );
+}
+
+function PlayButton({
+  playing,
+  onPress,
+  size,
+  palette,
+  label,
+}: {
+  playing: boolean;
+  onPress: () => void;
+  size: number;
+  palette: Palette;
+  label: string;
+}) {
+  return (
+    <Press
+      haptic
+      onPress={onPress}
+      accessibilityLabel={label}
+      style={[
+        {
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor: palette.primary,
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+        },
+        glowShadow(palette, 0.6),
+      ]}
+    >
+      <Icon name={playing ? 'pause' : 'play'} size={size * 0.4} color={palette.onPrimary} />
     </Press>
   );
 }
@@ -163,10 +207,10 @@ function Player({
   useKeepAwake();
   const { t } = useTranslation();
   const locale = useLocale();
+  const palette = useTheme();
   const insets = useSafeAreaInsets();
-  const { height } = useWindowDimensions();
   const settings = useSettings();
-  const android = Platform.OS === 'android';
+  const night = palette.name === 'abisal';
 
   const [firstClass] = useState(() => getSettings().sessionsCompleted === 0);
   const [careTags] = useState<CareTag[]>(() => getSettings().careTags);
@@ -185,8 +229,8 @@ function Player({
   const finishRef = useRef<(completed: boolean) => void>(() => undefined);
   const finished = useRef(false);
 
-  /** Lleva la marea al punto de la respiración actual y sigue desde ahí. */
-  const syncTide = (snapshot: PlayerSnapshot, playing: boolean) => {
+  /** Lleva la guía de respiración al punto actual y sigue desde ahí. */
+  const syncBreath = (snapshot: PlayerSnapshot, playing: boolean) => {
     cancelAnimation(level);
     const breath = snapshot.breath;
     if (!breath || breath.phase === 'hold') return;
@@ -236,12 +280,11 @@ function Player({
     stopSpeaking();
     cancelAnimation(level);
     const seconds = Math.round(player.practicedMs() / 1000);
-    const props = {
+    track(completed ? 'lesson_completed' : 'lesson_abandoned', {
       lesson: lesson.slug,
       seconds,
       positionSec: Math.round(snapshot.positionMs / 1000),
-    };
-    track(completed ? 'lesson_completed' : 'lesson_abandoned', props);
+    });
 
     if (completed || seconds >= MIN_SAVED_SECONDS) {
       const session = recordSession({
@@ -267,7 +310,7 @@ function Player({
     const tag = careTags[0];
     if (snapshot.positionMs === 0 && tag) speak(t(`player.careNote.${tag}`), locale, 1);
     player.play();
-    syncTide(player.snapshot, true);
+    syncBreath(player.snapshot, true);
   };
 
   const togglePlay = () => {
@@ -277,7 +320,7 @@ function Player({
       cancelAnimation(level);
     } else {
       player.play();
-      syncTide(snapshot, true);
+      syncBreath(snapshot, true);
     }
     setInteraction(Date.now());
   };
@@ -328,7 +371,7 @@ function Player({
     const index = PLAYBACK_RATES.indexOf(snapshot.rate as (typeof PLAYBACK_RATES)[number]);
     const next = PLAYBACK_RATES[(index - 1 + PLAYBACK_RATES.length) % PLAYBACK_RATES.length] ?? 1;
     player.setRate(next);
-    syncTide({ ...player.snapshot, rate: next }, playing);
+    syncBreath({ ...player.snapshot, rate: next }, playing);
     poke();
   };
 
@@ -339,28 +382,30 @@ function Player({
   };
 
   useEffect(() => {
-    // Después de un salto, la marea se acomoda a la respiración del nuevo punto.
+    // Al cambiar de movimiento o después de un salto, la respiración se acomoda al nuevo punto.
     if (!playing) return;
-    syncTide(snapshot, true);
-    // Solo cuando cambia el segmento o se salta: no en cada tick.
+    syncBreath(snapshot, true);
+    // Solo cuando cambia el segmento: no en cada tick.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [snapshot.segmentIndex]);
 
   const controlsStyle = useAnimatedStyle(() => ({ opacity: controlsOpacity.value }));
   const rateLabel = `${new Intl.NumberFormat(localeTag(locale), { maximumFractionDigits: 2 }).format(snapshot.rate)}×`;
-  const breathWord = snapshot.breath
-    ? t(
-        `player.${snapshot.breath.phase === 'in' ? 'inhale' : snapshot.breath.phase === 'out' ? 'exhale' : 'hold'}`,
-      )
+  const phase = snapshot.breath?.phase;
+  const breathWord = phase
+    ? t(`player.${phase === 'in' ? 'inhale' : phase === 'out' ? 'exhale' : 'hold'}`)
     : '';
   const caption = tutorial ? t(`player.tutorial.${tutorial}`) : snapshot.caption;
-  const captionStyle = CAPTION_SIZE[settings.captionSize];
+  const [captionSize, captionLine] = CAPTION_SIZE[settings.captionSize][palette.name];
+  const movementOf = t('player.movementOf', {
+    index: snapshot.segmentIndex + 1,
+    count: timeline.segments.length,
+  });
 
   return (
-    <View style={{ flex: 1, backgroundColor: stage.bottom }}>
-      <StatusBar hidden style="light" />
+    <View style={{ flex: 1, backgroundColor: palette.background }}>
+      <StatusBar hidden style={night ? 'light' : 'dark'} />
       <StageBackground />
-      <Tide level={level} restTop={height * 0.6} rise={height * 0.15} />
       <Pressable style={StyleSheet.absoluteFill} onPress={poke} accessible={false} />
 
       <View
@@ -371,26 +416,40 @@ function Player({
         }}
         pointerEvents="box-none"
       >
-        {/* Barra superior: salir siempre visible */}
         <View
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            paddingHorizontal: space.m,
+            paddingHorizontal: space.l,
             gap: space.s,
           }}
           pointerEvents="box-none"
         >
           <StageButton icon="close" label={t('player.exit')} onPress={openExit} />
           <View style={{ flex: 1, alignItems: 'center' }} accessible accessibilityRole="header">
-            <Text variant="callout" tone="stage" weight="semibold" numberOfLines={1}>
-              {snapshot.segment.title}
-            </Text>
-            <Text variant="caption" tone="stageSoft">
-              {t('player.movementOf', {
-                index: snapshot.segmentIndex + 1,
-                count: timeline.segments.length,
-              })}
+            <View style={{ flexDirection: 'row', alignItems: 'baseline', gap: 8 }}>
+              {!night && snapshot.segment.hanzi ? (
+                <Text
+                  color={palette.ink}
+                  style={{ fontSize: 22, lineHeight: 28, fontWeight: '600', fontFamily: undefined }}
+                  accessibilityElementsHidden
+                  importantForAccessibility="no"
+                >
+                  {snapshot.segment.hanzi}
+                </Text>
+              ) : null}
+              <Text
+                variant="headline"
+                numberOfLines={1}
+                style={night ? { fontSize: 18, lineHeight: 24 } : { fontSize: 24, lineHeight: 28 }}
+              >
+                {snapshot.segment.title}
+              </Text>
+            </View>
+            <Text variant="caption" tone="soft" numberOfLines={1}>
+              {!night && snapshot.segment.pinyin
+                ? `${snapshot.segment.pinyin} · ${movementOf.toLowerCase()}`
+                : movementOf}
             </Text>
           </View>
           <StageButton
@@ -403,7 +462,7 @@ function Player({
         <View
           style={{
             flexDirection: 'row',
-            gap: 4,
+            gap: 6,
             paddingHorizontal: space.gutter,
             marginTop: space.m,
           }}
@@ -422,14 +481,21 @@ function Player({
                 key={segment.startMs}
                 style={{
                   flex: segment.durationMs,
-                  height: 3,
+                  height: night ? 4 : 3,
                   borderRadius: 2,
-                  backgroundColor: 'rgba(238,244,245,0.18)',
+                  backgroundColor: night ? 'rgba(255,255,255,0.12)' : palette.border,
                   overflow: 'hidden',
                 }}
               >
                 <View
-                  style={{ width: `${fill * 100}%`, height: '100%', backgroundColor: cabin.sol }}
+                  style={[
+                    {
+                      width: `${fill * 100}%`,
+                      height: '100%',
+                      backgroundColor: night ? palette.accent : palette.ink,
+                    },
+                    glowShadow(palette, 0.8),
+                  ]}
                 />
               </View>
             );
@@ -437,28 +503,9 @@ function Player({
         </View>
 
         <View
-          style={{ height: 52, alignItems: 'center', justifyContent: 'center', marginTop: space.m }}
+          style={{ flex: 1, marginHorizontal: space.gutter, marginTop: space.m }}
           pointerEvents="none"
         >
-          {breathWord ? (
-            <Animated.View
-              key={breathWord}
-              entering={FadeIn.duration(600)}
-              exiting={FadeOut.duration(400)}
-            >
-              <Text
-                variant="title"
-                weight="light"
-                color="rgba(238,244,245,0.6)"
-                style={{ fontSize: 30, letterSpacing: 1.5 }}
-              >
-                {breathWord}
-              </Text>
-            </Animated.View>
-          ) : null}
-        </View>
-
-        <View style={{ flex: 1 }} pointerEvents="none">
           <InstructorStage
             lessonSlug={lesson.slug}
             segment={snapshot.segment}
@@ -469,20 +516,45 @@ function Player({
           />
         </View>
 
+        <View style={{ alignItems: 'center', marginTop: space.m }} pointerEvents="none">
+          <BreathGuide level={level}>
+            {breathWord ? (
+              <Animated.View
+                key={breathWord}
+                entering={FadeIn.duration(600)}
+                exiting={FadeOut.duration(400)}
+              >
+                <Text
+                  variant="title"
+                  italic={!night}
+                  weight="regular"
+                  style={
+                    night ? { fontSize: 22, lineHeight: 28 } : { fontSize: 32, lineHeight: 36 }
+                  }
+                >
+                  {breathWord}
+                </Text>
+              </Animated.View>
+            ) : null}
+          </BreathGuide>
+        </View>
+
         <View
           style={{
-            minHeight: captionStyle.lineHeight * 3,
+            minHeight: captionLine * 2,
             justifyContent: 'center',
             paddingHorizontal: space.xl,
+            marginTop: space.s,
           }}
           pointerEvents="none"
         >
           {captionsOn && caption ? (
             <Text
-              tone="stage"
+              variant={night ? 'body' : 'title'}
+              weight={night ? 'semibold' : 'semibold'}
               align="center"
               accessibilityLiveRegion="polite"
-              style={{ ...captionStyle, textShadowColor: 'rgba(6,35,43,0.8)', textShadowRadius: 8 }}
+              style={{ fontSize: captionSize, lineHeight: captionLine }}
             >
               {caption}
             </Text>
@@ -502,24 +574,21 @@ function Player({
             }}
           >
             <StageButton icon="back10" label={t('player.back10')} onPress={() => seek(-10_000)} />
-            <Press
-              haptic
-              onPress={togglePlay}
-              accessibilityLabel={playing ? t('player.pause') : t('player.play')}
-              style={{
-                width: 76,
-                height: 76,
-                borderRadius: android ? 24 : 38,
-                backgroundColor: cabin.sol,
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-                borderWidth: tutorial === 'pause' ? 3 : 0,
-                borderColor: stage.ink,
-              }}
+            <View
+              style={
+                tutorial === 'pause'
+                  ? { borderRadius: 44, borderWidth: 2, borderColor: palette.ink, padding: 4 }
+                  : { padding: 6 }
+              }
             >
-              <Icon name={playing ? 'pause' : 'play'} size={32} color="#0B3C49" />
-            </Press>
+              <PlayButton
+                playing={playing}
+                onPress={togglePlay}
+                size={74}
+                palette={palette}
+                label={playing ? t('player.pause') : t('player.play')}
+              />
+            </View>
             <StageButton
               icon="forward10"
               label={t('player.forward10')}
@@ -530,22 +599,23 @@ function Player({
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'center',
-              gap: space.s,
+              justifyContent: night ? 'center' : 'space-between',
+              gap: 4,
               marginHorizontal: space.l,
-              ...(android
-                ? {}
-                : {
+              ...(night
+                ? {
                     alignSelf: 'center',
                     padding: 4,
                     borderRadius: 28,
-                    backgroundColor: 'rgba(238,244,245,0.1)',
-                    borderWidth: 0.5,
-                    borderColor: 'rgba(238,244,245,0.22)',
-                  }),
+                    backgroundColor: palette.surface,
+                    borderWidth: 1,
+                    borderColor: palette.border,
+                  }
+                : {}),
             }}
           >
             <StageButton
+              bare
               icon="turtle"
               text={rateLabel}
               label={t('player.speed', { rate: rateLabel })}
@@ -554,7 +624,9 @@ function Player({
               active={snapshot.rate < 1}
             />
             <StageButton
+              bare
               icon="captions"
+              text={night ? undefined : t('player.captions')}
               label={t('player.captions')}
               onPress={() => setCaptionsOn((on) => !on)}
               active={captionsOn}
@@ -563,13 +635,14 @@ function Player({
             {segmentHasVideo ? (
               <>
                 <StageButton
+                  bare
                   icon="mirror"
                   label={t('player.mirror')}
                   onPress={() => setMirrored((on) => !on)}
                   active={mirrored}
                 />
                 <StageButton
-                  icon="view"
+                  bare
                   text={t(`player.view.${view}`)}
                   label={t(`player.view.${view}`)}
                   onPress={() => setView((current) => (current === 'front' ? 'side' : 'front'))}
@@ -583,7 +656,10 @@ function Player({
       {voiceOnly ? (
         <Animated.View
           entering={FadeIn.duration(500)}
-          style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(3,18,22,0.94)' }]}
+          style={[
+            StyleSheet.absoluteFill,
+            { backgroundColor: night ? 'rgba(3,12,20,0.96)' : 'rgba(243,243,239,0.98)' },
+          ]}
         >
           <View
             style={{
@@ -597,28 +673,19 @@ function Player({
             <View
               style={{ flex: 1, alignItems: 'center', justifyContent: 'center', gap: space.xl }}
             >
-              <Text variant="headline" tone="stageSoft" align="center">
+              <Text variant="title" align="center">
                 {snapshot.segment.title}
               </Text>
-              <Press
-                haptic
-                onPress={togglePlay}
-                accessibilityLabel={playing ? t('player.pause') : t('player.play')}
-                style={{
-                  width: 132,
-                  height: 132,
-                  borderRadius: 66,
-                  backgroundColor: 'rgba(242,177,52,0.16)',
-                  borderWidth: 2,
-                  borderColor: cabin.sol,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  overflow: 'hidden',
-                }}
-              >
-                <Icon name={playing ? 'pause' : 'play'} size={46} color={cabin.sol} />
-              </Press>
-              <Text variant="callout" tone="stageSoft" align="center">
+              <BreathGuide level={level}>
+                <PlayButton
+                  playing={playing}
+                  onPress={togglePlay}
+                  size={88}
+                  palette={palette}
+                  label={playing ? t('player.pause') : t('player.play')}
+                />
+              </BreathGuide>
+              <Text variant="callout" tone="soft" align="center">
                 {t('player.voiceOnlyBody')}
               </Text>
             </View>
@@ -638,25 +705,27 @@ function Player({
         <View
           style={[
             StyleSheet.absoluteFill,
-            { backgroundColor: 'rgba(0,0,0,0.55)', justifyContent: 'flex-end' },
+            { backgroundColor: palette.scrim, justifyContent: 'flex-end' },
           ]}
         >
           <View
             accessibilityViewIsModal
             style={{
-              backgroundColor: cabin.surface,
+              backgroundColor: palette.surface,
               borderTopLeftRadius: 28,
               borderTopRightRadius: 28,
+              borderWidth: night ? 1 : 0,
+              borderColor: palette.border,
               padding: space.xl,
               paddingBottom: insets.bottom + space.xl,
               gap: space.m,
             }}
           >
-            <Text variant="title" tone="stage" accessibilityRole="header">
+            <Text variant="title" accessibilityRole="header">
               {t('player.exitTitle')}
             </Text>
             {player.practicedMs() >= MIN_SAVED_SECONDS * 1000 ? (
-              <Text variant="callout" tone="stageSoft">
+              <Text variant="callout" tone="soft">
                 {t('player.exitSaved')}
               </Text>
             ) : null}

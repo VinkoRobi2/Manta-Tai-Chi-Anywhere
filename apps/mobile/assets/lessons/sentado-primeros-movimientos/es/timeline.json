@@ -6,6 +6,8 @@
   "segments": [
     {
       "title": "Comienzo",
+      "hanzi": "起势",
+      "pinyin": "qǐ shì",
       "clip": "comienzo.mp4",
       "clipSide": "comienzo-lado.mp4",
       "startMs": 0,
@@ -129,6 +131,8 @@
     },
     {
       "title": "Manos de nube",
+      "hanzi": "云手",
+      "pinyin": "yún shǒu",
       "clip": "manos-de-nube.mp4",
       "clipSide": "manos-de-nube-lado.mp4",
       "startMs": 90000,
@@ -400,6 +404,8 @@
     },
     {
       "title": "Cerrar el tai chi",
+      "hanzi": "收势",
+      "pinyin": "shōu shì",
       "clip": "cierre.mp4",
       "startMs": 300000,
       "durationMs": 60000,

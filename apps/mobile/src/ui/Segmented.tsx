@@ -1,8 +1,7 @@
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 
 import { useTheme } from '@/theme/theme';
 
-import { Icon } from './Icon';
 import { Press } from './Press';
 import { Text } from './Text';
 
@@ -18,7 +17,10 @@ export interface SegmentedProps<T extends string> {
   accessibilityLabel: string;
 }
 
-/** iOS: control segmentado clásico. Android: botones segmentados de Material 3 con check. */
+/**
+ * Tinta: opciones de texto sobre un filete; la elegida se subraya en bermellón.
+ * Abisal: cápsula de vidrio; la elegida se ilumina.
+ */
 export function Segmented<T extends string>({
   options,
   value,
@@ -26,30 +28,26 @@ export function Segmented<T extends string>({
   accessibilityLabel,
 }: SegmentedProps<T>) {
   const palette = useTheme();
-  const android = Platform.OS === 'android';
+  const night = palette.name === 'abisal';
 
   return (
     <View
       accessibilityRole="radiogroup"
       accessibilityLabel={accessibilityLabel}
       style={
-        android
+        night
           ? {
               flexDirection: 'row',
+              backgroundColor: palette.surface,
+              borderRadius: 26,
               borderWidth: 1,
-              borderColor: palette.inkSoft,
-              borderRadius: 24,
-              overflow: 'hidden',
+              borderColor: palette.border,
+              padding: 4,
             }
-          : {
-              flexDirection: 'row',
-              backgroundColor: palette.surfaceAlt,
-              borderRadius: 12,
-              padding: 3,
-            }
+          : { flexDirection: 'row', borderBottomWidth: 1, borderBottomColor: palette.border }
       }
     >
-      {options.map((option, index) => {
+      {options.map((option) => {
         const selected = option.value === value;
         return (
           <Press
@@ -61,38 +59,32 @@ export function Segmented<T extends string>({
             accessibilityLabel={option.label}
             style={{
               flex: 1,
-              minHeight: android ? 48 : 42,
+              minHeight: 46,
               alignItems: 'center',
               justifyContent: 'center',
               paddingHorizontal: 4,
               overflow: 'hidden',
-              ...(android
+              ...(night
                 ? {
-                    backgroundColor: selected ? palette.tonal : 'transparent',
-                    borderLeftWidth: index === 0 ? 0 : 1,
-                    borderLeftColor: palette.inkSoft,
+                    borderRadius: 22,
+                    backgroundColor: selected ? 'rgba(95,227,232,0.16)' : 'transparent',
                   }
                 : {
-                    borderRadius: 9,
-                    backgroundColor: selected ? palette.surface : 'transparent',
-                    shadowColor: '#0B3C49',
-                    shadowOpacity: selected ? 0.12 : 0,
-                    shadowRadius: 4,
-                    shadowOffset: { width: 0, height: 1 },
+                    borderBottomWidth: 2,
+                    borderBottomColor: selected ? palette.accent : 'transparent',
+                    marginBottom: -1,
                   }),
             }}
           >
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-              {android && selected ? <Icon name="check" size={16} /> : null}
-              <Text
-                variant="caption"
-                weight={selected ? 'semibold' : 'medium'}
-                numberOfLines={1}
-                adjustsFontSizeToFit
-              >
-                {option.label}
-              </Text>
-            </View>
+            <Text
+              variant="callout"
+              weight={selected ? 'bold' : 'regular'}
+              color={selected ? (night ? palette.accent : palette.ink) : palette.inkSoft}
+              numberOfLines={1}
+              adjustsFontSizeToFit
+            >
+              {option.label}
+            </Text>
           </Press>
         );
       })}

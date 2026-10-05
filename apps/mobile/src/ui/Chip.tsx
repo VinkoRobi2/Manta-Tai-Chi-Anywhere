@@ -1,7 +1,7 @@
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 
 import { useTheme } from '@/theme/theme';
-import { space } from '@/theme/tokens';
+import { glowShadow, space } from '@/theme/tokens';
 
 import { Icon } from './Icon';
 import { Press } from './Press';
@@ -13,18 +13,19 @@ export interface ChipProps {
   onPress: () => void;
 }
 
-/** Chip seleccionable. iOS: cápsula. Android: chip de filtro Material con check. */
+/** Tinta: filete fino; elegido, tinta llena. Abisal: vidrio; elegido, borde luminoso. */
 export function Chip({ label, selected, onPress }: ChipProps) {
   const palette = useTheme();
-  const android = Platform.OS === 'android';
+  const night = palette.name === 'abisal';
   const background = selected
-    ? android
-      ? palette.tonal
+    ? night
+      ? 'rgba(95,227,232,0.14)'
       : palette.ink
-    : android
-      ? 'transparent'
-      : palette.surface;
-  const foreground = selected && !android ? palette.background : palette.ink;
+    : night
+      ? palette.surface
+      : 'transparent';
+  const foreground = selected && !night ? palette.background : palette.ink;
+  const border = selected ? (night ? palette.accent : palette.ink) : palette.border;
 
   return (
     <Press
@@ -33,20 +34,25 @@ export function Chip({ label, selected, onPress }: ChipProps) {
       accessibilityRole="checkbox"
       accessibilityState={{ checked: selected }}
       accessibilityLabel={label}
-      style={{
-        minHeight: 44,
-        paddingHorizontal: space.l,
-        borderRadius: android ? 10 : 22,
-        borderWidth: 1,
-        borderColor: selected ? background : android ? palette.inkSoft : palette.border,
-        backgroundColor: background,
-        justifyContent: 'center',
-        overflow: 'hidden',
-      }}
+      style={[
+        {
+          minHeight: 44,
+          paddingHorizontal: space.l,
+          borderRadius: 22,
+          borderWidth: 1,
+          borderColor: border,
+          backgroundColor: background,
+          justifyContent: 'center',
+          overflow: 'hidden',
+        },
+        selected ? glowShadow(palette, 0.35) : null,
+      ]}
     >
       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-        {selected ? <Icon name="check" size={16} color={foreground} /> : null}
-        <Text variant="callout" weight="medium" color={foreground}>
+        {selected ? (
+          <Icon name="check" size={15} color={night ? palette.accent : foreground} />
+        ) : null}
+        <Text variant="callout" weight={selected ? 'bold' : 'medium'} color={foreground}>
           {label}
         </Text>
       </View>

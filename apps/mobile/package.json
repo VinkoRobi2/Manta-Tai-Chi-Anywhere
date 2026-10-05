@@ -3,7 +3,9 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "dependencies": {
-    "@expo-google-fonts/lexend": "^0.4.1",
+    "@expo-google-fonts/atkinson-hyperlegible-next": "^0.4.1",
+    "@expo-google-fonts/cormorant-garamond": "^0.4.1",
+    "@expo-google-fonts/sora": "^0.4.2",
     "@manta/shared": "workspace:*",
     "expo": "~57.0.26",
     "expo-audio": "~57.0.5",

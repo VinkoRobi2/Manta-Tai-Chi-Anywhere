@@ -52,7 +52,8 @@
     "dayNames": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     "count": "{{count}} of {{goal}} tides",
     "thisWeek": "this week",
-    "weekComplete": "Week complete"
+    "weekComplete": "Week complete",
+    "titleWeek": "This week's tides"
   },
   "lesson": {
     "movements_one": "{{count}} movement",
@@ -117,8 +118,8 @@
     "minutes_one": "{{count}} minute of calm",
     "minutes_other": "{{count}} minutes of calm",
     "moodQuestion": "How is your sea?",
-    "reminderQuestion": "Shall I remind you tomorrow at this time?",
-    "reminderYes": "Yes, at {{time}}",
+    "reminderQuestion": "Shall I remind you tomorrow at this time, {{time}}?",
+    "reminderYes": "Yes, remind me",
     "reminderOther": "Another time",
     "reminderSet": "Done: I'll remind you every day at {{time}}.",
     "reminderDenied": "I don't have permission to notify you. You can turn it on in Settings any time.",
@@ -203,9 +204,9 @@
     "languageSystem": "Phone",
     "appearance": "Appearance",
     "appearanceSystem": "Automatic",
-    "appearanceLight": "Light",
-    "appearanceCabin": "Cabin",
-    "appearanceHint": "Cabin mode: dark colors for practicing at night.",
+    "appearanceLight": "Day",
+    "appearanceCabin": "Night",
+    "appearanceHint": "By day, ink on paper. By night, the glowing sea: for practicing in a cabin without glare.",
     "captions": "Caption size",
     "captionNormal": "Normal",
     "captionLarge": "Large",
