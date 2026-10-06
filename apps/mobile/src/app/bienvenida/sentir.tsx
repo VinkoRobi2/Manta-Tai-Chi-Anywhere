@@ -2,94 +2,74 @@ import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { ChoiceCard, IconTile } from '@/features/onboarding/ChoiceCard';
 import {
+  canContinue,
+  MAX_GOALS,
   toggleGoal,
   trackStep,
   updateDraft,
   useOnboardingDraft,
 } from '@/features/onboarding/onboarding';
-import { Option } from '@/features/onboarding/Option';
 import { GoalIcon } from '@/features/onboarding/OptionIcons';
-import { PoseArt } from '@/features/onboarding/PoseArt';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { StepScreen } from '@/features/onboarding/StepScreen';
 import { GOALS } from '@/features/settings/settings';
 import { Text } from '@/ui/Text';
 
-/** Paso 2: qué quiere sentir, hasta dos. */
+/** Paso 2: qué quiere sentir, hasta dos. Mosaico de dos columnas; la última va a lo ancho. */
 export default function FeelStep() {
   const { t } = useTranslation();
   const draft = useOnboardingDraft();
   const layout = useOnboardingLayout();
   const palette = useOnboardingPalette();
   const context = draft.forRelative ? 'relative' : undefined;
+  const tileHeight =
+    layout.breakpoint === 'tablet' ? 132 : layout.breakpoint === 'compact' ? 92 : 112;
+  const iconSize = layout.breakpoint === 'compact' ? 20 : 24;
 
   return (
     <StepScreen
       step="sentir"
       title={t('onboarding.feel.title', { context })}
       body={t('onboarding.feel.body', { context })}
-      onNext={() => {
+      canContinue={canContinue('sentir', draft)}
+      onContinue={() => {
         trackStep('sentir');
         router.push('/bienvenida/tiempo');
       }}
       after={
         <Text
           variant="caption"
-          align="center"
           weight="medium"
-          color={palette.ink}
+          align="right"
+          color={palette.muted}
           accessibilityLiveRegion="polite"
-          style={{ marginTop: layout.gap + 8, letterSpacing: 3.5, textTransform: 'uppercase' }}
+          style={{ marginTop: layout.gap }}
         >
-          {t('onboarding.feel.limit', { count: draft.goals.length })}
+          {t('onboarding.feel.limit', { count: draft.goals.length, max: MAX_GOALS })}
         </Text>
       }
-      art={<PoseArt poses={['rise']} maxHeight={layout.artMax * 0.8} />}
     >
       <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: layout.gap }}>
         {GOALS.map((goal, index) => {
-          // Cuatro en dos columnas y la última a lo ancho, como en el diseño.
           const fullWidth = index === GOALS.length - 1 && GOALS.length % 2 === 1;
           return (
-            <Option
+            <ChoiceCard
               key={goal}
+              variant={fullWidth ? 'row' : 'tile'}
               role="checkbox"
               selected={draft.goals.includes(goal)}
               onPress={() => updateDraft({ goals: toggleGoal(draft.goals, goal) })}
-              accessibilityLabel={t(`onboarding.feel.${goal}`)}
-              height={layout.optionHeight}
-              style={{
-                flexGrow: 1,
-                flexBasis: fullWidth ? '100%' : '40%',
-              }}
-            >
-              {(colors) => (
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 10,
-                    paddingHorizontal: 10,
-                    paddingVertical: 8,
-                  }}
-                >
-                  <GoalIcon goal={goal} color={colors.icon} />
-                  <Text
-                    weight="medium"
-                    color={colors.text}
-                    style={{
-                      flexShrink: 1,
-                      fontSize: layout.labelSize,
-                      lineHeight: Math.round(layout.labelSize * 1.2),
-                    }}
-                  >
-                    {t(`onboarding.feel.${goal}`)}
-                  </Text>
-                </View>
+              label={t(`onboarding.feel.${goal}`)}
+              minHeight={fullWidth ? layout.rowHeight : tileHeight}
+              containerStyle={{ flexGrow: 1, flexBasis: fullWidth ? '100%' : '40%' }}
+              leading={(colors) => (
+                <IconTile colors={colors}>
+                  <GoalIcon goal={goal} color={colors.icon} size={iconSize} />
+                </IconTile>
               )}
-            </Option>
+            />
           );
         })}
       </View>

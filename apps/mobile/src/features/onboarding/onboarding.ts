@@ -32,27 +32,49 @@ export const ONBOARDING_CARE_TAGS = [
   'neck',
 ] as const satisfies readonly CareTag[];
 
+/** Las preguntas empiezan sin respuesta: "Continuar" se activa al elegir. Los minutos parten en 10. */
 export interface OnboardingDraft {
-  practiceMode: PracticeMode;
+  practiceMode: PracticeMode | null;
   goals: Goal[];
   dailyMinutes: DailyMinutes;
   careTags: CareTag[];
   /** Eligió "Ninguna" a propósito. */
   noCare: boolean;
-  offlineUsage: OfflineUsage;
+  offlineUsage: OfflineUsage | null;
   /** Lo está configurando otra persona para un familiar. */
   forRelative: boolean;
 }
 
 const INITIAL_DRAFT: OnboardingDraft = {
-  practiceMode: 'seated',
-  goals: ['calm'],
+  practiceMode: null,
+  goals: [],
   dailyMinutes: 10,
   careTags: [],
   noCare: false,
-  offlineUsage: 'sometimes',
+  offlineUsage: null,
   forRelative: false,
 };
+
+/** Respuestas por defecto si alguien llega al final sin responder (por ejemplo, saltando). */
+export const DEFAULT_PRACTICE: PracticeMode = 'seated';
+export const DEFAULT_OFFLINE: OfflineUsage = 'sometimes';
+export const RECOMMENDED_MINUTES: DailyMinutes = 10;
+
+/** ¿Se puede pasar a la siguiente pregunta? */
+export function canContinue(step: OnboardingStep, draft: OnboardingDraft): boolean {
+  switch (step) {
+    case 'practica':
+      return draft.practiceMode !== null;
+    case 'sentir':
+      return draft.goals.length > 0;
+    case 'tiempo':
+      return true;
+    case 'zonas':
+      return draft.noCare || draft.careTags.length > 0;
+    case 'sin-internet':
+      return draft.offlineUsage !== null;
+  }
+}
 
 const draftStore = createStore<OnboardingDraft>(INITIAL_DRAFT);
 
@@ -88,12 +110,12 @@ export function toggleCare(
 }
 
 /** El espacio de la primera clase. "Las dos" empieza sentado: es lo más seguro para arrancar. */
-export function spaceForPractice(mode: PracticeMode): SpaceMode {
+export function spaceForPractice(mode: PracticeMode | null): SpaceMode {
   return mode === 'standing' ? 'STANDING_IN_PLACE' : 'SEATED';
 }
 
-export function wantsAutoAnchor(usage: OfflineUsage): boolean {
-  return usage !== 'rarely';
+export function wantsAutoAnchor(usage: OfflineUsage | null): boolean {
+  return (usage ?? DEFAULT_OFFLINE) !== 'rarely';
 }
 
 export function stepNumber(step: OnboardingStep): number {
@@ -108,22 +130,24 @@ export function trackStep(step: OnboardingStep): void {
 export function completeOnboarding(): OnboardingDraft {
   const draft = draftStore.get();
   const autoAnchorFree = wantsAutoAnchor(draft.offlineUsage);
+  const practiceMode = draft.practiceMode ?? DEFAULT_PRACTICE;
+  const offlineUsage = draft.offlineUsage ?? DEFAULT_OFFLINE;
   updateSettings({
     onboardingDone: true,
-    practiceMode: draft.practiceMode,
+    practiceMode,
     goals: draft.goals,
     dailyMinutes: draft.dailyMinutes,
     careTags: draft.noCare ? [] : draft.careTags,
-    offlineUsage: draft.offlineUsage,
+    offlineUsage,
     autoAnchorFree,
     setupForRelative: draft.forRelative,
   });
   track('onboarding_completed', {
-    practiceMode: draft.practiceMode,
+    practiceMode,
     goals: draft.goals.join(','),
     dailyMinutes: draft.dailyMinutes,
     careCount: draft.careTags.length,
-    offlineUsage: draft.offlineUsage,
+    offlineUsage,
     forRelative: draft.forRelative,
   });
   if (autoAnchorFree) void anchorFreeLessonsOnWifi();

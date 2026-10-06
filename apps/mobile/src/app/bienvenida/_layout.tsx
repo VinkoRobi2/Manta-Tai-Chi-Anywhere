@@ -1,9 +1,8 @@
 import { Stack } from 'expo-router';
 
 import { useOnboardingPalette } from '@/features/onboarding/responsive';
-import { welcome } from '@/theme/tokens';
 
-/** Onboarding: bienvenida a pantalla completa, cinco preguntas y el plan. */
+/** Onboarding: bienvenida, cinco preguntas, "Creando tu plan" y el plan. */
 export default function OnboardingLayout() {
   const palette = useOnboardingPalette();
   return (
@@ -13,10 +12,8 @@ export default function OnboardingLayout() {
         contentStyle: { backgroundColor: palette.background },
       }}
     >
-      <Stack.Screen
-        name="index"
-        options={{ animation: 'fade', contentStyle: { backgroundColor: welcome.ground } }}
-      />
+      <Stack.Screen name="index" options={{ animation: 'fade' }} />
+      <Stack.Screen name="creando" options={{ animation: 'fade', gestureEnabled: false }} />
       <Stack.Screen name="plan" options={{ animation: 'fade' }} />
     </Stack>
   );

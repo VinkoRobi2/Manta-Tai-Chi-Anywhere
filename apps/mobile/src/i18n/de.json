@@ -10,29 +10,34 @@
   },
   "onboarding": {
     "tagline": "Du musst nur atmen.",
+    "welcomeBody": "Angeleitetes Tai-Chi in 5 bis 20 Minuten, im Sitzen oder Stehen. Funktioniert offline.",
     "start": "Los geht's",
-    "haveAccount": "Ich habe schon ein Konto",
-    "forRelative": "Ich richte es für einen Angehörigen ein",
+    "haveAccount": "Ich habe ein Konto",
+    "forRelative": "Für einen Angehörigen einrichten",
     "relative": "Für einen Angehörigen",
-    "next": "Weiter",
+    "continue": "Weiter",
     "back": "Zurück",
     "skip": "Überspringen",
     "progress": "Schritt {{current}} von {{total}}",
+    "and": "und",
     "practice": {
       "title": "Wie möchtest du üben?",
       "title_relative": "Wie soll geübt werden?",
       "body": "Wir wählen jede Bewegung passend zu deiner Haltung. Du kannst es jederzeit ändern.",
       "body_relative": "Wir wählen jede Bewegung passend zur Haltung. Das lässt sich jederzeit ändern.",
       "seated": "Sitzend",
+      "seatedBody": "Auf einem Stuhl. Ideal für den Anfang.",
       "standing": "Stehend",
-      "both": "Beides"
+      "standingBody": "Sanfte Schritte auf einem Quadratmeter.",
+      "both": "Beides",
+      "bothBody": "Wir wechseln je nach Tag."
     },
     "feel": {
       "title": "Was möchtest du spüren?",
       "title_relative": "Was soll die Übung bewirken?",
-      "body": "Damit passen wir Tempo und Bewegungen deiner Lektionen an.",
-      "body_relative": "Damit passen wir Tempo und Bewegungen der Lektionen an.",
-      "limit": "Bis zu 2 wählen · {{count}}/2",
+      "body": "Wähle bis zu zwei. Damit passen wir das Tempo deiner Lektionen an.",
+      "body_relative": "Bis zu zwei wählen. Damit passen wir das Tempo der Lektionen an.",
+      "limit": "{{count}} von 2",
       "calm": "Ruhe",
       "balance": "Gleichgewicht",
       "joints": "Lockere Gelenke",
@@ -43,11 +48,13 @@
       "title": "Wie viel Zeit pro Tag?",
       "body": "Lieber jeden Tag ein wenig als ab und zu viel.",
       "unit": "Min.",
+      "perDay": "Min. pro Tag",
       "option": "{{count}} Minuten",
+      "recommended": "Empfohlen",
       "hint": {
-        "5": "Eine Atempause",
-        "10": "Genau richtig",
-        "20": "In aller Ruhe"
+        "5": "Eine Atempause zwischendurch.",
+        "10": "Genau richtig, um dranzubleiben.",
+        "20": "Eine ganze Einheit, ohne Eile."
       }
     },
     "care": {
@@ -61,21 +68,44 @@
       "title_relative": "Wird ohne Internet geübt?",
       "body": "Im Park, auf dem Land oder unterwegs: Manta funktioniert ohne Verbindung.",
       "often": "Oft",
+      "oftenBody": "Ich übe meist unterwegs.",
       "sometimes": "Manchmal",
+      "sometimesBody": "An manchen Tagen habe ich kein Netz.",
       "rarely": "Fast nie",
+      "rarelyBody": "Ich habe immer WLAN oder mobile Daten.",
       "auto": "Kostenlose Lektionen laden sich im WLAN von selbst herunter.",
       "manual": "Du kannst jede Lektion herunterladen, wann du willst."
+    },
+    "building": {
+      "title": "Dein Plan entsteht",
+      "title_relative": "Der Plan entsteht",
+      "body": "Wir passen jede Bewegung an deine Antworten an.",
+      "body_relative": "Wir passen jede Bewegung an die Antworten an.",
+      "practice": "Haltung: {{value}}",
+      "goals": "Spüren: {{value}}",
+      "minutes": "{{count}} Minuten pro Tag",
+      "care": "Schonen: {{value}}",
+      "noCare": "Nichts zu schonen",
+      "offline": "Kostenlose Lektionen offline bereit",
+      "online": "Lektionen online"
     },
     "plan": {
       "title": "Dein Plan ist bereit",
       "title_relative": "Der Plan ist bereit",
-      "week": "Woche 1",
-      "program": {
-        "seated": "Tai-Chi im Sitzen · 7 Tage",
-        "standing": "Tai-Chi im Stehen · 7 Tage",
-        "both": "Sitzend & stehend · 7 Tage"
+      "body": "Auf dich zugeschnitten. Du kannst ihn jederzeit ändern.",
+      "body_relative": "Maßgeschneidert. Er lässt sich jederzeit ändern.",
+      "overline": "Dein Programm",
+      "name": {
+        "seated": "Tai-Chi im Sitzen",
+        "standing": "Tai-Chi im Stehen",
+        "both": "Sitzend & stehend"
       },
+      "days": "7 Tage",
+      "perDay": "{{count}} Min. pro Tag",
       "level": "Anfänger",
+      "week": "Deine Woche",
+      "today": "Heute",
+      "firstClass": "Deine erste Lektion",
       "start": "Erste Lektion starten",
       "change": "Antworten ändern"
     }

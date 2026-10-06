@@ -12,7 +12,7 @@ import { onboardingDark, onboardingLight, type OnboardingPalette } from '@/theme
  * - compact: teléfonos bajos (iPhone SE, Android de 640 dp de alto).
  * - regular: la mayoría de los teléfonos.
  * - tablet: el lado corto mide 600 dp o más (iPad, tablets Android, plegables abiertos).
- * - wide: además, si la ventana es apaisada y ancha, las preguntas y la figura van lado a lado.
+ * - wide: además, si la ventana es apaisada y ancha, el contenido se reparte en dos columnas.
  */
 export type Breakpoint = 'compact' | 'regular' | 'tablet';
 
@@ -24,22 +24,21 @@ export interface OnboardingLayout {
   /** Ancho máximo del contenido. */
   contentWidth: number;
   gutter: number;
-  /** Aire entre la zona segura y el título. */
+  /** Aire entre la barra superior y el título. */
   topPad: number;
   titleSize: number;
   titleLine: number;
   bodySize: number;
   bodyLine: number;
   labelSize: number;
-  optionHeight: number;
-  tileHeight: number;
+  /** Alto mínimo de una opción en lista. */
+  rowHeight: number;
   gap: number;
   /** Separación entre el texto y las opciones. */
   sectionGap: number;
-  /** Altura máxima y mínima de la figura grande. */
+  /** Alto máximo de la figura grande. */
   artMax: number;
-  artMin: number;
-  footerHeight: number;
+  buttonHeight: number;
 }
 
 const BASE: Record<
@@ -47,55 +46,49 @@ const BASE: Record<
   Omit<OnboardingLayout, 'breakpoint' | 'wide' | 'width' | 'height'>
 > = {
   compact: {
-    contentWidth: 480,
+    contentWidth: 520,
     gutter: 20,
-    topPad: 20,
-    titleSize: 22,
-    titleLine: 27,
+    topPad: 12,
+    titleSize: 26,
+    titleLine: 31,
     bodySize: 15,
     bodyLine: 21,
-    labelSize: 15,
-    optionHeight: 50,
-    tileHeight: 76,
-    gap: 8,
-    sectionGap: 18,
-    artMax: 230,
-    artMin: 150,
-    footerHeight: 56,
+    labelSize: 16,
+    rowHeight: 60,
+    gap: 10,
+    sectionGap: 20,
+    artMax: 190,
+    buttonHeight: 54,
   },
   regular: {
-    contentWidth: 480,
+    contentWidth: 520,
     gutter: 24,
-    topPad: 44,
-    titleSize: 26,
-    titleLine: 30,
+    topPad: 20,
+    titleSize: 31,
+    titleLine: 37,
     bodySize: 16,
-    bodyLine: 24,
-    labelSize: 16,
-    optionHeight: 58,
-    tileHeight: 90,
-    gap: 10,
-    sectionGap: 26,
-    artMax: 320,
-    artMin: 200,
-    footerHeight: 64,
+    bodyLine: 23,
+    labelSize: 17,
+    rowHeight: 68,
+    gap: 12,
+    sectionGap: 28,
+    artMax: 250,
+    buttonHeight: 58,
   },
   tablet: {
     contentWidth: 600,
     gutter: 40,
-    topPad: 64,
-    titleSize: 34,
-    titleLine: 40,
+    topPad: 40,
+    titleSize: 40,
+    titleLine: 48,
     bodySize: 19,
     bodyLine: 28,
-    labelSize: 18,
-    optionHeight: 68,
-    tileHeight: 112,
+    labelSize: 19,
+    rowHeight: 80,
     gap: 14,
-    sectionGap: 34,
-    artMax: 460,
-    artMin: 280,
-    footerHeight: 76,
+    sectionGap: 36,
+    artMax: 340,
+    buttonHeight: 64,
   },
 };
 
@@ -111,9 +104,9 @@ export function onboardingLayout(width: number, height: number): OnboardingLayou
     width,
     height,
     contentWidth: wide ? Math.min(1080, width - base.gutter * 2) : base.contentWidth,
-    // En horizontal la altura manda: la figura no puede pasar del 62 % de la pantalla.
-    artMax: wide ? Math.min(base.artMax, height * 0.62) : base.artMax,
-    topPad: wide ? Math.min(base.topPad, 32) : base.topPad,
+    // En horizontal manda la altura: la figura no puede pasar de la mitad de la pantalla.
+    artMax: wide ? Math.min(base.artMax, height * 0.5) : base.artMax,
+    topPad: wide ? Math.min(base.topPad, 16) : base.topPad,
   };
 }
 

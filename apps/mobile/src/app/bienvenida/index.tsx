@@ -2,145 +2,140 @@ import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { ContinueButton, TextButton } from '@/features/onboarding/ContinueButton';
 import { skipOnboarding, startOnboarding } from '@/features/onboarding/onboarding';
-import { useOnboardingLayout } from '@/features/onboarding/responsive';
+import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
+import { Squish } from '@/features/onboarding/Squish';
+import { enter } from '@/features/onboarding/StepScreen';
 import { WelcomeBackdrop } from '@/features/onboarding/WelcomeBackdrop';
-import { fonts, radius, welcome } from '@/theme/tokens';
+import { fonts, welcome } from '@/theme/tokens';
 import { MantaMark } from '@/ui/Brand';
-import { Press } from '@/ui/Press';
 import { Text } from '@/ui/Text';
 
-function WelcomeLink({ label, onPress }: { label: string; onPress: () => void }) {
-  return (
-    <Press
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityLabel={label}
-      style={{ minHeight: 44, justifyContent: 'center', paddingHorizontal: 8 }}
-    >
-      <Text variant="caption" weight="medium" color={welcome.inkSoft}>
-        {label}
-      </Text>
-    </Press>
-  );
-}
+const SHEET_RADIUS = 32;
 
-/** Bienvenida: el amanecer en movimiento, la marca y un solo botón. */
+/**
+ * Bienvenida: arriba el amanecer en movimiento; abajo una hoja blanca con la marca,
+ * la promesa y un solo botón. En pantallas anchas, imagen a la izquierda y texto a la derecha.
+ */
 export default function WelcomeScreen() {
   const { t } = useTranslation();
   const layout = useOnboardingLayout();
+  const palette = useOnboardingPalette();
   const insets = useSafeAreaInsets();
   const tablet = layout.breakpoint === 'tablet';
   const compact = layout.breakpoint === 'compact';
-  const wordSize = tablet ? 52 : compact ? 34 : 40;
-  // La marca queda debajo de la figura: en tablets se separa más del botón.
-  const brandGap = tablet ? layout.height * 0.14 : compact ? 20 : 44;
+  const wide = layout.wide;
+  const imageWidth = wide ? Math.round(layout.width * 0.5) : layout.width;
+  const imageHeight = wide
+    ? layout.height
+    : Math.round(layout.height * (tablet ? 0.56 : compact ? 0.48 : 0.56));
+  const headline = tablet ? 46 : compact ? 29 : 35;
 
   const begin = (forRelative: boolean) => {
     startOnboarding(forRelative);
     router.push('/bienvenida/practica');
   };
 
-  const haveAccount = () => {
-    skipOnboarding();
-    router.replace('/');
-  };
-
   return (
-    <View style={{ flex: 1, backgroundColor: welcome.ground }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: palette.background,
+        flexDirection: wide ? 'row' : 'column',
+      }}
+    >
       <StatusBar style="light" />
-      <WelcomeBackdrop />
+      <View style={{ width: imageWidth, height: imageHeight }}>
+        <WelcomeBackdrop width={imageWidth} height={imageHeight} />
+        <View style={{ position: 'absolute', top: insets.top + 8, right: layout.gutter }}>
+          <Squish
+            onPress={() => {
+              skipOnboarding();
+              router.replace('/');
+            }}
+            haptic={false}
+            accessibilityLabel={t('onboarding.haveAccount')}
+            style={{
+              height: 36,
+              paddingHorizontal: 14,
+              borderRadius: 18,
+              backgroundColor: 'rgba(0, 0, 0, 0.32)',
+              justifyContent: 'center',
+            }}
+          >
+            <Text weight="medium" color={welcome.ink} style={{ fontSize: 14, lineHeight: 18 }}>
+              {t('onboarding.haveAccount')}
+            </Text>
+          </Squish>
+        </View>
+      </View>
+
       <View
         style={{
           flex: 1,
-          justifyContent: 'flex-end',
-          alignItems: 'center',
+          marginTop: wide ? 0 : -SHEET_RADIUS,
+          borderTopLeftRadius: wide ? 0 : SHEET_RADIUS,
+          borderTopRightRadius: wide ? 0 : SHEET_RADIUS,
+          backgroundColor: palette.background,
+          paddingTop: wide ? insets.top + 40 : compact ? 24 : 32,
           paddingHorizontal: layout.gutter,
-          paddingBottom: insets.bottom + (compact ? 8 : 16),
+          paddingBottom: insets.bottom + (compact ? 6 : 10),
+          alignItems: 'center',
+          justifyContent: wide ? 'center' : 'flex-start',
         }}
       >
-        <View style={{ width: '100%', maxWidth: tablet ? 440 : 480 }}>
-          <View style={{ alignItems: 'center', gap: compact ? 10 : 14, marginBottom: brandGap }}>
-            <MantaMark width={tablet ? 64 : 52} color={welcome.sol} />
+        <View style={{ width: '100%', maxWidth: tablet ? 520 : 480, flex: wide ? undefined : 1 }}>
+          <Animated.View
+            entering={enter(0)}
+            style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}
+            accessible
+            accessibilityRole="header"
+            accessibilityLabel="Manta"
+          >
+            <MantaMark width={28} color={palette.accent} />
             <Text
-              accessibilityRole="header"
-              accessibilityLabel="Manta"
-              color={welcome.ink}
-              maxFontSizeMultiplier={1.2}
-              style={{
-                fontFamily: fonts.semibold,
-                fontSize: wordSize,
-                lineHeight: Math.round(wordSize * 1.15),
-                letterSpacing: wordSize * 0.38,
-                // El espaciado también se suma después de la última letra: esto lo compensa.
-                paddingLeft: wordSize * 0.38,
-              }}
+              color={palette.ink}
+              style={{ fontFamily: fonts.semibold, fontSize: 13, lineHeight: 16, letterSpacing: 3 }}
             >
               MANTA
             </Text>
+          </Animated.View>
+          <Animated.View entering={enter(1)}>
             <Text
-              align="center"
-              color={welcome.inkSoft}
+              color={palette.ink}
+              maxFontSizeMultiplier={1.3}
               style={{
-                fontSize: tablet ? 20 : compact ? 16 : 17,
-                lineHeight: tablet ? 28 : 24,
+                marginTop: compact ? 14 : 20,
+                fontFamily: fonts.semibold,
+                fontSize: headline,
+                lineHeight: Math.round(headline * 1.14),
+                letterSpacing: -1,
               }}
             >
               {t('onboarding.tagline')}
             </Text>
-          </View>
-
-          <Press
-            haptic
-            onPress={() => begin(false)}
-            accessibilityLabel={t('onboarding.start')}
-            style={{
-              height: tablet ? 64 : 58,
-              borderRadius: radius.pill,
-              backgroundColor: welcome.sol,
-              alignItems: 'center',
-              justifyContent: 'center',
-              overflow: 'hidden',
-            }}
-          >
+          </Animated.View>
+          <Animated.View entering={enter(2)}>
             <Text
-              color={welcome.onSol}
-              maxFontSizeMultiplier={1.4}
-              style={{
-                fontFamily: fonts.extrabold,
-                fontSize: tablet ? 17 : 15,
-                lineHeight: 20,
-                letterSpacing: 3,
-                textTransform: 'uppercase',
-              }}
+              color={palette.muted}
+              style={{ marginTop: 12, fontSize: layout.bodySize, lineHeight: layout.bodyLine }}
             >
-              {t('onboarding.start')}
+              {t('onboarding.welcomeBody')}
             </Text>
-          </Press>
-
-          <View
-            style={{
-              flexDirection: tablet ? 'row' : 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: compact ? 2 : 8,
-            }}
-          >
-            <WelcomeLink label={t('onboarding.haveAccount')} onPress={haveAccount} />
-            {tablet ? (
-              <Text
-                variant="caption"
-                color={welcome.separator}
-                accessibilityElementsHidden
-                importantForAccessibility="no"
-              >
-                ·
-              </Text>
-            ) : null}
-            <WelcomeLink label={t('onboarding.forRelative')} onPress={() => begin(true)} />
-          </View>
+          </Animated.View>
+          <View style={{ flexGrow: 1, minHeight: compact ? 16 : 24 }} />
+          <Animated.View entering={enter(3)} style={{ marginTop: wide ? 32 : 0 }}>
+            <ContinueButton label={t('onboarding.start')} onPress={() => begin(false)} />
+            <TextButton
+              label={t('onboarding.forRelative')}
+              color={palette.ink}
+              onPress={() => begin(true)}
+            />
+          </Animated.View>
         </View>
       </View>
     </View>

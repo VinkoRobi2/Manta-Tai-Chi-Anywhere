@@ -4,7 +4,7 @@ Cada carpeta es una funcionalidad con su lógica y estado propios. Las pantallas
 
 - `catalog/` — catálogo de ejemplo con la forma de `GET /v1/catalog` y las líneas de tiempo empaquetadas (`timelines.generated.ts`, generado con `pnpm content:lessons`).
 - `player/` — reproductor: conecta el motor de `@manta/shared` con el reloj, la voz (`voice.ts`), la marea (`Tide.tsx`) y el escenario del instructor (`InstructorStage.tsx`, video realista).
-- `onboarding/` — bienvenida animada y cinco preguntas (`src/app/bienvenida`). Las respuestas se guardan en Ajustes al terminar. `responsive.ts` tiene los cortes por tamaño de pantalla (teléfono bajo, teléfono, tablet, apaisado).
+- `onboarding/` — bienvenida animada, cinco preguntas, "Creando tu plan" y el plan (`src/app/bienvenida`). Las respuestas se guardan en Ajustes al terminar. `responsive.ts` tiene los cortes por tamaño de pantalla (teléfono bajo, teléfono, tablet, apaisado).
 - `downloads/` — clases "ancladas" (disponibles sin señal). Fase 1: descarga simulada con la misma interfaz que tendrá la real. `autoAnchor.ts` ancla solas las clases gratis con Wi-Fi si se eligió en el onboarding.
 - `sessions/` — bitácora local (SQLite).
 - `settings/` — preferencias guardadas en el teléfono.

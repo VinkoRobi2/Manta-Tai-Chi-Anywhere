@@ -10,29 +10,34 @@
   },
   "onboarding": {
     "tagline": "Solo tienes que respirar.",
+    "welcomeBody": "Tai chi guiado de 5 a 20 minutos, sentado o de pie. Funciona sin internet.",
     "start": "Empezar",
     "haveAccount": "Ya tengo cuenta",
     "forRelative": "Lo configuro para un familiar",
     "relative": "Para un familiar",
-    "next": "Siguiente",
+    "continue": "Continuar",
     "back": "Atrás",
     "skip": "Saltar",
     "progress": "Paso {{current}} de {{total}}",
+    "and": "y",
     "practice": {
       "title": "¿Cómo quieres practicar?",
       "title_relative": "¿Cómo va a practicar?",
       "body": "Elegimos cada movimiento según tu postura. Puedes cambiarlo cuando quieras.",
       "body_relative": "Elegimos cada movimiento según su postura. Se puede cambiar cuando quieran.",
       "seated": "Sentado",
+      "seatedBody": "En una silla. Ideal para empezar.",
       "standing": "De pie",
-      "both": "Las dos"
+      "standingBody": "Pasos suaves en un metro cuadrado.",
+      "both": "Las dos",
+      "bothBody": "Alternamos según el día."
     },
     "feel": {
       "title": "¿Qué quieres sentir?",
       "title_relative": "¿Qué quiere sentir?",
-      "body": "Con esto ajustamos el ritmo y los movimientos de tus clases.",
-      "body_relative": "Con esto ajustamos el ritmo y los movimientos de sus clases.",
-      "limit": "Elige hasta 2 · {{count}}/2",
+      "body": "Elige hasta dos. Con esto ajustamos el ritmo de tus clases.",
+      "body_relative": "Elige hasta dos. Con esto ajustamos el ritmo de sus clases.",
+      "limit": "{{count}} de 2",
       "calm": "Calma",
       "balance": "Equilibrio",
       "joints": "Articulaciones sueltas",
@@ -43,11 +48,13 @@
       "title": "¿Cuánto tiempo al día?",
       "body": "Mejor poco cada día que mucho de vez en cuando.",
       "unit": "min",
+      "perDay": "min al día",
       "option": "{{count}} minutos",
+      "recommended": "Recomendado",
       "hint": {
-        "5": "Un respiro",
-        "10": "Lo ideal",
-        "20": "A fondo"
+        "5": "Un respiro entre tareas.",
+        "10": "Lo justo para crear el hábito.",
+        "20": "Una sesión completa, sin prisa."
       }
     },
     "care": {
@@ -61,23 +68,46 @@
       "title_relative": "¿Practicará sin internet?",
       "body": "En el parque, en el pueblo o de viaje: Manta funciona sin conexión.",
       "often": "A menudo",
+      "oftenBody": "Casi siempre practico fuera de casa.",
       "sometimes": "A veces",
+      "sometimesBody": "Algunos días me quedo sin señal.",
       "rarely": "Casi nunca",
+      "rarelyBody": "Siempre tengo Wi‑Fi o datos.",
       "auto": "Las clases gratis se descargan solas con Wi‑Fi.",
       "manual": "Puedes descargar cualquier clase cuando quieras."
+    },
+    "building": {
+      "title": "Creando tu plan",
+      "title_relative": "Creando su plan",
+      "body": "Ajustamos cada movimiento a tus respuestas.",
+      "body_relative": "Ajustamos cada movimiento a sus respuestas.",
+      "practice": "Postura: {{value}}",
+      "goals": "Para sentir: {{value}}",
+      "minutes": "{{count}} minutos al día",
+      "care": "Cuidando: {{value}}",
+      "noCare": "Sin zonas que cuidar",
+      "offline": "Clases gratis listas sin internet",
+      "online": "Clases en línea"
     },
     "plan": {
       "title": "Tu plan está listo",
       "title_relative": "Su plan está listo",
-      "week": "Semana 1",
-      "program": {
-        "seated": "Tai chi sentado · 7 días",
-        "standing": "Tai chi de pie · 7 días",
-        "both": "Sentado y de pie · 7 días"
+      "body": "Hecho a tu medida. Puedes cambiarlo cuando quieras.",
+      "body_relative": "Hecho a su medida. Se puede cambiar cuando quieran.",
+      "overline": "Tu programa",
+      "name": {
+        "seated": "Tai chi sentado",
+        "standing": "Tai chi de pie",
+        "both": "Sentado y de pie"
       },
+      "days": "7 días",
+      "perDay": "{{count}} min al día",
       "level": "Principiante",
+      "week": "Tu semana",
+      "today": "Hoy",
+      "firstClass": "Tu primera clase",
       "start": "Empezar primera clase",
-      "change": "Cambiar mis respuestas"
+      "change": "Cambiar respuestas"
     }
   },
   "tabs": {

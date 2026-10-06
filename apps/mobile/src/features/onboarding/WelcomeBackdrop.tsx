@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { useEffect, useId } from 'react';
-import { StyleSheet, View, useWindowDimensions } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
   type SharedValue,
@@ -42,8 +42,8 @@ function useLoop(duration: number, enabled: boolean) {
   return value;
 }
 
-export function WelcomeBackdrop() {
-  const { width, height } = useWindowDimensions();
+/** Llena una caja de `width` × `height` (la parte de arriba de la bienvenida). */
+export function WelcomeBackdrop({ width, height }: { width: number; height: number }) {
   const reducedMotion = useReducedMotion();
   const ids = {
     glow: svgId(useId()),
@@ -52,7 +52,7 @@ export function WelcomeBackdrop() {
     scrim: svgId(useId()),
   };
 
-  // "cover": la imagen llena la pantalla sin deformarse, centrada.
+  // "cover": la imagen llena la caja sin deformarse, centrada.
   const scale = Math.max(width / IMAGE_W, height / IMAGE_H);
   const w = IMAGE_W * scale;
   const h = IMAGE_H * scale;
@@ -77,7 +77,7 @@ export function WelcomeBackdrop() {
 
   return (
     <View
-      style={[StyleSheet.absoluteFill, { overflow: 'hidden', backgroundColor: welcome.ground }]}
+      style={{ width, height, overflow: 'hidden', backgroundColor: welcome.ground }}
       pointerEvents="none"
     >
       <Animated.View
@@ -145,11 +145,9 @@ export function WelcomeBackdrop() {
       <Svg width={width} height={height} style={StyleSheet.absoluteFill}>
         <Defs>
           <LinearGradient id={ids.scrim} x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0" stopColor={welcome.ground} stopOpacity={0.35} />
-            <Stop offset="0.18" stopColor={welcome.ground} stopOpacity={0} />
-            <Stop offset="0.52" stopColor={welcome.ground} stopOpacity={0} />
-            <Stop offset="0.68" stopColor={welcome.ground} stopOpacity={0.72} />
-            <Stop offset="0.9" stopColor={welcome.ground} stopOpacity={1} />
+            <Stop offset="0" stopColor={welcome.ground} stopOpacity={0.45} />
+            <Stop offset="0.24" stopColor={welcome.ground} stopOpacity={0} />
+            <Stop offset="1" stopColor={welcome.ground} stopOpacity={0} />
           </LinearGradient>
         </Defs>
         <Rect width={width} height={height} fill={`url(#${ids.scrim})`} />

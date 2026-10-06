@@ -76,57 +76,81 @@ export const stage = {
 } as const;
 
 /**
- * Onboarding: blanco y negro puro, como una revista deportiva. El sol es el único color.
- * Sigue el modo de la app: claro → fondo blanco, cabina → fondo negro.
+ * Onboarding: blanco, negro y el sol como único acento. Las opciones son tarjetas grises
+ * que se vuelven negras al elegirlas. En modo cabina todo se invierte (fondo negro).
  */
 export interface OnboardingPalette {
   scheme: 'light' | 'dark';
   background: string;
   ink: string;
-  body: string;
+  /** Texto secundario (contraste 4.5:1 o más sobre el fondo y sobre las tarjetas). */
   muted: string;
+  /** Texto desactivado o de apoyo. */
+  faint: string;
+  /** Tarjetas y opciones sin elegir. */
+  card: string;
+  cardPressed: string;
   line: string;
-  iconOff: string;
-  panel: string;
-  /** Pista del anillo de minutos. */
+  /** Pista de la barra de progreso y del anillo de minutos. */
   track: string;
+  /** Opción elegida y botón principal. */
+  selected: string;
+  onSelected: string;
+  onSelectedMuted: string;
+  /** Casilla del icono dentro de una opción. */
+  tile: string;
+  tileSelected: string;
   /** Sombra en el suelo bajo la figura. */
   shadow: string;
   shadowOpacity: number;
   accent: string;
   onAccent: string;
+  /** El sol como texto sobre una tarjeta elegida (negra en claro, blanca en cabina). */
+  accentOnSelected: string;
 }
 
 export const onboardingLight: OnboardingPalette = {
   scheme: 'light',
   background: '#FFFFFF',
-  ink: '#0D0D0D',
-  body: '#1F1F1F',
-  muted: '#6B6B6B',
-  line: '#D4D4D4',
-  iconOff: '#BDBDBD',
-  panel: '#F3F3F3',
-  track: '#EFEFEF',
+  ink: '#0A0A0A',
+  muted: '#6B6B70',
+  faint: '#A1A1A6',
+  card: '#F4F4F6',
+  cardPressed: '#EAEAEE',
+  line: '#E5E5EA',
+  track: '#ECECF0',
+  selected: '#0A0A0A',
+  onSelected: '#FFFFFF',
+  onSelectedMuted: '#B4B4BA',
+  tile: '#FFFFFF',
+  tileSelected: '#262628',
   shadow: '#000000',
-  shadowOpacity: 0.18,
+  shadowOpacity: 0.16,
   accent: '#F2B134',
-  onAccent: '#0D0D0D',
+  onAccent: '#0A0A0A',
+  accentOnSelected: '#F2B134',
 };
 
 export const onboardingDark: OnboardingPalette = {
   scheme: 'dark',
   background: '#000000',
   ink: '#FFFFFF',
-  body: '#E6E6E6',
-  muted: '#9A9A9A',
-  line: '#3A3A3A',
-  iconOff: '#5A5A5A',
-  panel: '#111111',
-  track: '#1C1C1C',
+  muted: '#A1A1A6',
+  faint: '#636366',
+  card: '#1C1C1E',
+  cardPressed: '#2C2C2E',
+  line: '#2C2C2E',
+  track: '#2C2C2E',
+  selected: '#FFFFFF',
+  onSelected: '#000000',
+  onSelectedMuted: '#5A5A5F',
+  tile: '#2C2C2E',
+  tileSelected: '#E5E5EA',
   shadow: '#FFFFFF',
   shadowOpacity: 0.12,
   accent: '#F2B134',
   onAccent: '#000000',
+  accentOnSelected: '#8A5A00',
 };
 
 /** La bienvenida va siempre sobre la imagen del amanecer. */
