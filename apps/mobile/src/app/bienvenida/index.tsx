@@ -23,7 +23,7 @@ import { Text } from '@/ui/Text';
 const SHEET_RADIUS = 32;
 
 /**
- * Bienvenida: arriba el amanecer en movimiento; abajo una hoja blanca con la marca,
+ * Bienvenida: arriba el video de una persona practicando; abajo una hoja blanca con la marca,
  * la promesa y un solo botón. En pantallas anchas, imagen a la izquierda y texto a la derecha.
  */
 export default function WelcomeScreen() {
