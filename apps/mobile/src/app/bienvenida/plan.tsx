@@ -1,19 +1,18 @@
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { nextLessonFor } from '@/features/catalog/catalog';
 import {
   completeOnboarding,
-  spaceForPractice,
+  markScreen,
   useOnboardingDraft,
 } from '@/features/onboarding/onboarding';
 import { PoseArt, type Pose } from '@/features/onboarding/PoseArt';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import type { PracticeMode } from '@/features/settings/settings';
-import { useLocale } from '@/lib/i18n';
 import { fonts, radius } from '@/theme/tokens';
 import { Press } from '@/ui/Press';
 import { Text } from '@/ui/Text';
@@ -55,26 +54,28 @@ export default function PlanScreen() {
   const layout = useOnboardingLayout();
   const palette = useOnboardingPalette();
   const insets = useSafeAreaInsets();
-  const locale = useLocale();
   const context = draft.forRelative ? 'relative' : undefined;
   const tablet = layout.breakpoint === 'tablet';
   const compact = layout.breakpoint === 'compact';
+  useFocusEffect(useCallback(() => markScreen('plan'), []));
+
   const panelHeight = layout.wide ? layout.height * 0.58 : tablet ? 440 : compact ? 230 : 330;
 
+  // Por ahora no hay clases: se guardan las respuestas y se vuelve a la bienvenida.
   const start = () => {
-    const answers = completeOnboarding();
-    const lesson = nextLessonFor(spaceForPractice(answers.practiceMode), locale, new Set());
-    router.replace('/');
-    router.push({ pathname: '/clase/[slug]', params: { slug: lesson.slug } });
+    completeOnboarding();
+    router.dismissTo('/bienvenida');
   };
 
   const panel = (
     <View
       style={{
-        height: panelHeight,
         backgroundColor: palette.panel,
         overflow: 'hidden',
-        ...(layout.wide ? { flex: 1 } : null),
+        // En el teléfono el panel se encoge si hace falta, para que todo quepa sin scroll.
+        ...(layout.wide
+          ? { flex: 1, height: panelHeight }
+          : { flexGrow: 1, minHeight: 0, maxHeight: panelHeight }),
       }}
     >
       <PoseArt poses={POSES[draft.practiceMode]} maxHeight={panelHeight * 0.88} />
@@ -132,7 +133,7 @@ export default function PlanScreen() {
           paddingBottom: layout.gap * 2,
         }}
       >
-        <View style={{ width: '100%', maxWidth: layout.contentWidth }}>
+        <View style={{ flexGrow: 1, width: '100%', maxWidth: layout.contentWidth }}>
           <Text
             accessibilityRole="header"
             align="center"
@@ -149,6 +150,7 @@ export default function PlanScreen() {
           </Text>
           <View
             style={{
+              flexGrow: 1,
               marginTop: layout.sectionGap,
               flexDirection: layout.wide ? 'row' : 'column',
               alignItems: layout.wide ? 'center' : 'stretch',

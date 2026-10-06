@@ -20,8 +20,8 @@ import { svgId } from './svgId';
  * La imagen grande de cada paso: una silueta de tai chi, un sol detrás y su sombra en el suelo.
  * Mide el espacio que le queda en la pantalla (como una container query) y se ajusta a él.
  *
- * Las siluetas son PNG negros con fondo transparente; se tiñen con el color de tinta,
- * así en modo oscuro salen blancas. El lienzo de cada PNG mide 60 × 104 unidades:
+ * Las siluetas son PNG negros con fondo transparente; se tiñen con el color de tinta.
+ * El lienzo de cada PNG mide 60 × 104 unidades:
  * x = 0 en la unidad 30 y los pies en la unidad 100 (más 2 de margen arriba).
  */
 
@@ -60,6 +60,8 @@ const ZONES: Record<ZoneMarker, readonly (readonly [number, number])[]> = {
 const IMAGE_UNITS_W = 60;
 const IMAGE_UNITS_H = 104;
 const FEET_UNIT = 102;
+/** Si queda menos alto que esto, la figura no se dibuja: así nunca tapa las opciones. */
+const MIN_BOX_HEIGHT = 100;
 
 export type Backdrop = { kind: 'disc' } | { kind: 'ring'; progress: number };
 
@@ -94,7 +96,7 @@ export function PoseArt({
       accessibilityElementsHidden
       importantForAccessibility="no-hide-descendants"
     >
-      {box.width > 0 && box.height > 0 ? (
+      {box.width > 0 && box.height >= MIN_BOX_HEIGHT ? (
         <Scene
           width={box.width}
           height={box.height}

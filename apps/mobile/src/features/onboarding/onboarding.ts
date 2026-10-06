@@ -1,28 +1,43 @@
-import type { SpaceMode } from '@manta/shared';
+import { MAX_GOALS, type OnboardingAnswers, type OnboardingProgress } from '@manta/shared';
+import type { Href } from 'expo-router';
 
-import { anchorFreeLessonsOnWifi } from '@/features/downloads/autoAnchor';
+import {
+  getOnboardingProgress,
+  onProgressReplaced,
+  saveOnboardingProgress,
+} from '@/features/progress/progress';
 import {
   updateSettings,
   type CareTag,
-  type DailyMinutes,
   type Goal,
   type OfflineUsage,
-  type PracticeMode,
-  type Settings,
 } from '@/features/settings/settings';
 import { track } from '@/lib/analytics';
 import { createStore, useStore } from '@/lib/store';
 
 /**
- * Onboarding: cinco preguntas y un plan. Las respuestas viven en un borrador en memoria
- * y se guardan en Ajustes solo al terminar, así "Atrás" y "Cambiar mis respuestas" no ensucian nada.
+ * Onboarding: cinco preguntas y un plan. Cada respuesta y cada pantalla se guardan al momento como
+ * progreso (en el teléfono y, con cuenta, en la nube), así se retoma donde quedó aunque no haya señal.
+ * Las respuestas pasan a Ajustes solo al terminar.
  */
 
 /** Rutas de las preguntas, en orden. La bienvenida y el plan no cuentan como pasos. */
 export const ONBOARDING_STEPS = ['practica', 'sentir', 'tiempo', 'zonas', 'sin-internet'] as const;
 export type OnboardingStep = (typeof ONBOARDING_STEPS)[number];
 
-export const MAX_GOALS = 2;
+/** Pantallas desde las que se puede retomar: las preguntas y el plan. */
+export type OnboardingScreen = NonNullable<OnboardingProgress['screen']>;
+
+export const SCREEN_HREF = {
+  practica: '/bienvenida/practica',
+  sentir: '/bienvenida/sentir',
+  tiempo: '/bienvenida/tiempo',
+  zonas: '/bienvenida/zonas',
+  'sin-internet': '/bienvenida/sin-internet',
+  plan: '/bienvenida/plan',
+} as const satisfies Record<OnboardingScreen, Href>;
+
+export { MAX_GOALS };
 
 /** Zonas que se ofrecen en el onboarding (las muñecas se eligen antes de cada clase). */
 export const ONBOARDING_CARE_TAGS = [
@@ -32,17 +47,7 @@ export const ONBOARDING_CARE_TAGS = [
   'neck',
 ] as const satisfies readonly CareTag[];
 
-export interface OnboardingDraft {
-  practiceMode: PracticeMode;
-  goals: Goal[];
-  dailyMinutes: DailyMinutes;
-  careTags: CareTag[];
-  /** Eligió "Ninguna" a propósito. */
-  noCare: boolean;
-  offlineUsage: OfflineUsage;
-  /** Lo está configurando otra persona para un familiar. */
-  forRelative: boolean;
-}
+export type OnboardingDraft = OnboardingAnswers;
 
 const INITIAL_DRAFT: OnboardingDraft = {
   practiceMode: 'seated',
@@ -55,6 +60,13 @@ const INITIAL_DRAFT: OnboardingDraft = {
 };
 
 const draftStore = createStore<OnboardingDraft>(INITIAL_DRAFT);
+/** Dónde va la persona y si ya terminó: junto con las respuestas, es el progreso que se guarda. */
+let screen: OnboardingScreen | null = null;
+let completed = false;
+
+function saveProgress(): void {
+  saveOnboardingProgress({ screen, completed, answers: draftStore.get() });
+}
 
 export function useOnboardingDraft(): OnboardingDraft {
   return useStore(draftStore);
@@ -62,11 +74,44 @@ export function useOnboardingDraft(): OnboardingDraft {
 
 export function updateDraft(patch: Partial<OnboardingDraft>): void {
   draftStore.set((current) => ({ ...current, ...patch }));
+  saveProgress();
 }
 
+/** Empieza de cero. Para un familiar, las preguntas hablan de "su" práctica. */
 export function startOnboarding(forRelative: boolean): void {
   draftStore.set({ ...INITIAL_DRAFT, forRelative });
+  screen = null;
+  completed = false;
+  saveProgress();
   track('onboarding_started', { forRelative });
+}
+
+/** Recupera el progreso guardado: al abrir la app y al entrar con una cuenta. */
+export function restoreOnboarding(): void {
+  const saved = getOnboardingProgress();
+  draftStore.set(saved?.answers ?? INITIAL_DRAFT);
+  screen = saved?.screen ?? null;
+  completed = saved?.completed ?? false;
+}
+
+// Si llega de la nube una versión más reciente, las preguntas muestran esa.
+onProgressReplaced(restoreOnboarding);
+
+/** ¿Hay algo que retomar? */
+export function hasOnboardingProgress(): boolean {
+  return screen !== null || completed;
+}
+
+/** Donde quedó la persona: el plan si ya terminó, si no la última pregunta que vio. */
+export function resumeHref(): Href {
+  return SCREEN_HREF[completed ? 'plan' : (screen ?? 'practica')];
+}
+
+/** Cada pantalla avisa cuando se ve: así se sabe desde dónde retomar. */
+export function markScreen(next: OnboardingScreen): void {
+  if (screen === next) return;
+  screen = next;
+  saveProgress();
 }
 
 /** Hasta dos objetivos: si ya hay dos, el más antiguo deja su lugar al nuevo. */
@@ -87,11 +132,6 @@ export function toggleCare(
   return { careTags, noCare: false };
 }
 
-/** El espacio de la primera clase. "Las dos" empieza sentado: es lo más seguro para arrancar. */
-export function spaceForPractice(mode: PracticeMode): SpaceMode {
-  return mode === 'standing' ? 'STANDING_IN_PLACE' : 'SEATED';
-}
-
 export function wantsAutoAnchor(usage: OfflineUsage): boolean {
   return usage !== 'rarely';
 }
@@ -104,10 +144,12 @@ export function trackStep(step: OnboardingStep): void {
   track('onboarding_step_completed', { step: stepNumber(step) });
 }
 
-/** Guarda las respuestas en Ajustes y, si practica sin internet, empieza a anclar con Wi-Fi. */
+/** Termina el onboarding: guarda las respuestas en Ajustes y marca el progreso como completo. */
 export function completeOnboarding(): OnboardingDraft {
   const draft = draftStore.get();
-  const autoAnchorFree = wantsAutoAnchor(draft.offlineUsage);
+  completed = true;
+  screen = 'plan';
+  saveProgress();
   updateSettings({
     onboardingDone: true,
     practiceMode: draft.practiceMode,
@@ -115,7 +157,7 @@ export function completeOnboarding(): OnboardingDraft {
     dailyMinutes: draft.dailyMinutes,
     careTags: draft.noCare ? [] : draft.careTags,
     offlineUsage: draft.offlineUsage,
-    autoAnchorFree,
+    autoAnchorFree: wantsAutoAnchor(draft.offlineUsage),
     setupForRelative: draft.forRelative,
   });
   track('onboarding_completed', {
@@ -126,17 +168,5 @@ export function completeOnboarding(): OnboardingDraft {
     offlineUsage: draft.offlineUsage,
     forRelative: draft.forRelative,
   });
-  if (autoAnchorFree) void anchorFreeLessonsOnWifi();
   return draft;
-}
-
-/** "Ya tengo cuenta": entra directo a la app con los valores por defecto. */
-export function skipOnboarding(): void {
-  updateSettings({ onboardingDone: true });
-  track('onboarding_skipped');
-}
-
-/** Quien ya practicó con una versión anterior no tiene que pasar por el onboarding. */
-export function isOnboarded(settings: Pick<Settings, 'onboardingDone' | 'sessionsCompleted'>) {
-  return settings.onboardingDone || settings.sessionsCompleted > 0;
 }

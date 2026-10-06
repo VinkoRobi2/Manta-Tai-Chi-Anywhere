@@ -1,48 +1,22 @@
-import type { Locale } from '@manta/shared';
+import { CARE_TAGS, DAILY_MINUTES, GOALS, type OnboardingAnswers } from '@manta/shared';
 
 import { storage } from '@/db/storage';
 import { createStore, useStore } from '@/lib/store';
-import type { Appearance } from '@/theme/tokens';
 
-export const CARE_TAGS = ['shoulders', 'back', 'knees', 'wrists', 'neck'] as const;
+/** Respuestas del onboarding: los valores posibles son los mismos que valida la API. */
+export { CARE_TAGS, DAILY_MINUTES, GOALS };
 export type CareTag = (typeof CARE_TAGS)[number];
-
-export type CaptionSize = 'normal' | 'large' | 'xlarge';
-
-/** Respuestas del onboarding. */
-export type PracticeMode = 'seated' | 'standing' | 'both';
-export const GOALS = ['calm', 'balance', 'joints', 'sleep', 'energy'] as const;
+export type PracticeMode = OnboardingAnswers['practiceMode'];
 export type Goal = (typeof GOALS)[number];
-export const DAILY_MINUTES = [5, 10, 20] as const;
 export type DailyMinutes = (typeof DAILY_MINUTES)[number];
-export type OfflineUsage = 'often' | 'sometimes' | 'rarely';
-
-export interface Reminder {
-  enabled: boolean;
-  hour: number;
-  minute: number;
-}
+export type OfflineUsage = OnboardingAnswers['offlineUsage'];
 
 export interface Settings {
-  language: 'system' | Locale;
-  appearance: Appearance;
-  captionSize: CaptionSize;
-  breathHaptics: boolean;
-  reminder: Reminder;
-  /** Ya se ofreció el recordatorio al terminar una clase. */
-  reminderAsked: boolean;
-  weeklyGoal: number;
-  careTags: CareTag[];
-  /** Caché local del acceso premium: funciona sin señal. */
-  premium: boolean;
-  sessionsCompleted: number;
-  firstLessonCompletedAt: string | null;
-  lastReviewAskAt: string | null;
-  safetySeen: boolean;
   onboardingDone: boolean;
   practiceMode: PracticeMode;
   goals: Goal[];
   dailyMinutes: DailyMinutes;
+  careTags: CareTag[];
   offlineUsage: OfflineUsage;
   /** Descargar solas las clases gratis cuando haya Wi-Fi. */
   autoAnchorFree: boolean;
@@ -51,23 +25,11 @@ export interface Settings {
 }
 
 export const DEFAULT_SETTINGS: Settings = {
-  language: 'system',
-  appearance: 'system',
-  captionSize: 'normal',
-  breathHaptics: true,
-  reminder: { enabled: false, hour: 7, minute: 30 },
-  reminderAsked: false,
-  weeklyGoal: 3,
-  careTags: [],
-  premium: false,
-  sessionsCompleted: 0,
-  firstLessonCompletedAt: null,
-  lastReviewAskAt: null,
-  safetySeen: false,
   onboardingDone: false,
   practiceMode: 'seated',
   goals: [],
   dailyMinutes: 10,
+  careTags: [],
   offlineUsage: 'sometimes',
   autoAnchorFree: false,
   setupForRelative: false,

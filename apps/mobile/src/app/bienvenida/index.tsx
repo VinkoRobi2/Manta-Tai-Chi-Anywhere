@@ -4,7 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { skipOnboarding, startOnboarding } from '@/features/onboarding/onboarding';
+import { getSession } from '@/features/auth/session';
+import {
+  hasOnboardingProgress,
+  resumeHref,
+  startOnboarding,
+} from '@/features/onboarding/onboarding';
 import { useOnboardingLayout } from '@/features/onboarding/responsive';
 import { WelcomeBackdrop } from '@/features/onboarding/WelcomeBackdrop';
 import { fonts, radius, welcome } from '@/theme/tokens';
@@ -38,14 +43,14 @@ export default function WelcomeScreen() {
   // La marca queda debajo de la figura: en tablets se separa más del botón.
   const brandGap = tablet ? layout.height * 0.14 : compact ? 20 : 44;
 
+  // Para un familiar se empieza de cero; si no, se retoma donde quedó. Sin sesión, primero la cuenta.
   const begin = (forRelative: boolean) => {
-    startOnboarding(forRelative);
-    router.push('/bienvenida/practica');
+    if (forRelative || !hasOnboardingProgress()) startOnboarding(forRelative);
+    router.push(getSession() ? resumeHref() : '/bienvenida/cuenta');
   };
 
   const haveAccount = () => {
-    skipOnboarding();
-    router.replace('/');
+    router.push({ pathname: '/bienvenida/cuenta', params: { modo: 'entrar' } });
   };
 
   return (

@@ -1,17 +1,9 @@
 import { Text as RNText, type TextProps as RNTextProps } from 'react-native';
 
 import { useTheme } from '@/theme/theme';
-import {
-  fonts,
-  stage,
-  typeScale,
-  type FontWeight,
-  type Palette,
-  type TypeVariant,
-} from '@/theme/tokens';
+import { fonts, typeScale, type FontWeight, type Palette, type TypeVariant } from '@/theme/tokens';
 
-export type Tone =
-  'ink' | 'soft' | 'accent' | 'onSol' | 'onAccent' | 'stage' | 'stageSoft' | 'danger';
+export type Tone = 'ink' | 'soft' | 'accent' | 'onSol' | 'onAccent' | 'danger';
 
 function toneColor(palette: Palette, tone: Tone): string {
   switch (tone) {
@@ -23,10 +15,6 @@ function toneColor(palette: Palette, tone: Tone): string {
       return palette.onSol;
     case 'onAccent':
       return palette.onAccent;
-    case 'stage':
-      return stage.ink;
-    case 'stageSoft':
-      return stage.inkSoft;
     case 'danger':
       return palette.danger;
     default:

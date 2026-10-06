@@ -1,6 +1,6 @@
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import type { ReactNode } from 'react';
+import { useCallback, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -10,7 +10,9 @@ import { Press } from '@/ui/Press';
 import { Text } from '@/ui/Text';
 
 import {
+  markScreen,
   ONBOARDING_STEPS,
+  SCREEN_HREF,
   stepNumber,
   useOnboardingDraft,
   type OnboardingStep,
@@ -36,7 +38,8 @@ export interface StepScreenProps {
 /**
  * Estructura de cada pregunta: título en mayúsculas, texto, opciones, la figura grande
  * y abajo "1/5 · SIGUIENTE ⟶". En pantallas anchas, preguntas a la izquierda y figura a la derecha.
- * Si la letra del sistema está muy grande, todo hace scroll en lugar de cortarse.
+ * Todo cabe en la pantalla sin scroll: la figura ocupa solo el espacio que sobra.
+ * Solo con la letra del sistema enorme se puede deslizar, para que nada quede cortado.
  */
 export function StepScreen({
   step,
@@ -57,6 +60,16 @@ export function StepScreen({
   const total = ONBOARDING_STEPS.length;
   const tablet = layout.breakpoint === 'tablet';
   const compact = layout.breakpoint === 'compact';
+
+  useFocusEffect(useCallback(() => markScreen(step), [step]));
+
+  // Si se retomó a mitad, la pregunta anterior no está detrás: se abre igual.
+  const previous = ONBOARDING_STEPS[current - 2];
+  const goBack = () => {
+    if (previous) router.dismissTo(SCREEN_HREF[previous]);
+    else if (router.canGoBack()) router.back();
+    else router.replace('/bienvenida');
+  };
 
   const questions = (
     <View>
@@ -134,7 +147,7 @@ export function StepScreen({
               style={
                 layout.wide
                   ? { flex: 1, alignSelf: 'stretch', minHeight: layout.artMin }
-                  : { flexGrow: 1, minHeight: layout.artMin }
+                  : { flexGrow: 1, minHeight: 0 }
               }
             >
               {art}
@@ -184,7 +197,7 @@ export function StepScreen({
             </Text>
           </View>
           <Press
-            onPress={() => router.back()}
+            onPress={goBack}
             accessibilityRole="button"
             accessibilityLabel={t('onboarding.back')}
             hitSlop={8}
