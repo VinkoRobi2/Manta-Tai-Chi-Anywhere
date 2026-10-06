@@ -1,3 +1,5 @@
+import type { SpaceMode } from '@manta/shared';
+import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useId, useMemo, type ReactNode } from 'react';
@@ -30,6 +32,11 @@ import {
 } from '@/ui/Glyphs';
 import { Text } from '@/ui/Text';
 
+/** Fotos de cabecera por espacio. Sin foto (por ahora, de pie y la forma), va la silueta con el sol. */
+const HERO_PHOTOS: Partial<Record<SpaceMode, number>> = {
+  SEATED: require('../../../assets/images/lessons/seated.jpg'),
+};
+
 /**
  * La ficha de una clase, oscura y a pantalla completa: arriba la imagen grande con el nombre
  * encima; debajo, una lista corta con icono (duración y nivel, qué hace falta, los movimientos,
@@ -48,7 +55,7 @@ export default function LessonScreen() {
   const settings = useSettings();
   const hasPremium = useHasPremium();
   const fadeId = svgId(useId());
-  const heroHeight = Math.round(Math.min(layout.height * 0.56, 520));
+  const heroHeight = Math.round(Math.min(layout.height * 0.62, 580));
   const column = { width: '100%', maxWidth: 640, alignSelf: 'center' } as const;
 
   const goBack = () => {
@@ -90,25 +97,35 @@ export default function LessonScreen() {
         contentContainerStyle={{ paddingBottom: insets.bottom + 110 }}
       >
         <View style={{ height: heroHeight, overflow: 'hidden', backgroundColor: palette.hero }}>
-          <View
-            style={{ position: 'absolute', left: 0, right: 0, bottom: 0, alignItems: 'center' }}
-          >
-            <PoseThumb
-              poses={[poseFor(lesson.spaceMode)]}
-              width={layout.width}
-              height={heroHeight}
-              figureHeight={art * 0.86}
-              sunSize={art * 0.62}
-              sunOffsetY={-heroHeight * 0.06}
-              sunColor={locked ? '#3A3A3D' : appLight.accent}
-              tint={palette.silhouette}
+          {HERO_PHOTOS[lesson.spaceMode] ? (
+            <Image
+              source={HERO_PHOTOS[lesson.spaceMode]}
+              contentFit="cover"
+              contentPosition="top center"
+              accessibilityElementsHidden
+              style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
             />
-          </View>
+          ) : (
+            <View
+              style={{ position: 'absolute', left: 0, right: 0, bottom: 0, alignItems: 'center' }}
+            >
+              <PoseThumb
+                poses={[poseFor(lesson.spaceMode)]}
+                width={layout.width}
+                height={heroHeight}
+                figureHeight={art * 0.86}
+                sunSize={art * 0.62}
+                sunOffsetY={-heroHeight * 0.06}
+                sunColor={locked ? '#3A3A3D' : appLight.accent}
+                tint={palette.silhouette}
+              />
+            </View>
+          )}
           {/* La imagen se funde con el fondo para que el título se lea encima. */}
           <Svg
             width="100%"
-            height={heroHeight * 0.55}
-            style={{ position: 'absolute', left: 0, right: 0, bottom: 0 }}
+            height={heroHeight * 0.55 + 2}
+            style={{ position: 'absolute', left: 0, right: 0, bottom: -1 }}
             accessibilityElementsHidden
             importantForAccessibility="no"
           >
