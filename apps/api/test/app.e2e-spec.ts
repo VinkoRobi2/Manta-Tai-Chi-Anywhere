@@ -54,4 +54,13 @@ describe('API (e2e)', () => {
       .send({})
       .expect(401);
   });
+
+  it('GET y PUT /v1/me/sessions exigen sesión', async () => {
+    await request(app.getHttpServer()).get('/v1/me/sessions').expect(401);
+    await request(app.getHttpServer())
+      .put('/v1/me/sessions')
+      .set('Authorization', 'Bearer falso')
+      .send({ sessions: [] })
+      .expect(401);
+  });
 });

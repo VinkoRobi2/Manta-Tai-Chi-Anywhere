@@ -1,6 +1,9 @@
 import { Redirect } from 'expo-router';
 
-/** Por ahora la app es solo el onboarding. */
+import { useSettings } from '@/features/settings/settings';
+
+/** La primera vez, el onboarding; después, Inicio. */
 export default function Index() {
-  return <Redirect href="/bienvenida" />;
+  const { onboardingDone } = useSettings();
+  return <Redirect href={onboardingDone ? '/inicio' : '/bienvenida'} />;
 }

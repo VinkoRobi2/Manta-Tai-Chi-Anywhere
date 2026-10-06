@@ -2,6 +2,8 @@
 module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   presets: [require('nativewind/preset')],
+  // La app no usa clases dark:; con 'media' la vista web falla al arrancar (react-native-css-interop).
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

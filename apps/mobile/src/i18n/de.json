@@ -117,10 +117,6 @@
       "weekdays": ["M", "D", "M", "D", "F", "S", "S"],
       "firstClass": "Deine erste Lektion",
       "firstClass_relative": "Die erste Lektion",
-      "lesson": {
-        "seated": "Erste Bewegungen",
-        "standing": "Wolkenhände ohne Schritte"
-      },
       "start": "Erste Lektion starten",
       "change": "Antworten ändern"
     },
@@ -142,5 +138,140 @@
         "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
       }
     }
+  },
+  "tabs": {
+    "home": "Start",
+    "classes": "Kurse",
+    "profile": "Profil"
+  },
+  "space": {
+    "SEATED": "Im Sitzen",
+    "STANDING_IN_PLACE": "Im Stehen",
+    "FULL_FORM": "Ganze Form"
+  },
+  "level": {
+    "BEGINNER": "Anfänger",
+    "INTERMEDIATE": "Mittelstufe",
+    "ADVANCED": "Fortgeschritten"
+  },
+  "home": {
+    "greeting": {
+      "morning": "Guten Morgen",
+      "afternoon": "Guten Tag",
+      "evening": "Guten Abend"
+    },
+    "greetingName": "{{greeting}}, {{name}}",
+    "headline": {
+      "first": "Dein erster Kurs wartet.",
+      "progress": "{{count}} von {{goal}} Tagen geübt diese Woche.",
+      "reached": "Ziel erreicht: {{count}} Tage diese Woche."
+    },
+    "today": "Heute",
+    "offline": "Offline · alles funktioniert",
+    "period": "{{count}} Tage",
+    "stats": {
+      "activeDays": "Tage",
+      "sessions": "Kurse",
+      "minutes": "Minuten",
+      "calm": "Ruhig",
+      "calmEmpty": "Antworte am Ende",
+      "versus": "Im Vergleich zu den {{count}} Tagen davor",
+      "up": "{{value}} mehr",
+      "down": "{{value}} weniger",
+      "same": "Gleich"
+    },
+    "todayTitle": "Dein Kurs für heute",
+    "nextTitle": "Dein nächster Kurs",
+    "lessonOf": "Kurs {{number}} von {{total}}",
+    "offlineReady": "Offline bereit",
+    "start": "Starten",
+    "seeLesson": "Kurs ansehen",
+    "premium": "Manta Premium",
+    "lockedBody": "Du hast die kostenlosen Kurse dieses Programms gemacht.",
+    "allDone": "Du hast alle deine Kurse gemacht",
+    "allDoneBody": "Wiederhole deine Lieblinge oder entdecke ein anderes Programm.",
+    "explore": "Kurse entdecken",
+    "weekHint": "Jeder Übungstag zählt. Dein Ziel: {{goal}} Tage pro Woche.",
+    "dayDone": "Geübt"
+  },
+  "classes": {
+    "title": "Kurse",
+    "body": "Alle sind in der App: Sie funktionieren offline.",
+    "all": "Alle",
+    "free": "Kostenlos",
+    "premium": "Premium",
+    "count_one": "{{count}} Kurs",
+    "count_other": "{{count}} Kurse",
+    "done": "Erledigt"
+  },
+  "lessonScreen": {
+    "back": "Zurück",
+    "overline": "Kurs {{number}} · {{program}}",
+    "offline": "Funktioniert offline",
+    "start": "Starten",
+    "again": "Noch einmal üben",
+    "locked": "Mit Manta Premium verfügbar",
+    "lockedBody": "Bald kannst du alle Kurse freischalten.",
+    "care": "Achtsam mit: {{zones}}. Wenn etwas schmerzt, hör auf.",
+    "practiced_one": "Du hast ihn {{count}}-mal geübt",
+    "practiced_other": "Du hast ihn {{count}}-mal geübt",
+    "notFound": "Wir konnten diesen Kurs nicht finden.",
+    "needs": {
+      "SEATED": "Ein fester Stuhl ohne Rollen",
+      "STANDING_IN_PLACE": "Ein freier Quadratmeter",
+      "FULL_FORM": "Platz für ein paar Schritte"
+    }
+  },
+  "practice": {
+    "close": "Beenden",
+    "pause": "Pause",
+    "resume": "Weiter",
+    "remaining": "Noch {{time}}",
+    "movement": "Bewegung {{current}} von {{total}}",
+    "breath": {
+      "in": "Einatmen",
+      "out": "Ausatmen",
+      "hold": "Halten"
+    },
+    "tooShort": "Übungen unter einer Minute werden nicht gespeichert.",
+    "mood": {
+      "title": "Wie fühlst du dich jetzt?",
+      "body": "So erkennst du, was dir guttut.",
+      "skip": "Überspringen",
+      "CALM": "Ruhig",
+      "SLIGHT": "Gut",
+      "MODERATE": "Geht so",
+      "ROUGH": "Angespannt"
+    },
+    "done": {
+      "title": "Gut gemacht",
+      "reached": "Wochenziel erreicht!",
+      "summary": "{{title}} · {{minutes}} Min",
+      "next": "Als Nächstes: {{title}}",
+      "home": "Zurück zum Start",
+      "week": "{{count}} von {{goal}} Tagen geübt diese Woche."
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "guest": "Gast",
+    "local": "Dein Fortschritt wird auf diesem Telefon gespeichert.",
+    "cloud": "Dein Fortschritt wird in deinem Konto gespeichert.",
+    "pending_one": "{{count}} Übung wartet auf Empfang zum Hochladen.",
+    "pending_other": "{{count}} Übungen warten auf Empfang zum Hochladen.",
+    "signIn": "Fortschritt in einem Konto speichern",
+    "practice": "Deine Praxis",
+    "mode": "Haltung",
+    "minutes": "Zeit pro Tag",
+    "goals": "Zum Spüren",
+    "care": "Achtsame Bereiche",
+    "none": "Keine",
+    "totals": "Seit du angefangen hast",
+    "totalSessions": "Kurse",
+    "totalMinutes": "Minuten",
+    "language": "Sprache",
+    "change": "Meine Antworten ändern",
+    "signOut": "Abmelden",
+    "resetDone": "Fertig: Die App beginnt von vorn."
   }
 }

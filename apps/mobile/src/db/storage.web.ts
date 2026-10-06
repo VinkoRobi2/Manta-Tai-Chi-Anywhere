@@ -1,4 +1,4 @@
-import type { LocalStorage } from './types';
+import type { LocalStorage, StoredPractice } from './types';
 
 /**
  * Almacenamiento para la vista web (solo desarrollo y capturas de diseño).
@@ -9,9 +9,10 @@ const KEY = 'manta-dev-storage';
 
 interface State {
   settings: Record<string, string>;
+  practices: StoredPractice[];
 }
 
-let state: State = { settings: {} };
+let state: State = { settings: {}, practices: [] };
 
 function persist() {
   try {
@@ -35,6 +36,31 @@ export const storage: LocalStorage = {
 
   writeSetting(key, value) {
     state.settings[key] = value;
+    persist();
+  },
+
+  readPractices: () =>
+    [...state.practices].sort((a, b) => a.completedAt.localeCompare(b.completedAt)),
+
+  insertPractices(practices) {
+    const known = new Set(state.practices.map((practice) => practice.id));
+    state.practices = [
+      ...state.practices,
+      ...practices.filter((practice) => !known.has(practice.id)),
+    ];
+    persist();
+  },
+
+  markPracticesSynced(ids) {
+    const synced = new Set(ids);
+    state.practices = state.practices.map((practice) =>
+      synced.has(practice.id) ? { ...practice, synced: true } : practice,
+    );
+    persist();
+  },
+
+  clearPractices() {
+    state.practices = [];
     persist();
   },
 };

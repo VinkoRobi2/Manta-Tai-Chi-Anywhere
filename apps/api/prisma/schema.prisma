@@ -28,6 +28,14 @@ enum Level {
   ADVANCED
 }
 
+/// Cómo se siente la persona al terminar, con la escala del mar (SEA_STATES de @manta/shared).
+enum SeaState {
+  CALM
+  SLIGHT
+  MODERATE
+  ROUGH
+}
+
 enum AuthProvider {
   apple
   google
@@ -126,7 +134,6 @@ model Lesson {
   updatedAt    DateTime            @updatedAt
   translations LessonTranslation[]
   packages     LessonPackage[]
-  sessions     PracticeSession[]
 
   @@index([programId])
 }
@@ -159,15 +166,19 @@ model LessonPackage {
   @@unique([lessonId, locale, version])
 }
 
-/// Práctica completada, sincronizada desde el teléfono cuando hay señal.
+/// Práctica completada en el teléfono y subida cuando hay señal (PracticeSessionSchema de @manta/shared).
+/// Las clases se guardan por slug: el teléfono puede practicar clases que la base todavía no tiene.
 model PracticeSession {
-  id          String   @id @default(uuid())
+  /// Id que pone el teléfono: subir la misma práctica dos veces no la duplica.
+  id          String    @id
   userId      String
-  user        AppUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  lessonId    String
-  lesson      Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  user        AppUser   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonSlug  String
   completedAt DateTime
   durationSec Int
+  mood        SeaState?
+  spaceMode   SpaceMode
+  createdAt   DateTime  @default(now())
 
   @@index([userId, completedAt])
 }

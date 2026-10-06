@@ -6,6 +6,7 @@ import { ScrollView, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { programsForMode } from '@/features/catalog/catalog';
 import { CheckBadge } from '@/features/onboarding/ChoiceCard';
 import { ContinueButton, TextButton } from '@/features/onboarding/ContinueButton';
 import {
@@ -21,6 +22,7 @@ import { Squish } from '@/features/onboarding/Squish';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { enter } from '@/features/onboarding/StepScreen';
 import type { PracticeMode } from '@/features/settings/settings';
+import { useLocale } from '@/lib/i18n';
 import { fonts } from '@/theme/tokens';
 import { Text } from '@/ui/Text';
 
@@ -28,13 +30,6 @@ const POSES: Record<PracticeMode, readonly Pose[]> = {
   seated: ['seated'],
   standing: ['standing'],
   both: ['standing', 'seated'],
-};
-
-/** La primera clase de cada programa. "Las dos" empieza sentado: es lo más seguro para arrancar. */
-const FIRST_LESSON: Record<PracticeMode, { name: 'seated' | 'standing'; minutes: number }> = {
-  seated: { name: 'seated', minutes: 6 },
-  standing: { name: 'standing', minutes: 10 },
-  both: { name: 'seated', minutes: 6 },
 };
 
 /** La semana empieza hoy: las iniciales de los días, de hoy en adelante. */
@@ -50,6 +45,7 @@ export default function PlanScreen() {
   const layout = useOnboardingLayout();
   const palette = useOnboardingPalette();
   const insets = useSafeAreaInsets();
+  const locale = useLocale();
   const mode = draft.practiceMode ?? DEFAULT_PRACTICE;
   const context = draft.forRelative ? 'relative' : undefined;
   const week = weekFromToday(t('onboarding.plan.weekdays', { returnObjects: true }) as string[]);
@@ -62,9 +58,10 @@ export default function PlanScreen() {
   const [cardHeight, setCardHeight] = useState(cardMax);
   // Muy poco alto (iPhone SE de primera generación, Android bajos): sin subtítulo ni tarjeta de la clase.
   const tiny = !tablet && layout.height - insets.top - insets.bottom < 600;
-  const lesson = FIRST_LESSON[mode];
-  const lessonName = t(`onboarding.plan.lesson.${lesson.name}`);
-  const lessonMinutes = t('common.minutes', { count: lesson.minutes });
+  // La primera clase del programa que le toca ("Las dos" empieza sentado: es lo más seguro).
+  const lesson = programsForMode(locale, mode)[0]!.lessons[0]!;
+  const lessonName = lesson.title;
+  const lessonMinutes = t('common.minutes', { count: Math.round(lesson.durationSec / 60) });
   const artWidth = Math.round(cardHeight * 0.92);
   // El texto termina antes de donde empieza el sol (la figura va pegada a la derecha: el sol empieza
   // a 0,76 × alto del borde). Se calcula con el alto máximo: así no cambia de líneas al encogerse.
@@ -73,10 +70,11 @@ export default function PlanScreen() {
 
   useFocusEffect(useCallback(() => markScreen('plan'), []));
 
-  // Por ahora no hay clases: se guardan las respuestas y se vuelve a la bienvenida.
+  // Se guardan las respuestas, Inicio queda debajo y se abre la primera clase.
   const start = () => {
     completeOnboarding();
-    router.dismissTo('/bienvenida');
+    router.replace('/inicio');
+    router.push({ pathname: '/clase/[slug]', params: { slug: lesson.slug } });
   };
 
   return (

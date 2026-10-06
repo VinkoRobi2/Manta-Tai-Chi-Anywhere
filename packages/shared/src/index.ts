@@ -6,3 +6,6 @@ export * from './progress.js';
 export * from './voyage.js';
 export * from './lesson-builder.js';
 export * from './account.js';
+export * from './practice.js';
+export * from './dashboard.js';
+export * from './starter-catalog.js';

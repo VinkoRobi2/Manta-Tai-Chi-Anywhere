@@ -12,11 +12,12 @@ import { useEffect, useState } from 'react';
 import { storage } from '@/db/storage';
 import { loadSession } from '@/features/auth/session';
 import { restoreOnboarding } from '@/features/onboarding/onboarding';
+import { loadPractices, startPracticeSync } from '@/features/practice/practice';
 import { loadProgress, startProgressSync } from '@/features/progress/progress';
 import { loadSettings } from '@/features/settings/settings';
 import { track } from '@/lib/analytics';
 import { applyLanguage } from '@/lib/i18n';
-import { onboardingLight } from '@/theme/tokens';
+import { lessonDark, onboardingLight, practiceDark } from '@/theme/tokens';
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -29,13 +30,15 @@ function bootLocalData(): true {
   applyLanguage(loadSettings().language);
   loadProgress();
   restoreOnboarding();
+  loadPractices();
   loadSession();
   startProgressSync();
+  startPracticeSync();
   track('app_opened');
   return true;
 }
 
-/** Por ahora la app es solo el onboarding: la bienvenida, cinco preguntas y el plan. */
+/** El onboarding la primera vez; después, Inicio, Clases y Perfil, la ficha de cada clase y la práctica. */
 export default function RootLayout() {
   const [ready] = useState(bootLocalData);
   const [fontsLoaded, fontError] = useFonts({
@@ -61,6 +64,19 @@ export default function RootLayout() {
     >
       <Stack.Screen name="index" />
       <Stack.Screen name="bienvenida" options={{ animation: 'fade', gestureEnabled: false }} />
+      <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
+      <Stack.Screen
+        name="clase/[slug]"
+        options={{ contentStyle: { backgroundColor: lessonDark.ground } }}
+      />
+      <Stack.Screen
+        name="practica/[slug]"
+        options={{
+          presentation: 'fullScreenModal',
+          gestureEnabled: false,
+          contentStyle: { backgroundColor: practiceDark.ground },
+        }}
+      />
     </Stack>
   );
 }

@@ -103,6 +103,51 @@ export const onboardingLight: OnboardingPalette = {
   danger: '#B3261E',
 };
 
+/**
+ * La app después del onboarding (Inicio, Clases, Perfil): el mismo blanco y negro, con el sol como
+ * único acento. Arriba blanco; debajo, una franja gris donde descansan las tarjetas.
+ */
+export interface AppPalette extends OnboardingPalette {
+  /** Franja gris del cuerpo de Inicio. */
+  band: string;
+  /** Tarjetas blancas sobre la franja gris. */
+  raised: string;
+  /** Subidas en las estadísticas. Las bajadas van en gris: Manta no regaña. */
+  positive: string;
+}
+
+export const appLight: AppPalette = {
+  ...onboardingLight,
+  band: '#F4F4F6',
+  raised: '#FFFFFF',
+  positive: '#16794A',
+};
+
+/** La ficha de cada clase: oscura, con la imagen grande arriba y un botón blanco. */
+export const lessonDark = {
+  ground: '#111113',
+  hero: '#1C1C1F',
+  silhouette: '#FFFFFF',
+  ink: '#FFFFFF',
+  muted: '#A8A8AE',
+  faint: '#6E6E75',
+  card: '#2A2A2E',
+  /** Detrás del botón flotante. */
+  scrim: 'rgba(17, 17, 19, 0.92)',
+} as const;
+
+/** La práctica guiada: el azul profundo de la bienvenida, para practicar sin distracciones. */
+export const practiceDark = {
+  ground: '#04191F',
+  ink: '#FFFFFF',
+  inkSoft: '#B9CDD2',
+  faint: '#6F8C93',
+  track: 'rgba(255, 255, 255, 0.16)',
+  card: 'rgba(255, 255, 255, 0.08)',
+  sol: '#F2B134',
+  onSol: '#04191F',
+} as const;
+
 /** La bienvenida va siempre sobre el video. */
 export const welcome = {
   ground: '#04191F',

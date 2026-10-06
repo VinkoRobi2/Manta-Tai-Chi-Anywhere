@@ -1,8 +1,13 @@
 import {
   AuthSessionSchema,
+  PracticeListSchema,
+  PracticeUploadResultSchema,
   ProgressResponseSchema,
   type AppleSignIn,
   type AuthSession,
+  type PracticeList,
+  type PracticeSession,
+  type PracticeUploadResult,
   type ProgressResponse,
   type ProgressSnapshot,
 } from '@manta/shared';
@@ -77,4 +82,14 @@ export const api = {
 
   putProgress: (token: string, snapshot: ProgressSnapshot): Promise<ProgressResponse> =>
     request(ProgressResponseSchema, '/me/progress', { method: 'PUT', body: snapshot, token }),
+
+  getPractices: (token: string): Promise<PracticeList> =>
+    request(PracticeListSchema, '/me/sessions', { token }),
+
+  putPractices: (token: string, sessions: PracticeSession[]): Promise<PracticeUploadResult> =>
+    request(PracticeUploadResultSchema, '/me/sessions', {
+      method: 'PUT',
+      body: { sessions },
+      token,
+    }),
 };

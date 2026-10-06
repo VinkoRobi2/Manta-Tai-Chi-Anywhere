@@ -12,6 +12,7 @@ import {
   saveOnboardingProgress,
 } from '@/features/progress/progress';
 import {
+  getSettings,
   updateSettings,
   type CareTag,
   type DailyMinutes,
@@ -135,13 +136,17 @@ export function startOnboarding(forRelative: boolean): void {
   track('onboarding_started', { forRelative });
 }
 
-/** Recupera el progreso guardado: al abrir la app y al entrar con una cuenta. */
+/**
+ * Recupera el progreso guardado: al abrir la app y al entrar con una cuenta. Si llegó de la nube
+ * un onboarding terminado (otro teléfono), sus respuestas pasan a Ajustes y se entra directo a Inicio.
+ */
 export function restoreOnboarding(): void {
   const saved = getOnboardingProgress();
   chosen = chosenFrom(saved);
   answersStore.set(saved?.answers ?? INITIAL_ANSWERS);
   screen = saved?.screen ?? null;
   completed = saved?.completed ?? false;
+  if (saved?.completed && !getSettings().onboardingDone) applyAnswers(saved.answers);
 }
 
 // Si llega de la nube una versión más reciente, las preguntas muestran esa.
@@ -152,9 +157,9 @@ export function hasOnboardingProgress(): boolean {
   return screen !== null || completed;
 }
 
-/** Donde quedó la persona: el plan si ya terminó, si no la última pregunta que vio. */
+/** Donde quedó la persona: Inicio si ya terminó, si no la última pregunta que vio. */
 export function resumeHref(): Href {
-  return SCREEN_HREF[completed ? 'plan' : (screen ?? 'practica')];
+  return completed ? '/inicio' : SCREEN_HREF[screen ?? 'practica'];
 }
 
 /** Cada pantalla avisa cuando se ve: así se sabe desde dónde retomar. */
@@ -210,12 +215,8 @@ export function trackStep(step: OnboardingStep): void {
   track('onboarding_step_completed', { step: stepNumber(step) });
 }
 
-/** Termina el onboarding: guarda las respuestas en Ajustes y marca el progreso como completo. */
-export function completeOnboarding(): OnboardingAnswers {
-  const answers = answersStore.get();
-  completed = true;
-  screen = 'plan';
-  saveProgress();
+/** Las respuestas pasan a Ajustes: desde aquí las leen Inicio y las clases. */
+function applyAnswers(answers: OnboardingAnswers): void {
   updateSettings({
     onboardingDone: true,
     practiceMode: answers.practiceMode,
@@ -226,6 +227,15 @@ export function completeOnboarding(): OnboardingAnswers {
     autoAnchorFree: wantsAutoAnchor(answers.offlineUsage),
     setupForRelative: answers.forRelative,
   });
+}
+
+/** Termina el onboarding: guarda las respuestas en Ajustes y marca el progreso como completo. */
+export function completeOnboarding(): OnboardingAnswers {
+  const answers = answersStore.get();
+  completed = true;
+  screen = 'plan';
+  saveProgress();
+  applyAnswers(answers);
   track('onboarding_completed', {
     practiceMode: answers.practiceMode,
     goals: answers.goals.join(','),

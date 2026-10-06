@@ -1,0 +1,774 @@
+{
+  "schemaVersion": 1,
+  "lessonSlug": "en-el-lugar-manos-de-nube",
+  "locale": "es",
+  "totalDurationMs": 600000,
+  "segments": [
+    {
+      "title": "Llegar al lugar",
+      "clip": "preparacion-de-pie.mp4",
+      "startMs": 0,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "De pie, con los pies al ancho de los hombros y las rodillas suaves. Si el suelo se mueve, abre un poco más los pies."
+        },
+        {
+          "atMs": 18000,
+          "text": "Siente el peso repartido en los dos pies."
+        },
+        {
+          "atMs": 36000,
+          "text": "La coronilla sube, el mentón baja un poco."
+        },
+        {
+          "atMs": 54000,
+          "text": "Siente el peso repartido en los dos pies."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 7000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 17000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 27000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 37000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 47000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 57000,
+          "phase": "out",
+          "durationMs": 3000
+        }
+      ]
+    },
+    {
+      "title": "Manos de nube en el lugar",
+      "clip": "manos-de-nube-de-pie.mp4",
+      "startMs": 60000,
+      "durationMs": 480000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Sin dar pasos: el peso pasa de un pie al otro mientras las manos dibujan nubes."
+        },
+        {
+          "atMs": 18000,
+          "text": "Las rodillas siguen suaves."
+        },
+        {
+          "atMs": 36000,
+          "text": "La cintura guía, las manos acompañan."
+        },
+        {
+          "atMs": 54000,
+          "text": "Mueve el peso como una marea lenta."
+        },
+        {
+          "atMs": 72000,
+          "text": "Las rodillas siguen suaves."
+        },
+        {
+          "atMs": 90000,
+          "text": "La cintura guía, las manos acompañan."
+        },
+        {
+          "atMs": 108000,
+          "text": "Mueve el peso como una marea lenta."
+        },
+        {
+          "atMs": 126000,
+          "text": "Las rodillas siguen suaves."
+        },
+        {
+          "atMs": 144000,
+          "text": "La cintura guía, las manos acompañan."
+        },
+        {
+          "atMs": 162000,
+          "text": "Mueve el peso como una marea lenta."
+        },
+        {
+          "atMs": 180000,
+          "text": "Las rodillas siguen suaves."
+        },
+        {
+          "atMs": 198000,
+          "text": "La cintura guía, las manos acompañan."
+        },
+        {
+          "atMs": 216000,
+          "text": "Mueve el peso como una marea lenta."
+        },
+        {
+          "atMs": 234000,
+          "text": "Las rodillas siguen suaves."
+        },
+        {
+          "atMs": 252000,
+          "text": "La cintura guía, las manos acompañan."
+        },
+        {
+          "atMs": 270000,
+          "text": "Mueve el peso como una marea lenta."
+        },
+        {
+          "atMs": 288000,
+          "text": "Las rodillas siguen suaves."
+        },
+        {
+          "atMs": 306000,
+          "text": "La cintura guía, las manos acompañan."
+        },
+        {
+          "atMs": 324000,
+          "text": "Mueve el peso como una marea lenta."
+        },
+        {
+          "atMs": 342000,
+          "text": "Las rodillas siguen suaves."
+        },
+        {
+          "atMs": 360000,
+          "text": "La cintura guía, las manos acompañan."
+        },
+        {
+          "atMs": 378000,
+          "text": "Mueve el peso como una marea lenta."
+        },
+        {
+          "atMs": 396000,
+          "text": "Las rodillas siguen suaves."
+        },
+        {
+          "atMs": 414000,
+          "text": "La cintura guía, las manos acompañan."
+        },
+        {
+          "atMs": 432000,
+          "text": "Mueve el peso como una marea lenta."
+        },
+        {
+          "atMs": 450000,
+          "text": "Las rodillas siguen suaves."
+        },
+        {
+          "atMs": 468000,
+          "text": "La cintura guía, las manos acompañan."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 18000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 28000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 38000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 48000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 58000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 63000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 68000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 73000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 78000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 83000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 88000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 93000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 98000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 103000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 108000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 113000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 118000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 123000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 128000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 133000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 138000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 143000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 148000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 153000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 158000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 163000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 168000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 173000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 178000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 183000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 188000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 193000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 198000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 203000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 208000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 213000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 218000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 223000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 228000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 233000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 238000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 243000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 248000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 253000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 258000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 263000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 268000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 273000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 278000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 283000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 288000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 293000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 298000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 303000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 308000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 313000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 318000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 323000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 328000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 333000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 338000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 343000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 348000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 353000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 358000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 363000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 368000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 373000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 378000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 383000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 388000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 393000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 398000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 403000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 408000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 413000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 418000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 423000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 428000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 433000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 438000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 443000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 448000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 453000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 458000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 463000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 468000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 473000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 478000,
+          "phase": "out",
+          "durationMs": 2000
+        }
+      ]
+    },
+    {
+      "title": "Cerrar de pie",
+      "clip": "cierre-de-pie.mp4",
+      "startMs": 540000,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Las manos se cruzan frente al pecho y bajan despacio. Los pies se juntan."
+        },
+        {
+          "atMs": 18000,
+          "text": "Quédate quieto unos segundos."
+        },
+        {
+          "atMs": 36000,
+          "text": "Nota cómo respiras ahora."
+        },
+        {
+          "atMs": 54000,
+          "text": "Quédate quieto unos segundos."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 15000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 20000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 27000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 32000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 39000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 44000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 51000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 56000,
+          "phase": "out",
+          "durationMs": 4000
+        }
+      ]
+    }
+  ]
+}

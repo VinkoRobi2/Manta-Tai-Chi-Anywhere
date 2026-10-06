@@ -1,0 +1,640 @@
+{
+  "schemaVersion": 1,
+  "lessonSlug": "sentado-manos-de-nube",
+  "locale": "de",
+  "totalDurationMs": 480000,
+  "segments": [
+    {
+      "title": "Ankommen",
+      "clip": "respiracion-inicial.mp4",
+      "startMs": 0,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Setz dich nah an die Stuhlkante, die Füße fest am Boden, der Rücken lang."
+        },
+        {
+          "atMs": 18000,
+          "text": "Lass die Schultern sinken."
+        },
+        {
+          "atMs": 36000,
+          "text": "Atme langsam durch die Nase ein."
+        },
+        {
+          "atMs": 54000,
+          "text": "Lockere Kiefer und Stirn."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 7000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 17000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 27000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 37000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 47000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 57000,
+          "phase": "out",
+          "durationMs": 3000
+        }
+      ]
+    },
+    {
+      "title": "Eröffnung",
+      "clip": "comienzo.mp4",
+      "clipSide": "comienzo-lado.mp4",
+      "startMs": 60000,
+      "durationMs": 90000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Beim Einatmen schweben die Arme nach vorn bis auf Schulterhöhe, als würde das Wasser sie tragen."
+        },
+        {
+          "atMs": 18000,
+          "text": "Beim Ausatmen sinken die Hände auf die Oberschenkel."
+        },
+        {
+          "atMs": 36000,
+          "text": "Weiche Ellbogen, lockere Handgelenke."
+        },
+        {
+          "atMs": 54000,
+          "text": "Heb die Arme nur so weit, wie es angenehm ist."
+        },
+        {
+          "atMs": 72000,
+          "text": "Beim Ausatmen sinken die Hände auf die Oberschenkel."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 18000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 28000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 38000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 48000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 58000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 63000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 68000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 73000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 78000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 83000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 88000,
+          "phase": "out",
+          "durationMs": 2000
+        }
+      ]
+    },
+    {
+      "title": "Wolkenhände",
+      "clip": "manos-de-nube.mp4",
+      "clipSide": "manos-de-nube-lado.mp4",
+      "startMs": 150000,
+      "durationMs": 270000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Eine Hand auf Brusthöhe, die andere unten. Dreh dich aus der Taille und lass die Hände wie Wolken ziehen."
+        },
+        {
+          "atMs": 18000,
+          "text": "Dein Blick folgt der oberen Hand."
+        },
+        {
+          "atMs": 36000,
+          "text": "Dreh dich aus der Taille, nicht nur mit den Armen."
+        },
+        {
+          "atMs": 54000,
+          "text": "Wechsle die Hände ohne Eile, wie Wasser, das kommt und geht."
+        },
+        {
+          "atMs": 72000,
+          "text": "Dein Blick folgt der oberen Hand."
+        },
+        {
+          "atMs": 90000,
+          "text": "Dreh dich aus der Taille, nicht nur mit den Armen."
+        },
+        {
+          "atMs": 108000,
+          "text": "Wechsle die Hände ohne Eile, wie Wasser, das kommt und geht."
+        },
+        {
+          "atMs": 126000,
+          "text": "Dein Blick folgt der oberen Hand."
+        },
+        {
+          "atMs": 144000,
+          "text": "Dreh dich aus der Taille, nicht nur mit den Armen."
+        },
+        {
+          "atMs": 162000,
+          "text": "Wechsle die Hände ohne Eile, wie Wasser, das kommt und geht."
+        },
+        {
+          "atMs": 180000,
+          "text": "Dein Blick folgt der oberen Hand."
+        },
+        {
+          "atMs": 198000,
+          "text": "Dreh dich aus der Taille, nicht nur mit den Armen."
+        },
+        {
+          "atMs": 216000,
+          "text": "Wechsle die Hände ohne Eile, wie Wasser, das kommt und geht."
+        },
+        {
+          "atMs": 234000,
+          "text": "Dein Blick folgt der oberen Hand."
+        },
+        {
+          "atMs": 252000,
+          "text": "Dreh dich aus der Taille, nicht nur mit den Armen."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 18000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 28000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 38000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 48000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 58000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 63000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 68000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 73000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 78000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 83000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 88000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 93000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 98000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 103000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 108000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 113000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 118000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 123000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 128000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 133000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 138000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 143000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 148000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 153000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 158000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 163000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 168000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 173000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 178000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 183000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 188000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 193000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 198000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 203000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 208000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 213000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 218000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 223000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 228000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 233000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 238000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 243000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 248000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 253000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 258000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 263000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 268000,
+          "phase": "out",
+          "durationMs": 2000
+        }
+      ]
+    },
+    {
+      "title": "Abschluss",
+      "clip": "cierre.mp4",
+      "startMs": 420000,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Die Hände sinken langsam auf die Oberschenkel. Bleib ein paar Atemzüge ganz still."
+        },
+        {
+          "atMs": 18000,
+          "text": "Spür, wie du jetzt atmest."
+        },
+        {
+          "atMs": 36000,
+          "text": "Wenn du so weit bist, kehr ruhig in deinen Tag zurück."
+        },
+        {
+          "atMs": 54000,
+          "text": "Spür, wie du jetzt atmest."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 15000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 20000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 27000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 32000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 39000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 44000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 51000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 56000,
+          "phase": "out",
+          "durationMs": 4000
+        }
+      ]
+    }
+  ]
+}

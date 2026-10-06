@@ -1,0 +1,613 @@
+{
+  "schemaVersion": 1,
+  "lessonSlug": "sentado-grulla",
+  "locale": "en",
+  "totalDurationMs": 480000,
+  "segments": [
+    {
+      "title": "Settling in",
+      "clip": "respiracion-inicial.mp4",
+      "startMs": 0,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Sit near the front of your chair, feet flat on the floor, spine long."
+        },
+        {
+          "atMs": 18000,
+          "text": "Let your shoulders drop."
+        },
+        {
+          "atMs": 36000,
+          "text": "Breathe in through your nose, slowly."
+        },
+        {
+          "atMs": 54000,
+          "text": "Soften your jaw and your forehead."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 7000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 17000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 27000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 37000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 47000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 57000,
+          "phase": "out",
+          "durationMs": 3000
+        }
+      ]
+    },
+    {
+      "title": "Commencement",
+      "clip": "comienzo.mp4",
+      "clipSide": "comienzo-lado.mp4",
+      "startMs": 60000,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "As you breathe in, float your arms up in front to shoulder height, as if the water were holding them."
+        },
+        {
+          "atMs": 18000,
+          "text": "As you breathe out, your hands sink to your thighs."
+        },
+        {
+          "atMs": 36000,
+          "text": "Soft elbows, loose wrists."
+        },
+        {
+          "atMs": 54000,
+          "text": "Only rise as far as feels comfortable."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 18000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 28000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 38000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 48000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 58000,
+          "phase": "out",
+          "durationMs": 2000
+        }
+      ]
+    },
+    {
+      "title": "White crane spreads its wings",
+      "clip": "grulla.mp4",
+      "startMs": 120000,
+      "durationMs": 300000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "One hand rises in front, palm facing you; the other settles by your hip."
+        },
+        {
+          "atMs": 18000,
+          "text": "Switch sides as you breathe out."
+        },
+        {
+          "atMs": 36000,
+          "text": "The upper hand stays below your forehead."
+        },
+        {
+          "atMs": 54000,
+          "text": "Breathe long, like a wave reaching the shore."
+        },
+        {
+          "atMs": 72000,
+          "text": "Switch sides as you breathe out."
+        },
+        {
+          "atMs": 90000,
+          "text": "The upper hand stays below your forehead."
+        },
+        {
+          "atMs": 108000,
+          "text": "Breathe long, like a wave reaching the shore."
+        },
+        {
+          "atMs": 126000,
+          "text": "Switch sides as you breathe out."
+        },
+        {
+          "atMs": 144000,
+          "text": "The upper hand stays below your forehead."
+        },
+        {
+          "atMs": 162000,
+          "text": "Breathe long, like a wave reaching the shore."
+        },
+        {
+          "atMs": 180000,
+          "text": "Switch sides as you breathe out."
+        },
+        {
+          "atMs": 198000,
+          "text": "The upper hand stays below your forehead."
+        },
+        {
+          "atMs": 216000,
+          "text": "Breathe long, like a wave reaching the shore."
+        },
+        {
+          "atMs": 234000,
+          "text": "Switch sides as you breathe out."
+        },
+        {
+          "atMs": 252000,
+          "text": "The upper hand stays below your forehead."
+        },
+        {
+          "atMs": 270000,
+          "text": "Breathe long, like a wave reaching the shore."
+        },
+        {
+          "atMs": 288000,
+          "text": "Switch sides as you breathe out."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 14000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 19000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 25000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 30000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 36000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 41000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 47000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 52000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 58000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 63000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 69000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 74000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 80000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 85000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 91000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 96000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 102000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 107000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 113000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 118000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 124000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 129000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 135000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 140000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 146000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 151000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 157000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 162000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 168000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 173000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 179000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 184000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 190000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 195000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 201000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 206000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 212000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 217000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 223000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 228000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 234000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 239000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 245000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 250000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 256000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 261000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 267000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 272000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 278000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 283000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 289000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 294000,
+          "phase": "out",
+          "durationMs": 6000
+        }
+      ]
+    },
+    {
+      "title": "Closing",
+      "clip": "cierre.mp4",
+      "startMs": 420000,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Let your hands sink slowly to your thighs. Stay still for a few breaths."
+        },
+        {
+          "atMs": 18000,
+          "text": "Notice how you are breathing now."
+        },
+        {
+          "atMs": 36000,
+          "text": "When you are ready, return to your day, calmly."
+        },
+        {
+          "atMs": 54000,
+          "text": "Notice how you are breathing now."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 15000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 20000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 27000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 32000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 39000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 44000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 51000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 56000,
+          "phase": "out",
+          "durationMs": 4000
+        }
+      ]
+    }
+  ]
+}

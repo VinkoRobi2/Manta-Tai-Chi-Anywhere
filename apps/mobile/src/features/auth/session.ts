@@ -6,6 +6,7 @@ import {
   type AuthUser,
 } from '@manta/shared';
 
+import { adoptPractices, setPracticeAccount } from '@/features/practice/practice';
 import { adoptProgress, setSyncAccount, type SyncAccount } from '@/features/progress/progress';
 import { track } from '@/lib/analytics';
 import { api } from '@/lib/api';
@@ -39,7 +40,10 @@ export function getSession(): Session | null {
 export function loadSession(): void {
   const session = parseSession(secure.get(KEY));
   sessionStore.set(session);
-  if (session?.kind === 'account') setSyncAccount(syncAccount(session));
+  if (session?.kind === 'account') {
+    setSyncAccount(syncAccount(session));
+    setPracticeAccount(syncAccount(session));
+  }
 }
 
 function parseSession(raw: string | null): Session | null {
@@ -75,12 +79,14 @@ export function clearSession(): void {
   void secure.remove(KEY);
   sessionStore.set(null);
   setSyncAccount(null);
+  setPracticeAccount(null);
 }
 
 /** Sin cuenta: todo se queda en el teléfono. */
 export function enterAsGuest(): void {
   saveSession({ kind: 'guest' });
   setSyncAccount(null);
+  setPracticeAccount(null);
   track('account_guest');
 }
 
@@ -105,5 +111,6 @@ async function startAccountSession(provider: AuthProvider, auth: AuthSession): P
   saveSession(session);
   track('account_signed_in', { provider });
   // El progreso del teléfono y el de la nube se juntan: gana el más reciente.
-  await adoptProgress(syncAccount(session));
+  // Las prácticas se suman: las de los dos lados quedan en los dos.
+  await Promise.all([adoptProgress(syncAccount(session)), adoptPractices(syncAccount(session))]);
 }
