@@ -103,7 +103,7 @@ export const onboardingLight: OnboardingPalette = {
   danger: '#B3261E',
 };
 
-/** La bienvenida va siempre sobre la imagen del amanecer. */
+/** La bienvenida va siempre sobre el video. */
 export const welcome = {
   ground: '#04191F',
   ink: '#FFFFFF',
@@ -111,8 +111,6 @@ export const welcome = {
   separator: '#7F9CA3',
   sol: '#F2B134',
   onSol: '#04191F',
-  glow: '#FFDC96',
-  mist: '#F6DDB4',
 } as const;
 
 export const space = { xs: 4, s: 8, m: 12, l: 16, xl: 24, xxl: 32, xxxl: 48, gutter: 20 } as const;
