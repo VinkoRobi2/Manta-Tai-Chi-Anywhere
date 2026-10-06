@@ -1,4 +1,3 @@
-import type { SpaceMode } from '@manta/shared';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -32,9 +31,10 @@ import {
 } from '@/ui/Glyphs';
 import { Text } from '@/ui/Text';
 
-/** Fotos de cabecera por espacio. Sin foto (por ahora, de pie y la forma), va la silueta con el sol. */
-const HERO_PHOTOS: Partial<Record<SpaceMode, number>> = {
-  SEATED: require('../../../assets/images/lessons/seated.jpg'),
+/** La foto de cabecera de cada clase. Las clases sin foto todavía usan la silueta con el sol. */
+const HERO_PHOTOS: Partial<Record<string, number>> = {
+  'sentado-primeros-movimientos': require('../../../assets/images/lessons/sentado-primeros-movimientos.jpg'),
+  'en-el-lugar-manos-de-nube': require('../../../assets/images/lessons/en-el-lugar-manos-de-nube.jpg'),
 };
 
 /**
@@ -97,9 +97,9 @@ export default function LessonScreen() {
         contentContainerStyle={{ paddingBottom: insets.bottom + 110 }}
       >
         <View style={{ height: heroHeight, overflow: 'hidden', backgroundColor: palette.hero }}>
-          {HERO_PHOTOS[lesson.spaceMode] ? (
+          {HERO_PHOTOS[lesson.slug] ? (
             <Image
-              source={HERO_PHOTOS[lesson.spaceMode]}
+              source={HERO_PHOTOS[lesson.slug]}
               contentFit="cover"
               contentPosition="top center"
               accessibilityElementsHidden
