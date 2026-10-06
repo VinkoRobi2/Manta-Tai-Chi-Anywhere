@@ -14,6 +14,12 @@
   "onboarding": {
     "tagline": "Solo tienes que respirar.",
     "welcomeBody": "Tai chi guiado de 5 a 20 minutos, sentado o de pie. Funciona sin internet.",
+    "devReset": "Borrar progreso (dev)",
+    "devResetDone": "Listo: el onboarding empieza de cero.",
+    "language": {
+      "title": "Idioma",
+      "change": "Cambiar idioma"
+    },
     "start": "Empezar",
     "haveAccount": "Ya tengo cuenta",
     "forRelative": "Lo configuro para un familiar",

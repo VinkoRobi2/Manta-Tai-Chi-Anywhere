@@ -1,5 +1,4 @@
 import '../global.css';
-import '@/lib/i18n';
 
 import { Lexend_300Light } from '@expo-google-fonts/lexend/300Light';
 import { Lexend_400Regular } from '@expo-google-fonts/lexend/400Regular';
@@ -16,6 +15,7 @@ import { restoreOnboarding } from '@/features/onboarding/onboarding';
 import { loadProgress, startProgressSync } from '@/features/progress/progress';
 import { loadSettings } from '@/features/settings/settings';
 import { track } from '@/lib/analytics';
+import { applyLanguage } from '@/lib/i18n';
 import { onboardingLight } from '@/theme/tokens';
 
 void SplashScreen.preventAutoHideAsync();
@@ -26,7 +26,7 @@ void SplashScreen.preventAutoHideAsync();
  */
 function bootLocalData(): true {
   storage.init();
-  loadSettings();
+  applyLanguage(loadSettings().language);
   loadProgress();
   restoreOnboarding();
   loadSession();

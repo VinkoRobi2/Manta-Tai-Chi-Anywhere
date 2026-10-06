@@ -4,4 +4,5 @@ import * as SecureStore from 'expo-secure-store';
 export const secure = {
   get: (key: string): string | null => SecureStore.getItem(key),
   set: (key: string, value: string): void => SecureStore.setItem(key, value),
+  remove: (key: string): Promise<void> => SecureStore.deleteItemAsync(key),
 };

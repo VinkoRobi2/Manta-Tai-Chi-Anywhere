@@ -1,14 +1,16 @@
 import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { Alert, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { getSession } from '@/features/auth/session';
+import { clearSession, getSession } from '@/features/auth/session';
 import { ContinueButton, TextButton } from '@/features/onboarding/ContinueButton';
+import { GlobeGlyph } from '@/features/onboarding/OptionIcons';
 import {
   hasOnboardingProgress,
+  restoreOnboarding,
   resumeHref,
   startOnboarding,
 } from '@/features/onboarding/onboarding';
@@ -16,6 +18,9 @@ import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding
 import { Squish } from '@/features/onboarding/Squish';
 import { enter } from '@/features/onboarding/StepScreen';
 import { WelcomeBackdrop } from '@/features/onboarding/WelcomeBackdrop';
+import { clearProgress } from '@/features/progress/progress';
+import { DEFAULT_SETTINGS, getSettings, updateSettings } from '@/features/settings/settings';
+import { LANGUAGE_NAMES, useLocale } from '@/lib/i18n';
 import { fonts, welcome } from '@/theme/tokens';
 import { MantaMark } from '@/ui/Brand';
 import { Text } from '@/ui/Text';
@@ -31,6 +36,7 @@ export default function WelcomeScreen() {
   const layout = useOnboardingLayout();
   const palette = useOnboardingPalette();
   const insets = useSafeAreaInsets();
+  const locale = useLocale();
   const tablet = layout.breakpoint === 'tablet';
   const compact = layout.breakpoint === 'compact';
   const wide = layout.wide;
@@ -44,6 +50,16 @@ export default function WelcomeScreen() {
   const begin = (forRelative: boolean) => {
     if (forRelative || !hasOnboardingProgress()) startOnboarding(forRelative);
     router.push(getSession() ? resumeHref() : '/bienvenida/cuenta');
+  };
+
+  // Solo en desarrollo: borra respuestas, progreso y sesión para ver el onboarding desde cero.
+  const resetForTesting = () => {
+    clearSession();
+    clearProgress();
+    // El idioma no es progreso: se queda como estaba.
+    updateSettings({ ...DEFAULT_SETTINGS, language: getSettings().language });
+    restoreOnboarding();
+    Alert.alert(t('onboarding.devResetDone'));
   };
 
   const haveAccount = () => {
@@ -61,6 +77,53 @@ export default function WelcomeScreen() {
       <StatusBar style="light" />
       <View style={{ width: imageWidth, height: imageHeight }}>
         <WelcomeBackdrop width={imageWidth} height={imageHeight} />
+        <View
+          style={{
+            position: 'absolute',
+            top: insets.top + 8,
+            left: layout.gutter,
+            gap: 8,
+            alignItems: 'flex-start',
+          }}
+        >
+          <Squish
+            onPress={() => router.push('/bienvenida/idioma')}
+            haptic={false}
+            accessibilityLabel={`${t('onboarding.language.change')}: ${LANGUAGE_NAMES[locale]}`}
+            style={{
+              height: 36,
+              paddingHorizontal: 12,
+              borderRadius: 18,
+              backgroundColor: 'rgba(0, 0, 0, 0.32)',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 6,
+            }}
+          >
+            <GlobeGlyph color={welcome.ink} size={16} />
+            <Text weight="medium" color={welcome.ink} style={{ fontSize: 14, lineHeight: 18 }}>
+              {LANGUAGE_NAMES[locale]}
+            </Text>
+          </Squish>
+          {__DEV__ ? (
+            <Squish
+              onPress={resetForTesting}
+              haptic={false}
+              accessibilityLabel={t('onboarding.devReset')}
+              style={{
+                height: 36,
+                paddingHorizontal: 14,
+                borderRadius: 18,
+                backgroundColor: 'rgba(0, 0, 0, 0.32)',
+                justifyContent: 'center',
+              }}
+            >
+              <Text weight="medium" color={welcome.ink} style={{ fontSize: 14, lineHeight: 18 }}>
+                {t('onboarding.devReset')}
+              </Text>
+            </Squish>
+          ) : null}
+        </View>
         <View style={{ position: 'absolute', top: insets.top + 8, right: layout.gutter }}>
           <Squish
             onPress={haveAccount}

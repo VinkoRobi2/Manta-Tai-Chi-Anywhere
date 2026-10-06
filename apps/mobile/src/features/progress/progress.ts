@@ -87,6 +87,14 @@ export function saveOnboardingProgress(onboarding: OnboardingProgress): void {
   scheduleSync(SYNC_DELAY_MS);
 }
 
+/** Borra el progreso del teléfono (no el de la nube) y deja de sincronizar. */
+export function clearProgress(): void {
+  if (timer) clearTimeout(timer);
+  timer = null;
+  account = null;
+  persist(null);
+}
+
 /** Con cuenta, sube lo pendiente; con null (invitado), deja de sincronizar. */
 export function setSyncAccount(next: SyncAccount | null): void {
   account = next;

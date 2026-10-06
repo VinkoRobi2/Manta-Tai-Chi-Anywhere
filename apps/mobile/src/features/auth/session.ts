@@ -70,6 +70,13 @@ function syncAccount(session: AccountSession): SyncAccount {
   };
 }
 
+/** Sale de la cuenta o del modo invitado: la próxima vez se vuelve a elegir cómo entrar. */
+export function clearSession(): void {
+  void secure.remove(KEY);
+  sessionStore.set(null);
+  setSyncAccount(null);
+}
+
 /** Sin cuenta: todo se queda en el teléfono. */
 export function enterAsGuest(): void {
   saveSession({ kind: 'guest' });

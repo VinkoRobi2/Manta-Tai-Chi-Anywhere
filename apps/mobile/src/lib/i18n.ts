@@ -1,7 +1,7 @@
-import { DEFAULT_LOCALE, LOCALES, type Locale } from '@manta/shared';
+import { DEFAULT_LOCALE, LOCALES, LocaleSchema, type Locale } from '@manta/shared';
 import { getLocales } from 'expo-localization';
 import { createInstance } from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import { initReactI18next, useTranslation } from 'react-i18next';
 
 import de from '@/i18n/de.json';
 import en from '@/i18n/en.json';
@@ -21,5 +21,24 @@ void i18n.use(initReactI18next).init({
   fallbackLng: DEFAULT_LOCALE,
   interpolation: { escapeValue: false },
 });
+
+/** Cada idioma con su nombre en su propio idioma. */
+export const LANGUAGE_NAMES: Record<Locale, string> = {
+  es: 'Español',
+  en: 'English',
+  de: 'Deutsch',
+};
+
+/** Aplica el idioma elegido; 'system' sigue al teléfono. */
+export function applyLanguage(language: 'system' | Locale): void {
+  const next = language === 'system' ? deviceLocale() : language;
+  if (i18n.language !== next) void i18n.changeLanguage(next);
+}
+
+/** Idioma activo: el componente se vuelve a dibujar cuando cambia. */
+export function useLocale(): Locale {
+  const { i18n: instance } = useTranslation();
+  return LocaleSchema.safeParse(instance.language).data ?? DEFAULT_LOCALE;
+}
 
 export default i18n;

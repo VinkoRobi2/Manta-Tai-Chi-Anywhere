@@ -15,6 +15,15 @@ export default function OnboardingLayout() {
       <Stack.Screen name="index" options={{ animation: 'fade' }} />
       <Stack.Screen name="creando" options={{ animation: 'fade', gestureEnabled: false }} />
       <Stack.Screen name="plan" options={{ animation: 'fade' }} />
+      <Stack.Screen
+        name="idioma"
+        options={{
+          presentation: 'formSheet',
+          sheetAllowedDetents: 'fitToContents',
+          sheetGrabberVisible: true,
+          sheetCornerRadius: 28,
+        }}
+      />
     </Stack>
   );
 }

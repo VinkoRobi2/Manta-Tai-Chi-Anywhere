@@ -14,6 +14,12 @@
   "onboarding": {
     "tagline": "All you have to do is breathe.",
     "welcomeBody": "Guided tai chi in 5 to 20 minutes, seated or standing. Works offline.",
+    "devReset": "Delete progress (dev)",
+    "devResetDone": "Done: the onboarding starts from scratch.",
+    "language": {
+      "title": "Language",
+      "change": "Change language"
+    },
     "start": "Get started",
     "haveAccount": "I have an account",
     "forRelative": "I'm setting it up for a family member",

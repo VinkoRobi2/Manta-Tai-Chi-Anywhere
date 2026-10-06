@@ -1,4 +1,10 @@
-import { CARE_TAGS, DAILY_MINUTES, GOALS, type OnboardingAnswers } from '@manta/shared';
+import {
+  CARE_TAGS,
+  DAILY_MINUTES,
+  GOALS,
+  type Locale,
+  type OnboardingAnswers,
+} from '@manta/shared';
 
 import { storage } from '@/db/storage';
 import { createStore, useStore } from '@/lib/store';
@@ -12,6 +18,8 @@ export type DailyMinutes = (typeof DAILY_MINUTES)[number];
 export type OfflineUsage = OnboardingAnswers['offlineUsage'];
 
 export interface Settings {
+  /** Idioma elegido en la bienvenida. 'system' sigue al teléfono. */
+  language: 'system' | Locale;
   onboardingDone: boolean;
   practiceMode: PracticeMode;
   goals: Goal[];
@@ -25,6 +33,7 @@ export interface Settings {
 }
 
 export const DEFAULT_SETTINGS: Settings = {
+  language: 'system',
   onboardingDone: false,
   practiceMode: 'seated',
   goals: [],

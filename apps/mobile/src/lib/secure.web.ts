@@ -14,4 +14,11 @@ export const secure = {
       // Sin almacenamiento disponible: la sesión dura lo que dure la pestaña.
     }
   },
+  async remove(key: string): Promise<void> {
+    try {
+      globalThis.localStorage?.removeItem(key);
+    } catch {
+      // Nada que borrar.
+    }
+  },
 };
