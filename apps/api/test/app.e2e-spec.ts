@@ -38,4 +38,20 @@ describe('API (e2e)', () => {
   it('POST /v1/webhooks/revenuecat exige el secreto', async () => {
     await request(app.getHttpServer()).post('/v1/webhooks/revenuecat').send({}).expect(401);
   });
+
+  it('POST /v1/auth/apple rechaza tokens falsos', async () => {
+    await request(app.getHttpServer())
+      .post('/v1/auth/apple')
+      .send({ identityToken: 'esto-no-es-un-token' })
+      .expect(401);
+  });
+
+  it('GET y PUT /v1/me/progress exigen sesión', async () => {
+    await request(app.getHttpServer()).get('/v1/me/progress').expect(401);
+    await request(app.getHttpServer())
+      .put('/v1/me/progress')
+      .set('Authorization', 'Bearer falso')
+      .send({})
+      .expect(401);
+  });
 });

@@ -7,9 +7,8 @@
   },
   "scripts": {
     "postinstall": "pnpm --filter @manta/shared build",
-    "dev": "turbo run dev --filter=@manta/api --filter=@manta/web",
+    "dev": "turbo run dev --filter=@manta/api",
     "api": "pnpm --filter @manta/api start:dev",
-    "web": "pnpm --filter @manta/web dev",
     "mobile": "pnpm --filter @manta/mobile start",
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",

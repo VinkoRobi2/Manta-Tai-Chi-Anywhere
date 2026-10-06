@@ -7,9 +7,8 @@ Tai chi en el espacio que tengas, con o sin internet.
 ```
 manta/
 ├── apps/
-│   ├── mobile/          App iOS + Android (Expo SDK 57, Expo Router, NativeWind)
-│   ├── api/             API (NestJS 12 + Prisma 7 + PostgreSQL)
-│   └── web/             Landing y lista de espera (Next.js 16 + Tailwind 4)
+│   ├── mobile/          App iOS + Android: por ahora, el onboarding con cuenta (Expo SDK 57, Expo Router)
+│   └── api/             API (NestJS 12 + Prisma 7 + PostgreSQL)
 ├── packages/
 │   └── shared/          Tipos y esquemas Zod compartidos
 ├── content/             Producción de clases (ver content/README.md)
@@ -30,8 +29,7 @@ manta/
 | -------------------------------------------- | ------------------------------------------------------------- |
 | `pnpm db:up`                                 | Levanta PostgreSQL en Docker (puerto 5433)                    |
 | `pnpm api`                                   | API en http://localhost:3000/v1 con recarga automática        |
-| `pnpm web`                                   | Landing en http://localhost:3001                              |
-| `pnpm dev`                                   | API y web juntas                                              |
+| `pnpm dev`                                   | La API a través de turbo                                      |
 | `pnpm mobile`                                | Servidor de Expo para la app                                  |
 | `pnpm db:migrate`                            | Crea y aplica una migración después de editar `schema.prisma` |
 | `pnpm db:seed`                               | Carga programas y clases de ejemplo                           |
@@ -40,21 +38,32 @@ manta/
 
 ## App en el teléfono
 
-La app usa módulos nativos (video, notificaciones, RevenueCat), así que no corre en Expo Go: necesita un build de desarrollo.
+La app corre en Expo Go: `cd apps/mobile && npx expo start --go`. Entrar con Apple funciona en Expo Go (iPhone); entrar con Google necesita un build de desarrollo:
 
 1. `cd apps/mobile && npx eas-cli@latest init`
-2. `npx eas-cli@latest build --profile development --platform android` (o `ios`)
+2. `npx eas-cli@latest build --profile development --platform ios` (o `android`)
 3. Instala el build en el teléfono y corre `pnpm mobile`.
 
-En un teléfono físico, `localhost` no es tu computadora: en `apps/mobile/.env.local` pon la IP de tu red local, por ejemplo `http://192.168.1.20:3000/v1`.
+En desarrollo la app encuentra sola la API en tu computadora (usa la misma IP que Expo), aunque `.env.local` diga `localhost`. Si Windows lo pregunta, deja que Node reciba conexiones en redes privadas.
+
+## Entrar con Apple y Google
+
+Sin internet se entra como invitado: el progreso se guarda en el teléfono y se sube a la nube al entrar con una cuenta. Para las cuentas:
+
+1. **Base de datos:** `pnpm db:up` y `pnpm db:migrate` (crea las tablas `Account` y `UserProgress`).
+2. **API** (`apps/api/.env`): `AUTH_JWT_SECRET` (genéralo con `openssl rand -base64 48`), `APPLE_AUDIENCES` y `GOOGLE_CLIENT_IDS`.
+3. **Google Cloud** (APIs y servicios > Credenciales > ID de cliente de OAuth):
+   - _Web_: su ID va en `GOOGLE_CLIENT_IDS` (API) y en `EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID` (app).
+   - _iOS_, con el bundle `com.mantataichi.app`: su ID va en `EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID` (también activa el plugin de Google, ver `apps/mobile/app.config.ts`).
+   - _Android_, con el paquete `com.mantataichi.app` y el SHA-1 de la firma (`npx eas-cli@latest credentials`).
+4. **Apple:** EAS activa "Sign in with Apple" para `com.mantataichi.app` al compilar. En producción quita `host.exp.Exponent` (Expo Go) de `APPLE_AUDIENCES`.
 
 ## Variables de entorno
 
-| Archivo                  | Contiene                                                             |
-| ------------------------ | -------------------------------------------------------------------- |
-| `apps/api/.env`          | Base de datos, secreto del webhook de RevenueCat, credenciales de R2 |
-| `apps/mobile/.env.local` | URL de la API y llaves públicas de RevenueCat                        |
-| `apps/web/.env.local`    | URL de la API                                                        |
+| Archivo                  | Contiene                                                      |
+| ------------------------ | ------------------------------------------------------------- |
+| `apps/api/.env`          | Base de datos, sesiones, Apple y Google, RevenueCat y R2      |
+| `apps/mobile/.env.local` | URL de la API (opcional en desarrollo) y Client IDs de Google |
 
 Ninguno se sube a git. Las plantillas están en los `.env.example`.
 
@@ -65,4 +74,4 @@ Ninguno se sube a git. Las plantillas están en los `.env.example`.
 
 ## Siguiente paso
 
-Producir el primer clip del instructor y probarlo en el teléfono: [docs/instructor-video.md](docs/instructor-video.md).
+La app hoy es el onboarding: bienvenida, cuenta, cinco preguntas y el plan. Lo siguiente se construye a partir del plan (`apps/mobile/src/app/bienvenida/plan.tsx`), donde «Empezar primera clase» todavía vuelve a la bienvenida.
