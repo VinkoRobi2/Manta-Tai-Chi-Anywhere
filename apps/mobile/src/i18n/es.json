@@ -109,6 +109,12 @@
       "week": "Tu semana",
       "today": "Hoy",
       "weekdays": ["L", "M", "X", "J", "V", "S", "D"],
+      "firstClass": "Tu primera clase",
+      "firstClass_relative": "Su primera clase",
+      "lesson": {
+        "seated": "Primeros movimientos",
+        "standing": "Manos de nube sin desplazarte"
+      },
       "start": "Empezar primera clase",
       "change": "Cambiar respuestas"
     },
