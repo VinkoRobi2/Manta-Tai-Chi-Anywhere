@@ -144,12 +144,11 @@ export function ClockGlyph(props: GlyphProps) {
   );
 }
 
-/** Ancla: la clase ya está en el teléfono y funciona sin internet. */
-export function AnchorGlyph(props: GlyphProps) {
+/** La clase ya está en el teléfono y funciona sin internet: flecha hacia una bandeja. */
+export function SavedGlyph(props: GlyphProps) {
   return (
     <Glyph {...props}>
-      <Circle cx={12} cy={5} r={2} />
-      <Path d="M12 7v13M8 10.5h8M4.5 13.5c.4 4 3.6 6.5 7.5 6.5s7.1-2.5 7.5-6.5" />
+      <Path d="M12 4v10M7.5 9.5 12 14l4.5-4.5M4.5 15.5v2a2.5 2.5 0 0 0 2.5 2.5h10a2.5 2.5 0 0 0 2.5-2.5v-2" />
     </Glyph>
   );
 }
@@ -206,32 +205,23 @@ export function SpaceGlyph({ mode, ...props }: GlyphProps & { mode: SpaceMode })
   }
 }
 
-/** El estado del mar: plano en calma, más ondas cuanto más movido. */
-export function SeaGlyph({ state, ...props }: GlyphProps & { state: SeaState }) {
-  switch (state) {
-    case 'CALM':
-      return (
-        <Glyph {...props}>
-          <Path d="M3.5 12h17M6 16.5h12" />
-        </Glyph>
-      );
-    case 'SLIGHT':
-      return (
-        <Glyph {...props}>
-          <Path d="M3.5 12c2-1.6 3.7-1.6 5.7 0s3.7 1.6 5.6 0 3.7-1.6 5.7 0M6 16.5h12" />
-        </Glyph>
-      );
-    case 'MODERATE':
-      return (
-        <Glyph {...props}>
-          <Path d="M3.5 9.5c2-2 3.7-2 5.7 0s3.7 2 5.6 0 3.7-2 5.7 0M3.5 15c2-2 3.7-2 5.7 0s3.7 2 5.6 0 3.7-2 5.7 0" />
-        </Glyph>
-      );
-    case 'ROUGH':
-      return (
-        <Glyph {...props}>
-          <Path d="m3.5 11 3-3.5 3 3.5 2.5-3.5 3 3.5 3-3.5 2.5 3.5M3.5 17l3-3.5 3 3.5 2.5-3.5 3 3.5 3-3.5 2.5 3.5" />
-        </Glyph>
-      );
-  }
+/** Cómo se siente al terminar: de la cara más tranquila a la más tensa. */
+export function MoodGlyph({ mood, ...props }: GlyphProps & { mood: SeaState }) {
+  const mouth = {
+    CALM: 'M8 14.5c1.1 1.6 2.4 2.4 4 2.4s2.9-.8 4-2.4',
+    SLIGHT: 'M8.5 15c1 .9 2.2 1.3 3.5 1.3s2.5-.4 3.5-1.3',
+    MODERATE: 'M8.5 15.5h7',
+    ROUGH: 'M8.5 16.5c1-.9 2.2-1.3 3.5-1.3s2.5.4 3.5 1.3',
+  }[mood];
+  return (
+    <Glyph {...props}>
+      <Circle cx={12} cy={12} r={8.5} />
+      {mood === 'CALM' ? (
+        <Path d="M8.2 10.3c.5-.6 1.2-.6 1.7 0M14.1 10.3c.5-.6 1.2-.6 1.7 0" />
+      ) : (
+        <Path d="M9.2 10h.01M14.8 10h.01" strokeWidth={2.6} />
+      )}
+      <Path d={mouth} />
+    </Glyph>
+  );
 }

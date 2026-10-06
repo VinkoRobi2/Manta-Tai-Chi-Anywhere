@@ -162,17 +162,15 @@
     },
     "greetingName": "{{greeting}}, {{name}}",
     "headline": {
-      "first": "Your first tide is waiting.",
-      "progress": "{{count}} of {{goal}} tides this week.",
-      "reached": "Goal reached: {{count}} tides this week."
+      "first": "Your first class is waiting.",
+      "progress": "{{count}} of {{goal}} days practiced this week.",
+      "reached": "Goal reached: {{count}} days this week."
     },
-    "tideHint": "Every day you practice, a tide rises. Your goal: {{goal}} a week.",
     "today": "Today",
-    "tideDone": "Practiced",
     "offline": "Offline · everything still works",
     "period": "{{count}} days",
     "stats": {
-      "activeDays": "Active days",
+      "activeDays": "Days",
       "sessions": "Classes",
       "minutes": "Minutes",
       "calm": "Calm",
@@ -193,16 +191,8 @@
     "allDone": "You've finished all your classes",
     "allDoneBody": "Repeat your favorites or explore another program.",
     "explore": "Explore classes",
-    "pathTitle": "Your path",
-    "pathCount": "{{done}} of {{total}}",
-    "pathNext": "Up next: {{title}}",
-    "pathComplete": "Program complete",
-    "step": {
-      "done": "done",
-      "current": "up next",
-      "upcoming": "to do",
-      "locked": "Premium"
-    }
+    "weekHint": "Every day you practice counts. Your goal: {{goal}} days a week.",
+    "dayDone": "Practiced"
   },
   "classes": {
     "title": "Classes",
@@ -218,7 +208,6 @@
     "back": "Back",
     "overline": "Class {{number}} · {{program}}",
     "offline": "Works offline",
-    "movements": "Movements",
     "start": "Start",
     "again": "Practice again",
     "locked": "Available with Manta Premium",
@@ -226,7 +215,12 @@
     "care": "Taking care of: {{zones}}. If anything hurts, stop.",
     "practiced_one": "You've practiced it {{count}} time",
     "practiced_other": "You've practiced it {{count}} times",
-    "notFound": "We couldn't find this class."
+    "notFound": "We couldn't find this class.",
+    "needs": {
+      "SEATED": "A sturdy chair without wheels",
+      "STANDING_IN_PLACE": "One square meter of space",
+      "FULL_FORM": "Room to take a few steps"
+    }
   },
   "practice": {
     "close": "Finish",
@@ -241,21 +235,21 @@
     },
     "tooShort": "Practices shorter than a minute aren't saved.",
     "mood": {
-      "title": "How is your sea now?",
+      "title": "How do you feel now?",
       "body": "So you'll know what suits you best.",
       "skip": "Skip",
       "CALM": "Calm",
-      "SLIGHT": "Ripples",
-      "MODERATE": "Choppy",
-      "ROUGH": "Rough"
+      "SLIGHT": "Good",
+      "MODERATE": "So-so",
+      "ROUGH": "Tense"
     },
     "done": {
       "title": "Well done",
-      "tides": "{{count}} of {{goal}} tides this week.",
       "reached": "Weekly goal reached!",
       "summary": "{{title}} · {{minutes}} min",
       "next": "Next: {{title}}",
-      "home": "Back to home"
+      "home": "Back to home",
+      "week": "{{count}} of {{goal}} days practiced this week."
     }
   },
   "profile": {

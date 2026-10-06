@@ -26,7 +26,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { findLesson, lessonTimeline } from '@/features/catalog/catalog';
 import { homeModel } from '@/features/home/home';
-import { WeekTides } from '@/features/home/WeekTides';
+import { WeekDays } from '@/features/home/WeekDays';
 import { CheckBadge } from '@/features/onboarding/ChoiceCard';
 import { ContinueButton } from '@/features/onboarding/ContinueButton';
 import { useOnboardingLayout } from '@/features/onboarding/responsive';
@@ -38,7 +38,7 @@ import { useSettings } from '@/features/settings/settings';
 import { successFeedback } from '@/lib/haptics';
 import { useLocale } from '@/lib/i18n';
 import { appLight, fonts, practiceDark } from '@/theme/tokens';
-import { CloseGlyph, PauseGlyph, PlayGlyph, SeaGlyph } from '@/ui/Glyphs';
+import { CloseGlyph, PauseGlyph, PlayGlyph, MoodGlyph } from '@/ui/Glyphs';
 import { Text } from '@/ui/Text';
 
 /** Menos de un minuto no cuenta como práctica: se sale sin guardar. */
@@ -391,8 +391,8 @@ function MoodStage({ onChoose }: { onChoose: (mood: SeaState | null) => void }) 
                 justifyContent: 'space-between',
               }}
             >
-              <SeaGlyph
-                state={state}
+              <MoodGlyph
+                mood={state}
                 color={state === 'CALM' ? palette.sol : palette.ink}
                 size={34}
                 strokeWidth={2}
@@ -471,9 +471,9 @@ function DoneStage({ title, minutes }: { title: string; minutes: number }) {
             <Text weight="semibold" color={palette.ink} style={{ fontSize: 17, lineHeight: 23 }}>
               {week.reached
                 ? t('practice.done.reached')
-                : t('practice.done.tides', { count: week.count, goal: week.goal })}
+                : t('practice.done.week', { count: week.count, goal: week.goal })}
             </Text>
-            <WeekTides week={week} size={36} empty={palette.raised} />
+            <WeekDays week={week} size={36} empty={palette.raised} />
           </Animated.View>
           {next && !next.locked ? (
             <Animated.View entering={enter(2)}>

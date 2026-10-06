@@ -17,7 +17,7 @@ import { loadProgress, startProgressSync } from '@/features/progress/progress';
 import { loadSettings } from '@/features/settings/settings';
 import { track } from '@/lib/analytics';
 import { applyLanguage } from '@/lib/i18n';
-import { onboardingLight, practiceDark } from '@/theme/tokens';
+import { lessonDark, onboardingLight, practiceDark } from '@/theme/tokens';
 
 void SplashScreen.preventAutoHideAsync();
 
@@ -65,7 +65,10 @@ export default function RootLayout() {
       <Stack.Screen name="index" />
       <Stack.Screen name="bienvenida" options={{ animation: 'fade', gestureEnabled: false }} />
       <Stack.Screen name="(tabs)" options={{ animation: 'fade' }} />
-      <Stack.Screen name="clase/[slug]" />
+      <Stack.Screen
+        name="clase/[slug]"
+        options={{ contentStyle: { backgroundColor: lessonDark.ground } }}
+      />
       <Stack.Screen
         name="practica/[slug]"
         options={{

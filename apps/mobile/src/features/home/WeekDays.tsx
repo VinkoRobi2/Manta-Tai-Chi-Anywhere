@@ -8,10 +8,10 @@ import { CheckGlyph } from '@/ui/Glyphs';
 import { Text } from '@/ui/Text';
 
 /**
- * Las mareas de la semana, de lunes a domingo. Un día con práctica se llena de sol;
+ * La semana, de lunes a domingo. Un día con práctica se llena de sol;
  * hoy lleva un aro negro hasta que practicas. Los días sin práctica no se marcan como fallos.
  */
-export function WeekTides({
+export function WeekDays({
   week,
   size = 40,
   empty = appLight.card,
@@ -39,7 +39,7 @@ export function WeekTides({
             accessibilityLabel={[
               letter,
               today ? t('home.today') : null,
-              done ? t('home.tideDone') : null,
+              done ? t('home.dayDone') : null,
             ]
               .filter(Boolean)
               .join(', ')}

@@ -11,12 +11,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { catalog } from '@/features/catalog/catalog';
 import { Avatar, useFirstName } from '@/features/home/Avatar';
 import { greetingKey, homeModel } from '@/features/home/home';
-import { PathCard } from '@/features/home/PathCard';
 import { PeriodTabs } from '@/features/home/PeriodTabs';
 import { ProgramChips } from '@/features/home/ProgramChips';
 import { StatGrid } from '@/features/home/StatGrid';
 import { TodayCard } from '@/features/home/TodayCard';
-import { WeekTides } from '@/features/home/WeekTides';
+import { WeekDays } from '@/features/home/WeekDays';
 import { TAB_BAR_HEIGHT } from '@/features/navigation/TabBar';
 import { useOnboardingLayout } from '@/features/onboarding/responsive';
 import { Squish } from '@/features/onboarding/Squish';
@@ -30,8 +29,9 @@ import { OfflineGlyph } from '@/ui/Glyphs';
 import { Text } from '@/ui/Text';
 
 /**
- * Inicio: arriba, cómo va la semana (mareas) y los números del periodo; abajo, en la franja gris,
- * los programas, la clase de hoy y el camino. Todo sale del teléfono: funciona igual sin señal.
+ * Inicio, en una pantalla y poco más: arriba, cómo va la semana y los números del periodo; abajo,
+ * en la franja gris, la clase de hoy (con el camino del programa) y los programas.
+ * Todo sale del teléfono: funciona igual sin señal.
  */
 export default function HomeScreen() {
   const { t } = useTranslation();
@@ -76,28 +76,31 @@ export default function HomeScreen() {
       <StatusBar style="dark" />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: TAB_BAR_HEIGHT + 32 }}
+        contentContainerStyle={{ paddingBottom: TAB_BAR_HEIGHT + 20 }}
       >
         {/* Arriba, en blanco: la semana y los números. */}
         <View
           style={{
             backgroundColor: palette.background,
-            paddingTop: insets.top + 14,
+            paddingTop: insets.top + 12,
             paddingHorizontal: gutter,
-            paddingBottom: 22,
+            paddingBottom: 18,
           }}
         >
-          <View style={[column, { gap: 22 }]}>
-            <Animated.View entering={enter(0)} style={{ flexDirection: 'row', gap: 14 }}>
+          <View style={[column, { gap: 18 }]}>
+            <Animated.View
+              entering={enter(0)}
+              style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}
+            >
               <Squish
                 onPress={() => router.navigate('/perfil')}
                 accessibilityLabel={t('tabs.profile')}
                 pressedScale={0.94}
               >
-                <Avatar />
+                <Avatar size={46} />
               </Squish>
-              <View style={{ flex: 1, gap: 2, paddingTop: 2 }}>
-                <Text color={palette.muted} style={{ fontSize: 16, lineHeight: 21 }}>
+              <View style={{ flex: 1, gap: 1 }}>
+                <Text color={palette.muted} style={{ fontSize: 15, lineHeight: 20 }}>
                   {firstName ? t('home.greetingName', { greeting, name: firstName }) : greeting}
                 </Text>
                 <Text
@@ -106,9 +109,9 @@ export default function HomeScreen() {
                   maxFontSizeMultiplier={1.3}
                   style={{
                     fontFamily: fonts.semibold,
-                    fontSize: 24,
-                    lineHeight: 30,
-                    letterSpacing: -0.5,
+                    fontSize: 21,
+                    lineHeight: 26,
+                    letterSpacing: -0.4,
                   }}
                 >
                   {headline}
@@ -126,38 +129,33 @@ export default function HomeScreen() {
               </View>
             </Animated.View>
 
-            <Animated.View entering={enter(1)} style={{ gap: 12 }}>
-              <WeekTides week={week} size={layout.breakpoint === 'compact' ? 36 : 40} />
+            <Animated.View entering={enter(1)} style={{ gap: 10 }}>
+              <WeekDays week={week} size={layout.breakpoint === 'compact' ? 32 : 36} />
               {model.totalSessions === 0 ? (
                 <Text color={palette.muted} style={{ fontSize: 14, lineHeight: 20 }}>
-                  {t('home.tideHint', { goal: week.goal })}
+                  {t('home.weekHint', { goal: week.goal })}
                 </Text>
               ) : null}
             </Animated.View>
 
-            <Animated.View entering={enter(2)} style={{ gap: 16 }}>
+            <Animated.View entering={enter(2)} style={{ gap: 12 }}>
               <PeriodTabs value={period} onChange={setPeriod} />
               <StatGrid comparison={model.periods[period]} showChange={model.totalSessions > 0} />
             </Animated.View>
           </View>
         </View>
 
-        {/* Abajo, en la franja gris: programas, la clase de hoy y el camino. */}
-        <Animated.View entering={enter(3)} style={{ paddingTop: 22, gap: 26 }}>
-          <View style={column}>
-            <ProgramChips programs={programs} gutter={gutter} />
-          </View>
-
-          <View style={[column, { paddingHorizontal: gutter, gap: 14 }]}>
+        {/* Abajo, en la franja gris: la clase de hoy y los programas. */}
+        <Animated.View entering={enter(3)} style={{ paddingTop: 18, gap: 20 }}>
+          <View style={[column, { paddingHorizontal: gutter, gap: 12 }]}>
             <SectionTitle>
               {model.practicedToday ? t('home.nextTitle') : t('home.todayTitle')}
             </SectionTitle>
-            <TodayCard today={model.today} />
+            <TodayCard today={model.today} path={model.path} />
           </View>
 
-          <View style={[column, { paddingHorizontal: gutter, gap: 14 }]}>
-            <SectionTitle>{t('home.pathTitle')}</SectionTitle>
-            <PathCard program={model.program} path={model.path} />
+          <View style={column}>
+            <ProgramChips programs={programs} gutter={gutter} />
           </View>
         </Animated.View>
       </ScrollView>
@@ -170,7 +168,7 @@ function SectionTitle({ children }: { children: string }) {
     <Text
       accessibilityRole="header"
       color={appLight.ink}
-      style={{ fontFamily: fonts.semibold, fontSize: 22, lineHeight: 28, letterSpacing: -0.4 }}
+      style={{ fontFamily: fonts.semibold, fontSize: 20, lineHeight: 26, letterSpacing: -0.3 }}
     >
       {children}
     </Text>

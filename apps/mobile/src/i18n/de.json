@@ -162,17 +162,15 @@
     },
     "greetingName": "{{greeting}}, {{name}}",
     "headline": {
-      "first": "Deine erste Flut wartet.",
-      "progress": "{{count}} von {{goal}} Fluten diese Woche.",
-      "reached": "Ziel erreicht: {{count}} Fluten diese Woche."
+      "first": "Dein erster Kurs wartet.",
+      "progress": "{{count}} von {{goal}} Tagen geübt diese Woche.",
+      "reached": "Ziel erreicht: {{count}} Tage diese Woche."
     },
-    "tideHint": "An jedem Tag, an dem du übst, steigt eine Flut. Dein Ziel: {{goal}} pro Woche.",
     "today": "Heute",
-    "tideDone": "Geübt",
     "offline": "Offline · alles funktioniert",
     "period": "{{count}} Tage",
     "stats": {
-      "activeDays": "Aktive Tage",
+      "activeDays": "Tage",
       "sessions": "Kurse",
       "minutes": "Minuten",
       "calm": "Ruhig",
@@ -193,16 +191,8 @@
     "allDone": "Du hast alle deine Kurse gemacht",
     "allDoneBody": "Wiederhole deine Lieblinge oder entdecke ein anderes Programm.",
     "explore": "Kurse entdecken",
-    "pathTitle": "Dein Weg",
-    "pathCount": "{{done}} von {{total}}",
-    "pathNext": "Als Nächstes: {{title}}",
-    "pathComplete": "Programm abgeschlossen",
-    "step": {
-      "done": "erledigt",
-      "current": "als Nächstes",
-      "upcoming": "offen",
-      "locked": "Premium"
-    }
+    "weekHint": "Jeder Übungstag zählt. Dein Ziel: {{goal}} Tage pro Woche.",
+    "dayDone": "Geübt"
   },
   "classes": {
     "title": "Kurse",
@@ -218,7 +208,6 @@
     "back": "Zurück",
     "overline": "Kurs {{number}} · {{program}}",
     "offline": "Funktioniert offline",
-    "movements": "Bewegungen",
     "start": "Starten",
     "again": "Noch einmal üben",
     "locked": "Mit Manta Premium verfügbar",
@@ -226,7 +215,12 @@
     "care": "Achtsam mit: {{zones}}. Wenn etwas schmerzt, hör auf.",
     "practiced_one": "Du hast ihn {{count}}-mal geübt",
     "practiced_other": "Du hast ihn {{count}}-mal geübt",
-    "notFound": "Wir konnten diesen Kurs nicht finden."
+    "notFound": "Wir konnten diesen Kurs nicht finden.",
+    "needs": {
+      "SEATED": "Ein fester Stuhl ohne Rollen",
+      "STANDING_IN_PLACE": "Ein freier Quadratmeter",
+      "FULL_FORM": "Platz für ein paar Schritte"
+    }
   },
   "practice": {
     "close": "Beenden",
@@ -241,21 +235,21 @@
     },
     "tooShort": "Übungen unter einer Minute werden nicht gespeichert.",
     "mood": {
-      "title": "Wie ist dein Meer jetzt?",
+      "title": "Wie fühlst du dich jetzt?",
       "body": "So erkennst du, was dir guttut.",
       "skip": "Überspringen",
       "CALM": "Ruhig",
-      "SLIGHT": "Leicht bewegt",
-      "MODERATE": "Bewegt",
-      "ROUGH": "Unruhig"
+      "SLIGHT": "Gut",
+      "MODERATE": "Geht so",
+      "ROUGH": "Angespannt"
     },
     "done": {
       "title": "Gut gemacht",
-      "tides": "{{count}} von {{goal}} Fluten diese Woche.",
       "reached": "Wochenziel erreicht!",
       "summary": "{{title}} · {{minutes}} Min",
       "next": "Als Nächstes: {{title}}",
-      "home": "Zurück zum Start"
+      "home": "Zurück zum Start",
+      "week": "{{count}} von {{goal}} Tagen geübt diese Woche."
     }
   },
   "profile": {

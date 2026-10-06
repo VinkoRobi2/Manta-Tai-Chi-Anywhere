@@ -1,14 +1,15 @@
-import type { SpaceMode } from '@manta/shared';
+import type { LearningPath, SpaceMode } from '@manta/shared';
 import { router } from 'expo-router';
 import { useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, StyleSheet, View } from 'react-native';
 
+import type { Lesson } from '@/features/catalog/catalog';
 import type { Pose } from '@/features/onboarding/PoseArt';
 import { PoseThumb } from '@/features/onboarding/PoseThumb';
 import { Squish } from '@/features/onboarding/Squish';
 import { appLight, fonts } from '@/theme/tokens';
-import { AnchorGlyph, ClockGlyph, LockGlyph, PlayGlyph } from '@/ui/Glyphs';
+import { SavedGlyph, ClockGlyph, LockGlyph, PlayGlyph } from '@/ui/Glyphs';
 import { Text } from '@/ui/Text';
 
 import type { TodayLesson } from './home';
@@ -18,10 +19,17 @@ export function poseFor(mode: SpaceMode): Pose {
 }
 
 /**
- * La clase que toca hoy: una tarjeta negra con el sol y la silueta, el nombre de la clase y un
- * botón de sol para empezar. Un toque en la tarjeta abre la ficha; el botón empieza de una vez.
+ * La clase que toca hoy: una tarjeta negra con el sol y la silueta, el camino del programa en una
+ * fila de rayitas, el nombre de la clase y un botón de sol para empezar. Un toque en la tarjeta
+ * abre la ficha; el botón empieza de una vez.
  */
-export function TodayCard({ today }: { today: TodayLesson | null }) {
+export function TodayCard({
+  today,
+  path,
+}: {
+  today: TodayLesson | null;
+  path: LearningPath<Lesson>;
+}) {
   const { t } = useTranslation();
   const palette = appLight;
   const [height, setHeight] = useState(260);
@@ -78,7 +86,7 @@ export function TodayCard({ today }: { today: TodayLesson | null }) {
             tint={palette.onSelected}
           />
         </View>
-        <View pointerEvents="box-none" style={{ padding: 22, gap: 8, minHeight: 250 }}>
+        <View pointerEvents="box-none" style={{ padding: 20, gap: 8, minHeight: 224 }}>
           {/* El texto termina antes del sol; el botón sí puede pasar por delante. */}
           <View pointerEvents="none" style={{ maxWidth: '62%', gap: 8 }}>
             <Text
@@ -90,6 +98,7 @@ export function TodayCard({ today }: { today: TodayLesson | null }) {
                 ? t('home.premium')
                 : t('home.lessonOf', { number: lesson.number, total: program.lessons.length })}
             </Text>
+            <PathBars path={path} />
             <Text
               color={palette.onSelected}
               maxFontSizeMultiplier={1.3}
@@ -123,7 +132,7 @@ export function TodayCard({ today }: { today: TodayLesson | null }) {
               </Meta>
               {locked ? null : (
                 <Meta
-                  icon={<AnchorGlyph color={palette.onSelectedMuted} size={15} strokeWidth={2} />}
+                  icon={<SavedGlyph color={palette.onSelectedMuted} size={15} strokeWidth={2} />}
                 >
                   {t('home.offlineReady')}
                 </Meta>
@@ -146,6 +155,31 @@ export function TodayCard({ today }: { today: TodayLesson | null }) {
           )}
         </View>
       </View>
+    </View>
+  );
+}
+
+/** El camino del programa: hechas en blanco, la de hoy en sol, las que faltan apagadas. */
+function PathBars({ path }: { path: LearningPath<Lesson> }) {
+  const palette = appLight;
+  return (
+    <View style={{ flexDirection: 'row', gap: 4, marginBottom: 2 }}>
+      {path.steps.map((step) => (
+        <View
+          key={step.lesson.slug}
+          style={{
+            flex: 1,
+            height: 4,
+            borderRadius: 2,
+            backgroundColor:
+              step.state === 'done'
+                ? palette.onSelected
+                : step.state === 'current'
+                  ? palette.accent
+                  : 'rgba(255, 255, 255, 0.18)',
+          }}
+        />
+      ))}
     </View>
   );
 }

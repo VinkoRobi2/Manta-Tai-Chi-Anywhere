@@ -123,6 +123,19 @@ export const appLight: AppPalette = {
   positive: '#16794A',
 };
 
+/** La ficha de cada clase: oscura, con la imagen grande arriba y un botón blanco. */
+export const lessonDark = {
+  ground: '#111113',
+  hero: '#1C1C1F',
+  silhouette: '#FFFFFF',
+  ink: '#FFFFFF',
+  muted: '#A8A8AE',
+  faint: '#6E6E75',
+  card: '#2A2A2E',
+  /** Detrás del botón flotante. */
+  scrim: 'rgba(17, 17, 19, 0.92)',
+} as const;
+
 /** La práctica guiada: el azul profundo de la bienvenida, para practicar sin distracciones. */
 export const practiceDark = {
   ground: '#04191F',
