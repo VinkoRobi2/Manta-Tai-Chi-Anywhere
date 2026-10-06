@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "lessonSlug": "sentado-abrir-el-pecho",
+  "locale": "de",
+  "totalDurationMs": 420000,
+  "segments": [
+    {
+      "title": "Ankommen",
+      "clip": "respiracion-inicial.mp4",
+      "startMs": 0,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Setz dich nah an die Stuhlkante, die Füße fest am Boden, der Rücken lang."
+        },
+        {
+          "atMs": 18000,
+          "text": "Lass die Schultern sinken."
+        },
+        {
+          "atMs": 36000,
+          "text": "Atme langsam durch die Nase ein."
+        },
+        {
+          "atMs": 54000,
+          "text": "Lockere Kiefer und Stirn."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 7000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 17000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 27000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 37000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 47000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 4000
+        },
+        {
+          "atMs": 57000,
+          "phase": "out",
+          "durationMs": 3000
+        }
+      ]
+    },
+    {
+      "title": "Brust öffnen",
+      "clip": "abrir-el-pecho.mp4",
+      "startMs": 60000,
+      "durationMs": 240000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Die Hände kommen vor der Brust zusammen. Beim Einatmen öffnen sie sich langsam zur Seite."
+        },
+        {
+          "atMs": 18000,
+          "text": "Beim Ausatmen kommen sie wieder zusammen."
+        },
+        {
+          "atMs": 36000,
+          "text": "Spür, wie die Brust weit wird."
+        },
+        {
+          "atMs": 54000,
+          "text": "Die Schultern bleiben unten, weg von den Ohren."
+        },
+        {
+          "atMs": 72000,
+          "text": "Beim Ausatmen kommen sie wieder zusammen."
+        },
+        {
+          "atMs": 90000,
+          "text": "Spür, wie die Brust weit wird."
+        },
+        {
+          "atMs": 108000,
+          "text": "Die Schultern bleiben unten, weg von den Ohren."
+        },
+        {
+          "atMs": 126000,
+          "text": "Beim Ausatmen kommen sie wieder zusammen."
+        },
+        {
+          "atMs": 144000,
+          "text": "Spür, wie die Brust weit wird."
+        },
+        {
+          "atMs": 162000,
+          "text": "Die Schultern bleiben unten, weg von den Ohren."
+        },
+        {
+          "atMs": 180000,
+          "text": "Beim Ausatmen kommen sie wieder zusammen."
+        },
+        {
+          "atMs": 198000,
+          "text": "Spür, wie die Brust weit wird."
+        },
+        {
+          "atMs": 216000,
+          "text": "Die Schultern bleiben unten, weg von den Ohren."
+        },
+        {
+          "atMs": 234000,
+          "text": "Beim Ausatmen kommen sie wieder zusammen."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 14000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 19000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 25000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 30000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 36000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 41000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 47000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 52000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 58000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 63000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 69000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 74000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 80000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 85000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 91000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 96000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 102000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 107000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 113000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 118000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 124000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 129000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 135000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 140000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 146000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 151000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 157000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 162000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 168000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 173000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 179000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 184000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 190000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 195000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 201000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 206000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 212000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 217000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 223000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 228000,
+          "phase": "out",
+          "durationMs": 6000
+        },
+        {
+          "atMs": 234000,
+          "phase": "in",
+          "durationMs": 5000
+        }
+      ]
+    },
+    {
+      "title": "Abschluss",
+      "clip": "cierre.mp4",
+      "startMs": 300000,
+      "durationMs": 120000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Die Hände sinken langsam auf die Oberschenkel. Bleib ein paar Atemzüge ganz still."
+        },
+        {
+          "atMs": 18000,
+          "text": "Spür, wie du jetzt atmest."
+        },
+        {
+          "atMs": 36000,
+          "text": "Wenn du so weit bist, kehr ruhig in deinen Tag zurück."
+        },
+        {
+          "atMs": 54000,
+          "text": "Spür, wie du jetzt atmest."
+        },
+        {
+          "atMs": 72000,
+          "text": "Wenn du so weit bist, kehr ruhig in deinen Tag zurück."
+        },
+        {
+          "atMs": 90000,
+          "text": "Spür, wie du jetzt atmest."
+        },
+        {
+          "atMs": 108000,
+          "text": "Wenn du so weit bist, kehr ruhig in deinen Tag zurück."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 15000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 20000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 27000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 32000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 39000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 44000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 51000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 56000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 63000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 68000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 75000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 80000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 87000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 92000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 99000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 104000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 111000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 116000,
+          "phase": "out",
+          "durationMs": 4000
+        }
+      ]
+    }
+  ]
+}

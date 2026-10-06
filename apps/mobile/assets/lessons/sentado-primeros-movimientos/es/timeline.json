@@ -1,0 +1,480 @@
+{
+  "schemaVersion": 1,
+  "lessonSlug": "sentado-primeros-movimientos",
+  "locale": "es",
+  "totalDurationMs": 360000,
+  "segments": [
+    {
+      "title": "Comienzo",
+      "clip": "comienzo.mp4",
+      "clipSide": "comienzo-lado.mp4",
+      "startMs": 0,
+      "durationMs": 90000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Al inhalar, los brazos suben al frente hasta la altura de los hombros, como si el agua los sostuviera."
+        },
+        {
+          "atMs": 18000,
+          "text": "Al exhalar, las manos bajan hasta los muslos."
+        },
+        {
+          "atMs": 36000,
+          "text": "Codos suaves, muñecas sueltas."
+        },
+        {
+          "atMs": 54000,
+          "text": "Sube solo hasta donde sea cómodo."
+        },
+        {
+          "atMs": 72000,
+          "text": "Al exhalar, las manos bajan hasta los muslos."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 18000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 28000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 38000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 48000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 58000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 63000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 68000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 73000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 78000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 83000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 88000,
+          "phase": "out",
+          "durationMs": 2000
+        }
+      ]
+    },
+    {
+      "title": "Manos de nube",
+      "clip": "manos-de-nube.mp4",
+      "clipSide": "manos-de-nube-lado.mp4",
+      "startMs": 90000,
+      "durationMs": 210000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Una mano a la altura del pecho, la otra abajo. Gira la cintura y deja que las manos pasen como nubes."
+        },
+        {
+          "atMs": 18000,
+          "text": "La mirada sigue a la mano de arriba."
+        },
+        {
+          "atMs": 36000,
+          "text": "Gira desde la cintura, no solo con los brazos."
+        },
+        {
+          "atMs": 54000,
+          "text": "Cambia las manos sin prisa, como el agua que va y viene."
+        },
+        {
+          "atMs": 72000,
+          "text": "La mirada sigue a la mano de arriba."
+        },
+        {
+          "atMs": 90000,
+          "text": "Gira desde la cintura, no solo con los brazos."
+        },
+        {
+          "atMs": 108000,
+          "text": "Cambia las manos sin prisa, como el agua que va y viene."
+        },
+        {
+          "atMs": 126000,
+          "text": "La mirada sigue a la mano de arriba."
+        },
+        {
+          "atMs": 144000,
+          "text": "Gira desde la cintura, no solo con los brazos."
+        },
+        {
+          "atMs": 162000,
+          "text": "Cambia las manos sin prisa, como el agua que va y viene."
+        },
+        {
+          "atMs": 180000,
+          "text": "La mirada sigue a la mano de arriba."
+        },
+        {
+          "atMs": 198000,
+          "text": "Gira desde la cintura, no solo con los brazos."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 13000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 18000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 23000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 28000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 33000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 38000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 43000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 48000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 53000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 58000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 63000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 68000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 73000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 78000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 83000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 88000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 93000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 98000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 103000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 108000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 113000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 118000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 123000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 128000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 133000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 138000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 143000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 148000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 153000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 158000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 163000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 168000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 173000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 178000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 183000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 188000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 193000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 198000,
+          "phase": "out",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 203000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 208000,
+          "phase": "out",
+          "durationMs": 2000
+        }
+      ]
+    },
+    {
+      "title": "Cerrar el tai chi",
+      "clip": "cierre.mp4",
+      "startMs": 300000,
+      "durationMs": 60000,
+      "playbackRate": 1,
+      "mirrorable": true,
+      "captions": [
+        {
+          "atMs": 0,
+          "text": "Las manos bajan despacio hasta los muslos. Quédate quieto unos segundos."
+        },
+        {
+          "atMs": 18000,
+          "text": "Nota cómo respiras ahora."
+        },
+        {
+          "atMs": 36000,
+          "text": "Cuando quieras, vuelve al día con calma."
+        },
+        {
+          "atMs": 54000,
+          "text": "Nota cómo respiras ahora."
+        }
+      ],
+      "breath": [
+        {
+          "atMs": 3000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 8000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 15000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 20000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 27000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 32000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 39000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 44000,
+          "phase": "out",
+          "durationMs": 7000
+        },
+        {
+          "atMs": 51000,
+          "phase": "in",
+          "durationMs": 5000
+        },
+        {
+          "atMs": 56000,
+          "phase": "out",
+          "durationMs": 4000
+        }
+      ]
+    }
+  ]
+}

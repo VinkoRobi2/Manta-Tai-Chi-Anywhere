@@ -8,6 +8,7 @@ import { validateEnv } from './config/env.js';
 import { DownloadsModule } from './downloads/downloads.module.js';
 import { EntitlementsModule } from './entitlements/entitlements.module.js';
 import { HealthModule } from './health/health.module.js';
+import { PracticeModule } from './practice/practice.module.js';
 import { PrismaModule } from './prisma/prisma.module.js';
 import { ProgressModule } from './progress/progress.module.js';
 import { WaitlistModule } from './waitlist/waitlist.module.js';
@@ -27,6 +28,7 @@ import { WebhooksModule } from './webhooks/webhooks.module.js';
     WaitlistModule,
     AuthModule,
     ProgressModule,
+    PracticeModule,
   ],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
 })

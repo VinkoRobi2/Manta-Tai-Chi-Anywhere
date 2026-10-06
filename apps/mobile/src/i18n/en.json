@@ -117,10 +117,6 @@
       "weekdays": ["M", "T", "W", "T", "F", "S", "S"],
       "firstClass": "Your first class",
       "firstClass_relative": "Their first class",
-      "lesson": {
-        "seated": "First movements",
-        "standing": "Cloud hands without stepping"
-      },
       "start": "Start first class",
       "change": "Change answers"
     },
@@ -142,5 +138,146 @@
         "generic": "Something went wrong. Please try again."
       }
     }
+  },
+  "tabs": {
+    "home": "Home",
+    "classes": "Classes",
+    "profile": "Profile"
+  },
+  "space": {
+    "SEATED": "Seated",
+    "STANDING_IN_PLACE": "Standing",
+    "FULL_FORM": "Full form"
+  },
+  "level": {
+    "BEGINNER": "Beginner",
+    "INTERMEDIATE": "Intermediate",
+    "ADVANCED": "Advanced"
+  },
+  "home": {
+    "greeting": {
+      "morning": "Good morning",
+      "afternoon": "Good afternoon",
+      "evening": "Good evening"
+    },
+    "greetingName": "{{greeting}}, {{name}}",
+    "headline": {
+      "first": "Your first tide is waiting.",
+      "progress": "{{count}} of {{goal}} tides this week.",
+      "reached": "Goal reached: {{count}} tides this week."
+    },
+    "tideHint": "Every day you practice, a tide rises. Your goal: {{goal}} a week.",
+    "today": "Today",
+    "tideDone": "Practiced",
+    "offline": "Offline · everything still works",
+    "period": "{{count}} days",
+    "stats": {
+      "activeDays": "Active days",
+      "sessions": "Classes",
+      "minutes": "Minutes",
+      "calm": "Calm",
+      "calmEmpty": "Answer when you finish",
+      "versus": "Compared with the previous {{count}} days",
+      "up": "{{value}} more",
+      "down": "{{value}} fewer",
+      "same": "Same"
+    },
+    "todayTitle": "Today's class",
+    "nextTitle": "Your next class",
+    "lessonOf": "Class {{number}} of {{total}}",
+    "offlineReady": "Works offline",
+    "start": "Start",
+    "seeLesson": "See class",
+    "premium": "Manta Premium",
+    "lockedBody": "You've done the free classes in this program.",
+    "allDone": "You've finished all your classes",
+    "allDoneBody": "Repeat your favorites or explore another program.",
+    "explore": "Explore classes",
+    "pathTitle": "Your path",
+    "pathCount": "{{done}} of {{total}}",
+    "pathNext": "Up next: {{title}}",
+    "pathComplete": "Program complete",
+    "step": {
+      "done": "done",
+      "current": "up next",
+      "upcoming": "to do",
+      "locked": "Premium"
+    }
+  },
+  "classes": {
+    "title": "Classes",
+    "body": "They all come inside the app: they work offline.",
+    "all": "All",
+    "free": "Free",
+    "premium": "Premium",
+    "count_one": "{{count}} class",
+    "count_other": "{{count}} classes",
+    "done": "Done"
+  },
+  "lessonScreen": {
+    "back": "Back",
+    "overline": "Class {{number}} · {{program}}",
+    "offline": "Works offline",
+    "movements": "Movements",
+    "start": "Start",
+    "again": "Practice again",
+    "locked": "Available with Manta Premium",
+    "lockedBody": "Soon you'll be able to unlock every class.",
+    "care": "Taking care of: {{zones}}. If anything hurts, stop.",
+    "practiced_one": "You've practiced it {{count}} time",
+    "practiced_other": "You've practiced it {{count}} times",
+    "notFound": "We couldn't find this class."
+  },
+  "practice": {
+    "close": "Finish",
+    "pause": "Pause",
+    "resume": "Resume",
+    "remaining": "{{time}} left",
+    "movement": "Movement {{current}} of {{total}}",
+    "breath": {
+      "in": "Breathe in",
+      "out": "Breathe out",
+      "hold": "Hold"
+    },
+    "tooShort": "Practices shorter than a minute aren't saved.",
+    "mood": {
+      "title": "How is your sea now?",
+      "body": "So you'll know what suits you best.",
+      "skip": "Skip",
+      "CALM": "Calm",
+      "SLIGHT": "Ripples",
+      "MODERATE": "Choppy",
+      "ROUGH": "Rough"
+    },
+    "done": {
+      "title": "Well done",
+      "tides": "{{count}} of {{goal}} tides this week.",
+      "reached": "Weekly goal reached!",
+      "summary": "{{title}} · {{minutes}} min",
+      "next": "Next: {{title}}",
+      "home": "Back to home"
+    }
+  },
+  "profile": {
+    "title": "Profile",
+    "guest": "Guest",
+    "local": "Your progress is saved on this phone.",
+    "cloud": "Your progress is saved to your account.",
+    "pending_one": "{{count}} practice is waiting for signal to upload.",
+    "pending_other": "{{count}} practices are waiting for signal to upload.",
+    "signIn": "Save my progress to an account",
+    "practice": "Your practice",
+    "mode": "Posture",
+    "minutes": "Time per day",
+    "goals": "To feel",
+    "care": "Areas to protect",
+    "none": "None",
+    "totals": "Since you started",
+    "totalSessions": "Classes",
+    "totalMinutes": "Minutes",
+    "language": "Language",
+    "change": "Change my answers",
+    "signOut": "Sign out",
+    "resetDone": "Done: the app starts from scratch."
   }
 }

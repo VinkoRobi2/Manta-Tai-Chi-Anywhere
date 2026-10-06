@@ -117,10 +117,6 @@
       "weekdays": ["L", "M", "X", "J", "V", "S", "D"],
       "firstClass": "Tu primera clase",
       "firstClass_relative": "Su primera clase",
-      "lesson": {
-        "seated": "Primeros movimientos",
-        "standing": "Manos de nube sin desplazarte"
-      },
       "start": "Empezar primera clase",
       "change": "Cambiar respuestas"
     },
@@ -142,5 +138,146 @@
         "generic": "Algo salió mal. Inténtalo de nuevo."
       }
     }
+  },
+  "tabs": {
+    "home": "Inicio",
+    "classes": "Clases",
+    "profile": "Perfil"
+  },
+  "space": {
+    "SEATED": "Sentado",
+    "STANDING_IN_PLACE": "De pie",
+    "FULL_FORM": "Forma completa"
+  },
+  "level": {
+    "BEGINNER": "Principiante",
+    "INTERMEDIATE": "Intermedio",
+    "ADVANCED": "Avanzado"
+  },
+  "home": {
+    "greeting": {
+      "morning": "Buenos días",
+      "afternoon": "Buenas tardes",
+      "evening": "Buenas noches"
+    },
+    "greetingName": "{{greeting}}, {{name}}",
+    "headline": {
+      "first": "Tu primera marea te espera.",
+      "progress": "Llevas {{count}} de {{goal}} mareas esta semana.",
+      "reached": "Meta cumplida: {{count}} mareas esta semana."
+    },
+    "tideHint": "Cada día que practicas sube una marea. Tu meta: {{goal}} por semana.",
+    "today": "Hoy",
+    "tideDone": "Practicaste",
+    "offline": "Sin conexión · todo funciona igual",
+    "period": "{{count}} días",
+    "stats": {
+      "activeDays": "Días activos",
+      "sessions": "Clases",
+      "minutes": "Minutos",
+      "calm": "En calma",
+      "calmEmpty": "Responde al terminar",
+      "versus": "Comparado con los {{count}} días anteriores",
+      "up": "{{value}} más",
+      "down": "{{value}} menos",
+      "same": "Igual"
+    },
+    "todayTitle": "Tu clase de hoy",
+    "nextTitle": "Tu próxima clase",
+    "lessonOf": "Clase {{number}} de {{total}}",
+    "offlineReady": "Sin internet",
+    "start": "Empezar",
+    "seeLesson": "Ver clase",
+    "premium": "Manta Premium",
+    "lockedBody": "Ya hiciste las clases gratis de este programa.",
+    "allDone": "Completaste todas tus clases",
+    "allDoneBody": "Repite tus favoritas o explora otro programa.",
+    "explore": "Explorar clases",
+    "pathTitle": "Tu camino",
+    "pathCount": "{{done}} de {{total}}",
+    "pathNext": "Toca: {{title}}",
+    "pathComplete": "Programa completo",
+    "step": {
+      "done": "hecha",
+      "current": "toca ahora",
+      "upcoming": "pendiente",
+      "locked": "Premium"
+    }
+  },
+  "classes": {
+    "title": "Clases",
+    "body": "Todas vienen en la app: funcionan sin internet.",
+    "all": "Todas",
+    "free": "Gratis",
+    "premium": "Premium",
+    "count_one": "{{count}} clase",
+    "count_other": "{{count}} clases",
+    "done": "Hecha"
+  },
+  "lessonScreen": {
+    "back": "Atrás",
+    "overline": "Clase {{number}} · {{program}}",
+    "offline": "Funciona sin internet",
+    "movements": "Movimientos",
+    "start": "Empezar",
+    "again": "Practicar otra vez",
+    "locked": "Disponible con Manta Premium",
+    "lockedBody": "Muy pronto podrás desbloquear todas las clases.",
+    "care": "Cuidando: {{zones}}. Si algo duele, para.",
+    "practiced_one": "La practicaste {{count}} vez",
+    "practiced_other": "La practicaste {{count}} veces",
+    "notFound": "No encontramos esta clase."
+  },
+  "practice": {
+    "close": "Terminar",
+    "pause": "Pausar",
+    "resume": "Seguir",
+    "remaining": "Quedan {{time}}",
+    "movement": "Movimiento {{current}} de {{total}}",
+    "breath": {
+      "in": "Inhala",
+      "out": "Exhala",
+      "hold": "Mantén"
+    },
+    "tooShort": "Las prácticas de menos de un minuto no se guardan.",
+    "mood": {
+      "title": "¿Cómo está tu mar ahora?",
+      "body": "Así sabrás qué te sienta mejor.",
+      "skip": "Saltar",
+      "CALM": "En calma",
+      "SLIGHT": "Marejadilla",
+      "MODERATE": "Marejada",
+      "ROUGH": "Mar picado"
+    },
+    "done": {
+      "title": "Bien hecho",
+      "tides": "Llevas {{count}} de {{goal}} mareas esta semana.",
+      "reached": "¡Meta de la semana cumplida!",
+      "summary": "{{title}} · {{minutes}} min",
+      "next": "Lo siguiente: {{title}}",
+      "home": "Volver al inicio"
+    }
+  },
+  "profile": {
+    "title": "Perfil",
+    "guest": "Invitado",
+    "local": "Tu progreso se guarda en este teléfono.",
+    "cloud": "Tu progreso se guarda en tu cuenta.",
+    "pending_one": "{{count}} práctica espera señal para subir.",
+    "pending_other": "{{count}} prácticas esperan señal para subir.",
+    "signIn": "Guardar mi progreso en una cuenta",
+    "practice": "Tu práctica",
+    "mode": "Postura",
+    "minutes": "Tiempo al día",
+    "goals": "Para sentir",
+    "care": "Zonas que cuidar",
+    "none": "Ninguna",
+    "totals": "Desde que empezaste",
+    "totalSessions": "Clases",
+    "totalMinutes": "Minutos",
+    "language": "Idioma",
+    "change": "Cambiar mis respuestas",
+    "signOut": "Cerrar sesión",
+    "resetDone": "Listo: la app empieza de cero."
   }
 }

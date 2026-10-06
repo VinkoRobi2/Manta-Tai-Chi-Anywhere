@@ -18,6 +18,7 @@ import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding
 import { Squish } from '@/features/onboarding/Squish';
 import { enter } from '@/features/onboarding/StepScreen';
 import { WelcomeBackdrop } from '@/features/onboarding/WelcomeBackdrop';
+import { clearPractices } from '@/features/practice/practice';
 import { clearProgress } from '@/features/progress/progress';
 import { DEFAULT_SETTINGS, getSettings, updateSettings } from '@/features/settings/settings';
 import { LANGUAGE_NAMES, useLocale } from '@/lib/i18n';
@@ -56,6 +57,7 @@ export default function WelcomeScreen() {
   const resetForTesting = () => {
     clearSession();
     clearProgress();
+    clearPractices();
     // El idioma no es progreso: se queda como estaba.
     updateSettings({ ...DEFAULT_SETTINGS, language: getSettings().language });
     restoreOnboarding();
