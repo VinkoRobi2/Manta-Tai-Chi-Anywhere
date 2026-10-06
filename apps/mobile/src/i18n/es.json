@@ -1,12 +1,15 @@
 {
   "common": {
-    "anchored": "Anclada",
-    "back": "Volver",
-    "close": "Cerrar",
-    "done": "Listo",
-    "skip": "Saltar",
-    "soon": "Muy pronto",
     "minutes": "{{count}} min"
+  },
+  "lesson": {
+    "care": {
+      "shoulders": "Hombros",
+      "back": "Espalda",
+      "knees": "Rodillas",
+      "wrists": "Muñecas",
+      "neck": "Cuello"
+    }
   },
   "onboarding": {
     "tagline": "Solo tienes que respirar.",
@@ -105,245 +108,27 @@
       "level": "Principiante",
       "week": "Tu semana",
       "today": "Hoy",
-      "firstClass": "Tu primera clase",
+      "weekdays": ["L", "M", "X", "J", "V", "S", "D"],
       "start": "Empezar primera clase",
       "change": "Cambiar respuestas"
+    },
+    "account": {
+      "title": "Guarda tu progreso",
+      "title_signin": "Entra a tu cuenta",
+      "body": "Entra con tu cuenta y tu plan te acompaña en cualquier teléfono.",
+      "body_signin": "Recupera tu plan y tu progreso.",
+      "google": "Continuar con Google",
+      "guest": "Entrar como invitado",
+      "offline": "Sin internet. Entra como invitado: tu progreso se guarda en el teléfono y se sube a la nube cuando entres con tu cuenta.",
+      "busy": "Entrando…",
+      "error": {
+        "network": "No pudimos conectar. Revisa tu conexión o entra como invitado.",
+        "server": "El servidor no responde. Prueba en un momento o entra como invitado.",
+        "rejected": "No pudimos verificar tu cuenta. Inténtalo de nuevo.",
+        "googleExpoGo": "Google funciona en la app instalada, no en Expo Go. Entra con Apple o como invitado.",
+        "googleSetup": "Entrar con Google todavía no está configurado en esta versión.",
+        "generic": "Algo salió mal. Inténtalo de nuevo."
+      }
     }
-  },
-  "tabs": {
-    "today": "Hoy",
-    "classes": "Clases",
-    "log": "Bitácora"
-  },
-  "greeting": {
-    "morning": "Buenos días",
-    "afternoon": "Buenas tardes",
-    "evening": "Buenas noches"
-  },
-  "home": {
-    "title": "¿Cuánto espacio tienes hoy?",
-    "firstTime": "Sin cuenta. Funciona sin internet.",
-    "continue": "Seguir donde quedaste",
-    "settings": "Ajustes",
-    "spaceHint": "Abre la próxima clase de este espacio"
-  },
-  "space": {
-    "SEATED": {
-      "title": "Silla",
-      "body": "Basta una silla",
-      "measure": "50 × 50 cm"
-    },
-    "STANDING_IN_PLACE": {
-      "title": "En el lugar",
-      "body": "Un metro cuadrado",
-      "measure": "1 m²"
-    },
-    "FULL_FORM": {
-      "title": "Forma completa",
-      "body": "Una sala o un parque",
-      "measure": "≈ 2 × 3 m"
-    }
-  },
-  "level": {
-    "BEGINNER": "Principiante",
-    "INTERMEDIATE": "Intermedio",
-    "ADVANCED": "Avanzado"
-  },
-  "tides": {
-    "days": ["L", "M", "X", "J", "V", "S", "D"],
-    "dayNames": ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"],
-    "count": "{{count}} de {{goal}} mareas",
-    "thisWeek": "esta semana",
-    "weekComplete": "Semana completa"
-  },
-  "lesson": {
-    "movements_one": "{{count}} movimiento",
-    "movements_other": "{{count}} movimientos",
-    "careTitle": "¿Algo que cuidar hoy?",
-    "care": {
-      "shoulders": "Hombros",
-      "back": "Espalda",
-      "knees": "Rodillas",
-      "wrists": "Muñecas",
-      "neck": "Cuello"
-    },
-    "start": "Empezar",
-    "voiceOnly": "Solo voz",
-    "voiceOnlyHint": "La pantalla se oscurece y la voz te guía",
-    "safety": "Muévete sin dolor. Si algo duele, para.",
-    "safetyMore": "Más",
-    "locked": "Esta clase es parte de Manta completa.",
-    "unlock": "Ver Manta completa",
-    "anchor": "Anclar para practicar sin señal · {{size}}",
-    "anchoring": "Anclando… {{percent}} %",
-    "notFound": "No encontramos esta clase."
-  },
-  "player": {
-    "movementOf": "Movimiento {{index}} de {{count}}",
-    "inhale": "Inhala",
-    "exhale": "Exhala",
-    "hold": "Sostén",
-    "pause": "Pausar",
-    "play": "Seguir",
-    "back10": "Retroceder 10 segundos",
-    "forward10": "Adelantar 10 segundos",
-    "speed": "Velocidad {{rate}}",
-    "mirror": "Espejo",
-    "captions": "Subtítulos",
-    "view": {
-      "front": "Frente",
-      "side": "Lado"
-    },
-    "exit": "Salir de la clase",
-    "voiceOnly": "Solo voz",
-    "voiceOnlyBody": "Escucha y muévete. Toca la pantalla si quieres ver los controles.",
-    "exitTitle": "¿Terminar por hoy?",
-    "exitKeep": "Seguir practicando",
-    "exitEnd": "Terminar",
-    "exitSaved": "Lo que ya practicaste queda en tu bitácora.",
-    "videoPending": "Aquí va el video del instructor",
-    "tutorial": {
-      "speed": "Si quieres ir más lento, toca la tortuga, abajo a la izquierda.",
-      "captions": "Si prefieres solo escuchar, toca los subtítulos para ocultarlos.",
-      "pause": "Puedes pausar cuando quieras con el botón amarillo."
-    },
-    "careNote": {
-      "shoulders": "Hoy cuidamos los hombros: sube los brazos solo hasta donde sea cómodo.",
-      "back": "Hoy cuidamos la espalda: muévete despacio y apóyate en el respaldo si lo necesitas.",
-      "knees": "Hoy cuidamos las rodillas: pies firmes y giros suaves, sin forzar.",
-      "wrists": "Hoy cuidamos las muñecas: déjalas sueltas, sin doblarlas.",
-      "neck": "Hoy cuidamos el cuello: giros pequeños y la mirada suave, sin forzar."
-    },
-    "showClass": "Ver la clase"
-  },
-  "final": {
-    "title": "Hecho.",
-    "minutes_one": "{{count}} minuto de calma",
-    "minutes_other": "{{count}} minutos de calma",
-    "moodQuestion": "¿Cómo está tu mar?",
-    "reminderQuestion": "¿Te recuerdo mañana a esta hora?",
-    "reminderYes": "Sí, a las {{time}}",
-    "reminderOther": "Otra hora",
-    "reminderSet": "Listo: te recuerdo cada día a las {{time}}.",
-    "reminderDenied": "No tengo permiso para avisarte. Puedes activarlo en Ajustes cuando quieras.",
-    "next": "Siguiente",
-    "premiumTitle": "Manta completa",
-    "premiumBody": "Los tres espacios y todas las clases, ancladas para el mar.",
-    "premiumCta": "Ver planes"
-  },
-  "mood": {
-    "CALM": "En calma",
-    "SLIGHT": "Marejadilla",
-    "MODERATE": "Marejada",
-    "ROUGH": "Mar picado"
-  },
-  "log": {
-    "title": "Bitácora",
-    "weekMinutes": "esta semana",
-    "monthMinutes": "en {{month}}",
-    "frequentMood": "tu mar más frecuente",
-    "noMood": "—",
-    "empty": "Tu bitácora empieza con tu primera clase.",
-    "emptyCta": "Empezar",
-    "today": "Hoy",
-    "entry": "{{minutes}} min · {{space}}"
-  },
-  "classes": {
-    "title": "Clases",
-    "voyageTitle": "Preparar para zarpar",
-    "voyageBody": "¿Te vas días sin señal? Ancla un plan completo antes de salir.",
-    "premium": "Manta completa"
-  },
-  "voyage": {
-    "title": "Preparar para zarpar",
-    "question": "¿Cuántos días vas a estar sin señal?",
-    "days": "{{count}} días",
-    "plan": "Plan de {{count}} días",
-    "planBody_one": "{{count}} clase · {{spaces}}",
-    "planBody_other": "{{count}} clases · {{spaces}}",
-    "anchorAll": "Anclar todo",
-    "anchoring": "Anclando… {{percent}} %",
-    "canLeave": "Puedes cerrar esta pantalla. Seguimos anclando.",
-    "done": "Todo anclado. Buen viaje.",
-    "total": "{{size}} en total",
-    "toDownload": "faltan {{size}}",
-    "free": "tienes {{size}} libres",
-    "limited": "Con Manta completa el plan llega a {{count}} clases, con los ejercicios de pie.",
-    "limitedCta": "Ver Manta completa",
-    "waiting": "En cola"
-  },
-  "paywall": {
-    "title": "Manta completa",
-    "subtitle": "Todas las clases, ancladas para el mar.",
-    "benefit1": "Los tres espacios y todos los programas",
-    "benefit2": "Ancla todo lo que quieras, sin límite",
-    "benefit3": "Planes para espalda, equilibrio y sueño (pronto)",
-    "annual": "Anual",
-    "lifetime": "De por vida",
-    "monthly": "Mensual",
-    "annualNote": "{{perMonth}} al mes",
-    "lifetimeNote": "Un solo pago, para siempre",
-    "monthlyNote": "Cancela cuando quieras",
-    "trialBadge": "{{days}} días gratis",
-    "ctaTrial": "Probar {{days}} días gratis",
-    "ctaBuy": "Continuar",
-    "fineAnnual": "Gratis {{days}} días, después {{price}} al año. Cancela cuando quieras en {{where}}.",
-    "fineMonthly": "{{price}} al mes. Cancela cuando quieras en {{where}}.",
-    "fineLifetime": "Un solo pago. Sin renovaciones.",
-    "whereIos": "Ajustes › Apple ID › Suscripciones",
-    "whereAndroid": "Google Play › Pagos y suscripciones",
-    "restore": "Restaurar compras",
-    "gift": "Regalar Manta",
-    "giftSoon": "Muy pronto vas a poder regalar Manta.",
-    "terms": "Términos y privacidad",
-    "success": "Listo. Ya tienes Manta completa.",
-    "restored": "Compras restauradas.",
-    "nothingToRestore": "No encontramos compras anteriores.",
-    "demo": "Versión de prueba: no se cobra nada."
-  },
-  "settings": {
-    "title": "Ajustes",
-    "language": "Idioma",
-    "languageSystem": "Teléfono",
-    "appearance": "Apariencia",
-    "appearanceSystem": "Automática",
-    "appearanceLight": "Clara",
-    "appearanceCabin": "Cabina",
-    "appearanceHint": "Modo cabina: colores oscuros para practicar de noche.",
-    "captions": "Tamaño de subtítulos",
-    "captionNormal": "Normal",
-    "captionLarge": "Grande",
-    "captionXLarge": "Muy grande",
-    "haptics": "Vibración al inhalar",
-    "hapticsHint": "Un pulso suave al empezar cada inhalación, para practicar con los ojos cerrados.",
-    "voice": "Voz",
-    "voiceValue": "La voz de tu teléfono (provisional)",
-    "reminder": "Recordatorio diario",
-    "reminderHint": "Una sola notificación al día. Funciona sin internet.",
-    "reminderTime": "Hora del recordatorio",
-    "storage": "Clases ancladas",
-    "storageValue_one": "{{count}} descargada · {{size}}",
-    "storageValue_other": "{{count}} descargadas · {{size}}",
-    "storagePackaged": "Las clases gratis vienen dentro de la app y no ocupan espacio extra.",
-    "storageDelete": "Borrar clases descargadas",
-    "premium": "Manta completa",
-    "premiumActive": "Activa en este teléfono",
-    "premiumInactive": "Ver planes",
-    "restore": "Restaurar compras",
-    "health": "Nota de salud",
-    "version": "Versión {{version}}"
-  },
-  "health": {
-    "title": "Nota de salud",
-    "body1": "Manta propone movimientos suaves, pero no reemplaza a un médico ni a un fisioterapeuta.",
-    "body2": "Muévete siempre sin dolor. Si algo duele, para y respira.",
-    "body3": "Si tienes una lesión, una operación reciente, mareos o problemas de presión, consulta antes con un profesional de salud.",
-    "body4": "En un barco o en un lugar que se mueve, practica sentado o con un punto de apoyo cerca.",
-    "ok": "Entendido"
-  },
-  "notification": {
-    "title": "Tu marea de hoy",
-    "body": "Unos minutos de tai chi, donde estés.",
-    "channel": "Recordatorios"
   }
 }

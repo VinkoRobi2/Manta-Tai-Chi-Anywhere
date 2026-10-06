@@ -1,12 +1,15 @@
 {
   "common": {
-    "anchored": "Verankert",
-    "back": "Zurück",
-    "close": "Schließen",
-    "done": "Fertig",
-    "skip": "Überspringen",
-    "soon": "Bald verfügbar",
     "minutes": "{{count}} Min."
+  },
+  "lesson": {
+    "care": {
+      "shoulders": "Schultern",
+      "back": "Rücken",
+      "knees": "Knie",
+      "wrists": "Handgelenke",
+      "neck": "Nacken"
+    }
   },
   "onboarding": {
     "tagline": "Du musst nur atmen.",
@@ -105,245 +108,27 @@
       "level": "Anfänger",
       "week": "Deine Woche",
       "today": "Heute",
-      "firstClass": "Deine erste Lektion",
+      "weekdays": ["M", "D", "M", "D", "F", "S", "S"],
       "start": "Erste Lektion starten",
       "change": "Antworten ändern"
+    },
+    "account": {
+      "title": "Fortschritt speichern",
+      "title_signin": "Anmelden",
+      "body": "Melde dich an, und dein Plan begleitet dich auf jedes Telefon.",
+      "body_signin": "Hol dir deinen Plan und deinen Fortschritt zurück.",
+      "google": "Weiter mit Google",
+      "guest": "Als Gast fortfahren",
+      "offline": "Kein Internet. Fahre als Gast fort: Dein Fortschritt bleibt auf dem Telefon und kommt in die Cloud, sobald du dich anmeldest.",
+      "busy": "Anmeldung…",
+      "error": {
+        "network": "Keine Verbindung. Prüfe dein Netz oder fahre als Gast fort.",
+        "server": "Der Server antwortet nicht. Versuche es gleich noch einmal oder fahre als Gast fort.",
+        "rejected": "Wir konnten dein Konto nicht bestätigen. Bitte versuche es erneut.",
+        "googleExpoGo": "Google funktioniert in der installierten App, nicht in Expo Go. Melde dich mit Apple an oder fahre als Gast fort.",
+        "googleSetup": "Die Anmeldung mit Google ist in dieser Version noch nicht eingerichtet.",
+        "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+      }
     }
-  },
-  "tabs": {
-    "today": "Heute",
-    "classes": "Lektionen",
-    "log": "Logbuch"
-  },
-  "greeting": {
-    "morning": "Guten Morgen",
-    "afternoon": "Guten Tag",
-    "evening": "Guten Abend"
-  },
-  "home": {
-    "title": "Wie viel Platz hast du heute?",
-    "firstTime": "Kein Konto. Funktioniert ohne Internet.",
-    "continue": "Dort weitermachen, wo du warst",
-    "settings": "Einstellungen",
-    "spaceHint": "Öffnet die nächste Lektion für diesen Platz"
-  },
-  "space": {
-    "SEATED": {
-      "title": "Stuhl",
-      "body": "Ein Stuhl genügt",
-      "measure": "50 × 50 cm"
-    },
-    "STANDING_IN_PLACE": {
-      "title": "Auf der Stelle",
-      "body": "Ein Quadratmeter",
-      "measure": "1 m²"
-    },
-    "FULL_FORM": {
-      "title": "Ganze Form",
-      "body": "Ein Wohnzimmer oder ein Park",
-      "measure": "≈ 2 × 3 m"
-    }
-  },
-  "level": {
-    "BEGINNER": "Einsteiger",
-    "INTERMEDIATE": "Fortgeschritten",
-    "ADVANCED": "Erfahren"
-  },
-  "tides": {
-    "days": ["M", "D", "M", "D", "F", "S", "S"],
-    "dayNames": ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"],
-    "count": "{{count}} von {{goal}} Gezeiten",
-    "thisWeek": "diese Woche",
-    "weekComplete": "Woche geschafft"
-  },
-  "lesson": {
-    "movements_one": "{{count}} Bewegung",
-    "movements_other": "{{count}} Bewegungen",
-    "careTitle": "Worauf achten wir heute?",
-    "care": {
-      "shoulders": "Schultern",
-      "back": "Rücken",
-      "knees": "Knie",
-      "wrists": "Handgelenke",
-      "neck": "Nacken"
-    },
-    "start": "Los geht's",
-    "voiceOnly": "Nur Stimme",
-    "voiceOnlyHint": "Der Bildschirm wird dunkel und die Stimme führt dich",
-    "safety": "Beweg dich ohne Schmerzen. Wenn etwas wehtut, hör auf.",
-    "safetyMore": "Mehr",
-    "locked": "Diese Lektion gehört zu Manta Komplett.",
-    "unlock": "Manta Komplett ansehen",
-    "anchor": "Für offline verankern · {{size}}",
-    "anchoring": "Wird verankert … {{percent}} %",
-    "notFound": "Diese Lektion haben wir nicht gefunden."
-  },
-  "player": {
-    "movementOf": "Bewegung {{index}} von {{count}}",
-    "inhale": "Einatmen",
-    "exhale": "Ausatmen",
-    "hold": "Halten",
-    "pause": "Pause",
-    "play": "Weiter",
-    "back10": "10 Sekunden zurück",
-    "forward10": "10 Sekunden vor",
-    "speed": "Tempo {{rate}}",
-    "mirror": "Spiegeln",
-    "captions": "Untertitel",
-    "view": {
-      "front": "Vorne",
-      "side": "Seite"
-    },
-    "exit": "Lektion verlassen",
-    "voiceOnly": "Nur Stimme",
-    "voiceOnlyBody": "Hör zu und beweg dich. Tipp auf den Bildschirm, um die Steuerung zu sehen.",
-    "exitTitle": "Für heute beenden?",
-    "exitKeep": "Weiter üben",
-    "exitEnd": "Beenden",
-    "exitSaved": "Was du schon geübt hast, bleibt in deinem Logbuch.",
-    "videoPending": "Hier kommt das Video des Trainers hin",
-    "tutorial": {
-      "speed": "Wenn du langsamer gehen willst, tipp unten links auf die Schildkröte.",
-      "captions": "Wenn du lieber nur zuhörst, tipp auf die Untertitel, um sie auszublenden.",
-      "pause": "Mit dem gelben Knopf kannst du jederzeit pausieren."
-    },
-    "careNote": {
-      "shoulders": "Heute achten wir auf die Schultern: Heb die Arme nur so weit, wie es angenehm ist.",
-      "back": "Heute achten wir auf den Rücken: Beweg dich langsam und lehn dich an, wenn du es brauchst.",
-      "knees": "Heute achten wir auf die Knie: Feste Füße und sanfte Drehungen, nichts erzwingen.",
-      "wrists": "Heute achten wir auf die Handgelenke: Lass sie locker, ohne sie abzuknicken.",
-      "neck": "Heute achten wir auf den Nacken: Kleine Drehungen und ein weicher Blick, nichts erzwingen."
-    },
-    "showClass": "Lektion anzeigen"
-  },
-  "final": {
-    "title": "Geschafft.",
-    "minutes_one": "{{count}} Minute Ruhe",
-    "minutes_other": "{{count}} Minuten Ruhe",
-    "moodQuestion": "Wie ist dein Meer?",
-    "reminderQuestion": "Soll ich dich morgen um diese Zeit erinnern?",
-    "reminderYes": "Ja, um {{time}}",
-    "reminderOther": "Andere Uhrzeit",
-    "reminderSet": "Erledigt: Ich erinnere dich jeden Tag um {{time}}.",
-    "reminderDenied": "Ich darf dich nicht benachrichtigen. Du kannst es jederzeit in den Einstellungen erlauben.",
-    "next": "Als Nächstes",
-    "premiumTitle": "Manta Komplett",
-    "premiumBody": "Alle drei Plätze und alle Lektionen, verankert für das Meer.",
-    "premiumCta": "Tarife ansehen"
-  },
-  "mood": {
-    "CALM": "Ruhig",
-    "SLIGHT": "Leicht bewegt",
-    "MODERATE": "Bewegt",
-    "ROUGH": "Rau"
-  },
-  "log": {
-    "title": "Logbuch",
-    "weekMinutes": "diese Woche",
-    "monthMinutes": "im {{month}}",
-    "frequentMood": "dein häufigstes Meer",
-    "noMood": "—",
-    "empty": "Dein Logbuch beginnt mit deiner ersten Lektion.",
-    "emptyCta": "Los geht's",
-    "today": "Heute",
-    "entry": "{{minutes}} Min. · {{space}}"
-  },
-  "classes": {
-    "title": "Lektionen",
-    "voyageTitle": "Klar zum Auslaufen",
-    "voyageBody": "Tagelang ohne Netz? Verankere vor der Abfahrt einen ganzen Plan.",
-    "premium": "Manta Komplett"
-  },
-  "voyage": {
-    "title": "Klar zum Auslaufen",
-    "question": "Wie viele Tage bist du ohne Netz?",
-    "days": "{{count}} Tage",
-    "plan": "Plan für {{count}} Tage",
-    "planBody_one": "{{count}} Lektion · {{spaces}}",
-    "planBody_other": "{{count}} Lektionen · {{spaces}}",
-    "anchorAll": "Alles verankern",
-    "anchoring": "Wird verankert … {{percent}} %",
-    "canLeave": "Du kannst diesen Bildschirm schließen. Wir verankern weiter.",
-    "done": "Alles verankert. Gute Fahrt.",
-    "total": "{{size}} insgesamt",
-    "toDownload": "noch {{size}}",
-    "free": "{{size}} frei",
-    "limited": "Mit Manta Komplett umfasst der Plan {{count}} Lektionen, auch im Stehen.",
-    "limitedCta": "Manta Komplett ansehen",
-    "waiting": "Wartet"
-  },
-  "paywall": {
-    "title": "Manta Komplett",
-    "subtitle": "Alle Lektionen, verankert für das Meer.",
-    "benefit1": "Alle drei Plätze und alle Programme",
-    "benefit2": "Verankere so viel du willst, ohne Grenze",
-    "benefit3": "Pläne für Rücken, Gleichgewicht und Schlaf (bald)",
-    "annual": "Jährlich",
-    "lifetime": "Lebenslang",
-    "monthly": "Monatlich",
-    "annualNote": "{{perMonth}} im Monat",
-    "lifetimeNote": "Einmal zahlen, für immer behalten",
-    "monthlyNote": "Jederzeit kündbar",
-    "trialBadge": "{{days}} Tage gratis",
-    "ctaTrial": "{{days}} Tage gratis testen",
-    "ctaBuy": "Weiter",
-    "fineAnnual": "{{days}} Tage gratis, danach {{price}} pro Jahr. Jederzeit kündbar unter {{where}}.",
-    "fineMonthly": "{{price}} pro Monat. Jederzeit kündbar unter {{where}}.",
-    "fineLifetime": "Einmalige Zahlung. Keine Verlängerung.",
-    "whereIos": "Einstellungen › Apple-ID › Abonnements",
-    "whereAndroid": "Google Play › Zahlungen & Abos",
-    "restore": "Käufe wiederherstellen",
-    "gift": "Manta verschenken",
-    "giftSoon": "Bald kannst du Manta verschenken.",
-    "terms": "AGB und Datenschutz",
-    "success": "Fertig. Du hast jetzt Manta Komplett.",
-    "restored": "Käufe wiederhergestellt.",
-    "nothingToRestore": "Wir haben keine früheren Käufe gefunden.",
-    "demo": "Testversion: Es wird nichts berechnet."
-  },
-  "settings": {
-    "title": "Einstellungen",
-    "language": "Sprache",
-    "languageSystem": "Telefon",
-    "appearance": "Darstellung",
-    "appearanceSystem": "Automatisch",
-    "appearanceLight": "Hell",
-    "appearanceCabin": "Kajüte",
-    "appearanceHint": "Kajütenmodus: dunkle Farben zum Üben in der Nacht.",
-    "captions": "Größe der Untertitel",
-    "captionNormal": "Normal",
-    "captionLarge": "Groß",
-    "captionXLarge": "Sehr groß",
-    "haptics": "Vibration beim Einatmen",
-    "hapticsHint": "Ein sanfter Impuls zu Beginn jedes Einatmens, damit du mit geschlossenen Augen üben kannst.",
-    "voice": "Stimme",
-    "voiceValue": "Die Stimme deines Telefons (vorläufig)",
-    "reminder": "Tägliche Erinnerung",
-    "reminderHint": "Eine einzige Benachrichtigung am Tag. Funktioniert ohne Internet.",
-    "reminderTime": "Uhrzeit der Erinnerung",
-    "storage": "Verankerte Lektionen",
-    "storageValue_one": "{{count}} heruntergeladen · {{size}}",
-    "storageValue_other": "{{count}} heruntergeladen · {{size}}",
-    "storagePackaged": "Die kostenlosen Lektionen sind in der App enthalten und brauchen keinen zusätzlichen Platz.",
-    "storageDelete": "Heruntergeladene Lektionen löschen",
-    "premium": "Manta Komplett",
-    "premiumActive": "Auf diesem Telefon aktiv",
-    "premiumInactive": "Tarife ansehen",
-    "restore": "Käufe wiederherstellen",
-    "health": "Gesundheitshinweis",
-    "version": "Version {{version}}"
-  },
-  "health": {
-    "title": "Gesundheitshinweis",
-    "body1": "Manta bietet sanfte Bewegungen, ersetzt aber keine Ärztin, keinen Arzt und keine Physiotherapie.",
-    "body2": "Beweg dich immer ohne Schmerzen. Wenn etwas wehtut, hör auf und atme.",
-    "body3": "Bei einer Verletzung, einer kürzlichen Operation, Schwindel oder Blutdruckproblemen sprich vorher mit einer Fachperson.",
-    "body4": "Auf einem Boot oder an einem Ort, der sich bewegt, übe im Sitzen oder mit etwas zum Festhalten in der Nähe.",
-    "ok": "Verstanden"
-  },
-  "notification": {
-    "title": "Deine Gezeit für heute",
-    "body": "Ein paar Minuten Tai Chi, wo immer du bist.",
-    "channel": "Erinnerungen"
   }
 }

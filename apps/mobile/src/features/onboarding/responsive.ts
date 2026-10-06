@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
 import { useWindowDimensions } from 'react-native';
 
-import { useTheme } from '@/theme/theme';
-import { onboardingDark, onboardingLight, type OnboardingPalette } from '@/theme/tokens';
+import { onboardingLight, type OnboardingPalette } from '@/theme/tokens';
 
 /**
  * Las "media queries" del onboarding. React Native no tiene CSS, así que los cortes se calculan
@@ -115,6 +114,7 @@ export function useOnboardingLayout(): OnboardingLayout {
   return useMemo(() => onboardingLayout(width, height), [width, height]);
 }
 
+/** El onboarding va siempre en blanco, aunque el teléfono esté en modo oscuro. */
 export function useOnboardingPalette(): OnboardingPalette {
-  return useTheme().scheme === 'dark' ? onboardingDark : onboardingLight;
+  return onboardingLight;
 }

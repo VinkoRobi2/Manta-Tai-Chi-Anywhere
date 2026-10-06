@@ -5,8 +5,13 @@ import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { getSession } from '@/features/auth/session';
 import { ContinueButton, TextButton } from '@/features/onboarding/ContinueButton';
-import { skipOnboarding, startOnboarding } from '@/features/onboarding/onboarding';
+import {
+  hasOnboardingProgress,
+  resumeHref,
+  startOnboarding,
+} from '@/features/onboarding/onboarding';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { Squish } from '@/features/onboarding/Squish';
 import { enter } from '@/features/onboarding/StepScreen';
@@ -35,9 +40,14 @@ export default function WelcomeScreen() {
     : Math.round(layout.height * (tablet ? 0.56 : compact ? 0.48 : 0.56));
   const headline = tablet ? 46 : compact ? 29 : 35;
 
+  // Para un familiar se empieza de cero; si no, se retoma donde quedó. Sin sesión, primero la cuenta.
   const begin = (forRelative: boolean) => {
-    startOnboarding(forRelative);
-    router.push('/bienvenida/practica');
+    if (forRelative || !hasOnboardingProgress()) startOnboarding(forRelative);
+    router.push(getSession() ? resumeHref() : '/bienvenida/cuenta');
+  };
+
+  const haveAccount = () => {
+    router.push({ pathname: '/bienvenida/cuenta', params: { modo: 'entrar' } });
   };
 
   return (
@@ -53,10 +63,7 @@ export default function WelcomeScreen() {
         <WelcomeBackdrop width={imageWidth} height={imageHeight} />
         <View style={{ position: 'absolute', top: insets.top + 8, right: layout.gutter }}>
           <Squish
-            onPress={() => {
-              skipOnboarding();
-              router.replace('/');
-            }}
+            onPress={haveAccount}
             haptic={false}
             accessibilityLabel={t('onboarding.haveAccount')}
             style={{

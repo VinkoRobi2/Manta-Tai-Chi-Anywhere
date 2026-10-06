@@ -5,8 +5,6 @@ import type { TextStyle } from 'react-native';
  * los componentes de src/ui los leen de aquí.
  */
 
-export type Appearance = 'system' | 'light' | 'cabin';
-
 export interface Palette {
   scheme: 'light' | 'dark';
   /** Fondo de pantalla. */
@@ -45,39 +43,10 @@ export const light: Palette = {
   danger: '#A23B2A',
 };
 
-/** Modo cabina: para practicar de noche en un camarote sin encandilarse. */
-export const cabin: Palette = {
-  scheme: 'dark',
-  background: '#06232B',
-  surface: '#0B3C49',
-  surfaceAlt: '#103F4B',
-  tonal: '#1F5A68',
-  ink: '#EEF4F5',
-  inkSoft: '#A9C1C7',
-  accent: '#6CC0D0',
-  border: '#1D5361',
-  sol: '#E0A52F',
-  onSol: '#0B3C49',
-  onAccent: '#06232B',
-  scrim: 'rgba(0, 0, 0, 0.55)',
-  danger: '#E8907E',
-};
-
-/** El escenario del reproductor siempre es oscuro, en cualquier modo. */
-export const stage = {
-  top: '#145466',
-  middle: '#0B3C49',
-  bottom: '#06232B',
-  ink: '#EEF4F5',
-  inkSoft: '#9DB4BA',
-  water: 'rgba(31, 122, 140, 0.42)',
-  foam: 'rgba(242, 177, 52, 0.85)',
-  control: 'rgba(238, 244, 245, 0.12)',
-} as const;
-
 /**
  * Onboarding: blanco, negro y el sol como único acento. Las opciones son tarjetas grises
- * que se vuelven negras al elegirlas. En modo cabina todo se invierte (fondo negro).
+ * que se vuelven negras al elegirlas. Siempre sobre fondo blanco, aunque el teléfono esté
+ * en modo oscuro.
  */
 export interface OnboardingPalette {
   scheme: 'light' | 'dark';
@@ -105,8 +74,10 @@ export interface OnboardingPalette {
   shadowOpacity: number;
   accent: string;
   onAccent: string;
-  /** El sol como texto sobre una tarjeta elegida (negra en claro, blanca en cabina). */
+  /** El sol como texto sobre una tarjeta elegida (negra). */
   accentOnSelected: string;
+  /** Mensajes de error (por ejemplo, al no poder entrar). */
+  danger: string;
 }
 
 export const onboardingLight: OnboardingPalette = {
@@ -129,28 +100,7 @@ export const onboardingLight: OnboardingPalette = {
   accent: '#F2B134',
   onAccent: '#0A0A0A',
   accentOnSelected: '#F2B134',
-};
-
-export const onboardingDark: OnboardingPalette = {
-  scheme: 'dark',
-  background: '#000000',
-  ink: '#FFFFFF',
-  muted: '#A1A1A6',
-  faint: '#636366',
-  card: '#1C1C1E',
-  cardPressed: '#2C2C2E',
-  line: '#2C2C2E',
-  track: '#2C2C2E',
-  selected: '#FFFFFF',
-  onSelected: '#000000',
-  onSelectedMuted: '#5A5A5F',
-  tile: '#2C2C2E',
-  tileSelected: '#E5E5EA',
-  shadow: '#FFFFFF',
-  shadowOpacity: 0.12,
-  accent: '#F2B134',
-  onAccent: '#000000',
-  accentOnSelected: '#8A5A00',
+  danger: '#B3261E',
 };
 
 /** La bienvenida va siempre sobre la imagen del amanecer. */

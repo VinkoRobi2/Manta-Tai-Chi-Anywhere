@@ -25,6 +25,7 @@ jobs:
     env:
       DATABASE_URL: postgresql://manta:manta@localhost:5432/manta?schema=public
       REVENUECAT_WEBHOOK_SECRET: ci-secreto-de-prueba-largo
+      AUTH_JWT_SECRET: ci-secreto-de-prueba-para-firmar-sesiones-de-manta
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

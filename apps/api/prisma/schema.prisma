@@ -28,7 +28,13 @@ enum Level {
   ADVANCED
 }
 
-/// Usuario anónimo identificado por su App User ID de RevenueCat. Sin email ni contraseña al lanzar.
+enum AuthProvider {
+  apple
+  google
+}
+
+/// Una persona de Manta. Nace al entrar con Apple o Google (o anónima, con su App User ID de RevenueCat).
+/// Las cuentas creadas al entrar usan su propio id como App User ID de RevenueCat.
 model AppUser {
   id           String            @id @default(uuid())
   revenuecatId String            @unique
@@ -36,6 +42,35 @@ model AppUser {
   updatedAt    DateTime          @updatedAt
   entitlements Entitlement[]
   sessions     PracticeSession[]
+  accounts     Account[]
+  progress     UserProgress?
+}
+
+/// Cuenta de Apple o Google con la que la persona entra. Una persona puede tener las dos.
+model Account {
+  id             String       @id @default(uuid())
+  userId         String
+  user           AppUser      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider       AuthProvider
+  /// El "sub" del token de Apple o Google: no cambia aunque cambie el correo.
+  providerUserId String
+  email          String?
+  name           String?
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  @@unique([provider, providerUserId])
+  @@index([userId])
+}
+
+/// Progreso de la persona (por ahora, el onboarding), validado con ProgressSnapshotSchema de @manta/shared.
+model UserProgress {
+  userId          String   @id
+  user            AppUser  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  data            Json
+  /// Hora del teléfono en que cambió: si llegan dos versiones, gana la más reciente.
+  clientUpdatedAt DateTime
+  updatedAt       DateTime @updatedAt
 }
 
 /// Acceso premium según los webhooks de RevenueCat. expiresAt nulo = pago de por vida.

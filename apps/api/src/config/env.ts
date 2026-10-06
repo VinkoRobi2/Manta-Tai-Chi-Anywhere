@@ -14,6 +14,13 @@ export const envSchema = z.object({
   R2_BUCKET: z.string().min(1).default('manta-content'),
   CONTENT_DEV_BASE_URL: z.string().min(1).default('http://localhost:8787'),
   SIGNED_URL_TTL_SECONDS: z.coerce.number().int().min(30).max(3600).default(300),
+  /** Firma las sesiones de la app. Genera uno con: openssl rand -base64 48 */
+  AUTH_JWT_SECRET: z.string().min(32, 'debe tener al menos 32 caracteres'),
+  AUTH_SESSION_DAYS: z.coerce.number().int().min(1).max(365).default(180),
+  /** Bundle IDs aceptados en los tokens de Apple, separados por comas (Expo Go es host.exp.Exponent). */
+  APPLE_AUDIENCES: z.string().default('com.mantataichi.app'),
+  /** Client IDs de Google aceptados, separados por comas: el Web client ID que usa la app. */
+  GOOGLE_CLIENT_IDS: z.string().default(''),
 });
 
 export type Env = z.infer<typeof envSchema>;

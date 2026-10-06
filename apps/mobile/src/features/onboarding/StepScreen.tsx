@@ -1,5 +1,6 @@
+import { router, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import type { ReactNode } from 'react';
+import { useCallback, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
 import Animated, { FadeInDown } from 'react-native-reanimated';
@@ -10,7 +11,9 @@ import { Text } from '@/ui/Text';
 
 import { ContinueButton } from './ContinueButton';
 import {
+  markScreen,
   ONBOARDING_STEPS,
+  SCREEN_HREF,
   stepNumber,
   useOnboardingDraft,
   type OnboardingStep,
@@ -67,6 +70,16 @@ export function StepScreen({
   // En tablets el bloque de la pregunta va centrado en la pantalla, como una hoja.
   const centered = layout.breakpoint === 'tablet';
 
+  useFocusEffect(useCallback(() => markScreen(step), [step]));
+
+  // Si se retomó a mitad, la pregunta anterior no está detrás: se abre igual.
+  const previous = ONBOARDING_STEPS[current - 2];
+  const goBack = () => {
+    if (previous) router.dismissTo(SCREEN_HREF[previous]);
+    else if (router.canGoBack()) router.back();
+    else router.replace('/bienvenida');
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: palette.background }}>
       <StatusBar style={palette.scheme === 'dark' ? 'light' : 'dark'} />
@@ -83,6 +96,7 @@ export function StepScreen({
             total={total}
             right={topRight}
             progressLabel={t('onboarding.progress', { current, total })}
+            onBack={goBack}
           />
         </View>
       </View>

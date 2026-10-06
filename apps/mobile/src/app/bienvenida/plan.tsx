@@ -1,17 +1,17 @@
-import { router } from 'expo-router';
+import { router, useFocusEffect } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { nextLessonFor } from '@/features/catalog/catalog';
 import { CheckBadge } from '@/features/onboarding/ChoiceCard';
 import { ContinueButton, TextButton } from '@/features/onboarding/ContinueButton';
 import {
   completeOnboarding,
   DEFAULT_PRACTICE,
-  spaceForPractice,
+  markScreen,
   useOnboardingDraft,
 } from '@/features/onboarding/onboarding';
 import { PlayGlyph } from '@/features/onboarding/OptionIcons';
@@ -20,7 +20,6 @@ import { PoseThumb } from '@/features/onboarding/PoseThumb';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { enter } from '@/features/onboarding/StepScreen';
 import type { PracticeMode } from '@/features/settings/settings';
-import { useLocale } from '@/lib/i18n';
 import { fonts } from '@/theme/tokens';
 import { Text } from '@/ui/Text';
 
@@ -36,30 +35,28 @@ function weekFromToday(days: readonly string[]): string[] {
   return Array.from({ length: 7 }, (_, index) => days[(today + index) % 7] ?? '');
 }
 
-/** El plan: la tarjeta del programa, la semana y la primera clase. */
+/** El plan: la tarjeta del programa y la semana que empieza hoy. */
 export default function PlanScreen() {
   const { t } = useTranslation();
   const draft = useOnboardingDraft();
   const layout = useOnboardingLayout();
   const palette = useOnboardingPalette();
   const insets = useSafeAreaInsets();
-  const locale = useLocale();
   const mode = draft.practiceMode ?? DEFAULT_PRACTICE;
   const context = draft.forRelative ? 'relative' : undefined;
-  const lesson = nextLessonFor(spaceForPractice(mode), locale, new Set());
-  const lessonMinutes = Math.max(1, Math.round(lesson.durationSec / 60));
-  const week = weekFromToday(t('tides.days', { returnObjects: true }) as string[]);
+  const week = weekFromToday(t('onboarding.plan.weekdays', { returnObjects: true }) as string[]);
   const tablet = layout.breakpoint === 'tablet';
   const compact = layout.breakpoint === 'compact';
   const cardHeight = tablet ? 300 : compact ? 196 : 236;
   const artWidth = Math.round(cardHeight * 0.92);
   const column = { width: '100%', maxWidth: layout.contentWidth } as const;
 
+  useFocusEffect(useCallback(() => markScreen('plan'), []));
+
+  // Por ahora no hay clases: se guardan las respuestas y se vuelve a la bienvenida.
   const start = () => {
-    const answers = completeOnboarding();
-    const first = nextLessonFor(spaceForPractice(answers.practiceMode), locale, new Set());
-    router.replace('/');
-    router.push({ pathname: '/clase/[slug]', params: { slug: first.slug } });
+    completeOnboarding();
+    router.dismissTo('/bienvenida');
   };
 
   return (
@@ -71,12 +68,14 @@ export default function PlanScreen() {
         contentContainerStyle={{
           flexGrow: 1,
           alignItems: 'center',
+          // En tablets el bloque va centrado, como en las preguntas.
+          justifyContent: tablet ? 'center' : 'flex-start',
           paddingTop: insets.top + layout.topPad + 16,
           paddingHorizontal: layout.gutter,
           paddingBottom: layout.gap * 2,
         }}
       >
-        <View style={column}>
+        <View style={[column, { flexGrow: tablet ? 0 : 1 }]}>
           <Animated.View entering={enter(0)}>
             <CheckBadge size={compact ? 30 : 34} />
             <Text
@@ -105,7 +104,10 @@ export default function PlanScreen() {
             entering={enter(1)}
             style={{
               marginTop: layout.sectionGap,
+              // En el teléfono la tarjeta crece con el espacio que sobra, como una portada.
+              flexGrow: tablet ? 0 : 1,
               minHeight: cardHeight,
+              maxHeight: Math.round(cardHeight * 1.5),
               borderRadius: tablet ? 32 : 28,
               backgroundColor: palette.selected,
               overflow: 'hidden',
@@ -217,48 +219,6 @@ export default function PlanScreen() {
                 );
               })}
             </View>
-          </Animated.View>
-
-          <Animated.View
-            entering={enter(3)}
-            style={{
-              marginTop: layout.gap + 6,
-              flexDirection: 'row',
-              alignItems: 'center',
-              gap: 14,
-              padding: 14,
-              borderRadius: 20,
-              backgroundColor: palette.card,
-            }}
-          >
-            <View
-              style={{
-                width: 46,
-                height: 46,
-                borderRadius: 14,
-                backgroundColor: palette.selected,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <PlayGlyph color={palette.accent} size={16} />
-            </View>
-            <View style={{ flex: 1, gap: 2 }}>
-              <Text variant="caption" color={palette.muted} style={{ fontSize: 13 }}>
-                {t('onboarding.plan.firstClass')}
-              </Text>
-              <Text
-                weight="medium"
-                color={palette.ink}
-                numberOfLines={2}
-                style={{ fontSize: 16, lineHeight: 21 }}
-              >
-                {lesson.title}
-              </Text>
-            </View>
-            <Text variant="caption" weight="medium" color={palette.muted}>
-              {t('common.minutes', { count: lessonMinutes })}
-            </Text>
           </Animated.View>
         </View>
       </ScrollView>
