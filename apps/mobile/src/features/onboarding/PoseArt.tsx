@@ -28,7 +28,7 @@ import { svgId } from './svgId';
 export type Pose = 'standing' | 'seated' | 'rise';
 export type ZoneMarker = Exclude<CareTag, 'wrists'>;
 
-const POSES: Record<Pose, { source: number; centerUnit: number; chestUnit: number }> = {
+export const POSES: Record<Pose, { source: number; centerUnit: number; chestUnit: number }> = {
   standing: {
     source: require('../../../assets/images/onboarding/pose-standing.png'),
     centerUnit: 0,
@@ -57,9 +57,9 @@ const ZONES: Record<ZoneMarker, readonly (readonly [number, number])[]> = {
   ],
 };
 
-const IMAGE_UNITS_W = 60;
-const IMAGE_UNITS_H = 104;
-const FEET_UNIT = 102;
+export const IMAGE_UNITS_W = 60;
+export const IMAGE_UNITS_H = 104;
+export const FEET_UNIT = 102;
 /** Si queda menos alto que esto, la figura no se dibuja: así nunca tapa las opciones. */
 const MIN_BOX_HEIGHT = 100;
 
@@ -310,26 +310,31 @@ function ZoneDot({
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-/** Anillo que se llena según los minutos elegidos (20 min = vuelta completa). */
-function Ring({
+/**
+ * Anillo de progreso. Por defecto anima los cambios; con `immediate` sigue el valor tal cual
+ * (cuando quien lo usa ya lo anima, como la pantalla "Creando tu plan").
+ */
+export function Ring({
   size,
   stroke,
   progress,
   track,
   color,
+  immediate = false,
 }: {
   size: number;
   stroke: number;
   progress: number;
   track: string;
   color: string;
+  immediate?: boolean;
 }) {
   const r = (size - stroke) / 2;
   const circumference = 2 * Math.PI * r;
   const filled = useSharedValue(progress);
   useEffect(() => {
-    filled.value = withTiming(progress, { duration: motion.calm });
-  }, [filled, progress]);
+    filled.value = immediate ? progress : withTiming(progress, { duration: motion.calm });
+  }, [filled, immediate, progress]);
   const animatedProps = useAnimatedProps(() => ({
     strokeDashoffset: circumference * (1 - filled.value),
   }));
@@ -342,6 +347,7 @@ function Ring({
         r={r}
         stroke={color}
         strokeWidth={stroke}
+        strokeLinecap="round"
         fill="none"
         strokeDasharray={`${circumference} ${circumference}`}
         animatedProps={animatedProps}

@@ -4,21 +4,24 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, View } from 'react-native';
+import { ActivityIndicator, ScrollView, View } from 'react-native';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { isAppleAvailable } from '@/features/auth/apple';
 import { GoogleLogo } from '@/features/auth/GoogleLogo';
 import { GoogleUnavailableError } from '@/features/auth/google';
 import { enterAsGuest, signInWithApple, signInWithGoogle } from '@/features/auth/session';
+import { ContinueButton, TextButton } from '@/features/onboarding/ContinueButton';
 import { restoreOnboarding, resumeHref } from '@/features/onboarding/onboarding';
-import { LongArrow, OfflineIcon } from '@/features/onboarding/OptionIcons';
+import { OfflineIcon } from '@/features/onboarding/OptionIcons';
 import { PoseArt } from '@/features/onboarding/PoseArt';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
-import { NoteLine, SpacedLink } from '@/features/onboarding/StepScreen';
+import { Squish } from '@/features/onboarding/Squish';
+import { enter } from '@/features/onboarding/StepScreen';
+import { BackButton } from '@/features/onboarding/TopBar';
 import { ApiError } from '@/lib/api';
-import { fonts, radius } from '@/theme/tokens';
-import { Press } from '@/ui/Press';
+import { fonts } from '@/theme/tokens';
 import { Text } from '@/ui/Text';
 
 type Provider = 'apple' | 'google';
@@ -45,6 +48,7 @@ function errorKey(error: unknown): string {
 /**
  * Entrar con Apple (en iPhone), con Google o como invitado. Sin internet solo queda entrar
  * como invitado: el progreso se guarda en el teléfono y se sube cuando haya cuenta y señal.
+ * Como las preguntas: arriba volver, un título grande a la izquierda y abajo los botones.
  */
 export default function AccountScreen() {
   const { t } = useTranslation();
@@ -59,7 +63,11 @@ export default function AccountScreen() {
   const [busy, setBusy] = useState<Provider | null>(null);
   const [error, setError] = useState<string | null>(null);
   const tablet = layout.breakpoint === 'tablet';
-  const buttonHeight = tablet ? 64 : 58;
+  const column = { width: '100%', maxWidth: tablet ? 600 : 520 } as const;
+  // En tablets el bloque va centrado en la pantalla, como en las preguntas.
+  const centered = tablet;
+  // Sin Apple (Android y web), Google es la opción principal: va en negro.
+  const googlePrimary = !appleAvailable;
 
   useEffect(() => {
     void isAppleAvailable().then(setAppleAvailable);
@@ -100,179 +108,179 @@ export default function AccountScreen() {
       <StatusBar style="dark" />
       <View
         style={{
-          paddingTop: insets.top + layout.topPad,
+          paddingTop: insets.top + 4,
           paddingHorizontal: layout.gutter,
           alignItems: 'center',
         }}
       >
-        <View style={{ width: '100%', maxWidth: layout.contentWidth }}>
-          <Text
-            accessibilityRole="header"
-            align="center"
-            color={palette.ink}
-            maxFontSizeMultiplier={1.4}
-            style={{
-              fontFamily: fonts.extrabold,
-              fontSize: layout.titleSize,
-              lineHeight: layout.titleLine,
-              letterSpacing: -0.2,
-              textTransform: 'uppercase',
-            }}
-          >
-            {t('onboarding.account.title', { context })}
-          </Text>
-          <Text
-            align="center"
-            color={palette.body}
-            maxFontSizeMultiplier={1.6}
-            style={{
-              marginTop: layout.gap + 8,
-              fontSize: layout.bodySize,
-              lineHeight: layout.bodyLine,
-              alignSelf: 'center',
-              maxWidth: tablet ? 520 : 340,
-            }}
-          >
-            {t('onboarding.account.body', { context })}
-          </Text>
+        <View style={[column, { height: 56, flexDirection: 'row', alignItems: 'center' }]}>
+          <BackButton onPress={goBack} />
         </View>
       </View>
 
-      {/* La figura usa el espacio que sobra: todo cabe en la pantalla sin scroll. */}
-      <View style={{ flex: 1, minHeight: 0, marginVertical: layout.gap }}>
-        <PoseArt poses={['rise']} maxHeight={layout.artMax * 0.8} />
-      </View>
-
-      <View
-        style={{
-          paddingHorizontal: layout.gutter,
-          paddingBottom: insets.bottom + (layout.breakpoint === 'compact' ? 4 : 12),
+      <ScrollView
+        bounces={false}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          flexGrow: 1,
           alignItems: 'center',
+          justifyContent: centered ? 'center' : 'flex-start',
+          paddingTop: layout.topPad,
+          paddingHorizontal: layout.gutter,
+          paddingBottom: insets.bottom + (layout.breakpoint === 'compact' ? 10 : 16),
         }}
       >
-        <View
-          style={{ width: '100%', maxWidth: tablet ? 440 : layout.contentWidth, gap: layout.gap }}
-        >
-          {offline ? (
-            <NoteLine
-              icon={<OfflineIcon usage="often" color={palette.body} size={16} />}
-              text={t('onboarding.account.offline')}
-              color={palette.body}
-            />
-          ) : (
-            <>
-              {appleAvailable ? (
-                <AppleAuthentication.AppleAuthenticationButton
-                  buttonType={AppleAuthentication.AppleAuthenticationButtonType.CONTINUE}
-                  buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
-                  cornerRadius={buttonHeight / 2}
-                  style={{ width: '100%', height: buttonHeight }}
-                  onPress={() => void signIn('apple')}
-                />
-              ) : null}
-              <Press
-                haptic
-                onPress={() => void signIn('google')}
-                accessibilityLabel={t('onboarding.account.google')}
+        <View style={[column, { flexGrow: centered ? 0 : 1 }]}>
+          <Animated.View entering={enter(0)}>
+            <Text
+              accessibilityRole="header"
+              color={palette.ink}
+              maxFontSizeMultiplier={1.4}
+              style={{
+                fontFamily: fonts.semibold,
+                fontSize: layout.titleSize,
+                lineHeight: layout.titleLine,
+                letterSpacing: -0.8,
+              }}
+            >
+              {t('onboarding.account.title', { context })}
+            </Text>
+          </Animated.View>
+          <Animated.View entering={enter(1)}>
+            <Text
+              color={palette.muted}
+              maxFontSizeMultiplier={1.6}
+              style={{ marginTop: 10, fontSize: layout.bodySize, lineHeight: layout.bodyLine }}
+            >
+              {t('onboarding.account.body', { context })}
+            </Text>
+          </Animated.View>
+
+          {/* La figura va centrada en el espacio que sobra; con la letra muy grande desaparece. */}
+          <Animated.View
+            entering={enter(2)}
+            style={
+              centered
+                ? {
+                    height: Math.min(layout.artMax + 40, layout.height * 0.32),
+                    marginVertical: layout.sectionGap,
+                  }
+                : { flex: 1, minHeight: 0, marginVertical: layout.gap, justifyContent: 'center' }
+            }
+          >
+            <View style={{ height: layout.artMax + 40, flexShrink: 1 }}>
+              <PoseArt poses={['rise']} maxHeight={layout.artMax} />
+            </View>
+          </Animated.View>
+
+          <Animated.View
+            entering={enter(3)}
+            style={{ width: '100%', maxWidth: 440, alignSelf: 'center', gap: 10 }}
+          >
+            {offline ? (
+              <View
                 style={{
-                  height: buttonHeight,
-                  borderRadius: radius.pill,
-                  borderWidth: 1.5,
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 12,
+                  padding: 14,
+                  borderRadius: 18,
+                  borderWidth: 1,
                   borderColor: palette.line,
-                  backgroundColor: palette.background,
+                }}
+              >
+                <View
+                  style={{
+                    width: 34,
+                    height: 34,
+                    borderRadius: 17,
+                    backgroundColor: palette.card,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <OfflineIcon usage="often" color={palette.ink} size={18} />
+                </View>
+                <Text variant="caption" color={palette.ink} style={{ flexShrink: 1, fontSize: 15 }}>
+                  {t('onboarding.account.offline')}
+                </Text>
+              </View>
+            ) : (
+              <>
+                {appleAvailable ? (
+                  <AppleAuthentication.AppleAuthenticationButton
+                    buttonType={AppleAuthentication.AppleAuthenticationButtonType.CONTINUE}
+                    buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+                    cornerRadius={layout.buttonHeight / 2}
+                    style={{ width: '100%', height: layout.buttonHeight }}
+                    onPress={() => void signIn('apple')}
+                  />
+                ) : null}
+                <Squish
+                  onPress={() => void signIn('google')}
+                  accessibilityLabel={t('onboarding.account.google')}
+                  pressedScale={0.98}
+                  style={{
+                    height: layout.buttonHeight,
+                    borderRadius: layout.buttonHeight / 2,
+                    borderWidth: googlePrimary ? 0 : 1.5,
+                    borderColor: palette.line,
+                    backgroundColor: googlePrimary ? palette.selected : palette.background,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 12,
+                    paddingHorizontal: 24,
+                  }}
+                >
+                  <GoogleLogo size={20} />
+                  <Text
+                    weight="semibold"
+                    color={googlePrimary ? palette.onSelected : palette.ink}
+                    maxFontSizeMultiplier={1.4}
+                    style={{ fontSize: tablet ? 19 : 17, lineHeight: 22, letterSpacing: -0.1 }}
+                  >
+                    {t('onboarding.account.google')}
+                  </Text>
+                </Squish>
+              </>
+            )}
+
+            {busy ? (
+              <View
+                accessibilityLiveRegion="polite"
+                style={{
                   flexDirection: 'row',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: 12,
-                  overflow: 'hidden',
+                  gap: 8,
+                  minHeight: 24,
                 }}
               >
-                <GoogleLogo size={20} />
-                <Text
-                  color={palette.ink}
-                  weight="semibold"
-                  maxFontSizeMultiplier={1.4}
-                  style={{ fontSize: tablet ? 19 : 17, lineHeight: 22 }}
-                >
-                  {t('onboarding.account.google')}
+                <ActivityIndicator color={palette.ink} />
+                <Text variant="caption" color={palette.muted}>
+                  {t('onboarding.account.busy')}
                 </Text>
-              </Press>
-            </>
-          )}
-
-          {busy ? (
-            <View
-              accessibilityLiveRegion="polite"
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 8,
-                minHeight: 24,
-              }}
-            >
-              <ActivityIndicator color={palette.ink} />
-              <Text variant="caption" color={palette.body}>
-                {t('onboarding.account.busy')}
-              </Text>
-            </View>
-          ) : error ? (
-            <Text
-              variant="caption"
-              align="center"
-              color={palette.danger}
-              accessibilityLiveRegion="polite"
-            >
-              {t(error)}
-            </Text>
-          ) : null}
-
-          {offline ? (
-            <Press
-              haptic
-              onPress={guest}
-              accessibilityLabel={t('onboarding.account.guest')}
-              style={{
-                minHeight: buttonHeight,
-                borderRadius: radius.pill,
-                backgroundColor: palette.ink,
-                alignItems: 'center',
-                justifyContent: 'center',
-                paddingHorizontal: 20,
-                overflow: 'hidden',
-              }}
-            >
+              </View>
+            ) : error ? (
               <Text
-                color={palette.background}
-                maxFontSizeMultiplier={1.4}
-                style={{
-                  fontFamily: fonts.extrabold,
-                  fontSize: tablet ? 16 : 14,
-                  lineHeight: 20,
-                  letterSpacing: 2.2,
-                  textTransform: 'uppercase',
-                }}
+                variant="caption"
+                align="center"
+                color={palette.danger}
+                accessibilityLiveRegion="polite"
               >
-                {t('onboarding.account.guest')}
+                {t(error)}
               </Text>
-            </Press>
-          ) : (
-            <SpacedLink label={t('onboarding.account.guest')} onPress={guest} />
-          )}
+            ) : null}
 
-          <View style={{ height: 48, justifyContent: 'center' }}>
-            <Press
-              onPress={goBack}
-              accessibilityRole="button"
-              accessibilityLabel={t('onboarding.back')}
-              hitSlop={8}
-              style={{ height: 48, width: 48, justifyContent: 'center' }}
-            >
-              <LongArrow color={palette.ink} direction="left" width={28} />
-            </Press>
-          </View>
+            {offline ? (
+              <ContinueButton label={t('onboarding.account.guest')} onPress={guest} />
+            ) : (
+              <TextButton label={t('onboarding.account.guest')} onPress={guest} />
+            )}
+          </Animated.View>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 }

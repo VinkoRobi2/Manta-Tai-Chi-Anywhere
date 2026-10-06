@@ -13,29 +13,34 @@
   },
   "onboarding": {
     "tagline": "All you have to do is breathe.",
+    "welcomeBody": "Guided tai chi in 5 to 20 minutes, seated or standing. Works offline.",
     "start": "Get started",
-    "haveAccount": "I already have an account",
+    "haveAccount": "I have an account",
     "forRelative": "I'm setting it up for a family member",
     "relative": "For a family member",
-    "next": "Next",
+    "continue": "Continue",
     "back": "Back",
     "skip": "Skip",
     "progress": "Step {{current}} of {{total}}",
+    "and": "and",
     "practice": {
       "title": "How do you want to practice?",
       "title_relative": "How will they practice?",
       "body": "We pick every movement for your posture. You can change it anytime.",
       "body_relative": "We pick every movement for their posture. You can change it anytime.",
       "seated": "Seated",
+      "seatedBody": "On a chair. Ideal to start.",
       "standing": "Standing",
-      "both": "Both"
+      "standingBody": "Gentle steps in one square meter.",
+      "both": "Both",
+      "bothBody": "We switch depending on the day."
     },
     "feel": {
       "title": "What do you want to feel?",
       "title_relative": "What do they want to feel?",
-      "body": "This sets the pace and the movements of your classes.",
-      "body_relative": "This sets the pace and the movements of their classes.",
-      "limit": "Pick up to 2 · {{count}}/2",
+      "body": "Pick up to two. This sets the pace of your classes.",
+      "body_relative": "Pick up to two. This sets the pace of their classes.",
+      "limit": "{{count}} of 2",
       "calm": "Calm",
       "balance": "Balance",
       "joints": "Looser joints",
@@ -46,11 +51,13 @@
       "title": "How much time a day?",
       "body": "A little every day beats a lot once in a while.",
       "unit": "min",
+      "perDay": "min a day",
       "option": "{{count}} minutes",
+      "recommended": "Recommended",
       "hint": {
-        "5": "A breather",
-        "10": "Just right",
-        "20": "Deep dive"
+        "5": "A breather between tasks.",
+        "10": "Just right to build the habit.",
+        "20": "A full session, no rush."
       }
     },
     "care": {
@@ -64,23 +71,46 @@
       "title_relative": "Will they practice offline?",
       "body": "In the park, out of town or traveling: Manta works without a connection.",
       "often": "Often",
+      "oftenBody": "I usually practice away from home.",
       "sometimes": "Sometimes",
+      "sometimesBody": "Some days I have no signal.",
       "rarely": "Rarely",
+      "rarelyBody": "I always have Wi‑Fi or data.",
       "auto": "Free classes download on their own over Wi‑Fi.",
       "manual": "You can download any class whenever you like."
+    },
+    "building": {
+      "title": "Building your plan",
+      "title_relative": "Building their plan",
+      "body": "Fitting every movement to your answers.",
+      "body_relative": "Fitting every movement to their answers.",
+      "practice": "Posture: {{value}}",
+      "goals": "To feel: {{value}}",
+      "minutes": "{{count}} minutes a day",
+      "care": "Looking after: {{value}}",
+      "noCare": "No areas to look after",
+      "offline": "Free classes ready offline",
+      "online": "Classes online"
     },
     "plan": {
       "title": "Your plan is ready",
       "title_relative": "Their plan is ready",
-      "week": "Week 1",
-      "program": {
-        "seated": "Seated tai chi · 7 days",
-        "standing": "Standing tai chi · 7 days",
-        "both": "Seated & standing · 7 days"
+      "body": "Made for you. You can change it anytime.",
+      "body_relative": "Made for them. You can change it anytime.",
+      "overline": "Your program",
+      "name": {
+        "seated": "Seated tai chi",
+        "standing": "Standing tai chi",
+        "both": "Seated & standing"
       },
+      "days": "7 days",
+      "perDay": "{{count}} min a day",
       "level": "Beginner",
+      "week": "Your week",
+      "today": "Today",
+      "weekdays": ["M", "T", "W", "T", "F", "S", "S"],
       "start": "Start first class",
-      "change": "Change my answers"
+      "change": "Change answers"
     },
     "account": {
       "title": "Save your progress",

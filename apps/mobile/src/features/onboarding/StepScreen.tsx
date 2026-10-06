@@ -3,12 +3,13 @@ import { StatusBar } from 'expo-status-bar';
 import { useCallback, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { fonts } from '@/theme/tokens';
-import { Press } from '@/ui/Press';
 import { Text } from '@/ui/Text';
 
+import { ContinueButton } from './ContinueButton';
 import {
   markScreen,
   ONBOARDING_STEPS,
@@ -17,8 +18,13 @@ import {
   useOnboardingDraft,
   type OnboardingStep,
 } from './onboarding';
-import { LongArrow } from './OptionIcons';
 import { useOnboardingLayout, useOnboardingPalette } from './responsive';
+import { TopBar } from './TopBar';
+
+/** Entrada suave del contenido: sube unos píxeles mientras aparece. */
+export function enter(index: number) {
+  return FadeInDown.duration(420).delay(60 + index * 50);
+}
 
 export interface StepScreenProps {
   step: OnboardingStep;
@@ -26,20 +32,21 @@ export interface StepScreenProps {
   body: string;
   /** Las opciones. */
   children: ReactNode;
-  /** Lo que va debajo de las opciones (un enlace "Saltar", una nota). */
+  /** Lo que va debajo de las opciones. */
   after?: ReactNode;
-  /** La imagen grande. */
-  art?: ReactNode;
-  /** Una línea fija justo encima de la barra inferior (la nota de seguridad). */
+  /** Una línea fija justo encima del botón (la nota de seguridad). */
   footnote?: ReactNode;
-  onNext: () => void;
+  /** A la derecha de la barra de progreso ("Saltar"). */
+  topRight?: ReactNode;
+  canContinue: boolean;
+  onContinue: () => void;
 }
 
 /**
- * Estructura de cada pregunta: título en mayúsculas, texto, opciones, la figura grande
- * y abajo "1/5 · SIGUIENTE ⟶". En pantallas anchas, preguntas a la izquierda y figura a la derecha.
- * Todo cabe en la pantalla sin scroll: la figura ocupa solo el espacio que sobra.
- * Solo con la letra del sistema enorme se puede deslizar, para que nada quede cortado.
+ * Estructura de cada pregunta, como en las mejores apps de hoy: arriba volver y el progreso;
+ * un título grande alineado a la izquierda; las respuestas en tarjetas; y abajo, fijo,
+ * un solo botón "Continuar" que se activa al responder. Si la letra del sistema está muy
+ * grande, el contenido hace scroll y el botón sigue a la vista.
  */
 export function StepScreen({
   step,
@@ -47,9 +54,10 @@ export function StepScreen({
   body,
   children,
   after,
-  art,
   footnote,
-  onNext,
+  topRight,
+  canContinue,
+  onContinue,
 }: StepScreenProps) {
   const { t } = useTranslation();
   const palette = useOnboardingPalette();
@@ -58,8 +66,9 @@ export function StepScreen({
   const draft = useOnboardingDraft();
   const current = stepNumber(step);
   const total = ONBOARDING_STEPS.length;
-  const tablet = layout.breakpoint === 'tablet';
-  const compact = layout.breakpoint === 'compact';
+  const column = { width: '100%', maxWidth: layout.contentWidth } as const;
+  // En tablets el bloque de la pregunta va centrado en la pantalla, como una hoja.
+  const centered = layout.breakpoint === 'tablet';
 
   useFocusEffect(useCallback(() => markScreen(step), [step]));
 
@@ -71,213 +80,109 @@ export function StepScreen({
     else router.replace('/bienvenida');
   };
 
-  const questions = (
-    <View>
-      {draft.forRelative ? (
-        <Text
-          variant="label"
-          align="center"
-          color={palette.muted}
-          style={{ marginBottom: layout.gap, letterSpacing: 2.4 }}
-        >
-          {t('onboarding.relative')}
-        </Text>
-      ) : null}
-      <Text
-        accessibilityRole="header"
-        align="center"
-        color={palette.ink}
-        maxFontSizeMultiplier={1.4}
-        style={{
-          fontFamily: fonts.extrabold,
-          fontSize: layout.titleSize,
-          lineHeight: layout.titleLine,
-          letterSpacing: -0.2,
-          textTransform: 'uppercase',
-        }}
-      >
-        {title}
-      </Text>
-      <Text
-        align="center"
-        color={palette.body}
-        maxFontSizeMultiplier={1.6}
-        style={{
-          marginTop: layout.gap + 8,
-          fontSize: layout.bodySize,
-          lineHeight: layout.bodyLine,
-          alignSelf: 'center',
-          maxWidth: layout.breakpoint === 'tablet' ? 520 : 340,
-        }}
-      >
-        {body}
-      </Text>
-      <View style={{ marginTop: layout.sectionGap, gap: layout.gap }}>{children}</View>
-      {after}
-    </View>
-  );
-
   return (
     <View style={{ flex: 1, backgroundColor: palette.background }}>
       <StatusBar style={palette.scheme === 'dark' ? 'light' : 'dark'} />
+      <View
+        style={{
+          paddingTop: insets.top + 4,
+          paddingHorizontal: layout.gutter,
+          alignItems: 'center',
+        }}
+      >
+        <View style={column}>
+          <TopBar
+            step={current}
+            total={total}
+            right={topRight}
+            progressLabel={t('onboarding.progress', { current, total })}
+            onBack={goBack}
+          />
+        </View>
+      </View>
+
       <ScrollView
         bounces={false}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           flexGrow: 1,
           alignItems: 'center',
-          paddingTop: insets.top + layout.topPad,
+          justifyContent: centered ? 'center' : 'flex-start',
+          paddingTop: layout.topPad,
           paddingHorizontal: layout.gutter,
-          paddingBottom: layout.gap,
+          paddingBottom: centered ? layout.topPad * 2 : layout.gap * 2,
         }}
       >
-        <View
-          style={{
-            flexGrow: 1,
-            width: '100%',
-            maxWidth: layout.contentWidth,
-            flexDirection: layout.wide ? 'row' : 'column',
-            alignItems: layout.wide ? 'center' : 'stretch',
-            gap: layout.wide ? layout.gutter * 1.5 : layout.gap * 2,
-          }}
-        >
-          <View style={layout.wide ? { flex: 1, maxWidth: 520 } : undefined}>{questions}</View>
-          {art ? (
-            <View
-              style={
-                layout.wide
-                  ? { flex: 1, alignSelf: 'stretch', minHeight: layout.artMin }
-                  : { flexGrow: 1, minHeight: 0 }
-              }
-            >
-              {art}
-            </View>
+        <View style={[column, { flexGrow: centered ? 0 : 1 }]}>
+          {draft.forRelative ? (
+            <Animated.View entering={enter(0)} style={{ marginBottom: 12, flexDirection: 'row' }}>
+              <View
+                style={{
+                  paddingHorizontal: 12,
+                  height: 28,
+                  borderRadius: 14,
+                  backgroundColor: palette.card,
+                  justifyContent: 'center',
+                }}
+              >
+                <Text variant="caption" weight="medium" color={palette.ink}>
+                  {t('onboarding.relative')}
+                </Text>
+              </View>
+            </Animated.View>
           ) : null}
+          <Animated.View entering={enter(0)}>
+            <Text
+              accessibilityRole="header"
+              color={palette.ink}
+              maxFontSizeMultiplier={1.4}
+              style={{
+                fontFamily: fonts.semibold,
+                fontSize: layout.titleSize,
+                lineHeight: layout.titleLine,
+                letterSpacing: -0.8,
+              }}
+            >
+              {title}
+            </Text>
+          </Animated.View>
+          <Animated.View entering={enter(1)}>
+            <Text
+              color={palette.muted}
+              maxFontSizeMultiplier={1.6}
+              style={{ marginTop: 10, fontSize: layout.bodySize, lineHeight: layout.bodyLine }}
+            >
+              {body}
+            </Text>
+          </Animated.View>
+          <Animated.View
+            entering={enter(2)}
+            style={{ marginTop: layout.sectionGap, flexGrow: centered ? 0 : 1 }}
+          >
+            {children}
+            {after}
+          </Animated.View>
         </View>
       </ScrollView>
-
-      {footnote ? (
-        <View style={{ paddingHorizontal: layout.gutter, alignItems: 'center' }}>{footnote}</View>
-      ) : null}
 
       <View
         style={{
           paddingHorizontal: layout.gutter,
-          paddingBottom: insets.bottom + (layout.breakpoint === 'compact' ? 4 : 12),
+          paddingTop: 8,
+          paddingBottom: insets.bottom + (layout.breakpoint === 'compact' ? 10 : 16),
           alignItems: 'center',
+          backgroundColor: palette.background,
         }}
       >
-        <View
-          style={{
-            width: '100%',
-            maxWidth: layout.contentWidth,
-            height: layout.footerHeight,
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}
-        >
-          {/* El contador va centrado en la pantalla, no entre los dos botones. */}
-          <View
-            pointerEvents="none"
-            style={{ position: 'absolute', left: 0, right: 0, alignItems: 'center' }}
-          >
-            <Text
-              color={palette.ink}
-              accessibilityLabel={t('onboarding.progress', { current, total })}
-              maxFontSizeMultiplier={1.2}
-              style={{
-                fontFamily: fonts.extrabold,
-                fontSize: tablet ? 22 : 18,
-                lineHeight: 26,
-                letterSpacing: 2.4,
-              }}
-            >
-              {current}/{total}
-            </Text>
-          </View>
-          <Press
-            onPress={goBack}
-            accessibilityRole="button"
-            accessibilityLabel={t('onboarding.back')}
-            hitSlop={8}
-            style={{ height: 48, minWidth: 48, justifyContent: 'center' }}
-          >
-            <LongArrow color={palette.ink} direction="left" width={28} />
-          </Press>
-          <Press
-            haptic
-            onPress={onNext}
-            accessibilityRole="button"
-            accessibilityLabel={t('onboarding.next')}
-            hitSlop={8}
-            style={{ height: 48, flexDirection: 'row', alignItems: 'center', gap: 8 }}
-          >
-            <Text
-              color={palette.ink}
-              maxFontSizeMultiplier={1.2}
-              style={{
-                fontFamily: fonts.extrabold,
-                fontSize: tablet ? 16 : compact ? 12 : 13,
-                lineHeight: 20,
-                letterSpacing: 1.2,
-                textTransform: 'uppercase',
-              }}
-            >
-              {t('onboarding.next')}
-            </Text>
-            <LongArrow color={palette.ink} width={tablet ? 28 : 24} />
-          </Press>
+        <View style={[column, { gap: 10 }]}>
+          {footnote}
+          <ContinueButton
+            label={t('onboarding.continue')}
+            disabled={!canContinue}
+            onPress={onContinue}
+          />
         </View>
       </View>
-    </View>
-  );
-}
-
-/** El enlace con letras espaciadas, como "PREFER NOT TO SAY". */
-export function SpacedLink({ label, onPress }: { label: string; onPress: () => void }) {
-  const palette = useOnboardingPalette();
-  return (
-    <Press
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityLabel={label}
-      style={{
-        alignSelf: 'center',
-        minHeight: 48,
-        justifyContent: 'center',
-        paddingHorizontal: 16,
-      }}
-    >
-      <Text
-        variant="caption"
-        color={palette.ink}
-        weight="medium"
-        style={{ letterSpacing: 4, textTransform: 'uppercase' }}
-      >
-        {label}
-      </Text>
-    </Press>
-  );
-}
-
-/** Una nota pequeña con icono (seguridad, aviso de descarga). Centrada; si ocupa dos líneas, el icono va arriba. */
-export function NoteLine({ icon, text, color }: { icon: ReactNode; text: string; color: string }) {
-  return (
-    <View
-      style={{
-        alignSelf: 'center',
-        maxWidth: 360,
-        flexDirection: 'row',
-        alignItems: 'flex-start',
-        gap: 8,
-        paddingVertical: 6,
-      }}
-    >
-      <View style={{ paddingTop: 2 }}>{icon}</View>
-      <Text variant="caption" color={color} style={{ flexShrink: 1 }}>
-        {text}
-      </Text>
     </View>
   );
 }

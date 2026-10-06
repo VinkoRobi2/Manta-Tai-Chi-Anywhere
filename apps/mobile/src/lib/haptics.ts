@@ -6,3 +6,9 @@ export function tapFeedback(): void {
   if (Platform.OS === 'web') return;
   void Haptics.selectionAsync().catch(() => undefined);
 }
+
+/** Confirmación al terminar algo importante (el plan está listo). */
+export function successFeedback(): void {
+  if (Platform.OS === 'web') return;
+  void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(() => undefined);
+}

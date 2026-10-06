@@ -1,18 +1,19 @@
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
 
+import { ChoiceCard, IconTile } from '@/features/onboarding/ChoiceCard';
 import {
+  canContinue,
   trackStep,
   updateDraft,
   useOnboardingDraft,
   wantsAutoAnchor,
 } from '@/features/onboarding/onboarding';
-import { Option } from '@/features/onboarding/Option';
 import { DownloadGlyph, OfflineIcon } from '@/features/onboarding/OptionIcons';
-import { PoseArt } from '@/features/onboarding/PoseArt';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
-import { NoteLine, StepScreen } from '@/features/onboarding/StepScreen';
+import { StepScreen } from '@/features/onboarding/StepScreen';
 import type { OfflineUsage } from '@/features/settings/settings';
 import { Text } from '@/ui/Text';
 
@@ -25,62 +26,73 @@ export default function OfflineStep() {
   const layout = useOnboardingLayout();
   const palette = useOnboardingPalette();
   const context = draft.forRelative ? 'relative' : undefined;
-  const auto = wantsAutoAnchor(draft.offlineUsage);
+  const iconSize = layout.breakpoint === 'compact' ? 20 : 24;
 
   return (
     <StepScreen
       step="sin-internet"
       title={t('onboarding.offline.title', { context })}
       body={t('onboarding.offline.body')}
-      onNext={() => {
+      canContinue={canContinue('sin-internet', draft)}
+      onContinue={() => {
         trackStep('sin-internet');
-        router.push('/bienvenida/plan');
+        router.push('/bienvenida/creando');
       }}
       after={
-        <View style={{ marginTop: layout.gap }} accessibilityLiveRegion="polite">
-          <NoteLine
-            icon={<DownloadGlyph color={palette.body} />}
-            text={t(auto ? 'onboarding.offline.auto' : 'onboarding.offline.manual')}
-            color={palette.body}
-          />
-        </View>
+        draft.offlineUsage ? (
+          <Animated.View
+            key={wantsAutoAnchor(draft.offlineUsage) ? 'auto' : 'manual'}
+            entering={FadeIn.duration(260)}
+            accessibilityLiveRegion="polite"
+            style={{
+              marginTop: layout.gap + 4,
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 12,
+              padding: 14,
+              borderRadius: 18,
+              borderWidth: 1,
+              borderColor: palette.line,
+            }}
+          >
+            <View
+              style={{
+                width: 34,
+                height: 34,
+                borderRadius: 17,
+                backgroundColor: palette.accent,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <DownloadGlyph color={palette.onAccent} size={18} />
+            </View>
+            <Text variant="caption" color={palette.ink} style={{ flexShrink: 1, fontSize: 15 }}>
+              {t(
+                wantsAutoAnchor(draft.offlineUsage)
+                  ? 'onboarding.offline.auto'
+                  : 'onboarding.offline.manual',
+              )}
+            </Text>
+          </Animated.View>
+        ) : null
       }
-      art={<PoseArt poses={['seated']} maxHeight={layout.artMax * 0.9} />}
     >
-      <View style={{ flexDirection: 'row', gap: layout.gap }}>
+      <View style={{ gap: layout.gap }}>
         {USAGES.map((usage) => (
-          <Option
+          <ChoiceCard
             key={usage}
             role="radio"
             selected={draft.offlineUsage === usage}
             onPress={() => updateDraft({ offlineUsage: usage })}
-            accessibilityLabel={t(`onboarding.offline.${usage}`)}
-            height={layout.tileHeight}
-            style={{ flex: 1 }}
-          >
-            {(colors) => (
-              <View
-                style={{ alignItems: 'center', gap: 8, paddingVertical: 10, paddingHorizontal: 4 }}
-              >
-                <OfflineIcon
-                  usage={usage}
-                  color={colors.icon}
-                  size={layout.breakpoint === 'tablet' ? 30 : 26}
-                />
-                <Text
-                  align="center"
-                  weight="medium"
-                  color={colors.text}
-                  style={{
-                    fontSize: layout.labelSize - 1,
-                    lineHeight: Math.round((layout.labelSize - 1) * 1.25),
-                  }}
-                >
-                  {t(`onboarding.offline.${usage}`)}
-                </Text>
-              </View>
+            label={t(`onboarding.offline.${usage}`)}
+            description={t(`onboarding.offline.${usage}Body`)}
+            leading={(colors) => (
+              <IconTile colors={colors}>
+                <OfflineIcon usage={usage} color={colors.icon} size={iconSize} />
+              </IconTile>
             )}
-          </Option>
+          />
         ))}
       </View>
     </StepScreen>

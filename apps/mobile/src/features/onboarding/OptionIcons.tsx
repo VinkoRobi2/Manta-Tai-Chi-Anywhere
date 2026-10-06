@@ -139,34 +139,38 @@ export function DownloadGlyph({ color, size = 16 }: GlyphProps) {
   );
 }
 
-/** Flecha larga y fina, como la de "NEXT ⟶". */
-export function LongArrow({
-  color,
-  direction = 'right',
-  width = 34,
-}: {
-  color: string;
-  direction?: 'left' | 'right';
-  width?: number;
-}) {
-  const d =
-    direction === 'right'
-      ? `M1 6h${width - 2}M${width - 6} 1l5 5-5 5`
-      : `M${width - 1} 6H1M6 1L1 6l5 5`;
+export function ChevronLeftGlyph({ color, size = 22 }: GlyphProps) {
   return (
     <Svg
-      width={width}
-      height={12}
-      viewBox={`0 0 ${width} 12`}
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
       fill="none"
       stroke={color}
-      strokeWidth={1.5}
+      strokeWidth={2.2}
       strokeLinecap="round"
       strokeLinejoin="round"
       accessibilityElementsHidden
       importantForAccessibility="no"
     >
-      <Path d={d} />
+      <Path d="M15 5l-7 7 7 7" />
+    </Svg>
+  );
+}
+
+export function PlayGlyph({ color, size = 16 }: GlyphProps) {
+  return (
+    <Svg
+      width={size}
+      height={size}
+      viewBox="0 0 16 16"
+      accessibilityElementsHidden
+      importantForAccessibility="no"
+    >
+      <Path
+        d="M4.5 2.6c0-.8.9-1.3 1.6-.9l7.4 4.6c.6.4.6 1.3 0 1.7l-7.4 4.6c-.7.4-1.6-.1-1.6-.9z"
+        fill={color}
+      />
     </Svg>
   );
 }
