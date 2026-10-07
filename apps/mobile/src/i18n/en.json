@@ -73,28 +73,21 @@
         "5": "A breather between tasks.",
         "10": "Just right to build the habit.",
         "20": "A full session, no rush."
-      },
-      "anatomy": "What a {{count}}-min class looks like",
-      "parts": {
-        "arrive": "Arrive",
-        "move": "Move",
-        "close": "Close"
-      },
-      "week": "{{count}} min a week"
+      }
     },
     "care": {
       "title": "Any area to look after?",
       "body": "We adapt or skip the movements that load it.",
       "none": "None",
+      "noneBody": "I move without discomfort.",
+      "noneBody_relative": "They move without discomfort.",
       "safety": "Manta doesn't replace your doctor. If something hurts, stop.",
-      "adaptTitle": "How we adapt",
       "adapt": {
-        "knees": "Knees: no deep bends, always supported.",
-        "back": "Back: gentle turns, long spine.",
-        "shoulders": "Shoulders: arms at chest height, never overhead.",
-        "neck": "Neck: eyes forward, no sudden turns."
-      },
-      "tapHint": "Tap the figure or the list."
+        "knees": "No deep knee bends.",
+        "back": "Gentle turns, long spine.",
+        "shoulders": "Arms up to chest height.",
+        "neck": "Eyes forward, no sudden turns."
+      }
     },
     "offline": {
       "title": "Will you practice offline?",

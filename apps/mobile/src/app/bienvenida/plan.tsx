@@ -17,8 +17,12 @@ import {
 } from '@/features/onboarding/onboarding';
 import { Burst, RevealText, Ripples } from '@/features/onboarding/motion';
 import { PlayGlyph } from '@/features/onboarding/OptionIcons';
-import type { Pose } from '@/features/onboarding/PoseArt';
-import { PoseThumb } from '@/features/onboarding/PoseThumb';
+import {
+  PhotoSlides,
+  PRACTICE_PHOTOS,
+  usePhotoCycle,
+  type PracticePhoto,
+} from '@/features/onboarding/PhotoSlides';
 import { Squish } from '@/features/onboarding/Squish';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { enter } from '@/features/onboarding/StepScreen';
@@ -27,13 +31,17 @@ import { useLocale } from '@/lib/i18n';
 import { fonts } from '@/theme/tokens';
 import { Text } from '@/ui/Text';
 
-const POSES: Record<PracticeMode, readonly Pose[]> = {
-  seated: ['seated'],
-  standing: ['standing'],
-  both: ['standing', 'seated'],
+/** La foto del programa según cómo practica. "Las dos" alterna las dos fotos. */
+const PHOTOS: Record<PracticeMode, readonly PracticePhoto[]> = {
+  seated: [PRACTICE_PHOTOS.seated],
+  standing: [PRACTICE_PHOTOS.standing],
+  both: [PRACTICE_PHOTOS.seated, PRACTICE_PHOTOS.standing],
 };
 
-/** El plan: la tarjeta del programa y el camino de las tres primeras clases (hoy, mañana, día 3). */
+/**
+ * El plan: el programa (su nombre a la izquierda y la foto de cómo practica a la derecha, sobre el
+ * blanco de la app) y el camino de las tres primeras clases (hoy, mañana, día 3).
+ */
 export default function PlanScreen() {
   const { t } = useTranslation();
   const draft = useOnboardingDraft();
@@ -45,9 +53,9 @@ export default function PlanScreen() {
   const context = draft.forRelative ? 'relative' : undefined;
   const tablet = layout.breakpoint === 'tablet';
   const compact = layout.breakpoint === 'compact';
-  // La tarjeta negra mide lo de la referencia; en pantallas más bajas se encoge hasta cardMin
-  // para que todo quepa sin scroll. La figura se ajusta al alto real de la tarjeta.
-  const cardMax = tablet ? 300 : compact ? 196 : 236;
+  // El bloque del programa mide cardMax; en pantallas más bajas se encoge hasta cardMin para que
+  // todo quepa sin scroll. La foto se ajusta al alto real del bloque.
+  const cardMax = tablet ? 320 : compact ? 196 : 256;
   const cardMin = tablet ? 300 : compact ? 170 : 210;
   const [cardHeight, setCardHeight] = useState(cardMax);
   // Muy poco alto (iPhone SE de primera generación, Android bajos): sin subtítulo ni tarjeta de la clase.
@@ -57,10 +65,11 @@ export default function PlanScreen() {
   const lesson = program.lessons[0]!;
   // Las tres primeras clases: hoy, mañana y el día 3. En pantallas muy bajas, solo la de hoy.
   const firstLessons = program.lessons.slice(0, tiny ? 1 : 3);
-  const artWidth = Math.round(cardHeight * 0.92);
-  // El texto termina antes de donde empieza el sol (la figura va pegada a la derecha: el sol empieza
-  // a 0,76 × alto del borde). Se calcula con el alto máximo: así no cambia de líneas al encogerse.
-  const artReserve = Math.round(cardMax * 0.76) + 4;
+  // La foto, en vertical como las de las clases; nunca más de la mitad del ancho.
+  const columnWidth = Math.min(layout.width - layout.gutter * 2, layout.contentWidth);
+  const photoWidth = Math.round(Math.min(cardHeight * 0.74, columnWidth * 0.5));
+  const photos = PHOTOS[mode];
+  const { active, moving } = usePhotoCycle(photos.length);
   const column = { width: '100%', maxWidth: layout.contentWidth } as const;
 
   useFocusEffect(useCallback(() => markScreen('plan'), []));
@@ -135,46 +144,37 @@ export default function PlanScreen() {
               flexGrow: tablet ? 0 : 1,
               minHeight: cardMin,
               maxHeight: cardMax,
-              borderRadius: tablet ? 32 : 28,
-              backgroundColor: palette.selected,
-              overflow: 'hidden',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: compact ? 14 : 18,
             }}
           >
-            <View style={{ position: 'absolute', right: -6, bottom: 0 }}>
-              <PoseThumb
-                poses={POSES[mode]}
-                width={artWidth}
-                height={cardHeight}
-                figureHeight={cardHeight * 0.92}
-                sunSize={cardHeight * 0.6}
-                sunOffsetY={cardHeight * 0.02}
-                sunColor={palette.accent}
-                tint={palette.onSelected}
-                alive
-                rise
-              />
-            </View>
-            <View style={{ padding: compact ? 16 : 22, paddingRight: artReserve, gap: 8 }}>
+            <View style={{ flex: 1, gap: 8 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <View
+                  style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: palette.accent }}
+                />
+                <Text
+                  variant="label"
+                  color={palette.muted}
+                  style={{ letterSpacing: 1.6, fontSize: 12 }}
+                >
+                  {t('onboarding.plan.overline')}
+                </Text>
+              </View>
               <Text
-                variant="label"
-                color={palette.accentOnSelected}
-                style={{ letterSpacing: 1.6, fontSize: 12 }}
-              >
-                {t('onboarding.plan.overline')}
-              </Text>
-              <Text
-                color={palette.onSelected}
+                color={palette.ink}
                 maxFontSizeMultiplier={1.3}
                 style={{
                   fontFamily: fonts.semibold,
-                  fontSize: tablet ? 34 : compact ? 22 : 28,
-                  lineHeight: tablet ? 40 : compact ? 27 : 33,
+                  fontSize: tablet ? 34 : compact ? 24 : 28,
+                  lineHeight: tablet ? 40 : compact ? 29 : 33,
                   letterSpacing: -0.6,
                 }}
               >
                 {t(`onboarding.plan.name.${mode}`)}
               </Text>
-              <View style={{ gap: compact ? 4 : 6, marginTop: compact ? 4 : 8 }}>
+              <View style={{ gap: compact ? 4 : 6, marginTop: compact ? 2 : 6 }}>
                 {[
                   t('onboarding.plan.days'),
                   t('onboarding.plan.perDay', { count: draft.dailyMinutes }),
@@ -192,7 +192,7 @@ export default function PlanScreen() {
                     <Text
                       variant="caption"
                       weight="medium"
-                      color={palette.onSelectedMuted}
+                      color={palette.muted}
                       style={{ fontSize: 14, lineHeight: 19 }}
                     >
                       {label}
@@ -200,6 +200,27 @@ export default function PlanScreen() {
                   </View>
                 ))}
               </View>
+            </View>
+
+            <View
+              style={{
+                width: photoWidth,
+                alignSelf: 'stretch',
+                borderRadius: tablet ? 32 : 28,
+                overflow: 'hidden',
+                backgroundColor: palette.card,
+              }}
+              accessibilityElementsHidden
+              importantForAccessibility="no-hide-descendants"
+            >
+              <PhotoSlides
+                photos={photos}
+                active={active}
+                moving={moving}
+                width={photoWidth}
+                height={cardHeight}
+                contentPosition="center"
+              />
             </View>
           </Animated.View>
 

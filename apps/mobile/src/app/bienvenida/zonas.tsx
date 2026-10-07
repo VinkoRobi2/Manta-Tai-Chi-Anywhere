@@ -1,10 +1,10 @@
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
-import Animated, { FadeIn, FadeInDown, FadeOut, LinearTransition } from 'react-native-reanimated';
 
-import { CheckBadge, ChoiceChip } from '@/features/onboarding/ChoiceCard';
+import { ChoiceCard, IconTile } from '@/features/onboarding/ChoiceCard';
 import { TextButton } from '@/features/onboarding/ContinueButton';
+import { IconMotion } from '@/features/onboarding/IconMotion';
 import {
   canContinue,
   ONBOARDING_CARE_TAGS,
@@ -13,24 +13,24 @@ import {
   updateDraft,
   useOnboardingDraft,
 } from '@/features/onboarding/onboarding';
-import { ShieldGlyph } from '@/features/onboarding/OptionIcons';
-import { PoseArt, type ZoneMarker } from '@/features/onboarding/PoseArt';
+import { ShieldGlyph, ZoneIcon } from '@/features/onboarding/OptionIcons';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { StepScreen } from '@/features/onboarding/StepScreen';
 import { Text } from '@/ui/Text';
 
-/** Paso 4: zonas que cuidar. A la izquierda la figura con las zonas marcadas; a la derecha, las zonas. */
+/**
+ * Paso 4: zonas que cuidar. Mosaico de dos columnas, como "Qué quieres sentir": cada zona con su
+ * dibujo y lo que cambia en las clases. "Ninguna" va a lo ancho, debajo.
+ */
 export default function CareStep() {
   const { t } = useTranslation();
   const draft = useOnboardingDraft();
   const layout = useOnboardingLayout();
   const palette = useOnboardingPalette();
-  const chipHeight =
-    layout.breakpoint === 'tablet' ? 56 : layout.breakpoint === 'compact' ? 44 : 50;
-  const artHeight =
-    layout.breakpoint === 'tablet' ? 380 : layout.breakpoint === 'compact' ? 250 : 300;
-
-  const marked = draft.careTags.filter((tag): tag is ZoneMarker => tag !== 'wrists');
+  const context = draft.forRelative ? 'relative' : undefined;
+  const compact = layout.breakpoint === 'compact';
+  const tileHeight = layout.breakpoint === 'tablet' ? 168 : compact ? 116 : 148;
+  const iconSize = layout.breakpoint === 'tablet' ? 38 : compact ? 28 : 34;
 
   const next = () => {
     trackStep('zonas');
@@ -44,7 +44,6 @@ export default function CareStep() {
       body={t('onboarding.care.body')}
       canContinue={canContinue('zonas', draft)}
       onContinue={next}
-      after={<Adaptations zones={marked} none={draft.noCare} />}
       topRight={
         <TextButton
           label={t('onboarding.skip')}
@@ -68,90 +67,50 @@ export default function CareStep() {
         </View>
       }
     >
-      <View style={{ flexDirection: 'row', alignItems: 'center', gap: layout.gap }}>
-        <View style={{ width: '42%', height: artHeight }}>
-          <PoseArt
-            poses={['standing']}
-            markers={marked}
-            maxHeight={artHeight * 0.9}
-            onToggleZone={(zone) => updateDraft(toggleCare(draft, zone))}
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: layout.gap }}>
+        {ONBOARDING_CARE_TAGS.map((zone) => (
+          <ChoiceCard
+            key={zone}
+            variant="tile"
+            role="checkbox"
+            selected={draft.careTags.includes(zone)}
+            onPress={() => updateDraft(toggleCare(draft, zone))}
+            label={t(`lesson.care.${zone}`)}
+            // En teléfonos bajos, solo el nombre: así todo cabe sin scroll.
+            description={compact ? undefined : t(`onboarding.care.adapt.${zone}`)}
+            minHeight={tileHeight}
+            containerStyle={{ flexGrow: 1, flexBasis: '40%' }}
+            leading={(colors) => (
+              <IconTile colors={colors} large>
+                <IconMotion kind={zone} active={colors.selected}>
+                  <ZoneIcon
+                    zone={zone}
+                    color={colors.text}
+                    accent={palette.accent}
+                    size={iconSize}
+                  />
+                </IconMotion>
+              </IconTile>
+            )}
           />
-        </View>
-        <View style={{ flex: 1, gap: layout.gap - 2 }}>
-          {ONBOARDING_CARE_TAGS.map((tag) => (
-            <ChoiceChip
-              key={tag}
-              height={chipHeight}
-              selected={draft.careTags.includes(tag)}
-              onPress={() => updateDraft(toggleCare(draft, tag))}
-              label={t(`lesson.care.${tag}`)}
-            />
-          ))}
-          <ChoiceChip
-            height={chipHeight}
-            selected={draft.noCare}
-            onPress={() => updateDraft(toggleCare(draft, 'none'))}
-            label={t('onboarding.care.none')}
-          />
-        </View>
+        ))}
+        <ChoiceCard
+          role="checkbox"
+          selected={draft.noCare}
+          onPress={() => updateDraft(toggleCare(draft, 'none'))}
+          label={t('onboarding.care.none')}
+          description={t('onboarding.care.noneBody', { context })}
+          minHeight={layout.rowHeight}
+          containerStyle={{ flexGrow: 1, flexBasis: '100%' }}
+          leading={(colors) => (
+            <IconTile colors={colors} large>
+              <IconMotion kind="pulse" active={colors.selected}>
+                <ZoneIcon zone="none" color={colors.icon} accent={palette.accent} size={iconSize} />
+              </IconMotion>
+            </IconTile>
+          )}
+        />
       </View>
     </StepScreen>
-  );
-}
-
-/** Lo que cambia en las clases por cada zona elegida. Sin zonas, una pista para empezar. */
-function Adaptations({ zones, none }: { zones: readonly ZoneMarker[]; none: boolean }) {
-  const { t } = useTranslation();
-  const palette = useOnboardingPalette();
-  const layout = useOnboardingLayout();
-  if (none) return null;
-  if (zones.length === 0) {
-    return (
-      <Text
-        variant="caption"
-        color={palette.faint}
-        style={{ marginTop: layout.gap, textAlign: 'center' }}
-      >
-        {t('onboarding.care.tapHint')}
-      </Text>
-    );
-  }
-  return (
-    <Animated.View
-      entering={FadeInDown.duration(320)}
-      layout={LinearTransition.duration(240)}
-      accessibilityLiveRegion="polite"
-      style={{
-        marginTop: layout.gap + 4,
-        borderRadius: 20,
-        backgroundColor: palette.card,
-        padding: 14,
-        gap: 8,
-      }}
-    >
-      <Text weight="semibold" color={palette.ink} style={{ fontSize: 14, lineHeight: 18 }}>
-        {t('onboarding.care.adaptTitle')}
-      </Text>
-      {zones.map((zone) => (
-        <Animated.View
-          key={zone}
-          entering={FadeIn.duration(260)}
-          exiting={FadeOut.duration(160)}
-          layout={LinearTransition.duration(240)}
-          style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 8 }}
-        >
-          <View style={{ paddingTop: 2 }}>
-            <CheckBadge size={16} />
-          </View>
-          <Text
-            variant="caption"
-            color={palette.ink}
-            style={{ flexShrink: 1, fontSize: 14, lineHeight: 19 }}
-          >
-            {t(`onboarding.care.adapt.${zone}`)}
-          </Text>
-        </Animated.View>
-      ))}
-    </Animated.View>
   );
 }

@@ -54,6 +54,7 @@ export const ONBOARDING_CARE_TAGS = [
   'shoulders',
   'neck',
 ] as const satisfies readonly CareTag[];
+export type OnboardingCareTag = (typeof ONBOARDING_CARE_TAGS)[number];
 
 /** Lo que se guarda mientras una pregunta no tiene respuesta, y lo que se usa si alguien la salta. */
 export const DEFAULT_PRACTICE: PracticeMode = 'seated';

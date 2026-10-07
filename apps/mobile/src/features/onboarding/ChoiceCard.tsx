@@ -58,10 +58,20 @@ export function CheckBadge({ size = 24 }: { size?: number }) {
   );
 }
 
-/** Casilla redondeada para el icono de una opción. */
-export function IconTile({ colors, children }: { colors: ChoiceColors; children: ReactNode }) {
+/** Casilla redondeada para el icono de una opción. `large` para dibujos con más detalle. */
+export function IconTile({
+  colors,
+  large = false,
+  children,
+}: {
+  colors: ChoiceColors;
+  large?: boolean;
+  children: ReactNode;
+}) {
   const layout = useOnboardingLayout();
-  const size = layout.breakpoint === 'tablet' ? 52 : layout.breakpoint === 'compact' ? 40 : 46;
+  const size =
+    (layout.breakpoint === 'tablet' ? 52 : layout.breakpoint === 'compact' ? 40 : 46) +
+    (large ? 6 : 0);
   return (
     <View
       style={{
@@ -234,75 +244,6 @@ export function ChoiceCard({
             <CheckBadge />
           )
         ) : null}
-      </Animated.View>
-    </Squish>
-  );
-}
-
-/** Respuesta en píldora (zonas que cuidar): gris; negra con el visto del sol al elegirla. */
-export function ChoiceChip({
-  selected,
-  onPress,
-  label,
-  height,
-}: {
-  selected: boolean;
-  onPress: () => void;
-  label: string;
-  height: number;
-}) {
-  const palette = useOnboardingPalette();
-  const colors = choiceColors(palette, selected);
-  const progress = useSharedValue(selected ? 1 : 0);
-  useEffect(() => {
-    progress.value = withTiming(selected ? 1 : 0, { duration: 180 });
-  }, [progress, selected]);
-  const background = useAnimatedStyle(() => ({
-    backgroundColor: interpolateColor(progress.value, [0, 1], [palette.card, palette.selected]),
-  }));
-  const dot = Math.round(height * 0.44);
-
-  return (
-    <Squish
-      onPress={onPress}
-      accessibilityRole="checkbox"
-      accessibilityLabel={label}
-      accessibilityState={{ checked: selected }}
-    >
-      <Animated.View
-        style={[
-          {
-            minHeight: height,
-            borderRadius: height / 2,
-            paddingLeft: 8,
-            paddingRight: 18,
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 10,
-          },
-          background,
-        ]}
-      >
-        {selected ? (
-          <CheckBadge size={dot} />
-        ) : (
-          <View
-            style={{
-              width: dot,
-              height: dot,
-              borderRadius: dot / 2,
-              borderWidth: 1.5,
-              borderColor: palette.faint,
-            }}
-          />
-        )}
-        <Text
-          weight="medium"
-          color={colors.text}
-          style={{ flexShrink: 1, fontSize: 16, lineHeight: 20 }}
-        >
-          {label}
-        </Text>
       </Animated.View>
     </Squish>
   );
