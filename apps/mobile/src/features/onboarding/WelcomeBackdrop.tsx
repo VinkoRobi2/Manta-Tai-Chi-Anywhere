@@ -2,9 +2,11 @@ import { Image } from 'expo-image';
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useId, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import Animated, {
   cancelAnimation,
   Easing,
+  FadeIn,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -13,6 +15,7 @@ import Animated, {
 import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 
 import { welcome } from '@/theme/tokens';
+import { Text } from '@/ui/Text';
 
 import { svgId } from './svgId';
 
@@ -24,11 +27,13 @@ import { svgId } from './svgId';
 
 const PHOTOS = [
   {
+    caption: 'seated',
     source: require('../../../assets/images/lessons/sentado-primeros-movimientos.jpg'),
     // Hacia dónde se acerca la cámara (el rostro y las manos).
     origin: { x: 0.1, y: -0.12 },
   },
   {
+    caption: 'standing',
     source: require('../../../assets/images/lessons/en-el-lugar-manos-de-nube.jpg'),
     origin: { x: -0.08, y: -0.1 },
   },
@@ -39,7 +44,21 @@ const HOLD_MS = 7000;
 const FADE_MS = 1600;
 const ZOOM = 0.1;
 
-export function WelcomeBackdrop({ width, height }: { width: number; height: number }) {
+export function WelcomeBackdrop({
+  width,
+  height,
+  gutter,
+  bottomInset,
+}: {
+  width: number;
+  height: number;
+  /** Margen lateral de la pantalla, para alinear la etiqueta con el texto. */
+  gutter: number;
+  /** Lo que tapa la hoja blanca abajo: la etiqueta va justo encima. */
+  bottomInset: number;
+}) {
+  const { t } = useTranslation();
+  const palette = welcome;
   const reducedMotion = useReducedMotion();
   const scrimId = svgId(useId());
   const [active, setActive] = useState(0);
@@ -89,7 +108,58 @@ export function WelcomeBackdrop({ width, height }: { width: number; height: numb
         </Defs>
         <Rect width={width} height={height} fill={`url(#${scrimId})`} />
       </Svg>
+
+      {/* Qué se ve en la foto, y en cuál de las dos fotos vamos. */}
+      <View
+        style={{
+          position: 'absolute',
+          left: gutter,
+          right: gutter,
+          bottom: bottomInset + 14,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Animated.View
+          key={active}
+          entering={FadeIn.duration(FADE_MS)}
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 8,
+            height: 32,
+            paddingHorizontal: 12,
+            borderRadius: 16,
+            backgroundColor: 'rgba(0, 0, 0, 0.38)',
+          }}
+        >
+          <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: palette.sol }} />
+          <Text weight="medium" color={palette.ink} style={{ fontSize: 13, lineHeight: 16 }}>
+            {t(`onboarding.welcomeCaption.${PHOTOS[active]!.caption}`)}
+          </Text>
+        </Animated.View>
+        <View style={{ flexDirection: 'row', gap: 5 }}>
+          {PHOTOS.map((photo, index) => (
+            <Dash key={photo.caption} active={index === active} />
+          ))}
+        </View>
+      </View>
     </View>
+  );
+}
+
+function Dash({ active }: { active: boolean }) {
+  const grow = useSharedValue(active ? 1 : 0);
+  useEffect(() => {
+    grow.value = withTiming(active ? 1 : 0, { duration: 400 });
+  }, [active, grow]);
+  const style = useAnimatedStyle(() => ({
+    width: 8 + grow.value * 14,
+    opacity: 0.45 + grow.value * 0.55,
+  }));
+  return (
+    <Animated.View style={[{ height: 4, borderRadius: 2, backgroundColor: welcome.ink }, style]} />
   );
 }
 

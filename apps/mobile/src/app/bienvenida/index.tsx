@@ -2,12 +2,12 @@ import { router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useTranslation } from 'react-i18next';
 import { Alert, View } from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, { ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { clearSession, getSession } from '@/features/auth/session';
 import { ContinueButton, TextButton } from '@/features/onboarding/ContinueButton';
-import { GlobeGlyph } from '@/features/onboarding/OptionIcons';
+import { GlobeGlyph, OfflineIcon, PracticeIcon } from '@/features/onboarding/OptionIcons';
 import {
   hasOnboardingProgress,
   restoreOnboarding,
@@ -25,6 +25,7 @@ import { DEFAULT_SETTINGS, getSettings, updateSettings } from '@/features/settin
 import { LANGUAGE_NAMES, useLocale } from '@/lib/i18n';
 import { fonts, welcome } from '@/theme/tokens';
 import { MantaMark } from '@/ui/Brand';
+import { ClockGlyph } from '@/ui/Glyphs';
 import { Text } from '@/ui/Text';
 
 const SHEET_RADIUS = 32;
@@ -79,7 +80,12 @@ export default function WelcomeScreen() {
     >
       <StatusBar style="light" />
       <View style={{ width: imageWidth, height: imageHeight }}>
-        <WelcomeBackdrop width={imageWidth} height={imageHeight} />
+        <WelcomeBackdrop
+          width={imageWidth}
+          height={imageHeight}
+          gutter={layout.gutter}
+          bottomInset={wide ? 0 : SHEET_RADIUS}
+        />
         <View
           style={{
             position: 'absolute',
@@ -202,6 +208,43 @@ export default function WelcomeScreen() {
               {t('onboarding.welcomeBody')}
             </Text>
           </Animated.View>
+          <View
+            style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: compact ? 10 : 14 }}
+          >
+            {(['minutes', 'posture', 'offline'] as const).map((pill, index) => (
+              <Animated.View
+                key={pill}
+                entering={ZoomIn.springify()
+                  .damping(16)
+                  .delay(500 + index * 110)}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 5,
+                  height: 30,
+                  paddingHorizontal: 10,
+                  borderRadius: 15,
+                  backgroundColor: palette.card,
+                }}
+              >
+                {pill === 'minutes' ? (
+                  <ClockGlyph color={palette.ink} size={14} strokeWidth={2} />
+                ) : pill === 'posture' ? (
+                  <PracticeIcon mode="both" color={palette.ink} size={14} />
+                ) : (
+                  <OfflineIcon usage="often" color={palette.ink} size={14} />
+                )}
+                <Text
+                  weight="medium"
+                  color={palette.ink}
+                  maxFontSizeMultiplier={1.2}
+                  style={{ fontSize: 12, lineHeight: 15 }}
+                >
+                  {t(`onboarding.welcomePills.${pill}`)}
+                </Text>
+              </Animated.View>
+            ))}
+          </View>
           <View style={{ flexGrow: 1, minHeight: compact ? 16 : 24 }} />
           <Animated.View entering={enter(3)} style={{ marginTop: wide ? 32 : 0 }}>
             <ContinueButton label={t('onboarding.start')} onPress={() => begin(false)} />

@@ -26,7 +26,7 @@ export default function FeelStep() {
   const palette = useOnboardingPalette();
   const context = draft.forRelative ? 'relative' : undefined;
   const tileHeight =
-    layout.breakpoint === 'tablet' ? 132 : layout.breakpoint === 'compact' ? 92 : 112;
+    layout.breakpoint === 'tablet' ? 168 : layout.breakpoint === 'compact' ? 128 : 148;
   const iconSize = layout.breakpoint === 'compact' ? 20 : 24;
 
   return (
@@ -63,6 +63,7 @@ export default function FeelStep() {
               selected={draft.goals.includes(goal)}
               onPress={() => updateDraft({ goals: toggleGoal(draft.goals, goal) })}
               label={t(`onboarding.feel.${goal}`)}
+              description={t(`onboarding.feel.benefit.${goal}`)}
               minHeight={fullWidth ? layout.rowHeight : tileHeight}
               containerStyle={{ flexGrow: 1, flexBasis: fullWidth ? '100%' : '40%' }}
               leading={(colors) => (

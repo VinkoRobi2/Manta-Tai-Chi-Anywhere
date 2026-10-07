@@ -39,7 +39,9 @@
       "standing": "Standing",
       "standingBody": "Gentle steps in one square meter.",
       "both": "Both",
-      "bothBody": "We switch depending on the day."
+      "bothBody": "We switch depending on the day.",
+      "recommended": "Best to start",
+      "firstClass": "First class: {{title}} · {{minutes}} min"
     },
     "feel": {
       "title": "What do you want to feel?",
@@ -51,7 +53,14 @@
       "balance": "Balance",
       "joints": "Looser joints",
       "sleep": "Better sleep",
-      "energy": "Energy"
+      "energy": "Energy",
+      "benefit": {
+        "calm": "Slow breath, quiet mind.",
+        "balance": "Steady feet, stable center.",
+        "joints": "Loose shoulders, hips and wrists.",
+        "sleep": "Let go of the day before bed.",
+        "energy": "Wake the body without tiring it."
+      }
     },
     "time": {
       "title": "How much time a day?",
@@ -64,13 +73,28 @@
         "5": "A breather between tasks.",
         "10": "Just right to build the habit.",
         "20": "A full session, no rush."
-      }
+      },
+      "anatomy": "What a {{count}}-min class looks like",
+      "parts": {
+        "arrive": "Arrive",
+        "move": "Move",
+        "close": "Close"
+      },
+      "week": "{{count}} min a week"
     },
     "care": {
       "title": "Any area to look after?",
       "body": "We adapt or skip the movements that load it.",
       "none": "None",
-      "safety": "Manta doesn't replace your doctor. If something hurts, stop."
+      "safety": "Manta doesn't replace your doctor. If something hurts, stop.",
+      "adaptTitle": "How we adapt",
+      "adapt": {
+        "knees": "Knees: no deep bends, always supported.",
+        "back": "Back: gentle turns, long spine.",
+        "shoulders": "Shoulders: arms at chest height, never overhead.",
+        "neck": "Neck: eyes forward, no sudden turns."
+      },
+      "tapHint": "Tap the figure or the list."
     },
     "offline": {
       "title": "Will you practice offline?",
@@ -83,7 +107,9 @@
       "rarely": "Rarely",
       "rarelyBody": "I always have Wi‑Fi or data.",
       "auto": "Free classes download on their own over Wi‑Fi.",
-      "manual": "You can download any class whenever you like."
+      "manual": "You can download any class whenever you like.",
+      "saved": "On your phone",
+      "cloud": "Downloads when opened"
     },
     "building": {
       "title": "Building your plan",
@@ -112,13 +138,15 @@
       "days": "7 days",
       "perDay": "{{count}} min a day",
       "level": "Beginner",
-      "week": "Your week",
-      "today": "Today",
       "weekdays": ["M", "T", "W", "T", "F", "S", "S"],
-      "firstClass": "Your first class",
-      "firstClass_relative": "Their first class",
       "start": "Start first class",
-      "change": "Change answers"
+      "change": "Change answers",
+      "firstClasses": "Your first classes",
+      "dayLabel": {
+        "0": "Today",
+        "1": "Tomorrow",
+        "2": "Day 3"
+      }
     },
     "account": {
       "title": "Save your progress",
@@ -137,6 +165,15 @@
         "googleSetup": "Signing in with Google isn't set up in this version yet.",
         "generic": "Something went wrong. Please try again."
       }
+    },
+    "welcomePills": {
+      "minutes": "5–20 min",
+      "posture": "Seated or standing",
+      "offline": "Works offline"
+    },
+    "welcomeCaption": {
+      "seated": "Seated tai chi",
+      "standing": "Standing tai chi"
     }
   },
   "tabs": {

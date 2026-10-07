@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from 'react';
 import { View, type StyleProp, type ViewStyle } from 'react-native';
 import Animated, {
+  FadeInDown,
   interpolateColor,
   useAnimatedStyle,
   useSharedValue,
@@ -84,6 +85,10 @@ export interface ChoiceCardProps {
   role: 'radio' | 'checkbox';
   label: string;
   description?: string;
+  /** Etiqueta de sol encima del nombre ("Ideal para empezar"). */
+  badge?: string;
+  /** Una línea extra que aparece debajo al elegirla (por ejemplo, la primera clase). */
+  detail?: string;
   /** Lo que va a la izquierda (un icono en su casilla). */
   leading?: (colors: ChoiceColors) => ReactNode;
   /** Lo que va a la derecha (una ilustración). Por defecto, el visto si está elegida. */
@@ -104,6 +109,8 @@ export function ChoiceCard({
   role,
   label,
   description,
+  badge,
+  detail,
   leading,
   trailing,
   variant = 'row',
@@ -153,6 +160,27 @@ export function ChoiceCard({
       >
         {leading ? leading(colors) : null}
         <View style={{ flex: tile ? undefined : 1, gap: 3 }}>
+          {badge ? (
+            <View
+              style={{
+                alignSelf: 'flex-start',
+                marginBottom: 3,
+                paddingHorizontal: 8,
+                height: 20,
+                borderRadius: 10,
+                justifyContent: 'center',
+                backgroundColor: palette.accent,
+              }}
+            >
+              <Text
+                weight="semibold"
+                color={palette.onAccent}
+                style={{ fontSize: 11, lineHeight: 14 }}
+              >
+                {badge}
+              </Text>
+            </View>
+          ) : null}
           <Text
             weight="medium"
             color={colors.text}
@@ -172,6 +200,28 @@ export function ChoiceCard({
             >
               {description}
             </Text>
+          ) : null}
+          {detail && selected ? (
+            <Animated.View
+              entering={FadeInDown.duration(320)}
+              style={{ flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 6 }}
+            >
+              <View
+                style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: palette.accent }}
+              />
+              <Text
+                weight="medium"
+                color={colors.text}
+                numberOfLines={2}
+                style={{
+                  flexShrink: 1,
+                  fontSize: labelSize - 4,
+                  lineHeight: Math.round((labelSize - 4) * 1.35),
+                }}
+              >
+                {detail}
+              </Text>
+            </Animated.View>
           ) : null}
         </View>
         {trailing ? trailing(colors) : null}
