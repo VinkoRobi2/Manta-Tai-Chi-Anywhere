@@ -60,10 +60,10 @@ Sin internet se entra como invitado: el progreso se guarda en el teléfono y se 
 
 ## Variables de entorno
 
-| Archivo                  | Contiene                                                      |
-| ------------------------ | ------------------------------------------------------------- |
-| `apps/api/.env`          | Base de datos, sesiones, Apple y Google, RevenueCat y R2      |
-| `apps/mobile/.env.local` | URL de la API (opcional en desarrollo) y Client IDs de Google |
+| Archivo                  | Contiene                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| `apps/api/.env`          | Base de datos, sesiones, Apple y Google, RevenueCat y R2                        |
+| `apps/mobile/.env.local` | URL de la API (opcional en desarrollo), Client IDs de Google y llave de PostHog |
 
 Ninguno se sube a git. Las plantillas están en los `.env.example`.
 

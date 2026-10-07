@@ -15,7 +15,7 @@ import { restoreOnboarding } from '@/features/onboarding/onboarding';
 import { loadPractices, startPracticeSync } from '@/features/practice/practice';
 import { loadProgress, startProgressSync } from '@/features/progress/progress';
 import { loadSettings } from '@/features/settings/settings';
-import { track } from '@/lib/analytics';
+import { track, useScreenTracking } from '@/lib/analytics';
 import { applyLanguage } from '@/lib/i18n';
 import { lessonDark, onboardingLight, practiceDark } from '@/theme/tokens';
 
@@ -48,6 +48,7 @@ export default function RootLayout() {
     Lexend_600SemiBold,
     Lexend_800ExtraBold,
   });
+  useScreenTracking();
 
   useEffect(() => {
     if (ready && (fontsLoaded || fontError)) void SplashScreen.hideAsync();
