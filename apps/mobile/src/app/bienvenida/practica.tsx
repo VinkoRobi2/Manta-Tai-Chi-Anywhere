@@ -66,6 +66,7 @@ export default function PracticeStep() {
                   sunOffsetY={-cardHeight * 0.06}
                   sunColor={palette.accent}
                   tint={colors.selected ? palette.onSelected : palette.ink}
+                  alive={colors.selected}
                 />
                 {colors.selected ? (
                   <View style={{ position: 'absolute', top: 12, right: 12 }}>

@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
-import Animated from 'react-native-reanimated';
+import Animated, { ZoomIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { programsForMode } from '@/features/catalog/catalog';
@@ -15,6 +15,7 @@ import {
   markScreen,
   useOnboardingDraft,
 } from '@/features/onboarding/onboarding';
+import { Burst, RevealText, Ripples } from '@/features/onboarding/motion';
 import { PlayGlyph } from '@/features/onboarding/OptionIcons';
 import type { Pose } from '@/features/onboarding/PoseArt';
 import { PoseThumb } from '@/features/onboarding/PoseThumb';
@@ -95,22 +96,33 @@ export default function PlanScreen() {
         }}
       >
         <View style={[column, { flexGrow: tablet ? 0 : 1 }]}>
-          <Animated.View entering={enter(0)}>
-            <CheckBadge size={compact ? 30 : 34} />
-            <Text
-              accessibilityRole="header"
-              color={palette.ink}
-              maxFontSizeMultiplier={1.4}
+          <View>
+            <View
               style={{
-                marginTop: 16,
-                fontFamily: fonts.semibold,
-                fontSize: layout.titleSize,
-                lineHeight: layout.titleLine,
-                letterSpacing: -0.8,
+                width: compact ? 30 : 34,
+                height: compact ? 30 : 34,
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
-              {t('onboarding.plan.title', { context })}
-            </Text>
+              <Burst size={compact ? 96 : 110} color={palette.accent} count={10} delay={200} />
+              <CheckBadge size={compact ? 30 : 34} />
+            </View>
+            <View style={{ marginTop: 16 }}>
+              <RevealText
+                text={t('onboarding.plan.title', { context })}
+                header
+                color={palette.ink}
+                delay={120}
+                maxFontSizeMultiplier={1.4}
+                style={{
+                  fontFamily: fonts.semibold,
+                  fontSize: layout.titleSize,
+                  lineHeight: layout.titleLine,
+                  letterSpacing: -0.8,
+                }}
+              />
+            </View>
             {tiny ? null : (
               <Text
                 color={palette.muted}
@@ -119,7 +131,7 @@ export default function PlanScreen() {
                 {t('onboarding.plan.body', { context })}
               </Text>
             )}
-          </Animated.View>
+          </View>
 
           <Animated.View
             entering={enter(1)}
@@ -144,6 +156,8 @@ export default function PlanScreen() {
                 sunOffsetY={cardHeight * 0.02}
                 sunColor={palette.accent}
                 tint={palette.onSelected}
+                alive
+                rise
               />
             </View>
             <View style={{ padding: compact ? 16 : 22, paddingRight: artReserve, gap: 8 }}>
@@ -204,8 +218,11 @@ export default function PlanScreen() {
                 const today = index === 0;
                 const size = tablet ? 46 : compact ? 36 : 40;
                 return (
-                  <View
+                  <Animated.View
                     key={`${day}-${index}`}
+                    entering={ZoomIn.springify()
+                      .damping(14)
+                      .delay(500 + index * 70)}
                     style={{ alignItems: 'center', gap: 6 }}
                     accessible={today}
                     accessibilityLabel={today ? t('onboarding.plan.today') : undefined}
@@ -220,6 +237,16 @@ export default function PlanScreen() {
                         justifyContent: 'center',
                       }}
                     >
+                      {today ? (
+                        <Ripples
+                          size={size}
+                          color={palette.accent}
+                          count={2}
+                          durationMs={2600}
+                          from={1}
+                          to={1.5}
+                        />
+                      ) : null}
                       <Text
                         weight="medium"
                         color={today ? palette.onAccent : palette.muted}
@@ -236,7 +263,7 @@ export default function PlanScreen() {
                     >
                       {t('onboarding.plan.today')}
                     </Text>
-                  </View>
+                  </Animated.View>
                 );
               })}
             </View>

@@ -10,6 +10,7 @@ import { fonts } from '@/theme/tokens';
 import { Text } from '@/ui/Text';
 
 import { ContinueButton } from './ContinueButton';
+import { RevealText } from './motion';
 import {
   markScreen,
   ONBOARDING_STEPS,
@@ -131,22 +132,20 @@ export function StepScreen({
               </View>
             </Animated.View>
           ) : null}
-          <Animated.View entering={enter(0)}>
-            <Text
-              accessibilityRole="header"
-              color={palette.ink}
-              maxFontSizeMultiplier={1.4}
-              style={{
-                fontFamily: fonts.semibold,
-                fontSize: layout.titleSize,
-                lineHeight: layout.titleLine,
-                letterSpacing: -0.8,
-              }}
-            >
-              {title}
-            </Text>
-          </Animated.View>
-          <Animated.View entering={enter(1)}>
+          <RevealText
+            text={title}
+            header
+            color={palette.ink}
+            delay={60}
+            maxFontSizeMultiplier={1.4}
+            style={{
+              fontFamily: fonts.semibold,
+              fontSize: layout.titleSize,
+              lineHeight: layout.titleLine,
+              letterSpacing: -0.8,
+            }}
+          />
+          <Animated.View entering={enter(3)}>
             <Text
               color={palette.muted}
               maxFontSizeMultiplier={1.6}
@@ -156,7 +155,7 @@ export function StepScreen({
             </Text>
           </Animated.View>
           <Animated.View
-            entering={enter(2)}
+            entering={enter(4)}
             style={{ marginTop: layout.sectionGap, flexGrow: centered ? 0 : 1 }}
           >
             {children}

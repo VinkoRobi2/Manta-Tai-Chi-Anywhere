@@ -38,8 +38,8 @@ export function BackButton({ onPress }: { onPress: () => void }) {
 }
 
 /**
- * Barra superior de cada pregunta: volver, la barra de progreso y, si hace falta, "Saltar".
- * La barra se llena desde el paso anterior hasta el actual al entrar a la pantalla.
+ * Barra superior de cada pregunta: volver, el progreso por tramos (uno por pregunta) y, si hace
+ * falta, "Saltar". Los tramos hechos van en negro; el de la pregunta actual se llena al entrar.
  */
 export function TopBar({
   step,
@@ -54,17 +54,6 @@ export function TopBar({
   progressLabel: string;
   onBack: () => void;
 }) {
-  const palette = useOnboardingPalette();
-  const [trackWidth, setTrackWidth] = useState(0);
-  const filled = useSharedValue((step - 1) / total);
-  useEffect(() => {
-    filled.value = withTiming(step / total, {
-      duration: 520,
-      easing: Easing.bezier(0.22, 1, 0.36, 1),
-    });
-  }, [filled, step, total]);
-  const fill = useAnimatedStyle(() => ({ width: trackWidth * filled.value }));
-
   return (
     <View style={{ height: 56, flexDirection: 'row', alignItems: 'center', gap: 14 }}>
       <BackButton onPress={onBack} />
@@ -73,20 +62,52 @@ export function TopBar({
         accessibilityRole="progressbar"
         accessibilityLabel={progressLabel}
         accessibilityValue={{ min: 0, max: total, now: step }}
-        onLayout={(event: LayoutChangeEvent) => setTrackWidth(event.nativeEvent.layout.width)}
-        style={{
-          flex: 1,
-          height: 6,
-          borderRadius: 3,
-          backgroundColor: palette.track,
-          overflow: 'hidden',
-        }}
+        style={{ flex: 1, flexDirection: 'row', gap: 5 }}
       >
-        <Animated.View
-          style={[{ height: 6, borderRadius: 3, backgroundColor: palette.selected }, fill]}
-        />
+        {Array.from({ length: total }, (_, index) => (
+          <Segment
+            key={index}
+            state={index + 1 < step ? 'done' : index + 1 === step ? 'current' : 'next'}
+          />
+        ))}
       </View>
       <View style={{ minWidth: BUTTON, alignItems: 'flex-end' }}>{right}</View>
+    </View>
+  );
+}
+
+function Segment({ state }: { state: 'done' | 'current' | 'next' }) {
+  const palette = useOnboardingPalette();
+  const [width, setWidth] = useState(0);
+  const filled = useSharedValue(state === 'done' ? 1 : 0);
+  useEffect(() => {
+    filled.value = withTiming(state === 'next' ? 0 : 1, {
+      duration: state === 'current' ? 700 : 0,
+      easing: Easing.bezier(0.22, 1, 0.36, 1),
+    });
+  }, [filled, state]);
+  const fill = useAnimatedStyle(() => ({ width: width * filled.value }));
+  return (
+    <View
+      onLayout={(event: LayoutChangeEvent) => setWidth(event.nativeEvent.layout.width)}
+      style={{
+        flex: 1,
+        height: 6,
+        borderRadius: 3,
+        backgroundColor: palette.track,
+        overflow: 'hidden',
+      }}
+    >
+      <Animated.View
+        style={[
+          {
+            height: 6,
+            borderRadius: 3,
+            backgroundColor: state === 'current' ? palette.accent : palette.selected,
+          },
+          fill,
+        ]}
+      />
     </View>
   );
 }

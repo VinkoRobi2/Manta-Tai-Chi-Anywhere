@@ -11,6 +11,7 @@ import {
   updateDraft,
   useOnboardingDraft,
 } from '@/features/onboarding/onboarding';
+import { IconMotion } from '@/features/onboarding/IconMotion';
 import { GoalIcon } from '@/features/onboarding/OptionIcons';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { StepScreen } from '@/features/onboarding/StepScreen';
@@ -66,7 +67,9 @@ export default function FeelStep() {
               containerStyle={{ flexGrow: 1, flexBasis: fullWidth ? '100%' : '40%' }}
               leading={(colors) => (
                 <IconTile colors={colors}>
-                  <GoalIcon goal={goal} color={colors.icon} size={iconSize} />
+                  <IconMotion kind={goal} active={colors.selected}>
+                    <GoalIcon goal={goal} color={colors.icon} size={iconSize} />
+                  </IconMotion>
                 </IconTile>
               )}
             />

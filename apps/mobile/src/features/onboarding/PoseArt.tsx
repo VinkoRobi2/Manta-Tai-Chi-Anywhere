@@ -4,6 +4,7 @@ import { View, type LayoutChangeEvent } from 'react-native';
 import Animated, {
   FadeIn,
   useAnimatedProps,
+  useAnimatedStyle,
   useSharedValue,
   withTiming,
   ZoomIn,
@@ -13,6 +14,7 @@ import Svg, { Circle, Defs, Ellipse, RadialGradient, Stop } from 'react-native-s
 import type { CareTag } from '@/features/settings/settings';
 import { motion } from '@/theme/tokens';
 
+import { BreathingSun, FlowLines, Ripples, useBreath } from './motion';
 import { useOnboardingPalette } from './responsive';
 import { svgId } from './svgId';
 
@@ -72,6 +74,8 @@ export interface PoseArtProps {
   /** Zonas a marcar sobre la figura de pie. */
   markers?: readonly ZoneMarker[];
   maxHeight: number;
+  /** Estelas de movimiento alrededor de los brazos. */
+  flow?: boolean;
 }
 
 export function PoseArt({
@@ -79,6 +83,7 @@ export function PoseArt({
   backdrop = { kind: 'disc' },
   markers = [],
   maxHeight,
+  flow = false,
 }: PoseArtProps) {
   const [box, setBox] = useState({ width: 0, height: 0 });
   const onLayout = (event: LayoutChangeEvent) => {
@@ -104,6 +109,7 @@ export function PoseArt({
           backdrop={backdrop}
           markers={markers}
           maxHeight={maxHeight}
+          flow={flow}
         />
       ) : null}
     </View>
@@ -124,8 +130,13 @@ function Scene({
   backdrop,
   markers,
   maxHeight,
+  flow,
 }: Required<PoseArtProps> & { width: number; height: number }) {
   const palette = useOnboardingPalette();
+  const breath = useBreath();
+  const figureStyle = useAnimatedStyle(() => ({
+    transform: [{ translateY: -breath.value * 3 }],
+  }));
   const floorGap = 14;
   const feetY = height - floorGap;
   const figH = Math.max(80, Math.min(maxHeight, height - floorGap - 4, width * 1.25));
@@ -165,18 +176,26 @@ function Scene({
           />
         </View>
       ) : (
+        <BreathingSun
+          size={discSize}
+          color={palette.accent}
+          style={{ position: 'absolute', left: cx - discSize / 2, top: discTop }}
+        />
+      )}
+
+      {flow ? (
         <View
           style={{
             position: 'absolute',
-            left: cx - discSize / 2,
-            top: discTop,
-            width: discSize,
-            height: discSize,
-            borderRadius: discSize / 2,
-            backgroundColor: palette.accent,
+            left: cx - discSize * 0.8,
+            top: discTop + discSize / 2 - discSize * 0.8,
+            width: discSize * 1.6,
+            height: discSize * 1.6,
           }}
-        />
-      )}
+        >
+          <FlowLines size={discSize * 1.6} color={palette.ink} strokeWidth={1.5} opacity={0.3} />
+        </View>
+      ) : null}
 
       <FloorShadow
         left={cx - shadowW / 2}
@@ -190,7 +209,7 @@ function Scene({
       <Animated.View
         key={poses.join('-')}
         entering={FadeIn.duration(motion.quick)}
-        style={{ position: 'absolute', left: 0, top: 0, width, height }}
+        style={[{ position: 'absolute', left: 0, top: 0, width, height }, figureStyle]}
       >
         {placed.map((figure) => (
           <Image
@@ -282,15 +301,7 @@ function ZoneDot({
         height: halo,
       }}
     >
-      <View
-        style={{
-          position: 'absolute',
-          inset: 0,
-          borderRadius: halo / 2,
-          backgroundColor: color,
-          opacity: 0.3,
-        }}
-      />
+      <Ripples size={halo} color={color} count={2} durationMs={2400} from={0.5} to={1.7} filled />
       <View
         style={{
           position: 'absolute',

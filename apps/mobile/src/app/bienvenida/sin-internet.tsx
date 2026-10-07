@@ -11,6 +11,8 @@ import {
   useOnboardingDraft,
   wantsAutoAnchor,
 } from '@/features/onboarding/onboarding';
+import { IconMotion } from '@/features/onboarding/IconMotion';
+import { Float } from '@/features/onboarding/motion';
 import { DownloadGlyph, OfflineIcon } from '@/features/onboarding/OptionIcons';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { StepScreen } from '@/features/onboarding/StepScreen';
@@ -65,7 +67,9 @@ export default function OfflineStep() {
                 justifyContent: 'center',
               }}
             >
-              <DownloadGlyph color={palette.onAccent} size={18} />
+              <Float amplitude={2} periodMs={1400}>
+                <DownloadGlyph color={palette.onAccent} size={18} />
+              </Float>
             </View>
             <Text variant="caption" color={palette.ink} style={{ flexShrink: 1, fontSize: 15 }}>
               {t(
@@ -89,7 +93,9 @@ export default function OfflineStep() {
             description={t(`onboarding.offline.${usage}Body`)}
             leading={(colors) => (
               <IconTile colors={colors}>
-                <OfflineIcon usage={usage} color={colors.icon} size={iconSize} />
+                <IconMotion kind="signal" active={colors.selected}>
+                  <OfflineIcon usage={usage} color={colors.icon} size={iconSize} />
+                </IconMotion>
               </IconTile>
             )}
           />
