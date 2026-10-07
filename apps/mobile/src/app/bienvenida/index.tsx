@@ -15,6 +15,7 @@ import {
   startOnboarding,
 } from '@/features/onboarding/onboarding';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
+import { Float, RevealText } from '@/features/onboarding/motion';
 import { Squish } from '@/features/onboarding/Squish';
 import { enter } from '@/features/onboarding/StepScreen';
 import { WelcomeBackdrop } from '@/features/onboarding/WelcomeBackdrop';
@@ -29,8 +30,8 @@ import { Text } from '@/ui/Text';
 const SHEET_RADIUS = 32;
 
 /**
- * Bienvenida: arriba el video de una persona practicando; abajo una hoja blanca con la marca,
- * la promesa y un solo botón. En pantallas anchas, imagen a la izquierda y texto a la derecha.
+ * Bienvenida: arriba, fotos de tai chi que se acercan despacio y se funden; abajo una hoja blanca
+ * con la marca, la promesa (palabra por palabra) y un solo botón. En pantallas anchas, imagen a la izquierda.
  */
 export default function WelcomeScreen() {
   const { t } = useTranslation();
@@ -168,7 +169,9 @@ export default function WelcomeScreen() {
             accessibilityRole="header"
             accessibilityLabel="Manta"
           >
-            <MantaMark width={28} color={palette.accent} />
+            <Float amplitude={2} sway={5} periodMs={5000}>
+              <MantaMark width={28} color={palette.accent} />
+            </Float>
             <Text
               color={palette.ink}
               style={{ fontFamily: fonts.semibold, fontSize: 13, lineHeight: 16, letterSpacing: 3 }}
@@ -176,21 +179,21 @@ export default function WelcomeScreen() {
               MANTA
             </Text>
           </Animated.View>
-          <Animated.View entering={enter(1)}>
-            <Text
+          <View style={{ marginTop: compact ? 14 : 20 }}>
+            <RevealText
+              text={t('onboarding.tagline')}
               color={palette.ink}
+              delay={180}
+              stagger={90}
               maxFontSizeMultiplier={1.3}
               style={{
-                marginTop: compact ? 14 : 20,
                 fontFamily: fonts.semibold,
                 fontSize: headline,
                 lineHeight: Math.round(headline * 1.14),
                 letterSpacing: -1,
               }}
-            >
-              {t('onboarding.tagline')}
-            </Text>
-          </Animated.View>
+            />
+          </View>
           <Animated.View entering={enter(2)}>
             <Text
               color={palette.muted}

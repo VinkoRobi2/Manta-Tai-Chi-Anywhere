@@ -1,9 +1,10 @@
 import { Image } from 'expo-image';
 import { useFocusEffect } from 'expo-router';
-import { useVideoPlayer, VideoView } from 'expo-video';
-import { useCallback, useId } from 'react';
+import { useCallback, useEffect, useId, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, {
+  cancelAnimation,
+  Easing,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -16,50 +17,46 @@ import { welcome } from '@/theme/tokens';
 import { svgId } from './svgId';
 
 /**
- * Fondo de la bienvenida: una mujer practicando al aire libre, en video, en bucle y sin sonido.
- * El bucle va y vuelve (baja el brazo y lo sube), así no se nota dónde empieza.
- * Mientras carga se ve el primer cuadro como foto, y con "Reducir movimiento" se queda así.
- * El video solo corre mientras la bienvenida está a la vista.
+ * Fondo de la bienvenida: fotos de personas practicando tai chi, una tras otra. Cada foto se
+ * acerca muy despacio (efecto Ken Burns) y se funde con la siguiente, como una respiración larga.
+ * Con "Reducir movimiento" se queda la primera foto, quieta. Solo corre mientras se ve.
  */
 
-const VIDEO = require('../../../assets/videos/welcome.mp4');
-const POSTER = require('../../../assets/images/onboarding/welcome-poster.jpg');
-const VIDEO_W = 1280;
-const VIDEO_H = 720;
-/** Dónde está la persona en el cuadro (fracción del ancho): el recorte la mantiene a la vista. */
-const FOCUS_X = 0.74;
+const PHOTOS = [
+  {
+    source: require('../../../assets/images/lessons/sentado-primeros-movimientos.jpg'),
+    // Hacia dónde se acerca la cámara (el rostro y las manos).
+    origin: { x: 0.1, y: -0.12 },
+  },
+  {
+    source: require('../../../assets/images/lessons/en-el-lugar-manos-de-nube.jpg'),
+    origin: { x: -0.08, y: -0.1 },
+  },
+] as const;
 
-/** Llena una caja de `width` × `height` (la parte de arriba de la bienvenida). */
+/** Lo que dura cada foto en pantalla, y el fundido entre una y otra. */
+const HOLD_MS = 7000;
+const FADE_MS = 1600;
+const ZOOM = 0.1;
+
 export function WelcomeBackdrop({ width, height }: { width: number; height: number }) {
   const reducedMotion = useReducedMotion();
   const scrimId = svgId(useId());
-
-  // "cover" con punto de interés: llena la caja sin deformarse y deja a la persona a la vista.
-  const scale = Math.max(width / VIDEO_W, height / VIDEO_H);
-  const w = VIDEO_W * scale;
-  const h = VIDEO_H * scale;
-  const left = Math.min(0, Math.max(width - w, width / 2 - FOCUS_X * w));
-  const top = (height - h) / 2;
-  const frame = { position: 'absolute', left, top, width: w, height: h } as const;
-
-  const player = useVideoPlayer(reducedMotion ? null : VIDEO, (created) => {
-    created.loop = true;
-    created.muted = true;
-    // No corta la música de la persona.
-    created.audioMixingMode = 'mixWithOthers';
-  });
+  const [active, setActive] = useState(0);
+  const [running, setRunning] = useState(true);
 
   useFocusEffect(
     useCallback(() => {
-      if (reducedMotion) return;
-      player.play();
-      return () => player.pause();
-    }, [player, reducedMotion]),
+      setRunning(true);
+      return () => setRunning(false);
+    }, []),
   );
 
-  // El video aparece encima de la foto cuando ya tiene imagen: sin parpadeo negro.
-  const shown = useSharedValue(0);
-  const videoStyle = useAnimatedStyle(() => ({ opacity: shown.value }));
+  useEffect(() => {
+    if (reducedMotion || !running) return;
+    const timer = setInterval(() => setActive((index) => (index + 1) % PHOTOS.length), HOLD_MS);
+    return () => clearInterval(timer);
+  }, [reducedMotion, running]);
 
   return (
     <View
@@ -68,34 +65,86 @@ export function WelcomeBackdrop({ width, height }: { width: number; height: numb
       accessibilityElementsHidden
       importantForAccessibility="no-hide-descendants"
     >
-      <Image source={POSTER} style={frame} contentFit="cover" />
-      {reducedMotion ? null : (
-        <Animated.View style={[frame, videoStyle]}>
-          <VideoView
-            player={player}
-            style={{ width: w, height: h }}
-            contentFit="cover"
-            nativeControls={false}
-            allowsPictureInPicture={false}
-            playsInline
-            // Android: textureView se deja tapar por la hoja blanca con esquinas redondas.
-            surfaceType="textureView"
-            onFirstFrameRender={() => shown.set(withTiming(1, { duration: 500 }))}
-          />
-        </Animated.View>
-      )}
+      {PHOTOS.map((photo, index) => (
+        <Slide
+          key={index}
+          source={photo.source}
+          origin={photo.origin}
+          visible={index === active}
+          moving={!reducedMotion && running}
+          width={width}
+          height={height}
+        />
+      ))}
 
-      {/* Oscurece un poco arriba para que se lean la hora y "Ya tengo cuenta". */}
+      {/* Oscurece arriba (la hora y los botones) y un poco abajo, donde empieza la hoja blanca. */}
       <Svg width={width} height={height} style={StyleSheet.absoluteFill}>
         <Defs>
           <LinearGradient id={scrimId} x1="0" y1="0" x2="0" y2="1">
-            <Stop offset="0" stopColor={welcome.ground} stopOpacity={0.45} />
-            <Stop offset="0.24" stopColor={welcome.ground} stopOpacity={0} />
-            <Stop offset="1" stopColor={welcome.ground} stopOpacity={0} />
+            <Stop offset="0" stopColor={welcome.ground} stopOpacity={0.5} />
+            <Stop offset="0.22" stopColor={welcome.ground} stopOpacity={0} />
+            <Stop offset="0.8" stopColor={welcome.ground} stopOpacity={0} />
+            <Stop offset="1" stopColor={welcome.ground} stopOpacity={0.25} />
           </LinearGradient>
         </Defs>
         <Rect width={width} height={height} fill={`url(#${scrimId})`} />
       </Svg>
     </View>
+  );
+}
+
+function Slide({
+  source,
+  origin,
+  visible,
+  moving,
+  width,
+  height,
+}: {
+  source: number;
+  origin: { x: number; y: number };
+  visible: boolean;
+  moving: boolean;
+  width: number;
+  height: number;
+}) {
+  const opacity = useSharedValue(visible ? 1 : 0);
+  const zoom = useSharedValue(0);
+
+  useEffect(() => {
+    opacity.value = withTiming(visible ? 1 : 0, {
+      duration: FADE_MS,
+      easing: Easing.inOut(Easing.quad),
+    });
+    if (visible && moving) {
+      // Cada vez que vuelve a verse, el acercamiento empieza de nuevo.
+      zoom.value = 0;
+      zoom.value = withTiming(1, { duration: HOLD_MS + FADE_MS, easing: Easing.linear });
+    }
+    if (!moving) cancelAnimation(zoom);
+  }, [moving, opacity, visible, zoom]);
+
+  const style = useAnimatedStyle(() => {
+    const scale = 1 + ZOOM * zoom.value;
+    return {
+      opacity: opacity.value,
+      transform: [
+        { translateX: origin.x * width * ZOOM * zoom.value },
+        { translateY: origin.y * height * ZOOM * zoom.value },
+        { scale },
+      ],
+    };
+  });
+
+  return (
+    <Animated.View style={[StyleSheet.absoluteFill, style]}>
+      <Image
+        source={source}
+        contentFit="cover"
+        contentPosition="top center"
+        style={{ width, height }}
+        transition={0}
+      />
+    </Animated.View>
   );
 }

@@ -12,10 +12,10 @@ import { isAppleAvailable } from '@/features/auth/apple';
 import { GoogleLogo } from '@/features/auth/GoogleLogo';
 import { GoogleUnavailableError } from '@/features/auth/google';
 import { enterAsGuest, signInWithApple, signInWithGoogle } from '@/features/auth/session';
+import { AccountArt } from '@/features/onboarding/AccountArt';
 import { ContinueButton, TextButton } from '@/features/onboarding/ContinueButton';
 import { restoreOnboarding, resumeHref } from '@/features/onboarding/onboarding';
 import { OfflineIcon } from '@/features/onboarding/OptionIcons';
-import { PoseArt } from '@/features/onboarding/PoseArt';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { Squish } from '@/features/onboarding/Squish';
 import { enter } from '@/features/onboarding/StepScreen';
@@ -169,7 +169,7 @@ export default function AccountScreen() {
             }
           >
             <View style={{ height: layout.artMax + 40, flexShrink: 1 }}>
-              <PoseArt poses={['rise']} maxHeight={layout.artMax} />
+              <AccountArt maxHeight={layout.artMax} />
             </View>
           </Animated.View>
 

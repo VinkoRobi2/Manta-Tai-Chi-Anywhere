@@ -161,6 +161,15 @@ export function OfflineGlyph(props: GlyphProps) {
   );
 }
 
+export function PhoneGlyph(props: GlyphProps) {
+  return (
+    <Glyph {...props}>
+      <Rect x={6.5} y={2.5} width={11} height={19} rx={2.8} />
+      <Path d="M10.5 18.5h3" />
+    </Glyph>
+  );
+}
+
 export function CloudGlyph(props: GlyphProps) {
   return (
     <Glyph {...props}>
