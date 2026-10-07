@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react';
-import Svg, { Circle, Ellipse, Path } from 'react-native-svg';
+import Svg, { Circle, Ellipse, G, Path, Rect } from 'react-native-svg';
 
 import type { Goal, OfflineUsage, PracticeMode } from '@/features/settings/settings';
+
+import type { OnboardingCareTag } from './onboarding';
 
 /** Iconos de línea de las opciones del onboarding. Se pintan del color que dicta la selección. */
 
@@ -89,6 +91,69 @@ export function GoalIcon({ goal, ...props }: GlyphProps & { goal: Goal }) {
         <Glyph {...props}>
           <Circle cx={12} cy={12} r={4} />
           <Path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8" />
+        </Glyph>
+      );
+  }
+}
+
+/**
+ * Las zonas que cuidar: cada una es la parte del cuerpo de cerca, con la zona marcada por el sol.
+ * Rodillas: las piernas de frente. Espalda: la columna. Hombros y cuello:
+ * el busto. Ninguna: una cara tranquila.
+ */
+export function ZoneIcon({
+  zone,
+  accent,
+  ...props
+}: GlyphProps & { zone: OnboardingCareTag | 'none'; accent: string }) {
+  const sun = { fill: accent, stroke: 'none' } as const;
+  switch (zone) {
+    case 'knees':
+      return (
+        <Glyph {...props}>
+          <Circle cx={7.6} cy={12.4} r={2.6} {...sun} />
+          <Circle cx={16.4} cy={12.4} r={2.6} {...sun} />
+          <Path d="M5.4 2c-.6 3.6-.9 6.8-.7 10.2.2 3 .8 5.8 1 8.6M10.6 2c-.2 3.6-.5 6.8-.6 10.2-.1 3-.4 5.8-.6 8.6M5.6 21.4h3.8" />
+          <Path d="M18.6 2c.6 3.6.9 6.8.7 10.2-.2 3-.8 5.8-1 8.6M13.4 2c.2 3.6.5 6.8.6 10.2.1 3 .4 5.8.6 8.6M18.4 21.4h-3.8" />
+        </Glyph>
+      );
+    case 'back':
+      return (
+        <Glyph {...props}>
+          <Circle cx={12} cy={15.2} r={5.4} {...sun} />
+          <G fill={props.color} stroke="none">
+            <Rect x={9.6} y={1.8} width={4.8} height={2.8} rx={1.4} />
+            <Rect x={9.2} y={5.8} width={5.4} height={2.8} rx={1.4} />
+            <Rect x={8.9} y={9.8} width={5.8} height={2.8} rx={1.4} />
+            <Rect x={9} y={13.8} width={6} height={2.8} rx={1.4} />
+            <Rect x={9.4} y={17.8} width={5.6} height={2.8} rx={1.4} />
+          </G>
+        </Glyph>
+      );
+    case 'shoulders':
+      return (
+        <Glyph {...props}>
+          <Circle cx={5.6} cy={15.6} r={2.6} {...sun} />
+          <Circle cx={18.4} cy={15.6} r={2.6} {...sun} />
+          <Circle cx={12} cy={6.6} r={3.6} />
+          <Path d="M3 22v-3.2c0-3.6 2.7-5.8 6.2-5.8h5.6c3.5 0 6.2 2.2 6.2 5.8V22" />
+        </Glyph>
+      );
+    case 'neck':
+      return (
+        <Glyph {...props}>
+          <Circle cx={12} cy={12.2} r={2.8} {...sun} />
+          <Circle cx={12} cy={5.6} r={3.6} />
+          <Path d="M10.2 9v4.6M13.8 9v4.6M3 22v-2.4c0-3.4 2.6-5.6 6-5.6h6c3.4 0 6 2.2 6 5.6V22" />
+        </Glyph>
+      );
+    case 'none':
+      return (
+        <Glyph {...props}>
+          <Circle cx={12} cy={12} r={8.6} />
+          <Circle cx={9.2} cy={10.2} r={1} fill={props.color} stroke="none" />
+          <Circle cx={14.8} cy={10.2} r={1} fill={props.color} stroke="none" />
+          <Path d="M8.6 14.2c1.9 2.4 4.9 2.4 6.8 0" />
         </Glyph>
       );
   }

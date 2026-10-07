@@ -73,28 +73,21 @@
         "5": "Eine Atempause zwischendurch.",
         "10": "Genau richtig, um dranzubleiben.",
         "20": "Eine ganze Einheit, ohne Eile."
-      },
-      "anatomy": "So sieht ein {{count}}-Min-Kurs aus",
-      "parts": {
-        "arrive": "Ankommen",
-        "move": "Bewegen",
-        "close": "Abschließen"
-      },
-      "week": "{{count}} Min pro Woche"
+      }
     },
     "care": {
       "title": "Etwas, das geschont werden soll?",
       "body": "Wir passen Bewegungen an, die diese Stelle belasten, oder lassen sie weg.",
       "none": "Nichts",
+      "noneBody": "Ich bewege mich ohne Beschwerden.",
+      "noneBody_relative": "Bewegt sich ohne Beschwerden.",
       "safety": "Manta ersetzt keine ärztliche Beratung. Wenn etwas schmerzt, hör auf.",
-      "adaptTitle": "So passen wir es an",
       "adapt": {
-        "knees": "Knie: keine tiefen Beugen, immer mit Halt.",
-        "back": "Rücken: sanfte Drehungen, langer Rücken.",
-        "shoulders": "Schultern: Arme auf Brusthöhe, nie über Kopf.",
-        "neck": "Nacken: Blick nach vorn, keine schnellen Drehungen."
-      },
-      "tapHint": "Tippe auf die Figur oder die Liste."
+        "knees": "Keine tiefen Kniebeugen.",
+        "back": "Sanfte Drehungen, langer Rücken.",
+        "shoulders": "Arme bis Brusthöhe.",
+        "neck": "Blick nach vorn, ohne Ruck."
+      }
     },
     "offline": {
       "title": "Übst du ohne Internet?",

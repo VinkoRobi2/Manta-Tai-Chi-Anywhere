@@ -1,21 +1,18 @@
 import { Image } from 'expo-image';
 import { useEffect, useId, useState } from 'react';
-import { Pressable, View, type LayoutChangeEvent } from 'react-native';
+import { View, type LayoutChangeEvent } from 'react-native';
 import Animated, {
   FadeIn,
   useAnimatedProps,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
-  ZoomIn,
 } from 'react-native-reanimated';
 import Svg, { Circle, Defs, Ellipse, RadialGradient, Stop } from 'react-native-svg';
 
-import type { CareTag } from '@/features/settings/settings';
-import { tapFeedback } from '@/lib/haptics';
 import { motion } from '@/theme/tokens';
 
-import { BreathingSun, FlowLines, Ripples, useBreath } from './motion';
+import { BreathingSun, FlowLines, useBreath } from './motion';
 import { useOnboardingPalette } from './responsive';
 import { svgId } from './svgId';
 
@@ -29,7 +26,6 @@ import { svgId } from './svgId';
  */
 
 export type Pose = 'standing' | 'seated' | 'rise';
-export type ZoneMarker = Exclude<CareTag, 'wrists'>;
 
 export const POSES: Record<Pose, { source: number; centerUnit: number; chestUnit: number }> = {
   standing: {
@@ -49,24 +45,11 @@ export const POSES: Record<Pose, { source: number; centerUnit: number; chestUnit
   },
 };
 
-/** Dónde está cada zona en la silueta de pie, en unidades del lienzo. */
-const ZONES: Record<ZoneMarker, readonly (readonly [number, number])[]> = {
-  neck: [[1, 16]],
-  shoulders: [[2.5, 24]],
-  back: [[-6.2, 38]],
-  knees: [
-    [15.6, 72],
-    [-12.6, 75.6],
-  ],
-};
-
 export const IMAGE_UNITS_W = 60;
 export const IMAGE_UNITS_H = 104;
 export const FEET_UNIT = 102;
 /** Si queda menos alto que esto, la figura no se dibuja: así nunca tapa las opciones. */
 const MIN_BOX_HEIGHT = 100;
-/** Área táctil de cada zona sobre la figura. */
-const HOTSPOT = 40;
 
 export type Backdrop = { kind: 'disc' } | { kind: 'ring'; progress: number };
 
@@ -74,25 +57,16 @@ export interface PoseArtProps {
   /** Una o dos figuras. */
   poses: readonly Pose[];
   backdrop?: Backdrop;
-  /** Zonas a marcar sobre la figura de pie. */
-  markers?: readonly ZoneMarker[];
   maxHeight: number;
   /** Estelas de movimiento alrededor de los brazos. */
   flow?: boolean;
-  /**
-   * Con esto, cada zona de la figura de pie se puede tocar: las que no están marcadas se ven
-   * como un aro vacío. Es un atajo visual; la lista de zonas sigue siendo el control accesible.
-   */
-  onToggleZone?: ((zone: ZoneMarker) => void) | null;
 }
 
 export function PoseArt({
   poses,
   backdrop = { kind: 'disc' },
-  markers = [],
   maxHeight,
   flow = false,
-  onToggleZone = null,
 }: PoseArtProps) {
   const [box, setBox] = useState({ width: 0, height: 0 });
   const onLayout = (event: LayoutChangeEvent) => {
@@ -106,7 +80,7 @@ export function PoseArt({
     <View
       style={{ flex: 1 }}
       onLayout={onLayout}
-      pointerEvents={onToggleZone ? 'box-none' : 'none'}
+      pointerEvents="none"
       accessibilityElementsHidden
       importantForAccessibility="no-hide-descendants"
     >
@@ -116,10 +90,8 @@ export function PoseArt({
           height={box.height}
           poses={poses}
           backdrop={backdrop}
-          markers={markers}
           maxHeight={maxHeight}
           flow={flow}
-          onToggleZone={onToggleZone}
         />
       ) : null}
     </View>
@@ -138,10 +110,8 @@ function Scene({
   height,
   poses,
   backdrop,
-  markers,
   maxHeight,
   flow,
-  onToggleZone,
 }: Required<PoseArtProps> & { width: number; height: number }) {
   const palette = useOnboardingPalette();
   const breath = useBreath();
@@ -238,68 +208,6 @@ function Scene({
           />
         ))}
       </Animated.View>
-
-      {main.pose === 'standing' && !pair ? (
-        // Los puntos van con la figura: suben y bajan con su respiración.
-        <Animated.View
-          pointerEvents="box-none"
-          style={[{ position: 'absolute', left: 0, top: 0, width, height }, figureStyle]}
-        >
-          {(Object.keys(ZONES) as ZoneMarker[]).flatMap((zone) =>
-            ZONES[zone].map(([ux, uy], index) => {
-              const x = main.left + (ux + IMAGE_UNITS_W / 2) * mainU;
-              const y = main.top + (uy + 2) * mainU;
-              const marked = markers.includes(zone);
-              if (!marked && !onToggleZone) return null;
-              const dot = marked ? (
-                <ZoneDot
-                  x={onToggleZone ? HOTSPOT / 2 : x}
-                  y={onToggleZone ? HOTSPOT / 2 : y}
-                  scale={figH / 220}
-                  color={palette.accent}
-                  ring={palette.background}
-                />
-              ) : (
-                <View
-                  style={{
-                    position: 'absolute',
-                    left: HOTSPOT / 2 - 7,
-                    top: HOTSPOT / 2 - 7,
-                    width: 14,
-                    height: 14,
-                    borderRadius: 7,
-                    borderWidth: 2.5,
-                    borderColor: palette.accent,
-                    backgroundColor: palette.background,
-                  }}
-                />
-              );
-              return onToggleZone ? (
-                <Pressable
-                  key={`${zone}-${index}`}
-                  onPress={() => {
-                    tapFeedback();
-                    onToggleZone(zone);
-                  }}
-                  accessibilityElementsHidden
-                  importantForAccessibility="no-hide-descendants"
-                  style={{
-                    position: 'absolute',
-                    left: x - HOTSPOT / 2,
-                    top: y - HOTSPOT / 2,
-                    width: HOTSPOT,
-                    height: HOTSPOT,
-                  }}
-                >
-                  {dot}
-                </Pressable>
-              ) : (
-                <View key={`${zone}-${index}`}>{dot}</View>
-              );
-            }),
-          )}
-        </Animated.View>
-      ) : null}
     </>
   );
 }
@@ -330,50 +238,6 @@ function FloorShadow({
       </Defs>
       <Ellipse cx={width / 2} cy={height / 2} rx={width / 2} ry={height / 2} fill={`url(#${id})`} />
     </Svg>
-  );
-}
-
-function ZoneDot({
-  x,
-  y,
-  scale,
-  color,
-  ring,
-}: {
-  x: number;
-  y: number;
-  scale: number;
-  color: string;
-  ring: string;
-}) {
-  const halo = 30 * scale;
-  const dot = 14 * scale;
-  return (
-    <Animated.View
-      entering={ZoomIn.duration(motion.quick)}
-      style={{
-        position: 'absolute',
-        left: x - halo / 2,
-        top: y - halo / 2,
-        width: halo,
-        height: halo,
-      }}
-    >
-      <Ripples size={halo} color={color} count={2} durationMs={2400} from={0.5} to={1.7} filled />
-      <View
-        style={{
-          position: 'absolute',
-          left: (halo - dot) / 2,
-          top: (halo - dot) / 2,
-          width: dot,
-          height: dot,
-          borderRadius: dot / 2,
-          borderWidth: Math.max(2, 3 * scale),
-          borderColor: ring,
-          backgroundColor: color,
-        }}
-      />
-    </Animated.View>
   );
 }
 

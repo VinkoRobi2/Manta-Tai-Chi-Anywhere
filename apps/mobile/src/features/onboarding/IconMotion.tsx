@@ -4,13 +4,16 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import type { Goal } from '@/features/settings/settings';
 
 import { useBreath, useCycle, usePop } from './motion';
+import type { OnboardingCareTag } from './onboarding';
 
-export type IconMotionKind = Goal | 'pulse' | 'signal';
+export type IconMotionKind = Goal | OnboardingCareTag | 'pulse' | 'signal';
 
 /**
  * Da vida al icono de una opción elegida: un "pop" al tocarla y después un movimiento propio
  * que cuenta lo que significa. Calma: las ondas se mecen. Equilibrio: las piedras se balancean.
  * Articulaciones: gira despacio. Dormir: la luna flota. Energía: el sol gira y late.
+ * Zonas: las rodillas se doblan apenas, la espalda se mece, los hombros suben y bajan y el
+ * cuello se inclina, como en el calentamiento de una clase.
  */
 export function IconMotion({
   kind,
@@ -48,6 +51,14 @@ export function IconMotion({
             { rotate: `${turn.value * 360}deg` },
           ],
         };
+      case 'knees':
+        return { transform: [{ scale: pop.value }, { translateY: wave.value * 1.5 }] };
+      case 'back':
+        return { transform: [{ scale: pop.value }, { rotate: `${w * 4}deg` }] };
+      case 'shoulders':
+        return { transform: [{ scale: pop.value }, { translateY: -wave.value * 1.8 }] };
+      case 'neck':
+        return { transform: [{ scale: pop.value }, { rotate: `${w * 7}deg` }] };
       case 'signal':
         return { opacity: 0.55 + wave.value * 0.45, transform: [{ scale: pop.value }] };
       default:
