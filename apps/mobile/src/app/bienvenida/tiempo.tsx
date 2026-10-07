@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
-import { MinutesDial, MinutesSegmented } from '@/features/onboarding/MinutesPicker';
+import { ClassAnatomy, MinutesDial, MinutesSegmented } from '@/features/onboarding/MinutesPicker';
 import {
   canContinue,
   trackStep,
@@ -20,7 +20,7 @@ export default function TimeStep() {
   const draft = useOnboardingDraft();
   const layout = useOnboardingLayout();
   const palette = useOnboardingPalette();
-  const dial = Math.min(layout.artMax, layout.width - layout.gutter * 2 - 40);
+  const dial = Math.min(layout.artMax * 0.82, layout.width - layout.gutter * 2 - 40);
 
   return (
     <StepScreen
@@ -34,8 +34,9 @@ export default function TimeStep() {
       }}
     >
       <View style={{ flexGrow: 1, justifyContent: 'space-between', gap: layout.sectionGap }}>
-        <View style={{ flexGrow: 1, justifyContent: 'center' }}>
+        <View style={{ flexGrow: 1, justifyContent: 'center', gap: layout.gap + 6 }}>
           <MinutesDial minutes={draft.dailyMinutes} size={dial} />
+          <ClassAnatomy minutes={draft.dailyMinutes} />
         </View>
         <View style={{ gap: 14 }}>
           <MinutesSegmented

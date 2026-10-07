@@ -1,6 +1,6 @@
 import { Image } from 'expo-image';
 import { useEffect, useId, useState } from 'react';
-import { View, type LayoutChangeEvent } from 'react-native';
+import { Pressable, View, type LayoutChangeEvent } from 'react-native';
 import Animated, {
   FadeIn,
   useAnimatedProps,
@@ -12,6 +12,7 @@ import Animated, {
 import Svg, { Circle, Defs, Ellipse, RadialGradient, Stop } from 'react-native-svg';
 
 import type { CareTag } from '@/features/settings/settings';
+import { tapFeedback } from '@/lib/haptics';
 import { motion } from '@/theme/tokens';
 
 import { BreathingSun, FlowLines, Ripples, useBreath } from './motion';
@@ -64,6 +65,8 @@ export const IMAGE_UNITS_H = 104;
 export const FEET_UNIT = 102;
 /** Si queda menos alto que esto, la figura no se dibuja: así nunca tapa las opciones. */
 const MIN_BOX_HEIGHT = 100;
+/** Área táctil de cada zona sobre la figura. */
+const HOTSPOT = 40;
 
 export type Backdrop = { kind: 'disc' } | { kind: 'ring'; progress: number };
 
@@ -76,6 +79,11 @@ export interface PoseArtProps {
   maxHeight: number;
   /** Estelas de movimiento alrededor de los brazos. */
   flow?: boolean;
+  /**
+   * Con esto, cada zona de la figura de pie se puede tocar: las que no están marcadas se ven
+   * como un aro vacío. Es un atajo visual; la lista de zonas sigue siendo el control accesible.
+   */
+  onToggleZone?: ((zone: ZoneMarker) => void) | null;
 }
 
 export function PoseArt({
@@ -84,6 +92,7 @@ export function PoseArt({
   markers = [],
   maxHeight,
   flow = false,
+  onToggleZone = null,
 }: PoseArtProps) {
   const [box, setBox] = useState({ width: 0, height: 0 });
   const onLayout = (event: LayoutChangeEvent) => {
@@ -97,7 +106,7 @@ export function PoseArt({
     <View
       style={{ flex: 1 }}
       onLayout={onLayout}
-      pointerEvents="none"
+      pointerEvents={onToggleZone ? 'box-none' : 'none'}
       accessibilityElementsHidden
       importantForAccessibility="no-hide-descendants"
     >
@@ -110,6 +119,7 @@ export function PoseArt({
           markers={markers}
           maxHeight={maxHeight}
           flow={flow}
+          onToggleZone={onToggleZone}
         />
       ) : null}
     </View>
@@ -131,6 +141,7 @@ function Scene({
   markers,
   maxHeight,
   flow,
+  onToggleZone,
 }: Required<PoseArtProps> & { width: number; height: number }) {
   const palette = useOnboardingPalette();
   const breath = useBreath();
@@ -228,20 +239,67 @@ function Scene({
         ))}
       </Animated.View>
 
-      {main.pose === 'standing' && !pair
-        ? markers.flatMap((zone) =>
-            ZONES[zone].map(([ux, uy], index) => (
-              <ZoneDot
-                key={`${zone}-${index}`}
-                x={main.left + (ux + IMAGE_UNITS_W / 2) * mainU}
-                y={main.top + (uy + 2) * mainU}
-                scale={figH / 220}
-                color={palette.accent}
-                ring={palette.background}
-              />
-            )),
-          )
-        : null}
+      {main.pose === 'standing' && !pair ? (
+        // Los puntos van con la figura: suben y bajan con su respiración.
+        <Animated.View
+          pointerEvents="box-none"
+          style={[{ position: 'absolute', left: 0, top: 0, width, height }, figureStyle]}
+        >
+          {(Object.keys(ZONES) as ZoneMarker[]).flatMap((zone) =>
+            ZONES[zone].map(([ux, uy], index) => {
+              const x = main.left + (ux + IMAGE_UNITS_W / 2) * mainU;
+              const y = main.top + (uy + 2) * mainU;
+              const marked = markers.includes(zone);
+              if (!marked && !onToggleZone) return null;
+              const dot = marked ? (
+                <ZoneDot
+                  x={onToggleZone ? HOTSPOT / 2 : x}
+                  y={onToggleZone ? HOTSPOT / 2 : y}
+                  scale={figH / 220}
+                  color={palette.accent}
+                  ring={palette.background}
+                />
+              ) : (
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: HOTSPOT / 2 - 7,
+                    top: HOTSPOT / 2 - 7,
+                    width: 14,
+                    height: 14,
+                    borderRadius: 7,
+                    borderWidth: 2.5,
+                    borderColor: palette.accent,
+                    backgroundColor: palette.background,
+                  }}
+                />
+              );
+              return onToggleZone ? (
+                <Pressable
+                  key={`${zone}-${index}`}
+                  onPress={() => {
+                    tapFeedback();
+                    onToggleZone(zone);
+                  }}
+                  accessibilityElementsHidden
+                  importantForAccessibility="no-hide-descendants"
+                  style={{
+                    position: 'absolute',
+                    left: x - HOTSPOT / 2,
+                    top: y - HOTSPOT / 2,
+                    width: HOTSPOT,
+                    height: HOTSPOT,
+                  }}
+                >
+                  {dot}
+                </Pressable>
+              ) : (
+                <View key={`${zone}-${index}`}>{dot}</View>
+              );
+            }),
+          )}
+        </Animated.View>
+      ) : null}
     </>
   );
 }

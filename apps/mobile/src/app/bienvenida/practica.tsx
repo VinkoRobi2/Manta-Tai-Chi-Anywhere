@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
+import { programsForMode } from '@/features/catalog/catalog';
 import { CheckBadge, ChoiceCard } from '@/features/onboarding/ChoiceCard';
 import {
   canContinue,
@@ -14,6 +15,7 @@ import { PoseThumb } from '@/features/onboarding/PoseThumb';
 import { useOnboardingLayout, useOnboardingPalette } from '@/features/onboarding/responsive';
 import { StepScreen } from '@/features/onboarding/StepScreen';
 import type { PracticeMode } from '@/features/settings/settings';
+import { useLocale } from '@/lib/i18n';
 
 const MODES: readonly PracticeMode[] = ['seated', 'standing', 'both'];
 
@@ -31,8 +33,19 @@ export default function PracticeStep() {
   const palette = useOnboardingPalette();
   const context = draft.forRelative ? 'relative' : undefined;
   const cardHeight =
-    layout.breakpoint === 'tablet' ? 132 : layout.breakpoint === 'compact' ? 92 : 112;
+    layout.breakpoint === 'tablet' ? 140 : layout.breakpoint === 'compact' ? 100 : 122;
   const artWidth = Math.round(cardHeight * 1.05);
+  const locale = useLocale();
+  // La primera clase que le tocaría con cada forma de practicar.
+  const firstClass = (mode: PracticeMode) => {
+    const lesson = programsForMode(locale, mode)[0]?.lessons[0];
+    return lesson
+      ? t('onboarding.practice.firstClass', {
+          title: lesson.title,
+          minutes: Math.round(lesson.durationSec / 60),
+        })
+      : undefined;
+  };
 
   return (
     <StepScreen
@@ -54,6 +67,8 @@ export default function PracticeStep() {
             onPress={() => updateDraft({ practiceMode: mode })}
             label={t(`onboarding.practice.${mode}`)}
             description={t(`onboarding.practice.${mode}Body`)}
+            badge={mode === 'seated' ? t('onboarding.practice.recommended') : undefined}
+            detail={firstClass(mode)}
             minHeight={cardHeight}
             trailing={(colors) => (
               <View style={{ marginVertical: -12, marginRight: -16, alignSelf: 'stretch' }}>

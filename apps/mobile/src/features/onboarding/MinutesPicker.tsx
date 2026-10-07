@@ -248,3 +248,68 @@ export function MinutesSegmented({
     </View>
   );
 }
+
+/** Cómo se reparte una clase según su duración: llegar, moverse y cerrar (en minutos). */
+const ANATOMY: Record<DailyMinutes, { arrive: number; move: number; close: number }> = {
+  5: { arrive: 1, move: 3, close: 1 },
+  10: { arrive: 1, move: 7, close: 2 },
+  20: { arrive: 2, move: 15, close: 3 },
+};
+
+const PARTS = ['arrive', 'move', 'close'] as const;
+
+/**
+ * La anatomía de una clase: una barra con sus tres partes, que se reacomoda al cambiar los
+ * minutos, y cuánto suma a la semana. Así "10 minutos" deja de ser un número abstracto.
+ */
+export function ClassAnatomy({ minutes }: { minutes: DailyMinutes }) {
+  const { t } = useTranslation();
+  const palette = useOnboardingPalette();
+  const parts = ANATOMY[minutes];
+  const colors = { arrive: palette.faint, move: palette.accent, close: palette.selected };
+
+  return (
+    <View
+      accessible
+      accessibilityLabel={`${t('onboarding.time.anatomy', { count: minutes })}: ${PARTS.map(
+        (part) => `${t(`onboarding.time.parts.${part}`)} ${parts[part]} min`,
+      ).join(', ')}`}
+      style={{ borderRadius: 20, backgroundColor: palette.card, padding: 16, gap: 12 }}
+    >
+      <View
+        style={{ flexDirection: 'row', alignItems: 'baseline', justifyContent: 'space-between' }}
+      >
+        <Text weight="medium" color={palette.ink} style={{ fontSize: 14, lineHeight: 18 }}>
+          {t('onboarding.time.anatomy', { count: minutes })}
+        </Text>
+        <Text color={palette.muted} style={{ fontSize: 13, lineHeight: 17 }}>
+          {t('onboarding.time.week', { count: minutes * 7 })}
+        </Text>
+      </View>
+      <View style={{ flexDirection: 'row', gap: 4 }}>
+        {PARTS.map((part) => (
+          <AnatomyPart key={part} flex={parts[part]} color={colors[part]} />
+        ))}
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap', columnGap: 14, rowGap: 4 }}>
+        {PARTS.map((part) => (
+          <View key={part} style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+            <View style={{ width: 8, height: 8, borderRadius: 4, backgroundColor: colors[part] }} />
+            <Text weight="medium" color={palette.ink} style={{ fontSize: 12, lineHeight: 15 }}>
+              {t(`onboarding.time.parts.${part}`)} · {parts[part]}′
+            </Text>
+          </View>
+        ))}
+      </View>
+    </View>
+  );
+}
+
+function AnatomyPart({ flex, color }: { flex: number; color: string }) {
+  const grow = useSharedValue(flex);
+  useEffect(() => {
+    grow.value = withSpring(flex, { damping: 18, stiffness: 160 });
+  }, [flex, grow]);
+  const style = useAnimatedStyle(() => ({ flexGrow: grow.value, flexBasis: 0 }));
+  return <Animated.View style={[{ height: 10, borderRadius: 5, backgroundColor: color }, style]} />;
+}

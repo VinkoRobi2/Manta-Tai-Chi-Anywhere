@@ -39,7 +39,9 @@
       "standing": "Stehend",
       "standingBody": "Sanfte Schritte auf einem Quadratmeter.",
       "both": "Beides",
-      "bothBody": "Wir wechseln je nach Tag."
+      "bothBody": "Wir wechseln je nach Tag.",
+      "recommended": "Ideal zum Start",
+      "firstClass": "Erster Kurs: {{title}} · {{minutes}} Min"
     },
     "feel": {
       "title": "Was möchtest du spüren?",
@@ -51,7 +53,14 @@
       "balance": "Gleichgewicht",
       "joints": "Lockere Gelenke",
       "sleep": "Besser schlafen",
-      "energy": "Energie"
+      "energy": "Energie",
+      "benefit": {
+        "calm": "Langsamer Atem, ruhiger Geist.",
+        "balance": "Feste Füße, stabile Mitte.",
+        "joints": "Lockere Schultern, Hüften und Handgelenke.",
+        "sleep": "Den Tag vor dem Schlafen loslassen.",
+        "energy": "Den Körper wecken, ohne ihn zu ermüden."
+      }
     },
     "time": {
       "title": "Wie viel Zeit pro Tag?",
@@ -64,13 +73,28 @@
         "5": "Eine Atempause zwischendurch.",
         "10": "Genau richtig, um dranzubleiben.",
         "20": "Eine ganze Einheit, ohne Eile."
-      }
+      },
+      "anatomy": "So sieht ein {{count}}-Min-Kurs aus",
+      "parts": {
+        "arrive": "Ankommen",
+        "move": "Bewegen",
+        "close": "Abschließen"
+      },
+      "week": "{{count}} Min pro Woche"
     },
     "care": {
       "title": "Etwas, das geschont werden soll?",
       "body": "Wir passen Bewegungen an, die diese Stelle belasten, oder lassen sie weg.",
       "none": "Nichts",
-      "safety": "Manta ersetzt keine ärztliche Beratung. Wenn etwas schmerzt, hör auf."
+      "safety": "Manta ersetzt keine ärztliche Beratung. Wenn etwas schmerzt, hör auf.",
+      "adaptTitle": "So passen wir es an",
+      "adapt": {
+        "knees": "Knie: keine tiefen Beugen, immer mit Halt.",
+        "back": "Rücken: sanfte Drehungen, langer Rücken.",
+        "shoulders": "Schultern: Arme auf Brusthöhe, nie über Kopf.",
+        "neck": "Nacken: Blick nach vorn, keine schnellen Drehungen."
+      },
+      "tapHint": "Tippe auf die Figur oder die Liste."
     },
     "offline": {
       "title": "Übst du ohne Internet?",
@@ -83,7 +107,9 @@
       "rarely": "Fast nie",
       "rarelyBody": "Ich habe immer WLAN oder mobile Daten.",
       "auto": "Kostenlose Lektionen laden sich im WLAN von selbst herunter.",
-      "manual": "Du kannst jede Lektion herunterladen, wann du willst."
+      "manual": "Du kannst jede Lektion herunterladen, wann du willst.",
+      "saved": "Auf dem Telefon",
+      "cloud": "Lädt beim Öffnen"
     },
     "building": {
       "title": "Dein Plan entsteht",
@@ -112,13 +138,15 @@
       "days": "7 Tage",
       "perDay": "{{count}} Min. pro Tag",
       "level": "Anfänger",
-      "week": "Deine Woche",
-      "today": "Heute",
       "weekdays": ["M", "D", "M", "D", "F", "S", "S"],
-      "firstClass": "Deine erste Lektion",
-      "firstClass_relative": "Die erste Lektion",
       "start": "Erste Lektion starten",
-      "change": "Antworten ändern"
+      "change": "Antworten ändern",
+      "firstClasses": "Deine ersten Kurse",
+      "dayLabel": {
+        "0": "Heute",
+        "1": "Morgen",
+        "2": "Tag 3"
+      }
     },
     "account": {
       "title": "Fortschritt speichern",
@@ -137,6 +165,15 @@
         "googleSetup": "Die Anmeldung mit Google ist in dieser Version noch nicht eingerichtet.",
         "generic": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
       }
+    },
+    "welcomePills": {
+      "minutes": "5–20 Min",
+      "posture": "Sitzend oder stehend",
+      "offline": "Offline nutzbar"
+    },
+    "welcomeCaption": {
+      "seated": "Tai Chi im Sitzen",
+      "standing": "Tai Chi im Stehen"
     }
   },
   "tabs": {

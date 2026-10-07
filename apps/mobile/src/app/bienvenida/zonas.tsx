@@ -1,8 +1,9 @@
 import { router } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import Animated, { FadeIn, FadeInDown, FadeOut, LinearTransition } from 'react-native-reanimated';
 
-import { ChoiceChip } from '@/features/onboarding/ChoiceCard';
+import { CheckBadge, ChoiceChip } from '@/features/onboarding/ChoiceCard';
 import { TextButton } from '@/features/onboarding/ContinueButton';
 import {
   canContinue,
@@ -29,6 +30,8 @@ export default function CareStep() {
   const artHeight =
     layout.breakpoint === 'tablet' ? 380 : layout.breakpoint === 'compact' ? 250 : 300;
 
+  const marked = draft.careTags.filter((tag): tag is ZoneMarker => tag !== 'wrists');
+
   const next = () => {
     trackStep('zonas');
     router.push('/bienvenida/sin-internet');
@@ -41,6 +44,7 @@ export default function CareStep() {
       body={t('onboarding.care.body')}
       canContinue={canContinue('zonas', draft)}
       onContinue={next}
+      after={<Adaptations zones={marked} none={draft.noCare} />}
       topRight={
         <TextButton
           label={t('onboarding.skip')}
@@ -68,8 +72,9 @@ export default function CareStep() {
         <View style={{ width: '42%', height: artHeight }}>
           <PoseArt
             poses={['standing']}
-            markers={draft.careTags.filter((tag): tag is ZoneMarker => tag !== 'wrists')}
+            markers={marked}
             maxHeight={artHeight * 0.9}
+            onToggleZone={(zone) => updateDraft(toggleCare(draft, zone))}
           />
         </View>
         <View style={{ flex: 1, gap: layout.gap - 2 }}>
@@ -91,5 +96,62 @@ export default function CareStep() {
         </View>
       </View>
     </StepScreen>
+  );
+}
+
+/** Lo que cambia en las clases por cada zona elegida. Sin zonas, una pista para empezar. */
+function Adaptations({ zones, none }: { zones: readonly ZoneMarker[]; none: boolean }) {
+  const { t } = useTranslation();
+  const palette = useOnboardingPalette();
+  const layout = useOnboardingLayout();
+  if (none) return null;
+  if (zones.length === 0) {
+    return (
+      <Text
+        variant="caption"
+        color={palette.faint}
+        style={{ marginTop: layout.gap, textAlign: 'center' }}
+      >
+        {t('onboarding.care.tapHint')}
+      </Text>
+    );
+  }
+  return (
+    <Animated.View
+      entering={FadeInDown.duration(320)}
+      layout={LinearTransition.duration(240)}
+      accessibilityLiveRegion="polite"
+      style={{
+        marginTop: layout.gap + 4,
+        borderRadius: 20,
+        backgroundColor: palette.card,
+        padding: 14,
+        gap: 8,
+      }}
+    >
+      <Text weight="semibold" color={palette.ink} style={{ fontSize: 14, lineHeight: 18 }}>
+        {t('onboarding.care.adaptTitle')}
+      </Text>
+      {zones.map((zone) => (
+        <Animated.View
+          key={zone}
+          entering={FadeIn.duration(260)}
+          exiting={FadeOut.duration(160)}
+          layout={LinearTransition.duration(240)}
+          style={{ flexDirection: 'row', alignItems: 'flex-start', gap: 8 }}
+        >
+          <View style={{ paddingTop: 2 }}>
+            <CheckBadge size={16} />
+          </View>
+          <Text
+            variant="caption"
+            color={palette.ink}
+            style={{ flexShrink: 1, fontSize: 14, lineHeight: 19 }}
+          >
+            {t(`onboarding.care.adapt.${zone}`)}
+          </Text>
+        </Animated.View>
+      ))}
+    </Animated.View>
   );
 }

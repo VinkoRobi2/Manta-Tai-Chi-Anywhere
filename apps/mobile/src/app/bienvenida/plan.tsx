@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, View } from 'react-native';
-import Animated, { ZoomIn } from 'react-native-reanimated';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { programsForMode } from '@/features/catalog/catalog';
@@ -33,13 +33,7 @@ const POSES: Record<PracticeMode, readonly Pose[]> = {
   both: ['standing', 'seated'],
 };
 
-/** La semana empieza hoy: las iniciales de los días, de hoy en adelante. */
-function weekFromToday(days: readonly string[]): string[] {
-  const today = (new Date().getDay() + 6) % 7; // 0 = lunes
-  return Array.from({ length: 7 }, (_, index) => days[(today + index) % 7] ?? '');
-}
-
-/** El plan: la tarjeta del programa, la semana que empieza hoy y la primera clase. */
+/** El plan: la tarjeta del programa y el camino de las tres primeras clases (hoy, mañana, día 3). */
 export default function PlanScreen() {
   const { t } = useTranslation();
   const draft = useOnboardingDraft();
@@ -49,7 +43,6 @@ export default function PlanScreen() {
   const locale = useLocale();
   const mode = draft.practiceMode ?? DEFAULT_PRACTICE;
   const context = draft.forRelative ? 'relative' : undefined;
-  const week = weekFromToday(t('onboarding.plan.weekdays', { returnObjects: true }) as string[]);
   const tablet = layout.breakpoint === 'tablet';
   const compact = layout.breakpoint === 'compact';
   // La tarjeta negra mide lo de la referencia; en pantallas más bajas se encoge hasta cardMin
@@ -60,9 +53,10 @@ export default function PlanScreen() {
   // Muy poco alto (iPhone SE de primera generación, Android bajos): sin subtítulo ni tarjeta de la clase.
   const tiny = !tablet && layout.height - insets.top - insets.bottom < 600;
   // La primera clase del programa que le toca ("Las dos" empieza sentado: es lo más seguro).
-  const lesson = programsForMode(locale, mode)[0]!.lessons[0]!;
-  const lessonName = lesson.title;
-  const lessonMinutes = t('common.minutes', { count: Math.round(lesson.durationSec / 60) });
+  const program = programsForMode(locale, mode)[0]!;
+  const lesson = program.lessons[0]!;
+  // Las tres primeras clases: hoy, mañana y el día 3. En pantallas muy bajas, solo la de hoy.
+  const firstLessons = program.lessons.slice(0, tiny ? 1 : 3);
   const artWidth = Math.round(cardHeight * 0.92);
   // El texto termina antes de donde empieza el sol (la figura va pegada a la derecha: el sol empieza
   // a 0,76 × alto del borde). Se calcula con el alto máximo: así no cambia de líneas al encogerse.
@@ -209,115 +203,117 @@ export default function PlanScreen() {
             </View>
           </Animated.View>
 
-          <Animated.View entering={enter(2)} style={{ marginTop: layout.sectionGap - 4 }}>
-            <Text variant="caption" weight="medium" color={palette.muted}>
-              {t('onboarding.plan.week')}
-            </Text>
-            <View style={{ marginTop: 12, flexDirection: 'row', justifyContent: 'space-between' }}>
-              {week.map((day, index) => {
+          <View style={{ marginTop: layout.sectionGap - 4 }}>
+            <Animated.View entering={enter(2)}>
+              <Text variant="caption" weight="medium" color={palette.muted}>
+                {t('onboarding.plan.firstClasses')}
+              </Text>
+            </Animated.View>
+            <View style={{ marginTop: 10 }}>
+              {firstLessons.map((item, index) => {
                 const today = index === 0;
-                const size = tablet ? 46 : compact ? 36 : 40;
+                const minutes = t('common.minutes', { count: Math.round(item.durationSec / 60) });
+                const day = t(`onboarding.plan.dayLabel.${index}`);
+                const dot = tablet ? 46 : compact ? 36 : 40;
+                const last = index === firstLessons.length - 1;
                 return (
                   <Animated.View
-                    key={`${day}-${index}`}
-                    entering={ZoomIn.springify()
-                      .damping(14)
-                      .delay(500 + index * 70)}
-                    style={{ alignItems: 'center', gap: 6 }}
-                    accessible={today}
-                    accessibilityLabel={today ? t('onboarding.plan.today') : undefined}
+                    key={item.slug}
+                    entering={FadeInDown.duration(420).delay(700 + index * 140)}
                   >
-                    <View
+                    <Squish
+                      onPress={today ? start : undefined}
+                      disabled={!today}
+                      haptic={today}
+                      pressedScale={0.98}
+                      accessibilityLabel={`${day}: ${item.title}, ${minutes}`}
                       style={{
-                        width: size,
-                        height: size,
-                        borderRadius: size / 2,
-                        backgroundColor: today ? palette.accent : palette.card,
+                        flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: 'center',
+                        gap: compact ? 12 : 14,
+                        paddingVertical: compact ? 8 : 10,
+                        paddingHorizontal: today ? (compact ? 10 : 12) : 0,
+                        marginHorizontal: today ? 0 : compact ? 10 : 12,
+                        borderRadius: 20,
+                        backgroundColor: today ? palette.card : 'transparent',
                       }}
                     >
-                      {today ? (
-                        <Ripples
-                          size={size}
-                          color={palette.accent}
-                          count={2}
-                          durationMs={2600}
-                          from={1}
-                          to={1.5}
-                        />
-                      ) : null}
-                      <Text
-                        weight="medium"
-                        color={today ? palette.onAccent : palette.muted}
-                        style={{ fontSize: 14, lineHeight: 18 }}
-                      >
-                        {day}
-                      </Text>
-                    </View>
-                    <Text
-                      variant="caption"
-                      weight="medium"
-                      color={today ? palette.ink : 'transparent'}
-                      style={{ fontSize: 11, lineHeight: 14 }}
-                    >
-                      {t('onboarding.plan.today')}
-                    </Text>
+                      <View style={{ width: dot, alignItems: 'center' }}>
+                        <View
+                          style={{
+                            width: dot,
+                            height: dot,
+                            borderRadius: dot / 2,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            backgroundColor: today ? palette.accent : palette.background,
+                            borderWidth: today ? 0 : 2,
+                            borderColor: palette.track,
+                          }}
+                        >
+                          {today ? (
+                            <>
+                              <Ripples
+                                size={dot}
+                                color={palette.accent}
+                                count={2}
+                                durationMs={2600}
+                                from={1}
+                                to={1.5}
+                              />
+                              <PlayGlyph color={palette.onAccent} size={tablet ? 18 : 15} />
+                            </>
+                          ) : (
+                            <Text
+                              weight="semibold"
+                              color={palette.muted}
+                              style={{ fontSize: 14, lineHeight: 18 }}
+                            >
+                              {item.number}
+                            </Text>
+                          )}
+                        </View>
+                        {/* La línea del camino hasta la siguiente clase. */}
+                        {last ? null : (
+                          <View
+                            style={{
+                              position: 'absolute',
+                              top: dot + (compact ? 8 : 10),
+                              width: 2,
+                              height: compact ? 16 : 20,
+                              borderRadius: 1,
+                              backgroundColor: palette.track,
+                            }}
+                          />
+                        )}
+                      </View>
+                      <View style={{ flex: 1, gap: 1 }}>
+                        <Text
+                          weight={today ? 'semibold' : 'medium'}
+                          color={today ? palette.ink : palette.muted}
+                          numberOfLines={1}
+                          maxFontSizeMultiplier={1.3}
+                          style={{
+                            fontSize: compact ? 15 : 16,
+                            lineHeight: 21,
+                            letterSpacing: -0.2,
+                          }}
+                        >
+                          {item.title}
+                        </Text>
+                        <Text
+                          color={today ? palette.muted : palette.faint}
+                          style={{ fontSize: 13, lineHeight: 17 }}
+                        >
+                          {`${day} · ${minutes}`}
+                        </Text>
+                      </View>
+                    </Squish>
                   </Animated.View>
                 );
               })}
             </View>
-          </Animated.View>
-
-          {tiny ? null : (
-            <Animated.View entering={enter(3)} style={{ marginTop: compact ? 12 : 18 }}>
-              <Squish
-                onPress={start}
-                accessibilityLabel={`${t('onboarding.plan.firstClass', { context })}: ${lessonName}, ${lessonMinutes}`}
-                style={{
-                  minHeight: tablet ? 84 : compact ? 62 : 74,
-                  borderRadius: tablet ? 26 : 22,
-                  backgroundColor: palette.card,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: compact ? 12 : 15,
-                  paddingVertical: 10,
-                  paddingLeft: compact ? 12 : 14,
-                  paddingRight: compact ? 14 : 16,
-                }}
-              >
-                <View
-                  style={{
-                    width: tablet ? 54 : compact ? 40 : 46,
-                    height: tablet ? 54 : compact ? 40 : 46,
-                    borderRadius: tablet ? 15 : 12,
-                    backgroundColor: palette.selected,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <PlayGlyph color={palette.accent} size={tablet ? 20 : 16} />
-                </View>
-                <View style={{ flex: 1, gap: 2 }}>
-                  <Text color={palette.muted} style={{ fontSize: 13, lineHeight: 17 }}>
-                    {t('onboarding.plan.firstClass', { context })}
-                  </Text>
-                  <Text
-                    weight="semibold"
-                    color={palette.ink}
-                    numberOfLines={1}
-                    maxFontSizeMultiplier={1.3}
-                    style={{ fontSize: compact ? 16 : 17, lineHeight: 22, letterSpacing: -0.2 }}
-                  >
-                    {lessonName}
-                  </Text>
-                </View>
-                <Text color={palette.muted} style={{ fontSize: 15, lineHeight: 20 }}>
-                  {lessonMinutes}
-                </Text>
-              </Squish>
-            </Animated.View>
-          )}
+          </View>
         </View>
       </ScrollView>
 
