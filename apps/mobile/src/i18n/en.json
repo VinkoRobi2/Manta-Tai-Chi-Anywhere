@@ -222,17 +222,30 @@
     "allDoneBody": "Repeat your favorites or explore another program.",
     "explore": "Explore classes",
     "weekHint": "Every day you practice counts. Your goal: {{goal}} days a week.",
-    "dayDone": "Practiced"
+    "dayDone": "Practiced",
+    "weekTitle": "Your week",
+    "progressTitle": "Your progress",
+    "programsTitle": "Programs",
+    "seeAll": "See all",
+    "programDone": "{{done}} of {{total}} done",
+    "allDoneEyebrow": "All done"
   },
   "classes": {
     "title": "Classes",
-    "body": "They all come inside the app: they work offline.",
-    "all": "All",
+    "body": "Every class works offline.",
     "free": "Free",
     "premium": "Premium",
     "count_one": "{{count}} class",
     "count_other": "{{count}} classes",
-    "done": "Done"
+    "done": "Done",
+    "short": {
+      "sentado-basico": "Seated",
+      "en-el-lugar": "Standing",
+      "forma-24": "24 form"
+    },
+    "listTitle": "Classes",
+    "lessonNumber": "Class {{number}}",
+    "next": "Up next"
   },
   "lessonScreen": {
     "back": "Back",

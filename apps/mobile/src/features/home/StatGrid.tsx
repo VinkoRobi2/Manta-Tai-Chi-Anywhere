@@ -1,5 +1,4 @@
 import type { PeriodComparison, PeriodStats } from '@manta/shared';
-import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
@@ -16,9 +15,9 @@ function valueOf(stats: PeriodStats, key: StatKey): number | null {
 }
 
 /**
- * Cuatro números en una sola tarjeta, uno al lado del otro: días activos, clases, minutos y cuántas
- * veces terminó en calma (sin calorías: el tai chi no va de eso). Debajo de cada número, cuánto
- * cambió frente al periodo anterior.
+ * Cuatro números en un mosaico de dos por dos: días activos, clases, minutos y cuántas veces
+ * terminó en calma (sin calorías: el tai chi no va de eso). Debajo de cada número, cuánto cambió
+ * frente al periodo anterior.
  */
 export function StatGrid({
   comparison,
@@ -36,72 +35,72 @@ export function StatGrid({
       accessibilityHint={
         showChange ? t('home.stats.versus', { count: comparison.days }) : undefined
       }
-      style={{
-        flexDirection: 'row',
-        borderRadius: 20,
-        backgroundColor: palette.card,
-        paddingVertical: 14,
-      }}
+      style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 10 }}
     >
-      {STATS.map((key, index) => {
+      {STATS.map((key) => {
         const value = valueOf(comparison.current, key);
         const before = valueOf(comparison.previous, key);
         const label = t(`home.stats.${key}`);
         const unit = key === 'calm' && value !== null ? '%' : '';
         const change = value !== null && before !== null ? value - before : null;
         return (
-          <Fragment key={key}>
-            {index > 0 ? (
-              <View style={{ width: 1, marginVertical: 4, backgroundColor: palette.line }} />
-            ) : null}
-            <View
-              accessible
-              accessibilityLabel={`${label}: ${value ?? '—'}${unit}`}
-              style={{ flex: 1, paddingHorizontal: 10, gap: 4 }}
+          <View
+            key={key}
+            accessible
+            accessibilityLabel={`${label}: ${value ?? '—'}${unit}`}
+            style={{
+              flexGrow: 1,
+              flexBasis: '40%',
+              borderRadius: 22,
+              backgroundColor: palette.card,
+              paddingHorizontal: 16,
+              paddingTop: 14,
+              paddingBottom: 14,
+              gap: 2,
+            }}
+          >
+            <Text
+              weight="medium"
+              color={palette.muted}
+              numberOfLines={1}
+              style={{ fontSize: 13, lineHeight: 17 }}
+            >
+              {label}
+            </Text>
+            <Animated.View
+              key={`${comparison.days}-${value}`}
+              entering={FadeIn.duration(260)}
+              style={{ flexDirection: 'row', alignItems: 'baseline', gap: 1 }}
             >
               <Text
-                weight="medium"
-                color={palette.muted}
-                numberOfLines={1}
-                adjustsFontSizeToFit
-                style={{ fontSize: 12, lineHeight: 16 }}
+                color={value === null ? palette.faint : palette.ink}
+                maxFontSizeMultiplier={1.2}
+                style={{
+                  fontFamily: fonts.semibold,
+                  fontSize: 34,
+                  lineHeight: 40,
+                  letterSpacing: -1,
+                  fontVariant: ['tabular-nums'],
+                }}
               >
-                {label}
+                {value ?? '—'}
               </Text>
-              <Animated.View
-                key={`${comparison.days}-${value}`}
-                entering={FadeIn.duration(260)}
-                style={{ flexDirection: 'row', alignItems: 'baseline' }}
-              >
+              {unit ? (
                 <Text
-                  color={value === null ? palette.faint : palette.ink}
-                  maxFontSizeMultiplier={1.2}
-                  style={{
-                    fontFamily: fonts.semibold,
-                    fontSize: 26,
-                    lineHeight: 31,
-                    letterSpacing: -0.6,
-                  }}
+                  weight="semibold"
+                  color={palette.ink}
+                  style={{ fontSize: 17, lineHeight: 22 }}
                 >
-                  {value ?? '—'}
+                  {unit}
                 </Text>
-                {unit ? (
-                  <Text
-                    weight="medium"
-                    color={palette.ink}
-                    style={{ fontSize: 14, lineHeight: 18 }}
-                  >
-                    {unit}
-                  </Text>
-                ) : null}
-              </Animated.View>
-              {showChange && change !== null ? (
-                <Change value={change} percent={key === 'calm'} />
-              ) : (
-                <View style={{ height: 15 }} />
-              )}
-            </View>
-          </Fragment>
+              ) : null}
+            </Animated.View>
+            {showChange && change !== null ? (
+              <Change value={change} percent={key === 'calm'} />
+            ) : (
+              <View style={{ height: 17 }} />
+            )}
+          </View>
         );
       })}
     </View>
@@ -124,9 +123,9 @@ function Change({ value, percent }: { value: number; percent: boolean }) {
       color={up ? palette.positive : palette.muted}
       numberOfLines={1}
       accessibilityLabel={label}
-      style={{ fontSize: 12, lineHeight: 15 }}
+      style={{ fontSize: 13, lineHeight: 17 }}
     >
-      {value === 0 ? '=' : `${up ? '▲' : '▼'} ${amount}`}
+      {value === 0 ? label : `${up ? '▲' : '▼'} ${label}`}
     </Text>
   );
 }

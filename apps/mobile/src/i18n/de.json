@@ -222,17 +222,30 @@
     "allDoneBody": "Wiederhole deine Lieblinge oder entdecke ein anderes Programm.",
     "explore": "Kurse entdecken",
     "weekHint": "Jeder Übungstag zählt. Dein Ziel: {{goal}} Tage pro Woche.",
-    "dayDone": "Geübt"
+    "dayDone": "Geübt",
+    "weekTitle": "Deine Woche",
+    "progressTitle": "Dein Fortschritt",
+    "programsTitle": "Programme",
+    "seeAll": "Alle",
+    "programDone": "{{done}} von {{total}} gemacht",
+    "allDoneEyebrow": "Alles geschafft"
   },
   "classes": {
     "title": "Kurse",
-    "body": "Alle sind in der App: Sie funktionieren offline.",
-    "all": "Alle",
+    "body": "Alle Stunden funktionieren offline.",
     "free": "Kostenlos",
     "premium": "Premium",
     "count_one": "{{count}} Kurs",
     "count_other": "{{count}} Kurse",
-    "done": "Erledigt"
+    "done": "Erledigt",
+    "short": {
+      "sentado-basico": "Sitzen",
+      "en-el-lugar": "Stehen",
+      "forma-24": "24er-Form"
+    },
+    "listTitle": "Die Kurse",
+    "lessonNumber": "Kurs {{number}}",
+    "next": "Als Nächstes"
   },
   "lessonScreen": {
     "back": "Zurück",

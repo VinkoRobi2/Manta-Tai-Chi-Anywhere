@@ -222,17 +222,30 @@
     "allDoneBody": "Repite tus favoritas o explora otro programa.",
     "explore": "Explorar clases",
     "weekHint": "Cada día que practicas suma. Tu meta: {{goal}} días por semana.",
-    "dayDone": "Practicaste"
+    "dayDone": "Practicaste",
+    "weekTitle": "Tu semana",
+    "progressTitle": "Tu progreso",
+    "programsTitle": "Programas",
+    "seeAll": "Ver todo",
+    "programDone": "{{done}} de {{total}} hechas",
+    "allDoneEyebrow": "Todo hecho"
   },
   "classes": {
     "title": "Clases",
-    "body": "Todas vienen en la app: funcionan sin internet.",
-    "all": "Todas",
+    "body": "Todas funcionan sin internet.",
     "free": "Gratis",
     "premium": "Premium",
     "count_one": "{{count}} clase",
     "count_other": "{{count}} clases",
-    "done": "Hecha"
+    "done": "Hecha",
+    "short": {
+      "sentado-basico": "Sentado",
+      "en-el-lugar": "De pie",
+      "forma-24": "Forma 24"
+    },
+    "listTitle": "Las clases",
+    "lessonNumber": "Clase {{number}}",
+    "next": "Siguiente"
   },
   "lessonScreen": {
     "back": "Atrás",
