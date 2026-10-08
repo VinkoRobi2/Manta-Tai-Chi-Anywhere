@@ -1,4 +1,3 @@
-import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useId, useMemo, type ReactNode } from 'react';
@@ -8,9 +7,9 @@ import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Defs, LinearGradient, Rect, Stop } from 'react-native-svg';
 
+import { lessonArt } from '@/features/catalog/art';
+import { ArtPhoto } from '@/features/catalog/ArtPhoto';
 import { findLesson, lessonTimeline } from '@/features/catalog/catalog';
-import { poseFor } from '@/features/home/TodayCard';
-import { PoseThumb } from '@/features/onboarding/PoseThumb';
 import { useOnboardingLayout } from '@/features/onboarding/responsive';
 import { Squish } from '@/features/onboarding/Squish';
 import { enter } from '@/features/onboarding/StepScreen';
@@ -30,12 +29,6 @@ import {
   SpaceGlyph,
 } from '@/ui/Glyphs';
 import { Text } from '@/ui/Text';
-
-/** La foto de cabecera de cada clase. Las clases sin foto todavía usan la silueta con el sol. */
-const HERO_PHOTOS: Partial<Record<string, number>> = {
-  'sentado-primeros-movimientos': require('../../../assets/images/lessons/sentado-primeros-movimientos.jpg'),
-  'en-el-lugar-manos-de-nube': require('../../../assets/images/lessons/en-el-lugar-manos-de-nube.jpg'),
-};
 
 /**
  * La ficha de una clase, oscura y a pantalla completa: arriba la imagen grande con el nombre
@@ -87,7 +80,6 @@ export default function LessonScreen() {
   const minutes = Math.round(lesson.durationSec / 60);
   const care = settings.careTags.map((tag) => t(`lesson.care.${tag}`).toLowerCase());
   const movements = timeline?.segments.map((segment) => segment.title).filter(Boolean) ?? [];
-  const art = heroHeight * 0.9;
 
   return (
     <View style={{ flex: 1, backgroundColor: palette.ground }}>
@@ -97,30 +89,9 @@ export default function LessonScreen() {
         contentContainerStyle={{ paddingBottom: insets.bottom + 110 }}
       >
         <View style={{ height: heroHeight, overflow: 'hidden', backgroundColor: palette.hero }}>
-          {HERO_PHOTOS[lesson.slug] ? (
-            <Image
-              source={HERO_PHOTOS[lesson.slug]}
-              contentFit="cover"
-              contentPosition="top center"
-              accessibilityElementsHidden
-              style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
-            />
-          ) : (
-            <View
-              style={{ position: 'absolute', left: 0, right: 0, bottom: 0, alignItems: 'center' }}
-            >
-              <PoseThumb
-                poses={[poseFor(lesson.spaceMode)]}
-                width={layout.width}
-                height={heroHeight}
-                figureHeight={art * 0.86}
-                sunSize={art * 0.62}
-                sunOffsetY={-heroHeight * 0.06}
-                sunColor={locked ? '#3A3A3D' : appLight.accent}
-                tint={palette.silhouette}
-              />
-            </View>
-          )}
+          <View style={{ position: 'absolute', top: 0, left: 0 }}>
+            <ArtPhoto art={lessonArt(lesson)} width={layout.width} height={heroHeight} drift />
+          </View>
           {/* La imagen se funde con el fondo para que el título se lea encima. */}
           <Svg
             width="100%"

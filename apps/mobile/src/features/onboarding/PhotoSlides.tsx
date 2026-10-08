@@ -11,6 +11,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { SEATED_PHOTO, STANDING_PHOTO } from '@/features/catalog/art';
 import type { PracticeMode } from '@/features/settings/settings';
 
 /**
@@ -26,14 +27,8 @@ export interface PracticePhoto {
 }
 
 export const PRACTICE_PHOTOS = {
-  seated: {
-    source: require('../../../assets/images/lessons/sentado-primeros-movimientos.jpg'),
-    origin: { x: 0.1, y: -0.12 },
-  },
-  standing: {
-    source: require('../../../assets/images/lessons/en-el-lugar-manos-de-nube.jpg'),
-    origin: { x: -0.08, y: -0.1 },
-  },
+  seated: { source: SEATED_PHOTO, origin: { x: 0.1, y: -0.12 } },
+  standing: { source: STANDING_PHOTO, origin: { x: -0.08, y: -0.1 } },
 } as const satisfies Record<Exclude<PracticeMode, 'both'>, PracticePhoto>;
 
 /** Lo que dura cada foto en pantalla, y el fundido entre una y otra. */
